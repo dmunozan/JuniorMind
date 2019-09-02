@@ -28,7 +28,7 @@ namespace Collections
 
         public int Count()
         {
-            return this.intArray.Length;
+            return this.index;
         }
 
         public int Element(int index)
