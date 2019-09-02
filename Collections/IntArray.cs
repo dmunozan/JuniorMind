@@ -23,5 +23,10 @@ namespace Collections
             newArray[this.intArray.Length] = element;
             this.intArray = newArray;
         }
+
+        public int Count()
+        {
+            return intArray.Length;
+        }
     }
 }
