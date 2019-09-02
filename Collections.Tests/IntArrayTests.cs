@@ -42,7 +42,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void ElementWhen5ShouldReturnPosition()
+        public void ElementWhen1ShouldReturnNumberInPosition1()
         {
             IntArray arrayTest = new IntArray();
             arrayTest.Add(4);
