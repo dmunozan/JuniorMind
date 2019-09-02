@@ -17,7 +17,8 @@ namespace Collections
 
         public bool Contains(int element)
         {
-            return Array.IndexOf(this.intArray, element) >= 0;
+            int currentIndex = Array.IndexOf(this.intArray, element);
+            return currentIndex >= 0 && currentIndex < this.index;
         }
 
         public void Add(int element)
