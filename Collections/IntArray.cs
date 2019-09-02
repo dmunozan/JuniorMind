@@ -9,7 +9,8 @@ namespace Collections
 
         public IntArray()
         {
-            this.intArray = new int[0];
+            const int BaseSize = 4;
+            this.intArray = new int[BaseSize];
         }
 
         public bool Contains(int element)
