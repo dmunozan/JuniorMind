@@ -19,10 +19,8 @@ namespace Collections
 
         public void Add(int element)
         {
-            int[] newArray = new int[this.intArray.Length + 1];
-            this.intArray.CopyTo(newArray, 0);
-            newArray[this.intArray.Length] = element;
-            this.intArray = newArray;
+            Array.Resize(ref this.intArray, this.intArray.Length + 1);
+            this.intArray[this.intArray.Length - 1] = element;
         }
 
         public int Count()
