@@ -40,5 +40,16 @@ namespace Collections.Tests
 
             Assert.Equal(3, arrayTest.Count());
         }
+
+        [Fact]
+        public void ElementWhen5ShouldReturnPosition()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            Assert.Equal(5, arrayTest.Element(1));
+        }
     }
 }
