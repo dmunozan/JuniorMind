@@ -37,6 +37,11 @@ namespace Collections
 
         public void SetElement(int index, int element)
         {
+            if (index < 0 || index >= this.intArray.Length)
+            {
+                return;
+            }
+
             this.intArray[index] = element;
         }
 
