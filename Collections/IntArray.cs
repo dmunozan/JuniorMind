@@ -92,8 +92,8 @@ namespace Collections
                 return;
             }
 
-            Array.Copy(this.intArray, index + 1, this.intArray, index, this.intArray.Length - index - 1);
-            Array.Resize(ref this.intArray, this.intArray.Length - 1);
+            Array.Copy(this.intArray, index + 1, this.intArray, index, this.index - index - 1);
+            this.index--;
         }
     }
 }
