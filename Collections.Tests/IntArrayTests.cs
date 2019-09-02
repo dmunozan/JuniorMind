@@ -140,5 +140,18 @@ namespace Collections.Tests
             Assert.True(arrayTest.Contains(5));
             Assert.Equal(2, arrayTest.IndexOf(5));
         }
+
+        [Fact]
+        public void RemoveWhenNoElementShouldDoNothing()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            arrayTest.Remove(3);
+
+            Assert.Equal(3, arrayTest.Count());
+        }
     }
 }
