@@ -51,5 +51,18 @@ namespace Collections.Tests
 
             Assert.Equal(5, arrayTest.Element(1));
         }
+
+        [Fact]
+        public void SetElementWhen1AndNumber3ShouldReturn3ForElementInPosition1()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            arrayTest.SetElement(1, 3);
+
+            Assert.Equal(3, arrayTest.Element(1));
+        }
     }
 }
