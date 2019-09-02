@@ -44,7 +44,7 @@ namespace Collections
 
         public void SetElement(int index, int element)
         {
-            if (index < 0 || index >= this.intArray.Length)
+            if (index < 0 || index >= this.index)
             {
                 return;
             }
