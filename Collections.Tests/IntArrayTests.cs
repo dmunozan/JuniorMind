@@ -21,5 +21,13 @@ namespace Collections.Tests
 
             Assert.True(arrayTest.Contains(5));
         }
+
+        [Fact]
+        public void CountWhenEmptyStringShouldReturn0()
+        {
+            IntArray arrayTest = new IntArray();
+
+            Assert.Equal(0, arrayTest.Count());
+        }
     }
 }
