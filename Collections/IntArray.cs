@@ -78,10 +78,8 @@ namespace Collections
                 return;
             }
 
-            int[] newArray = new int[this.intArray.Length - 1];
-            Array.Copy(this.intArray, 0, newArray, 0, index);
-            Array.Copy(this.intArray, index + 1, newArray, index, this.intArray.Length - index - 1);
-            this.intArray = newArray;
+            Array.Copy(this.intArray, index + 1, this.intArray, index, this.intArray.Length - index - 1);
+            Array.Resize(ref this.intArray, this.intArray.Length - 1);
         }
     }
 }
