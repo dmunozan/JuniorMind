@@ -75,5 +75,16 @@ namespace Collections.Tests
 
             Assert.Equal(1, arrayTest.IndexOf(5));
         }
+
+        [Fact]
+        public void IndexOfWhen6ShouldReturnMinus1()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            Assert.Equal(-1, arrayTest.IndexOf(6));
+        }
     }
 }
