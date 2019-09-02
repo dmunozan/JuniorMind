@@ -14,7 +14,7 @@ namespace Collections
 
         public bool Contains(int element)
         {
-            return Array.IndexOf(intArray, element) >= 0;
+            return Array.IndexOf(this.intArray, element) >= 0;
         }
 
         public void Add(int element)
@@ -25,7 +25,7 @@ namespace Collections
 
         public int Count()
         {
-            return intArray.Length;
+            return this.intArray.Length;
         }
 
         public int Element(int index)
