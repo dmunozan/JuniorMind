@@ -179,5 +179,19 @@ namespace Collections.Tests
 
             Assert.Equal(3, arrayTest.Count());
         }
+
+        [Fact]
+        public void RemoveAtWhenPosition2ShouldDelete1ReturnFalseForContainsAnd2ForCount()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            arrayTest.RemoveAt(2);
+
+            Assert.False(arrayTest.Contains(1));
+            Assert.Equal(2, arrayTest.Count());
+        }
     }
 }
