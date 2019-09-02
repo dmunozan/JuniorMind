@@ -125,5 +125,20 @@ namespace Collections.Tests
 
             Assert.False(arrayTest.Contains(5));
         }
+
+        [Fact]
+        public void RemoveWhen5AndMoreThanOne5ShouldReturnTrueForContainsAnd2ForIndexOf()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+            arrayTest.Add(5);
+
+            arrayTest.Remove(5);
+
+            Assert.True(arrayTest.Contains(5));
+            Assert.Equal(2, arrayTest.IndexOf(5));
+        }
     }
 }
