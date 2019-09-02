@@ -86,5 +86,18 @@ namespace Collections.Tests
 
             Assert.Equal(-1, arrayTest.IndexOf(6));
         }
+
+        [Fact]
+        public void InsertWhenNumber3AndPoistion0ShouldReturn3ForElement0()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            arrayTest.Insert(0, 3);
+
+            Assert.Equal(3, arrayTest.Element(0));
+        }
     }
 }
