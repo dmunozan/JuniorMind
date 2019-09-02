@@ -66,6 +66,19 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void SetElementWhenIndexOutOfBoundsShouldDoNothing()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            arrayTest.SetElement(6, 3);
+
+            Assert.False(arrayTest.Contains(3));
+        }
+
+        [Fact]
         public void IndexOfWhen5ShouldReturn1()
         {
             IntArray arrayTest = new IntArray();
