@@ -59,12 +59,17 @@ namespace Collections
 
         public void Insert(int index, int element)
         {
-            if (index < 0 || index >= this.intArray.Length)
+            if (index < 0 || index >= this.index)
             {
                 return;
             }
 
-            Array.Resize(ref this.intArray, this.intArray.Length + 1);
+            const int Double = 2;
+            if (this.index > this.intArray.Length)
+            {
+                Array.Resize(ref this.intArray, this.intArray.Length * Double);
+            }
+
             Array.Copy(this.intArray, index, this.intArray, index + 1, this.intArray.Length - index - 1);
 
             this.intArray[index] = element;
