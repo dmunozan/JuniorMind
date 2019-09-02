@@ -86,6 +86,11 @@ namespace Collections
 
         public void RemoveAt(int index)
         {
+            if (index < 0 || index >= this.intArray.Length)
+            {
+                return;
+            }
+
             int[] newArray = new int[this.intArray.Length - 1];
             Array.Copy(this.intArray, 0, newArray, 0, index);
             Array.Copy(this.intArray, index + 1, newArray, index, this.intArray.Length - index - 1);
