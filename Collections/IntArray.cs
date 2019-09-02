@@ -5,7 +5,7 @@ namespace Collections
 {
     public class IntArray
     {
-        readonly int index;
+        int index;
         int[] intArray;
 
         public IntArray()
@@ -24,6 +24,7 @@ namespace Collections
         {
             Array.Resize(ref this.intArray, this.intArray.Length + 1);
             this.intArray[this.intArray.Length - 1] = element;
+            this.index++;
         }
 
         public int Count()
