@@ -101,6 +101,19 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void InsertWhenPoistionOutOfBoundsShouldDoNothing()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            arrayTest.Insert(6, 3);
+
+            Assert.False(arrayTest.Contains(3));
+        }
+
+        [Fact]
         public void ClearWhenAnyArrayShouldReturn0ForCount()
         {
             IntArray arrayTest = new IntArray();
