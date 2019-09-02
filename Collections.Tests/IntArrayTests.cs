@@ -53,7 +53,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void SetElementWhen1AndNumber3ShouldReturn3ForElementInPosition1()
+        public void SetElementWhenIndex1AndNumber3ShouldReturn3ForElement1()
         {
             IntArray arrayTest = new IntArray();
             arrayTest.Add(4);
