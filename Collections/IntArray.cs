@@ -55,11 +55,13 @@ namespace Collections
                 return;
             }
 
-            int[] newArray = new int[this.intArray.Length + 1];
-            Array.Copy(this.intArray, 0, newArray, 0, index);
-            newArray[index] = element;
-            Array.Copy(this.intArray, index, newArray, index + 1, this.intArray.Length - index);
-            this.intArray = newArray;
+            Array.Resize(ref this.intArray, this.intArray.Length + 1);
+            for (int i = this.intArray.Length - 1; i > index; i--)
+            {
+                this.intArray[i] = this.intArray[i - 1];
+            }
+
+            this.intArray[index] = element;
         }
 
         public void Clear()
