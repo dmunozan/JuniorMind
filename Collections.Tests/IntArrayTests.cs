@@ -99,5 +99,18 @@ namespace Collections.Tests
 
             Assert.Equal(3, arrayTest.Element(0));
         }
+
+        [Fact]
+        public void ClearWhenAnyArrayShouldReturn0ForCount()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            arrayTest.Clear();
+
+            Assert.Equal(0, arrayTest.Count());
+        }
     }
 }
