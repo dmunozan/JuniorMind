@@ -193,5 +193,18 @@ namespace Collections.Tests
             Assert.False(arrayTest.Contains(1));
             Assert.Equal(2, arrayTest.Count());
         }
+
+        [Fact]
+        public void RemoveAtWhenPositionOutOfBoundsShouldDoNothing()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            arrayTest.RemoveAt(6);
+
+            Assert.Equal(3, arrayTest.Count());
+        }
     }
 }
