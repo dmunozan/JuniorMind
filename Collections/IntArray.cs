@@ -39,5 +39,10 @@ namespace Collections
         {
             this.intArray[index] = element;
         }
+
+        public int IndexOf(int element)
+        {
+            return Array.IndexOf(this.intArray, element);
+        }
     }
 }
