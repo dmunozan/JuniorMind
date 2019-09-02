@@ -23,7 +23,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void CountWhenEmptyStringShouldReturn0()
+        public void CountWhenEmptyArrayShouldReturn0()
         {
             IntArray arrayTest = new IntArray();
 
@@ -31,7 +31,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void CountWhenEmptyStringAndAddElementShouldReturnNumberOfElements()
+        public void CountWhenEmptyArrayAndAddElementShouldReturnNumberOfElements()
         {
             IntArray arrayTest = new IntArray();
             arrayTest.Add(4);
