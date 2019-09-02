@@ -56,10 +56,7 @@ namespace Collections
             }
 
             Array.Resize(ref this.intArray, this.intArray.Length + 1);
-            for (int i = this.intArray.Length - 1; i > index; i--)
-            {
-                this.intArray[i] = this.intArray[i - 1];
-            }
+            Array.Copy(this.intArray, index, this.intArray, index + 1, this.intArray.Length - index - 1);
 
             this.intArray[index] = element;
         }
