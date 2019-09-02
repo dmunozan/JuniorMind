@@ -12,5 +12,14 @@ namespace Collections.Tests
 
             Assert.False(arrayTest.Contains(5));
         }
+
+        [Fact]
+        public void AddWhenNumberAndArrayIsEmptyShouldContainNumber()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(5);
+
+            Assert.True(arrayTest.Contains(5));
+        }
     }
 }
