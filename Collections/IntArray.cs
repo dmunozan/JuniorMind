@@ -5,12 +5,14 @@ namespace Collections
 {
     public class IntArray
     {
+        readonly int index;
         int[] intArray;
 
         public IntArray()
         {
             const int BaseSize = 4;
             this.intArray = new int[BaseSize];
+            this.index = 0;
         }
 
         public bool Contains(int element)
