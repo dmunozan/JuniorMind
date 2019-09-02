@@ -20,7 +20,7 @@ namespace Collections
         public void Add(int element)
         {
             int[] newArray = new int[this.intArray.Length + 1];
-            intArray.CopyTo(newArray, 0);
+            this.intArray.CopyTo(newArray, 0);
             newArray[this.intArray.Length] = element;
             this.intArray = newArray;
         }
@@ -43,6 +43,15 @@ namespace Collections
         public int IndexOf(int element)
         {
             return Array.IndexOf(this.intArray, element);
+        }
+
+        public void Insert(int index, int element)
+        {
+            int[] newArray = new int[this.intArray.Length + 1];
+            Array.Copy(this.intArray, 0, newArray, 0, index);
+            newArray[index] = element;
+            Array.Copy(this.intArray, index, newArray, index + 1, this.intArray.Length - index);
+            this.intArray = newArray;
         }
     }
 }
