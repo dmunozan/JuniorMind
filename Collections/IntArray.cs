@@ -4,7 +4,7 @@ namespace Collections
 {
     public class IntArray
     {
-        readonly int[] intArray;
+        int[] intArray;
 
         public IntArray()
         {
@@ -13,8 +13,15 @@ namespace Collections
 
         public bool Contains(int element)
         {
-            Console.WriteLine(intArray + "" + element);
-            return false;
+            return Array.IndexOf(intArray, element) >= 0;
+        }
+
+        public void Add(int element)
+        {
+            int[] newArray = new int[this.intArray.Length + 1];
+            intArray.CopyTo(newArray, 0);
+            newArray[this.intArray.Length] = element;
+            this.intArray = newArray;
         }
     }
 }
