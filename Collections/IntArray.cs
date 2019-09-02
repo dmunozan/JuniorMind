@@ -47,6 +47,11 @@ namespace Collections
 
         public void Insert(int index, int element)
         {
+            if (index < 0 || index >= this.intArray.Length)
+            {
+                return;
+            }
+
             int[] newArray = new int[this.intArray.Length + 1];
             Array.Copy(this.intArray, 0, newArray, 0, index);
             newArray[index] = element;
