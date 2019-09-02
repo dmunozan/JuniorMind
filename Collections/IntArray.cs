@@ -58,5 +58,15 @@ namespace Collections
         {
             this.intArray = new int[0];
         }
+
+        public void Remove(int element)
+        {
+            int index = Array.IndexOf(this.intArray, element);
+
+            int[] newArray = new int[this.intArray.Length - 1];
+            Array.Copy(this.intArray, 0, newArray, 0, index);
+            Array.Copy(this.intArray, index + 1, newArray, index, this.intArray.Length - index - 1);
+            this.intArray = newArray;
+        }
     }
 }

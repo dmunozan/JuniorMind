@@ -112,5 +112,18 @@ namespace Collections.Tests
 
             Assert.Equal(0, arrayTest.Count());
         }
+
+        [Fact]
+        public void RemoveWhen5AndOnlyOne5ShouldReturnFalseForContains()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            arrayTest.Remove(5);
+
+            Assert.False(arrayTest.Contains(5));
+        }
     }
 }
