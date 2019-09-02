@@ -62,6 +62,12 @@ namespace Collections
         public void Remove(int element)
         {
             int index = Array.IndexOf(this.intArray, element);
+
+            if (index == -1)
+            {
+                return;
+            }
+
             int[] newArray = new int[this.intArray.Length - 1];
             Array.Copy(this.intArray, 0, newArray, 0, index);
             Array.Copy(this.intArray, index + 1, newArray, index, this.intArray.Length - index - 1);
