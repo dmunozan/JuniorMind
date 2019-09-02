@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Collections
 {
@@ -27,6 +28,11 @@ namespace Collections
         public int Count()
         {
             return intArray.Length;
+        }
+
+        public int Element(int index)
+        {
+            return this.intArray[index];
         }
     }
 }
