@@ -70,7 +70,7 @@ namespace Collections
                 Array.Resize(ref this.intArray, this.intArray.Length * Double);
             }
 
-            Array.Copy(this.intArray, index, this.intArray, index + 1, this.intArray.Length - index - 1);
+            Array.Copy(this.intArray, index, this.intArray, index + 1, this.index - index - 1);
 
             this.intArray[index] = element;
         }
@@ -87,7 +87,7 @@ namespace Collections
 
         public void RemoveAt(int index)
         {
-            if (index < 0 || index >= this.intArray.Length)
+            if (index < 0 || index >= this.index)
             {
                 return;
             }
