@@ -29,5 +29,16 @@ namespace Collections.Tests
 
             Assert.Equal(0, arrayTest.Count());
         }
+
+        [Fact]
+        public void CountWhenEmptyStringAndAddElementShouldReturnNumberOfElements()
+        {
+            IntArray arrayTest = new IntArray();
+            arrayTest.Add(4);
+            arrayTest.Add(5);
+            arrayTest.Add(1);
+
+            Assert.Equal(3, arrayTest.Count());
+        }
     }
 }
