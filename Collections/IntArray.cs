@@ -22,8 +22,13 @@ namespace Collections
 
         public void Add(int element)
         {
-            Array.Resize(ref this.intArray, this.intArray.Length + 1);
-            this.intArray[this.intArray.Length - 1] = element;
+            const int Double = 2;
+            if (this.index > this.intArray.Length)
+            {
+                Array.Resize(ref this.intArray, this.intArray.Length * Double);
+            }
+
+            this.intArray[index] = element;
             this.index++;
         }
 
@@ -67,7 +72,7 @@ namespace Collections
 
         public void Clear()
         {
-            this.intArray = new int[0];
+            this.index = 0;
         }
 
         public void Remove(int element)
