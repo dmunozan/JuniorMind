@@ -53,5 +53,10 @@ namespace Collections
             Array.Copy(this.intArray, index, newArray, index + 1, this.intArray.Length - index);
             this.intArray = newArray;
         }
+
+        public void Clear()
+        {
+            this.intArray = new int[0];
+        }
     }
 }
