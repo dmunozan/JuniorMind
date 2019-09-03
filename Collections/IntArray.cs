@@ -4,15 +4,16 @@ namespace Collections
 {
     public class IntArray
     {
-        int count;
         int[] intArray;
 
         public IntArray()
         {
             const int BaseSize = 4;
             this.intArray = new int[BaseSize];
-            this.count = 0;
+            this.Count = 0;
         }
+
+        public int Count { get; private set; }
 
         public bool Contains(int element)
         {
@@ -23,13 +24,8 @@ namespace Collections
         {
             this.EnsureCapacity();
 
-            this.intArray[this.count] = element;
-            this.count++;
-        }
-
-        public int Count()
-        {
-            return this.count;
+            this.intArray[this.Count] = element;
+            this.Count++;
         }
 
         public int Element(int index)
@@ -39,7 +35,7 @@ namespace Collections
 
         public void SetElement(int index, int element)
         {
-            if (index < 0 || index >= this.count)
+            if (index < 0 || index >= this.Count)
             {
                 return;
             }
@@ -51,26 +47,26 @@ namespace Collections
         {
             int currentIndex = Array.IndexOf(this.intArray, element);
 
-            return (currentIndex >= 0 && currentIndex < this.count) ? currentIndex : -1;
+            return (currentIndex >= 0 && currentIndex < this.Count) ? currentIndex : -1;
         }
 
         public void Insert(int index, int element)
         {
-            if (index < 0 || index >= this.count)
+            if (index < 0 || index >= this.Count)
             {
                 return;
             }
 
             this.EnsureCapacity();
 
-            Array.Copy(this.intArray, index, this.intArray, index + 1, this.count - index - 1);
+            Array.Copy(this.intArray, index, this.intArray, index + 1, this.Count - index - 1);
 
             this.intArray[index] = element;
         }
 
         public void Clear()
         {
-            this.count = 0;
+            this.Count = 0;
         }
 
         public void Remove(int element)
@@ -80,20 +76,20 @@ namespace Collections
 
         public void RemoveAt(int index)
         {
-            if (index < 0 || index >= this.count)
+            if (index < 0 || index >= this.Count)
             {
                 return;
             }
 
-            Array.Copy(this.intArray, index + 1, this.intArray, index, this.count - index - 1);
-            this.count--;
+            Array.Copy(this.intArray, index + 1, this.intArray, index, this.Count - index - 1);
+            this.Count--;
         }
 
         private void EnsureCapacity()
         {
             const int Double = 2;
 
-            if (this.count < this.intArray.Length)
+            if (this.Count < this.intArray.Length)
             {
                 return;
             }
