@@ -27,7 +27,7 @@ namespace Collections.Tests
         {
             IntArray arrayTest = new IntArray();
 
-            Assert.Equal(0, arrayTest.Count());
+            Assert.Equal(0, arrayTest.Count);
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace Collections.Tests
             arrayTest.Add(5);
             arrayTest.Add(1);
 
-            Assert.Equal(3, arrayTest.Count());
+            Assert.Equal(3, arrayTest.Count);
         }
 
         [Fact]
@@ -136,7 +136,7 @@ namespace Collections.Tests
 
             arrayTest.Clear();
 
-            Assert.Equal(0, arrayTest.Count());
+            Assert.Equal(0, arrayTest.Count);
         }
 
         [Fact]
@@ -177,7 +177,7 @@ namespace Collections.Tests
 
             arrayTest.Remove(3);
 
-            Assert.Equal(3, arrayTest.Count());
+            Assert.Equal(3, arrayTest.Count);
         }
 
         [Fact]
@@ -191,7 +191,7 @@ namespace Collections.Tests
             arrayTest.RemoveAt(2);
 
             Assert.False(arrayTest.Contains(1));
-            Assert.Equal(2, arrayTest.Count());
+            Assert.Equal(2, arrayTest.Count);
         }
 
         [Fact]
@@ -204,7 +204,7 @@ namespace Collections.Tests
 
             arrayTest.RemoveAt(6);
 
-            Assert.Equal(3, arrayTest.Count());
+            Assert.Equal(3, arrayTest.Count);
         }
     }
 }
