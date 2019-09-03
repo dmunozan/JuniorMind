@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Collections
 {
@@ -23,11 +22,7 @@ namespace Collections
 
         public void Add(int element)
         {
-            const int Double = 2;
-            if (this.index > this.intArray.Length)
-            {
-                Array.Resize(ref this.intArray, this.intArray.Length * Double);
-            }
+            this.EnsureCapacity();
 
             this.intArray[index] = element;
             this.index++;
@@ -65,11 +60,7 @@ namespace Collections
                 return;
             }
 
-            const int Double = 2;
-            if (this.index > this.intArray.Length)
-            {
-                Array.Resize(ref this.intArray, this.intArray.Length * Double);
-            }
+            this.EnsureCapacity();
 
             Array.Copy(this.intArray, index, this.intArray, index + 1, this.index - index - 1);
 
@@ -95,6 +86,18 @@ namespace Collections
 
             Array.Copy(this.intArray, index + 1, this.intArray, index, this.index - index - 1);
             this.index--;
+        }
+
+        private void EnsureCapacity()
+        {
+            const int Double = 2;
+
+            if (this.index <= this.intArray.Length)
+            {
+                return;
+            }
+
+            Array.Resize(ref this.intArray, this.intArray.Length * Double);
         }
     }
 }
