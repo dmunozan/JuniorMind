@@ -93,7 +93,7 @@ namespace Collections
         {
             const int Double = 2;
 
-            if (this.count <= this.intArray.Length)
+            if (this.count < this.intArray.Length)
             {
                 return;
             }
