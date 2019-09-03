@@ -50,7 +50,9 @@ namespace Collections
 
         public int IndexOf(int element)
         {
-            return Array.IndexOf(this.intArray, element);
+            int currentIndex = Array.IndexOf(this.intArray, element);
+
+            return (currentIndex >= 0 && currentIndex < this.count) ? currentIndex : -1;
         }
 
         public void Insert(int index, int element)
