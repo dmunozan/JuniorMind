@@ -49,7 +49,7 @@ namespace Collections.Tests
             arrayTest.Add(5);
             arrayTest.Add(1);
 
-            Assert.Equal(5, arrayTest.Element(1));
+            Assert.Equal(5, arrayTest[1]);
         }
 
         [Fact]
@@ -60,9 +60,9 @@ namespace Collections.Tests
             arrayTest.Add(5);
             arrayTest.Add(1);
 
-            arrayTest.SetElement(1, 3);
+            arrayTest[1] = 3;
 
-            Assert.Equal(3, arrayTest.Element(1));
+            Assert.Equal(3, arrayTest[1]);
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace Collections.Tests
             arrayTest.Add(5);
             arrayTest.Add(1);
 
-            arrayTest.SetElement(6, 3);
+            arrayTest[6] = 3;
 
             Assert.False(arrayTest.Contains(3));
         }
@@ -110,7 +110,7 @@ namespace Collections.Tests
 
             arrayTest.Insert(0, 3);
 
-            Assert.Equal(3, arrayTest.Element(0));
+            Assert.Equal(3, arrayTest[0]);
         }
 
         [Fact]
