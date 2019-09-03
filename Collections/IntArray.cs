@@ -15,6 +15,20 @@ namespace Collections
 
         public int Count { get; private set; }
 
+        public int this[int index]
+        {
+            get => this.intArray[index];
+            set
+            {
+                if (index < 0 || index >= this.Count)
+                {
+                    return;
+                }
+
+                this.intArray[index] = value;
+            }
+        }
+
         public bool Contains(int element)
         {
             return this.IndexOf(element) >= 0;
@@ -26,21 +40,6 @@ namespace Collections
 
             this.intArray[this.Count] = element;
             this.Count++;
-        }
-
-        public int Element(int index)
-        {
-            return this.intArray[index];
-        }
-
-        public void SetElement(int index, int element)
-        {
-            if (index < 0 || index >= this.Count)
-            {
-                return;
-            }
-
-            this.intArray[index] = element;
         }
 
         public int IndexOf(int element)
