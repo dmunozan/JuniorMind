@@ -75,7 +75,7 @@ namespace Collections
 
         public void Remove(int element)
         {
-            this.RemoveAt(Array.IndexOf(this.intArray, element));
+            this.RemoveAt(this.IndexOf(element));
         }
 
         public void RemoveAt(int index)
