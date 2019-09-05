@@ -29,5 +29,15 @@ namespace Collections
                 Insert(position, element);
             }
         }
+
+        public override void Insert(int index, int element)
+        {
+            if (this[index] < element)
+            {
+                return;
+            }
+
+            base.Insert(index, element);
+        }
     }
 }
