@@ -61,6 +61,7 @@ namespace Collections
             Array.Copy(this.intArray, index, this.intArray, index + 1, this.Count - index - 1);
 
             this.intArray[index] = element;
+            this.Count++;
         }
 
         public void Clear()
