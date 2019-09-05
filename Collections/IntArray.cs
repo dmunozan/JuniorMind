@@ -15,7 +15,7 @@ namespace Collections
 
         public int Count { get; private set; }
 
-        public int this[int index]
+        public virtual int this[int index]
         {
             get => this.intArray[index];
             set
@@ -34,7 +34,7 @@ namespace Collections
             return this.IndexOf(element) >= 0;
         }
 
-        public void Add(int element)
+        public virtual void Add(int element)
         {
             this.EnsureCapacity();
 
@@ -49,7 +49,7 @@ namespace Collections
             return (currentIndex >= 0 && currentIndex < this.Count) ? currentIndex : -1;
         }
 
-        public void Insert(int index, int element)
+        public virtual void Insert(int index, int element)
         {
             if (index < 0 || index >= this.Count)
             {
