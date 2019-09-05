@@ -15,9 +15,10 @@ namespace Collections
             {
                 if (this[i] >= element)
                 {
-                    position = i;
                     break;
                 }
+
+                position++;
             }
 
             if (position == this.Count)
@@ -26,13 +27,13 @@ namespace Collections
             }
             else
             {
-                Insert(position, element);
+                base.Insert(position, element);
             }
         }
 
         public override void Insert(int index, int element)
         {
-            if (this[index] < element)
+            if (this[index] < element || (index != 0 && this[index - 1] > element))
             {
                 return;
             }
