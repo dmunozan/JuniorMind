@@ -58,7 +58,7 @@ namespace Collections
 
             this.EnsureCapacity();
 
-            Array.Copy(this.intArray, index, this.intArray, index + 1, this.Count - index - 1);
+            Array.Copy(this.intArray, index, this.intArray, index + 1, this.Count - index);
 
             this.intArray[index] = element;
             this.Count++;
