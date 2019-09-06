@@ -12,7 +12,7 @@ namespace Collections
         {
             set
             {
-                if (index + 1 != this.Count && this[index + 1] < value)
+                if ((index + 1 != this.Count && this[index + 1] < value) || (index != 0 && this[index - 1] > value))
                 {
                     return;
                 }
