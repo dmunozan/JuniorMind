@@ -120,5 +120,85 @@ namespace Collections.Tests
             Assert.Equal(6, arrayTest[1]);
             Assert.Equal(7, arrayTest[2]);
         }
+
+        [Fact]
+        public void IndexerSetWhenPosition0Number4ShouldSetTheNumber()
+        {
+            SortedIntArray arrayTest = new SortedIntArray();
+            arrayTest.Add(6);
+            arrayTest.Add(7);
+            arrayTest.Add(5);
+
+            arrayTest[0] = 4;
+
+            Assert.Equal(3, arrayTest.Count);
+            Assert.Equal(4, arrayTest[0]);
+            Assert.Equal(6, arrayTest[1]);
+            Assert.Equal(7, arrayTest[2]);
+        }
+
+        [Fact]
+        public void IndexerSetWhenPosition0Number5ShouldSetTheNumber()
+        {
+            SortedIntArray arrayTest = new SortedIntArray();
+            arrayTest.Add(6);
+            arrayTest.Add(7);
+            arrayTest.Add(5);
+
+            arrayTest[0] = 5;
+
+            Assert.Equal(3, arrayTest.Count);
+            Assert.Equal(5, arrayTest[0]);
+            Assert.Equal(6, arrayTest[1]);
+            Assert.Equal(7, arrayTest[2]);
+        }
+
+        [Fact]
+        public void IndexerSetWhenPosition0Number6ShouldSetTheNumber()
+        {
+            SortedIntArray arrayTest = new SortedIntArray();
+            arrayTest.Add(6);
+            arrayTest.Add(7);
+            arrayTest.Add(5);
+
+            arrayTest[0] = 6;
+
+            Assert.Equal(3, arrayTest.Count);
+            Assert.Equal(6, arrayTest[0]);
+            Assert.Equal(6, arrayTest[1]);
+            Assert.Equal(7, arrayTest[2]);
+        }
+
+        [Fact]
+        public void IndexerSetWhenPosition0Number7ShouldDoNothing()
+        {
+            SortedIntArray arrayTest = new SortedIntArray();
+            arrayTest.Add(6);
+            arrayTest.Add(7);
+            arrayTest.Add(5);
+
+            arrayTest[0] = 7;
+
+            Assert.Equal(3, arrayTest.Count);
+            Assert.Equal(5, arrayTest[0]);
+            Assert.Equal(6, arrayTest[1]);
+            Assert.Equal(7, arrayTest[2]);
+        }
+
+        [Fact]
+        public void IndexerSetWhenLastPositionNumber6ShouldSetTheNumber()
+        {
+            SortedIntArray arrayTest = new SortedIntArray();
+            arrayTest.Add(6);
+            arrayTest.Add(7);
+            arrayTest.Add(5);
+
+            arrayTest[2] = 6;
+
+            Assert.Equal(3, arrayTest.Count);
+            Assert.Equal(5, arrayTest[0]);
+            Assert.Equal(6, arrayTest[1]);
+            Assert.Equal(6, arrayTest[2]);
+        }
     }
 }
