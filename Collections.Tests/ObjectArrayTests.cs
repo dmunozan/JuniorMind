@@ -59,5 +59,16 @@ namespace Collections.Tests
 
             Assert.Equal(0, arrayTest.Count);
         }
+
+        [Fact]
+        public void IndexOfWhenNoExistsAfterClearShouldReturnMinus1()
+        {
+            ObjectArray arrayTest = new ObjectArray();
+            arrayTest.Add("test");
+
+            arrayTest.Clear();
+
+            Assert.Equal(-1, arrayTest.IndexOf("test"));
+        }
     }
 }
