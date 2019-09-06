@@ -61,7 +61,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void IndexOfWhenNoExistsAfterClearShouldReturnMinus1()
+        public void IndexOfWhenNoExistAfterClearShouldReturnMinus1()
         {
             ObjectArray arrayTest = new ObjectArray();
             arrayTest.Add("test");
@@ -69,6 +69,34 @@ namespace Collections.Tests
             arrayTest.Clear();
 
             Assert.Equal(-1, arrayTest.IndexOf("test"));
+        }
+
+        [Fact]
+        public void ContainsWhenNoExistAfterClearShouldReturnFalse()
+        {
+            ObjectArray arrayTest = new ObjectArray();
+            arrayTest.Add("test");
+
+            arrayTest.Clear();
+
+            Assert.False(arrayTest.Contains("test"));
+        }
+
+        [Fact]
+        public void InsertWhenPosition0ShouldReturnElementOnIndex0()
+        {
+            ObjectArray arrayTest = new ObjectArray();
+            arrayTest.Add(1);
+            arrayTest.Add('2');
+            arrayTest.Add("3");
+
+            arrayTest.Insert(0, new int[4] {0, 1, 2, 3 });
+
+            Assert.Equal(4, arrayTest.Count);
+            Assert.Equal(new int[4] { 0, 1, 2, 3 }, arrayTest[0]);
+            Assert.Equal(1, arrayTest[1]);
+            Assert.Equal('2', arrayTest[2]);
+            Assert.Equal("3", arrayTest[3]);
         }
     }
 }
