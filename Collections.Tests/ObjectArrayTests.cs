@@ -21,5 +21,14 @@ namespace Collections.Tests
 
             Assert.Equal(1, arrayTest.Count);
         }
+
+        [Fact]
+        public void IndexOfWhenTextShouldReturn0()
+        {
+            ObjectArray arrayTest = new ObjectArray();
+            arrayTest.Add("test");
+
+            Assert.Equal(0, arrayTest.IndexOf("test"));
+        }
     }
 }
