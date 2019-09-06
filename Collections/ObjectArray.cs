@@ -69,6 +69,11 @@ namespace Collections
             this.Count++;
         }
 
+        public void Remove(object element)
+        {
+            this.RemoveAt(this.IndexOf(element));
+        }
+
         public void RemoveAt(int index)
         {
             if (index < 0 || index >= this.Count)
