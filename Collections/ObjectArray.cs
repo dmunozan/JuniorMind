@@ -56,6 +56,11 @@ namespace Collections
 
         public void Insert(int index, object element)
         {
+            if (index < 0 || index >= this.Count)
+            {
+                return;
+            }
+
             this.EnsureCapacity();
 
             Array.Copy(this.objectArray, index, this.objectArray, index + 1, this.Count - index);
