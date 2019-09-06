@@ -42,6 +42,11 @@ namespace Collections
             return Array.IndexOf(this.objectArray, element);
         }
 
+        public bool Contains(object element)
+        {
+            return this.IndexOf(element) >= 0;
+        }
+
         private void EnsureCapacity()
         {
             const int Double = 2;
