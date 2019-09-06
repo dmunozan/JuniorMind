@@ -115,5 +115,21 @@ namespace Collections.Tests
             Assert.Equal('2', arrayTest[1]);
             Assert.Equal("3", arrayTest[2]);
         }
+
+        [Fact]
+        public void RemoveAtWhenPostion0ShouldRemoveFirstElement()
+        {
+            ObjectArray arrayTest = new ObjectArray();
+            arrayTest.Add(1);
+            arrayTest.Add('2');
+            arrayTest.Add("3");
+
+            arrayTest.RemoveAt(0);
+
+            Assert.Equal(2, arrayTest.Count);
+            Assert.False(arrayTest.Contains(1));
+            Assert.Equal('2', arrayTest[0]);
+            Assert.Equal("3", arrayTest[1]);
+        }
     }
 }
