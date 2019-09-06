@@ -37,6 +37,11 @@ namespace Collections
             this.Count++;
         }
 
+        public int IndexOf(object element)
+        {
+            return Array.IndexOf(this.objectArray, element);
+        }
+
         private void EnsureCapacity()
         {
             const int Double = 2;
