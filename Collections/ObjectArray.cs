@@ -54,6 +54,16 @@ namespace Collections
             this.Count = 0;
         }
 
+        public void Insert(int index, object element)
+        {
+            this.EnsureCapacity();
+
+            Array.Copy(this.objectArray, index, this.objectArray, index + 1, this.Count - index);
+
+            this.objectArray[index] = element;
+            this.Count++;
+        }
+
         private void EnsureCapacity()
         {
             const int Double = 2;
