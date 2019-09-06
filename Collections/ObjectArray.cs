@@ -39,7 +39,9 @@ namespace Collections
 
         public int IndexOf(object element)
         {
-            return Array.IndexOf(this.objectArray, element);
+            int currentIndex = Array.IndexOf(this.objectArray, element);
+
+            return (currentIndex >= 0 && currentIndex < this.Count) ? currentIndex : -1;
         }
 
         public bool Contains(object element)
