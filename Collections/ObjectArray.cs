@@ -69,6 +69,12 @@ namespace Collections
             this.Count++;
         }
 
+        public void RemoveAt(int index)
+        {
+            Array.Copy(this.objectArray, index + 1, this.objectArray, index, this.Count - index - 1);
+            this.Count--;
+        }
+
         private void EnsureCapacity()
         {
             const int Double = 2;
