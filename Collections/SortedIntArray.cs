@@ -8,6 +8,19 @@ namespace Collections
         {
         }
 
+        public override int this[int index]
+        {
+            set
+            {
+                if (index + 1 != this.Count && this[index + 1] < value)
+                {
+                    return;
+                }
+
+                base[index] = value;
+            }
+        }
+
         public override void Add(int element)
         {
             int position = 0;
