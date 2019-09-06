@@ -160,5 +160,33 @@ namespace Collections.Tests
 
             Assert.False(arrayTest.Contains(1));
         }
+
+        [Fact]
+        public void RemoveWhen1AndMoreThanOne1ShouldReturnReturnTrueForContainsAnd2ForIndexOf()
+        {
+            ObjectArray arrayTest = new ObjectArray();
+            arrayTest.Add(1);
+            arrayTest.Add('2');
+            arrayTest.Add("3");
+            arrayTest.Add(1);
+
+            arrayTest.Remove(1);
+
+            Assert.True(arrayTest.Contains(1));
+            Assert.Equal(2, arrayTest.IndexOf(1));
+        }
+
+        [Fact]
+        public void RemoveWhenNoElementShouldDoNothing()
+        {
+            ObjectArray arrayTest = new ObjectArray();
+            arrayTest.Add(1);
+            arrayTest.Add('2');
+            arrayTest.Add("3");
+
+            arrayTest.Remove(2);
+
+            Assert.Equal(3, arrayTest.Count);
+        }
     }
 }
