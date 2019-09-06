@@ -147,5 +147,18 @@ namespace Collections.Tests
             Assert.Equal('2', arrayTest[1]);
             Assert.Equal("3", arrayTest[2]);
         }
+
+        [Fact]
+        public void RemoveWhen1AndOnlyOne1ShouldReturnFalseForContains()
+        {
+            ObjectArray arrayTest = new ObjectArray();
+            arrayTest.Add(1);
+            arrayTest.Add('2');
+            arrayTest.Add("3");
+
+            arrayTest.Remove(1);
+
+            Assert.False(arrayTest.Contains(1));
+        }
     }
 }
