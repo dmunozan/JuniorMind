@@ -186,6 +186,22 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void IndexerSetWhenLastPositionNumber5ShouldDoNothing()
+        {
+            SortedIntArray arrayTest = new SortedIntArray();
+            arrayTest.Add(6);
+            arrayTest.Add(7);
+            arrayTest.Add(5);
+
+            arrayTest[2] = 5;
+
+            Assert.Equal(3, arrayTest.Count);
+            Assert.Equal(5, arrayTest[0]);
+            Assert.Equal(6, arrayTest[1]);
+            Assert.Equal(7, arrayTest[2]);
+        }
+
+        [Fact]
         public void IndexerSetWhenLastPositionNumber6ShouldSetTheNumber()
         {
             SortedIntArray arrayTest = new SortedIntArray();
@@ -199,6 +215,22 @@ namespace Collections.Tests
             Assert.Equal(5, arrayTest[0]);
             Assert.Equal(6, arrayTest[1]);
             Assert.Equal(6, arrayTest[2]);
+        }
+
+        [Fact]
+        public void IndexerSetWhenLastPositionNumber7ShouldSetTheNumber()
+        {
+            SortedIntArray arrayTest = new SortedIntArray();
+            arrayTest.Add(6);
+            arrayTest.Add(7);
+            arrayTest.Add(5);
+
+            arrayTest[2] = 7;
+
+            Assert.Equal(3, arrayTest.Count);
+            Assert.Equal(5, arrayTest[0]);
+            Assert.Equal(6, arrayTest[1]);
+            Assert.Equal(7, arrayTest[2]);
         }
     }
 }
