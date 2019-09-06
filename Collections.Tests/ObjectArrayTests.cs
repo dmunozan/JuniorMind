@@ -48,5 +48,16 @@ namespace Collections.Tests
 
             Assert.True(arrayTest.Contains("test"));
         }
+
+        [Fact]
+        public void ClearWhenAnyShouldReturnCount0()
+        {
+            ObjectArray arrayTest = new ObjectArray();
+            arrayTest.Add("test");
+
+            arrayTest.Clear();
+
+            Assert.Equal(0, arrayTest.Count);
+        }
     }
 }
