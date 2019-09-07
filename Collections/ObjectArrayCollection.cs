@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections;
 
 namespace Collections
 {
-    public class ObjectArray
+    public class ObjectArrayCollection : IEnumerable
     {
-        object[] objectArray;
+        object[] objectArrayCollection;
 
-        public ObjectArray()
+        public ObjectArrayCollection()
         {
             const int BaseSize = 4;
-            this.objectArray = new object[BaseSize];
+            this.objectArrayCollection = new object[BaseSize];
             this.Count = 0;
         }
 
@@ -17,7 +18,7 @@ namespace Collections
 
         public object this[int index]
         {
-            get => this.objectArray[index];
+            get => this.objectArrayCollection[index];
             set
             {
                 if (index < 0 || index >= this.Count)
@@ -25,7 +26,7 @@ namespace Collections
                     return;
                 }
 
-                this.objectArray[index] = value;
+                this.objectArrayCollection[index] = value;
             }
         }
 
@@ -33,13 +34,13 @@ namespace Collections
         {
             this.EnsureCapacity();
 
-            this.objectArray[this.Count] = element;
+            this.objectArrayCollection[this.Count] = element;
             this.Count++;
         }
 
         public int IndexOf(object element)
         {
-            int currentIndex = Array.IndexOf(this.objectArray, element);
+            int currentIndex = Array.IndexOf(this.objectArrayCollection, element);
 
             return (currentIndex >= 0 && currentIndex < this.Count) ? currentIndex : -1;
         }
@@ -63,9 +64,9 @@ namespace Collections
 
             this.EnsureCapacity();
 
-            Array.Copy(this.objectArray, index, this.objectArray, index + 1, this.Count - index);
+            Array.Copy(this.objectArrayCollection, index, this.objectArrayCollection, index + 1, this.Count - index);
 
-            this.objectArray[index] = element;
+            this.objectArrayCollection[index] = element;
             this.Count++;
         }
 
@@ -81,20 +82,25 @@ namespace Collections
                 return;
             }
 
-            Array.Copy(this.objectArray, index + 1, this.objectArray, index, this.Count - index - 1);
+            Array.Copy(this.objectArrayCollection, index + 1, this.objectArrayCollection, index, this.Count - index - 1);
             this.Count--;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return objectArrayCollection.GetEnumerator();
         }
 
         private void EnsureCapacity()
         {
             const int Double = 2;
 
-            if (this.Count < this.objectArray.Length)
+            if (this.Count < this.objectArrayCollection.Length)
             {
                 return;
             }
 
-            Array.Resize(ref this.objectArray, this.objectArray.Length * Double);
+            Array.Resize(ref this.objectArrayCollection, this.objectArrayCollection.Length * Double);
         }
     }
 }

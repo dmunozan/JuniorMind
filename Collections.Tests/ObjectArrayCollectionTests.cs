@@ -3,12 +3,12 @@ using Xunit;
 
 namespace Collections.Tests
 {
-    public class ObjectArrayTests
+    public class ObjectArrayCollectionTests
     {
         [Fact]
         public void CountWhenEmptyArrayShouldReturn0()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
 
             Assert.Equal(0, arrayTest.Count);
         }
@@ -16,7 +16,7 @@ namespace Collections.Tests
         [Fact]
         public void AddWhenEmptyArrayShouldReturnCount1()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add(4);
 
             Assert.Equal(1, arrayTest.Count);
@@ -25,7 +25,7 @@ namespace Collections.Tests
         [Fact]
         public void IndexOfWhenTextShouldReturn0()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add("test");
 
             Assert.Equal(0, arrayTest.IndexOf("test"));
@@ -34,7 +34,7 @@ namespace Collections.Tests
         [Fact]
         public void IndexOfWhenNoExistsShouldReturnMinus1()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add("test");
 
             Assert.Equal(-1, arrayTest.IndexOf("noTest"));
@@ -43,7 +43,7 @@ namespace Collections.Tests
         [Fact]
         public void ContainsWhenExistShouldReturnTrue()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add("test");
 
             Assert.True(arrayTest.Contains("test"));
@@ -52,7 +52,7 @@ namespace Collections.Tests
         [Fact]
         public void ClearWhenAnyShouldReturnCount0()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add("test");
 
             arrayTest.Clear();
@@ -63,7 +63,7 @@ namespace Collections.Tests
         [Fact]
         public void IndexOfWhenNoExistAfterClearShouldReturnMinus1()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add("test");
 
             arrayTest.Clear();
@@ -74,7 +74,7 @@ namespace Collections.Tests
         [Fact]
         public void ContainsWhenNoExistAfterClearShouldReturnFalse()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add("test");
 
             arrayTest.Clear();
@@ -85,7 +85,7 @@ namespace Collections.Tests
         [Fact]
         public void InsertWhenPosition0ShouldReturnElementOnIndex0()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add(1);
             arrayTest.Add('2');
             arrayTest.Add("3");
@@ -102,7 +102,7 @@ namespace Collections.Tests
         [Fact]
         public void InsertWhenPoistionOutOfBoundsShouldDoNothing()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add(1);
             arrayTest.Add('2');
             arrayTest.Add("3");
@@ -119,7 +119,7 @@ namespace Collections.Tests
         [Fact]
         public void RemoveAtWhenPostion0ShouldRemoveFirstElement()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add(1);
             arrayTest.Add('2');
             arrayTest.Add("3");
@@ -135,7 +135,7 @@ namespace Collections.Tests
         [Fact]
         public void RemoveAtWhenPostionOutOfBoundsShouldDoNothing()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add(1);
             arrayTest.Add('2');
             arrayTest.Add("3");
@@ -151,7 +151,7 @@ namespace Collections.Tests
         [Fact]
         public void RemoveWhen1AndOnlyOne1ShouldReturnFalseForContains()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add(1);
             arrayTest.Add('2');
             arrayTest.Add("3");
@@ -164,7 +164,7 @@ namespace Collections.Tests
         [Fact]
         public void RemoveWhen1AndMoreThanOne1ShouldReturnReturnTrueForContainsAnd2ForIndexOf()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add(1);
             arrayTest.Add('2');
             arrayTest.Add("3");
@@ -179,7 +179,7 @@ namespace Collections.Tests
         [Fact]
         public void RemoveWhenNoElementShouldDoNothing()
         {
-            ObjectArray arrayTest = new ObjectArray();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
             arrayTest.Add(1);
             arrayTest.Add('2');
             arrayTest.Add("3");
