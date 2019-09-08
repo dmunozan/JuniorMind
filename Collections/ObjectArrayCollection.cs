@@ -88,7 +88,7 @@ namespace Collections
 
         public IEnumerator GetEnumerator()
         {
-            return objectArrayCollection.GetEnumerator();
+            return new ObjectArrayEnumerator(this);
         }
 
         private void EnsureCapacity()
