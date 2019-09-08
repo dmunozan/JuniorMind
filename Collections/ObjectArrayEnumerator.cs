@@ -5,8 +5,9 @@ namespace Collections
 {
     public class ObjectArrayEnumerator : IEnumerator
     {
-        ObjectArrayCollection objectArrayCollection;
-        int index;
+        readonly ObjectArrayCollection objectArrayCollection;
+        readonly int index;
+        readonly object currentObject = null;
 
         public ObjectArrayEnumerator(ObjectArrayCollection objectArrayCollection)
         {
