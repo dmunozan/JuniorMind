@@ -5,17 +5,11 @@ namespace Collections
 {
     public class ObjectArrayEnumerator : IEnumerator
     {
-        readonly ObjectArrayCollection objectArrayCollection;
-        readonly int index;
-        readonly object currentObject = null;
-
-        public ObjectArrayEnumerator(ObjectArrayCollection objectArrayCollection)
+        public ObjectArrayEnumerator()
         {
-            this.objectArrayCollection = objectArrayCollection;
-            index = -1;
         }
 
-        public object Current => throw new NotImplementedException();
+        public object Current => null;
 
         public bool MoveNext()
         {
