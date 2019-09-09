@@ -40,7 +40,7 @@ namespace Collections
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            currentIndex = -1;
         }
     }
 }
