@@ -8,7 +8,8 @@ namespace Collections.Tests
         [Fact]
         public void CurrentWhenInitialPositionShouldReturnNull()
         {
-            ObjectArrayEnumerator arrayEnumerator = new ObjectArrayEnumerator();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
+            ObjectArrayEnumerator arrayEnumerator = new ObjectArrayEnumerator(arrayTest);
 
             Assert.Null(arrayEnumerator.Current);
         }
@@ -16,9 +17,21 @@ namespace Collections.Tests
         [Fact]
         public void MoveNextWhenInitialPositionShouldReturnTrue()
         {
-            ObjectArrayEnumerator arrayEnumerator = new ObjectArrayEnumerator();
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
+            ObjectArrayEnumerator arrayEnumerator = new ObjectArrayEnumerator(arrayTest);
 
             Assert.True(arrayEnumerator.MoveNext());
+        }
+
+        [Fact]
+        public void CurrentWhenNotInitialPositionShouldReturnEelmentOnThatPosition()
+        {
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
+            arrayTest.Add(1);
+            ObjectArrayEnumerator arrayEnumerator = new ObjectArrayEnumerator(arrayTest);
+
+            Assert.True(arrayEnumerator.MoveNext());
+            Assert.Equal(1, arrayEnumerator.Current);
         }
     }
 }
