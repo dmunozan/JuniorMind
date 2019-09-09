@@ -12,5 +12,13 @@ namespace Collections.Tests
 
             Assert.Null(arrayEnumerator.Current);
         }
+
+        [Fact]
+        public void MoveNextWhenInitialPositionShouldReturnTrue()
+        {
+            ObjectArrayEnumerator arrayEnumerator = new ObjectArrayEnumerator();
+
+            Assert.True(arrayEnumerator.MoveNext());
+        }
     }
 }
