@@ -46,5 +46,20 @@ namespace Collections.Tests
             Assert.True(arrayEnumerator.MoveNext());
             Assert.False(arrayEnumerator.MoveNext());
         }
+
+        [Fact]
+        public void ResetWhenAnyShouldSetCurrentPositionToInitialPosition()
+        {
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
+            arrayTest.Add(1);
+            ObjectArrayEnumerator arrayEnumerator = new ObjectArrayEnumerator(arrayTest);
+
+            Assert.True(arrayEnumerator.MoveNext());
+            Assert.Equal(1, arrayEnumerator.Current);
+
+            arrayEnumerator.Reset();
+
+            Assert.Null(arrayEnumerator.Current);
+        }
     }
 }
