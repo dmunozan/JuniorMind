@@ -149,6 +149,24 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void RemoveAtWhenLastPostionAndNoMoreSpaceShouldRemoveLastElement()
+        {
+            ObjectArrayCollection arrayTest = new ObjectArrayCollection();
+            arrayTest.Add(1);
+            arrayTest.Add('2');
+            arrayTest.Add("3");
+            arrayTest.Add(new int[] { 0, 1, 2 });
+
+            arrayTest.RemoveAt(3);
+
+            Assert.Equal(3, arrayTest.Count);
+            Assert.False(arrayTest.Contains(new int[] { 0, 1, 2 }));
+            Assert.Equal(1, arrayTest[0]);
+            Assert.Equal('2', arrayTest[1]);
+            Assert.Equal("3", arrayTest[2]);
+        }
+
+        [Fact]
         public void RemoveWhen1AndOnlyOne1ShouldReturnFalseForContains()
         {
             ObjectArrayCollection arrayTest = new ObjectArrayCollection();
