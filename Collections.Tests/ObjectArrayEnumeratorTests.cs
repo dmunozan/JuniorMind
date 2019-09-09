@@ -9,6 +9,7 @@ namespace Collections.Tests
         public void CurrentWhenInitialPositionShouldReturnNull()
         {
             ObjectArrayCollection arrayTest = new ObjectArrayCollection();
+            arrayTest.Add(1);
             ObjectArrayEnumerator arrayEnumerator = new ObjectArrayEnumerator(arrayTest);
 
             Assert.Null(arrayEnumerator.Current);
@@ -18,6 +19,7 @@ namespace Collections.Tests
         public void MoveNextWhenInitialPositionShouldReturnTrue()
         {
             ObjectArrayCollection arrayTest = new ObjectArrayCollection();
+            arrayTest.Add(1);
             ObjectArrayEnumerator arrayEnumerator = new ObjectArrayEnumerator(arrayTest);
 
             Assert.True(arrayEnumerator.MoveNext());
