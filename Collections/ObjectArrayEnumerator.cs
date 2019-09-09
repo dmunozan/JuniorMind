@@ -29,6 +29,11 @@ namespace Collections
 
         public bool MoveNext()
         {
+            if (currentIndex == objectArrayCollection.Count - 1)
+            {
+                return false;
+            }
+
             currentIndex++;
             return true;
         }
