@@ -13,7 +13,7 @@ namespace Collections
 
         public bool MoveNext()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void Reset()
