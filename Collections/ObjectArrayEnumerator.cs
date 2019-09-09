@@ -5,14 +5,31 @@ namespace Collections
 {
     public class ObjectArrayEnumerator : IEnumerator
     {
-        public ObjectArrayEnumerator()
+        readonly ObjectArrayCollection objectArrayCollection;
+        int currentIndex;
+
+        public ObjectArrayEnumerator(ObjectArrayCollection objectArrayCollection)
         {
+            this.objectArrayCollection = objectArrayCollection;
+            this.currentIndex = -1;
         }
 
-        public object Current => null;
+        public object Current
+        {
+            get
+            {
+                if (currentIndex == -1)
+                {
+                    return null;
+                }
+
+                return objectArrayCollection[currentIndex];
+            }
+        }
 
         public bool MoveNext()
         {
+            currentIndex++;
             return true;
         }
 
