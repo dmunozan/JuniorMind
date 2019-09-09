@@ -88,7 +88,18 @@ namespace Collections
 
         public IEnumerator GetEnumerator()
         {
-            return new ObjectArrayEnumerator(this);
+            int currentIndex = 0;
+
+            foreach (object o in objectArrayCollection)
+            {
+                if (currentIndex == this.Count)
+                {
+                    yield break;
+                }
+
+                currentIndex++;
+                yield return o;
+            }
         }
 
         private void EnsureCapacity()
