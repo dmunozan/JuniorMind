@@ -32,17 +32,39 @@ namespace Collections
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            int currentIndex = 0;
+
+            foreach (T element in listArray)
+            {
+                if (currentIndex == this.Count)
+                {
+                    yield break;
+                }
+
+                currentIndex++;
+                yield return element;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            int currentIndex = 0;
+
+            foreach (T element in listArray)
+            {
+                if (currentIndex == this.Count)
+                {
+                    yield break;
+                }
+
+                currentIndex++;
+                yield return element;
+            }
         }
 
         public void Add(T element)
         {
-            EnsureCapacity();
+            this.EnsureCapacity();
 
             this.listArray[this.Count] = element;
             this.Count++;
@@ -72,7 +94,7 @@ namespace Collections
                 return;
             }
 
-            EnsureCapacity();
+            this.EnsureCapacity();
 
             Array.Copy(this.listArray, index, this.listArray, index + 1, this.Count - index);
 
