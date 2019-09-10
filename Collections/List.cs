@@ -6,8 +6,12 @@ namespace Collections
 {
     public class List<T> : IEnumerable<T>
     {
+        readonly T[] listArray;
+
         public List()
         {
+            const int BaseSize = 4;
+            this.listArray = new T[BaseSize];
         }
 
         public int Count { get; set; }
@@ -20,6 +24,12 @@ namespace Collections
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+
+        public void Add(T element)
+        {
+            this.listArray[this.Count] = element;
+            this.Count++;
         }
     }
 }
