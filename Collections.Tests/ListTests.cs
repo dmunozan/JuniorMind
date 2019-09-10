@@ -166,5 +166,18 @@ namespace Collections.Tests
             Assert.Equal(2, listTest[1]);
             Assert.Equal(3, listTest[2]);
         }
+
+        [Fact]
+        public void RemoveWhen1AndOnlyOne1ShouldReturnFalseForContains()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+
+            listTest.Remove(1);
+
+            Assert.False(listTest.Contains(1));
+        }
     }
 }
