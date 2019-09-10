@@ -220,5 +220,18 @@ namespace Collections.Tests
 
             Assert.Equal(5, listTest.Count);
         }
+
+        [Fact]
+        public void InsertWhenNoMoreSpaceShouldIncreaseTheSizeAndInsertTheElement()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+            listTest.Add(4);
+            listTest.Insert(3, 5);
+
+            Assert.Equal(5, listTest.Count);
+        }
     }
 }
