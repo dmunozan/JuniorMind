@@ -194,5 +194,18 @@ namespace Collections.Tests
             Assert.True(listTest.Contains(1));
             Assert.Equal(2, listTest.IndexOf(1));
         }
+
+        [Fact]
+        public void RemoveWhenNoElementShouldDoNothing()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+
+            listTest.Remove(4);
+
+            Assert.Equal(3, listTest.Count);
+        }
     }
 }
