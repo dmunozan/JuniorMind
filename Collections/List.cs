@@ -10,6 +10,8 @@ namespace Collections
         {
         }
 
+        public int Count { get; set; }
+
         public IEnumerator<T> GetEnumerator()
         {
             throw new NotImplementedException();
