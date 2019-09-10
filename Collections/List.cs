@@ -78,6 +78,11 @@ namespace Collections
 
         public void RemoveAt(int index)
         {
+            if (index < 0 || index >= this.Count)
+            {
+                return;
+            }
+
             Array.Copy(this.listArray, index + 1, this.listArray, index, this.Count - index - 1);
             this.Count--;
         }
