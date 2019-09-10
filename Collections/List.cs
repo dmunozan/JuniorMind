@@ -41,5 +41,10 @@ namespace Collections
         {
             return this.IndexOf(element) >= 0;
         }
+
+        public void Clear()
+        {
+            this.Count = 0;
+        }
     }
 }
