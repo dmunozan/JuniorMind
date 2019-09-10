@@ -14,7 +14,7 @@ namespace Collections
             this.listArray = new T[BaseSize];
         }
 
-        public int Count { get; set; }
+        public int Count { get; private set; }
 
         public T this[int index]
         {
