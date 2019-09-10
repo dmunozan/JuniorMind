@@ -49,5 +49,16 @@ namespace Collections.Tests
 
             Assert.True(listTest.Contains("test"));
         }
+
+        [Fact]
+        public void ClearWhenAnyShouldReturnCount0()
+        {
+            List<string> listTest = new List<string>();
+            listTest.Add("test");
+
+            listTest.Clear();
+
+            Assert.Equal(0, listTest.Count);
+        }
     }
 }
