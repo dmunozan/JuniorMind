@@ -31,5 +31,10 @@ namespace Collections
             this.listArray[this.Count] = element;
             this.Count++;
         }
+
+        public int IndexOf(T element)
+        {
+            return Array.IndexOf(this.listArray, element);
+        }
     }
 }
