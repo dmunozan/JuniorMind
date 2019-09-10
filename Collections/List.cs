@@ -36,5 +36,10 @@ namespace Collections
         {
             return Array.IndexOf(this.listArray, element);
         }
+
+        public bool Contains(T element)
+        {
+            return this.IndexOf(element) >= 0;
+        }
     }
 }
