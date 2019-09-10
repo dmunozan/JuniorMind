@@ -148,5 +148,23 @@ namespace Collections.Tests
             Assert.Equal(2, listTest[1]);
             Assert.Equal(3, listTest[2]);
         }
+
+        [Fact]
+        public void RemoveAtWhenLastPostionAndNoMoreSpaceShouldRemoveLastElement()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+            listTest.Add(4);
+
+            listTest.RemoveAt(3);
+
+            Assert.Equal(3, listTest.Count);
+            Assert.False(listTest.Contains(4));
+            Assert.Equal(1, listTest[0]);
+            Assert.Equal(2, listTest[1]);
+            Assert.Equal(3, listTest[2]);
+        }
     }
 }
