@@ -71,5 +71,16 @@ namespace Collections.Tests
 
             Assert.Equal(-1, listTest.IndexOf("test"));
         }
+
+        [Fact]
+        public void ContainsWhenNoExistAfterClearShouldReturnFalse()
+        {
+            List<string> listTest = new List<string>();
+            listTest.Add("test");
+
+            listTest.Clear();
+
+            Assert.False(listTest.Contains("test"));
+        }
     }
 }
