@@ -42,12 +42,7 @@ namespace Collections
 
         public void Add(T element)
         {
-            const int Double = 2;
-
-            if (this.Count == this.listArray.Length)
-            {
-                Array.Resize(ref this.listArray, this.listArray.Length * Double);
-            }
+            EnsureCapacity();
 
             this.listArray[this.Count] = element;
             this.Count++;
@@ -77,12 +72,7 @@ namespace Collections
                 return;
             }
 
-            const int Double = 2;
-
-            if (this.Count == this.listArray.Length)
-            {
-                Array.Resize(ref this.listArray, this.listArray.Length * Double);
-            }
+            EnsureCapacity();
 
             Array.Copy(this.listArray, index, this.listArray, index + 1, this.Count - index);
 
@@ -104,6 +94,18 @@ namespace Collections
         public void Remove(T element)
         {
             this.RemoveAt(this.IndexOf(element));
+        }
+
+        private void EnsureCapacity()
+        {
+            const int Double = 2;
+
+            if (this.Count < this.listArray.Length)
+            {
+                return;
+            }
+
+            Array.Resize(ref this.listArray, this.listArray.Length * Double);
         }
     }
 }
