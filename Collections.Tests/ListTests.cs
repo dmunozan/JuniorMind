@@ -22,5 +22,14 @@ namespace Collections.Tests
 
             Assert.Equal(1, listTest.Count);
         }
+
+        [Fact]
+        public void IndexOfTextShouldReturn0()
+        {
+            List<string> listTest = new List<string>();
+            listTest.Add("test");
+
+            Assert.Equal(0, listTest.IndexOf("test"));
+        }
     }
 }
