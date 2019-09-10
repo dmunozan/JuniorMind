@@ -86,5 +86,10 @@ namespace Collections
             Array.Copy(this.listArray, index + 1, this.listArray, index, this.Count - index - 1);
             this.Count--;
         }
+
+        public void Remove(T element)
+        {
+            this.RemoveAt(this.IndexOf(element));
+        }
     }
 }
