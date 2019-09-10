@@ -179,5 +179,20 @@ namespace Collections.Tests
 
             Assert.False(listTest.Contains(1));
         }
+
+        [Fact]
+        public void RemoveWhen1AndMoreThanOne1ShouldReturnReturnTrueForContainsAnd2ForIndexOf()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+            listTest.Add(1);
+
+            listTest.Remove(1);
+
+            Assert.True(listTest.Contains(1));
+            Assert.Equal(2, listTest.IndexOf(1));
+        }
     }
 }
