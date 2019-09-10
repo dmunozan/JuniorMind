@@ -16,6 +16,20 @@ namespace Collections
 
         public int Count { get; set; }
 
+        public T this[int index]
+        {
+            get => this.listArray[index];
+            set
+            {
+                if (index < 0 || index >= this.Count)
+                {
+                    return;
+                }
+
+                this.listArray[index] = value;
+            }
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             throw new NotImplementedException();
@@ -47,6 +61,14 @@ namespace Collections
         public void Clear()
         {
             this.Count = 0;
+        }
+
+        public void Insert(int index, T element)
+        {
+            Array.Copy(this.listArray, index, this.listArray, index + 1, this.Count - index);
+
+            this.listArray[index] = element;
+            this.Count++;
         }
     }
 }
