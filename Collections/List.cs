@@ -77,6 +77,13 @@ namespace Collections
                 return;
             }
 
+            const int Double = 2;
+
+            if (this.Count == this.listArray.Length)
+            {
+                Array.Resize(ref this.listArray, this.listArray.Length * Double);
+            }
+
             Array.Copy(this.listArray, index, this.listArray, index + 1, this.Count - index);
 
             this.listArray[index] = element;
