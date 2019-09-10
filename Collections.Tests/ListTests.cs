@@ -40,5 +40,14 @@ namespace Collections.Tests
 
             Assert.Equal(-1, listTest.IndexOf("noTest"));
         }
+
+        [Fact]
+        public void ContainsWhenExistShouldReturnTrue()
+        {
+            List<string> listTest = new List<string>();
+            listTest.Add("test");
+
+            Assert.True(listTest.Contains("test"));
+        }
     }
 }
