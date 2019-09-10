@@ -13,5 +13,14 @@ namespace Collections.Tests
 
             Assert.Equal(0, listTest.Count);
         }
+
+        [Fact]
+        public void AddWhenEmptyShouldReturnCount1()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(4);
+
+            Assert.Equal(1, listTest.Count);
+        }
     }
 }
