@@ -60,5 +60,16 @@ namespace Collections.Tests
 
             Assert.Equal(0, listTest.Count);
         }
+
+        [Fact]
+        public void IndexOfWhenNoExistAfterClearShouldReturnMinus1()
+        {
+            List<string> listTest = new List<string>();
+            listTest.Add("test");
+
+            listTest.Clear();
+
+            Assert.Equal(-1, listTest.IndexOf("test"));
+        }
     }
 }
