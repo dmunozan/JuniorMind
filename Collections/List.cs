@@ -6,7 +6,7 @@ namespace Collections
 {
     public class List<T> : IEnumerable<T>
     {
-        readonly T[] listArray;
+        T[] listArray;
 
         public List()
         {
@@ -42,6 +42,13 @@ namespace Collections
 
         public void Add(T element)
         {
+            const int Double = 2;
+
+            if (this.Count == this.listArray.Length)
+            {
+                Array.Resize(ref this.listArray, this.listArray.Length * Double);
+            }
+
             this.listArray[this.Count] = element;
             this.Count++;
         }
