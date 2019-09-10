@@ -75,5 +75,11 @@ namespace Collections
             this.listArray[index] = element;
             this.Count++;
         }
+
+        public void RemoveAt(int index)
+        {
+            Array.Copy(this.listArray, index + 1, this.listArray, index, this.Count - index - 1);
+            this.Count--;
+        }
     }
 }
