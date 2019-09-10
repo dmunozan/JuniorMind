@@ -31,5 +31,14 @@ namespace Collections.Tests
 
             Assert.Equal(0, listTest.IndexOf("test"));
         }
+
+        [Fact]
+        public void IndexOfWhenNoExistsShouldReturnMinus1()
+        {
+            List<string> listTest = new List<string>();
+            listTest.Add("test");
+
+            Assert.Equal(-1, listTest.IndexOf("noTest"));
+        }
     }
 }
