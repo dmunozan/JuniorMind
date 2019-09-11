@@ -29,8 +29,18 @@ namespace Collections
             }
             else
             {
-                Insert(position, element);
+                base.Insert(position, element);
             }
+        }
+
+        public override void Insert(int index, T element)
+        {
+            if (this[index].CompareTo(element) < 0)
+            {
+                return;
+            }
+
+            base.Insert(index, element);
         }
     }
 }
