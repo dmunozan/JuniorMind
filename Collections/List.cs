@@ -48,18 +48,7 @@ namespace Collections
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            int currentIndex = 0;
-
-            foreach (T element in listArray)
-            {
-                if (currentIndex == this.Count)
-                {
-                    yield break;
-                }
-
-                currentIndex++;
-                yield return element;
-            }
+            return this.GetEnumerator();
         }
 
         public void Add(T element)
