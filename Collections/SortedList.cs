@@ -35,7 +35,7 @@ namespace Collections
 
         public override void Insert(int index, T element)
         {
-            if (this[index].CompareTo(element) < 0)
+            if (this[index].CompareTo(element) < 0 || (index != 0 && this[index - 1].CompareTo(element) > 0))
             {
                 return;
             }
