@@ -14,7 +14,7 @@ namespace Collections
         {
             set
             {
-                if (this[index + 1].CompareTo(value) < 0)
+                if ((index + 1 != this.Count && this[index + 1].CompareTo(value) < 0) || (index != 0 && this[index - 1].CompareTo(value) > 0))
                 {
                     return;
                 }
