@@ -120,5 +120,21 @@ namespace Collections.Tests
             Assert.Equal(6, listTest[1]);
             Assert.Equal(7, listTest[2]);
         }
+
+        [Fact]
+        public void IndexerSetWhenPosition0Number4ShouldSetTheNumber()
+        {
+            SortedList<int> listTest = new SortedList<int>();
+            listTest.Add(6);
+            listTest.Add(7);
+            listTest.Add(5);
+
+            listTest[0] = 4;
+
+            Assert.Equal(3, listTest.Count);
+            Assert.Equal(4, listTest[0]);
+            Assert.Equal(6, listTest[1]);
+            Assert.Equal(7, listTest[2]);
+        }
     }
 }
