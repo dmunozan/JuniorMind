@@ -10,6 +10,19 @@ namespace Collections
         {
         }
 
+        public override T this[int index]
+        {
+            set
+            {
+                if (this[index + 1].CompareTo(value) < 0)
+                {
+                    return;
+                }
+
+                base[index] = value;
+            }
+        }
+
         public override void Add(T element)
         {
             int position = 0;
