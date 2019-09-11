@@ -76,7 +76,7 @@ namespace Collections
             this.Count = 0;
         }
 
-        public void Insert(int index, T element)
+        public virtual void Insert(int index, T element)
         {
             if (index < 0 || index >= this.Count)
             {
