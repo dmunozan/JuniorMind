@@ -54,5 +54,22 @@ namespace Collections.Tests
             Assert.Equal(2, listTest[0]);
             Assert.Equal(5, listTest[1]);
         }
+
+        [Fact]
+        public void InsertWhenPosition2Number4ShouldInsertNumber()
+        {
+            SortedList<int> listTest = new SortedList<int>();
+            listTest.Add(5);
+            listTest.Add(2);
+            listTest.Add(3);
+
+            listTest.Insert(2, 4);
+
+            Assert.Equal(4, listTest.Count);
+            Assert.Equal(2, listTest[0]);
+            Assert.Equal(3, listTest[1]);
+            Assert.Equal(4, listTest[2]);
+            Assert.Equal(5, listTest[3]);
+        }
     }
 }
