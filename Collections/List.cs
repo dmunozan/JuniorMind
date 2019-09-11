@@ -51,7 +51,7 @@ namespace Collections
             return this.GetEnumerator();
         }
 
-        public void Add(T element)
+        public virtual void Add(T element)
         {
             this.EnsureCapacity();
 
