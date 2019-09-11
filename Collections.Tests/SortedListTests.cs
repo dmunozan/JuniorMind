@@ -13,5 +13,17 @@ namespace Collections.Tests
 
             Assert.Equal(1, listTest.Count);
         }
+
+        [Fact]
+        public void AddWhenOneNumberShouldReturnCount2AndBeSorted()
+        {
+            SortedList<int> listTest = new SortedList<int>();
+            listTest.Add(5);
+            listTest.Add(2);
+
+            Assert.Equal(2, listTest.Count);
+            Assert.Equal(2, listTest[0]);
+            Assert.Equal(5, listTest[1]);
+        }
     }
 }
