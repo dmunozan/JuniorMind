@@ -265,5 +265,22 @@ namespace Collections.Tests
 
             Assert.Null(destinationArray);
         }
+
+        [Fact]
+        public void CopyToWhenIndexIsNegativeShouldDoNothing()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+
+            int[] destinationArray = new int[4];
+
+            listTest.CopyTo(destinationArray, -1);
+
+            Assert.Equal(0, destinationArray[0]);
+            Assert.Equal(0, destinationArray[1]);
+            Assert.Equal(0, destinationArray[2]);
+        }
     }
 }
