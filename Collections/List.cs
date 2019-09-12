@@ -109,6 +109,16 @@ namespace Collections
             this.RemoveAt(this.IndexOf(element));
         }
 
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool ICollection<T>.Remove(T item)
+        {
+            throw new NotImplementedException();
+        }
+
         private void EnsureCapacity()
         {
             const int Double = 2;
@@ -119,16 +129,6 @@ namespace Collections
             }
 
             Array.Resize(ref this.listArray, this.listArray.Length * Double);
-        }
-
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
-        }
-
-        bool ICollection<T>.Remove(T item)
-        {
-            throw new NotImplementedException();
         }
     }
 }
