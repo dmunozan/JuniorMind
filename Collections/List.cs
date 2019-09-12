@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Collections
 {
-    public class List<T> : IEnumerable<T>
+    public class List<T> : IList<T>
     {
         T[] listArray;
 
@@ -15,6 +15,8 @@ namespace Collections
         }
 
         public int Count { get; private set; }
+
+        public bool IsReadOnly => throw new NotImplementedException();
 
         public virtual T this[int index]
         {
@@ -117,6 +119,16 @@ namespace Collections
             }
 
             Array.Resize(ref this.listArray, this.listArray.Length * Double);
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool ICollection<T>.Remove(T item)
+        {
+            throw new NotImplementedException();
         }
     }
 }
