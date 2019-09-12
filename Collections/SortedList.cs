@@ -23,12 +23,12 @@ namespace Collections
             }
         }
 
-        public override void Add(T element)
+        public override void Add(T item)
         {
             int position = 0;
             for (int i = 0; i < this.Count; i++)
             {
-                if (element.CompareTo(this[i]) < 0)
+                if (item.CompareTo(this[i]) < 0)
                 {
                     break;
                 }
@@ -38,22 +38,22 @@ namespace Collections
 
             if (position == this.Count)
             {
-                base.Add(element);
+                base.Add(item);
             }
             else
             {
-                base.Insert(position, element);
+                base.Insert(position, item);
             }
         }
 
-        public override void Insert(int index, T element)
+        public override void Insert(int index, T item)
         {
-            if (this[index].CompareTo(element) < 0 || (index != 0 && this[index - 1].CompareTo(element) > 0))
+            if (this[index].CompareTo(item) < 0 || (index != 0 && this[index - 1].CompareTo(item) > 0))
             {
                 return;
             }
 
-            base.Insert(index, element);
+            base.Insert(index, item);
         }
     }
 }
