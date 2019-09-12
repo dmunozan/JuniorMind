@@ -315,5 +315,20 @@ namespace Collections.Tests
             Assert.Equal(0, destinationArray[0]);
             Assert.Equal(0, destinationArray[1]);
         }
+
+        [Fact]
+        public void CopyToWhenDestinationArrayAvailableSpaceIsSmallerThanCountShouldDoNothing()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+
+            int[] destinationArray = new int[5];
+
+            listTest.CopyTo(destinationArray, 4);
+
+            Assert.Equal(0, destinationArray[4]);
+        }
     }
 }
