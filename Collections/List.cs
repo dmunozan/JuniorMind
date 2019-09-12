@@ -111,7 +111,7 @@ namespace Collections
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (array == null)
+            if (array == null || arrayIndex < 0)
             {
                 return;
             }
