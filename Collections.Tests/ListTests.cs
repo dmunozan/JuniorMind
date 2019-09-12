@@ -282,5 +282,22 @@ namespace Collections.Tests
             Assert.Equal(0, destinationArray[1]);
             Assert.Equal(0, destinationArray[2]);
         }
+
+        [Fact]
+        public void CopyToWhenIndexIsGreaterThanDestinationArrayLengthShouldDoNothing()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+
+            int[] destinationArray = new int[4];
+
+            listTest.CopyTo(destinationArray, 5);
+
+            Assert.Equal(0, destinationArray[0]);
+            Assert.Equal(0, destinationArray[1]);
+            Assert.Equal(0, destinationArray[2]);
+        }
     }
 }
