@@ -250,5 +250,20 @@ namespace Collections.Tests
             Assert.Equal(listTest[1], destinationArray[1]);
             Assert.Equal(listTest[2], destinationArray[2]);
         }
+
+        [Fact]
+        public void CopyToWhenNullShouldDoNothing()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+
+            int[] destinationArray = null;
+
+            listTest.CopyTo(destinationArray, 0);
+
+            Assert.Null(destinationArray);
+        }
     }
 }
