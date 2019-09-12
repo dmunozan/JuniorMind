@@ -111,7 +111,15 @@ namespace Collections
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (array == null || arrayIndex < 0 || arrayIndex >= array.Length || array.Length < this.Count)
+            if (array == null)
+            {
+                return;
+            }
+
+            bool isOutOfBounds = arrayIndex < 0 || arrayIndex >= array.Length;
+            bool isNotLongEnough = array.Length - arrayIndex < this.Count;
+
+            if (isOutOfBounds || isNotLongEnough)
             {
                 return;
             }
