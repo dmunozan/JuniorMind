@@ -111,7 +111,7 @@ namespace Collections
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            Array.Copy(this.listArray, 0, array, arrayIndex, this.Count);
         }
 
         bool ICollection<T>.Remove(T item)
