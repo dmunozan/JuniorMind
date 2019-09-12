@@ -36,7 +36,7 @@ namespace Collections
         {
             int currentIndex = 0;
 
-            foreach (T element in listArray)
+            foreach (T item in listArray)
             {
                 if (currentIndex == this.Count)
                 {
@@ -44,7 +44,7 @@ namespace Collections
                 }
 
                 currentIndex++;
-                yield return element;
+                yield return item;
             }
         }
 
@@ -53,24 +53,24 @@ namespace Collections
             return this.GetEnumerator();
         }
 
-        public virtual void Add(T element)
+        public virtual void Add(T item)
         {
             this.EnsureCapacity();
 
-            this.listArray[this.Count] = element;
+            this.listArray[this.Count] = item;
             this.Count++;
         }
 
-        public int IndexOf(T element)
+        public int IndexOf(T item)
         {
-            int currentIndex = Array.IndexOf(this.listArray, element);
+            int currentIndex = Array.IndexOf(this.listArray, item);
 
             return (currentIndex >= 0 && currentIndex < this.Count) ? currentIndex : -1;
         }
 
-        public bool Contains(T element)
+        public bool Contains(T item)
         {
-            return this.IndexOf(element) >= 0;
+            return this.IndexOf(item) >= 0;
         }
 
         public void Clear()
@@ -78,7 +78,7 @@ namespace Collections
             this.Count = 0;
         }
 
-        public virtual void Insert(int index, T element)
+        public virtual void Insert(int index, T item)
         {
             if (index < 0 || index >= this.Count)
             {
@@ -89,7 +89,7 @@ namespace Collections
 
             Array.Copy(this.listArray, index, this.listArray, index + 1, this.Count - index);
 
-            this.listArray[index] = element;
+            this.listArray[index] = item;
             this.Count++;
         }
 
@@ -104,9 +104,9 @@ namespace Collections
             this.Count--;
         }
 
-        public void Remove(T element)
+        public void Remove(T item)
         {
-            this.RemoveAt(this.IndexOf(element));
+            this.RemoveAt(this.IndexOf(item));
         }
 
         public void CopyTo(T[] array, int arrayIndex)
