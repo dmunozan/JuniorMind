@@ -111,6 +111,11 @@ namespace Collections
 
         public void CopyTo(T[] array, int arrayIndex)
         {
+            if (array == null)
+            {
+                return;
+            }
+
             Array.Copy(this.listArray, 0, array, arrayIndex, this.Count);
         }
 
