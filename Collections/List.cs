@@ -16,7 +16,7 @@ namespace Collections
 
         public int Count { get; private set; }
 
-        public bool IsReadOnly => throw new NotImplementedException();
+        public bool IsReadOnly => false;
 
         public virtual T this[int index]
         {
