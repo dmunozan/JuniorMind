@@ -129,7 +129,11 @@ namespace Collections
 
         bool ICollection<T>.Remove(T item)
         {
-            throw new NotImplementedException();
+            int index = this.IndexOf(item);
+
+            this.RemoveAt(index);
+
+            return index > -1;
         }
 
         private void EnsureCapacity()
