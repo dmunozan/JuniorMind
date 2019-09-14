@@ -134,15 +134,15 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void RemoveAtWhenPostionOutOfBoundsShouldDoNothing()
+        public void RemoveAtWhenPostionOutOfBoundsShouldThrowExceptionAndDoNothing()
         {
             List<int> listTest = new List<int>();
             listTest.Add(1);
             listTest.Add(2);
             listTest.Add(3);
 
-            listTest.RemoveAt(3);
-
+            Assert.Throws<ArgumentOutOfRangeException>(() => listTest.RemoveAt(3));
+            
             Assert.Equal(3, listTest.Count);
             Assert.Equal(1, listTest[0]);
             Assert.Equal(2, listTest[1]);
@@ -196,14 +196,14 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void RemoveWhenNoElementShouldDoNothing()
+        public void RemoveWhenNoElementShouldThrowExceptionAndDoNothing()
         {
             List<int> listTest = new List<int>();
             listTest.Add(1);
             listTest.Add(2);
             listTest.Add(3);
 
-            listTest.Remove(4);
+            Assert.Throws<ArgumentOutOfRangeException>(() => listTest.Remove(4));
 
             Assert.Equal(3, listTest.Count);
         }
