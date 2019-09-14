@@ -42,13 +42,13 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void InsertWhenPosition0Number3ShouldDoNothing()
+        public void InsertWhenPosition0Number3ShouldThrowExceptionAndDoNothing()
         {
             SortedList<int> listTest = new SortedList<int>();
             listTest.Add(5);
             listTest.Add(2);
 
-            listTest.Insert(0, 3);
+            Assert.Throws<InvalidOperationException>(() => listTest.Insert(0, 3));
 
             Assert.Equal(2, listTest.Count);
             Assert.Equal(2, listTest[0]);
@@ -90,14 +90,14 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void InsertWhenPosition2Number6ShouldDoNothing()
+        public void InsertWhenPosition2Number6ShouldThrowExceptionAndDoNothing()
         {
             SortedList<int> listTest = new SortedList<int>();
             listTest.Add(5);
             listTest.Add(2);
             listTest.Add(3);
 
-            listTest.Insert(2, 6);
+            Assert.Throws<InvalidOperationException>(() => listTest.Insert(2, 6));
 
             Assert.Equal(3, listTest.Count);
             Assert.Equal(2, listTest[0]);
@@ -106,14 +106,14 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void InsertWhenPosition1Number4ShouldDoNothing()
+        public void InsertWhenPosition1Number4ShouldThrowExceptionAndDoNothing()
         {
             SortedList<int> listTest = new SortedList<int>();
             listTest.Add(6);
             listTest.Add(7);
             listTest.Add(5);
 
-            listTest.Insert(1, 4);
+            Assert.Throws<InvalidOperationException>(() => listTest.Insert(1, 4));
 
             Assert.Equal(3, listTest.Count);
             Assert.Equal(5, listTest[0]);
