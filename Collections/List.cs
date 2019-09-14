@@ -97,6 +97,11 @@ namespace Collections
 
         public virtual void Insert(int index, T item)
         {
+            if (this.IsReadOnly)
+            {
+                throw new NotSupportedException(NotSupportedExceptionMessage);
+            }
+
             if (index < 0 || index >= this.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), IndexExceptionMessage);
