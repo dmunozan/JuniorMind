@@ -87,6 +87,11 @@ namespace Collections
 
         public void Clear()
         {
+            if (this.IsReadOnly)
+            {
+                throw new NotSupportedException(NotSupportedExceptionMessage);
+            }
+
             this.Count = 0;
         }
 
