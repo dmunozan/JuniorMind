@@ -98,7 +98,7 @@ namespace Collections
         {
             if (index < 0 || index >= this.Count)
             {
-                return;
+                throw new ArgumentOutOfRangeException(nameof(index), IndexExceptionMessage);
             }
 
             Array.Copy(this.listArray, index + 1, this.listArray, index, this.Count - index - 1);
