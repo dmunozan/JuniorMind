@@ -52,7 +52,7 @@ namespace Collections
         {
             if (this[index].CompareTo(item) < 0 || (index != 0 && this[index - 1].CompareTo(item) > 0))
             {
-                return;
+                throw new InvalidOperationException(InvalidOperationExceptionMessage);
             }
 
             base.Insert(index, item);
