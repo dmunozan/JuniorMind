@@ -347,5 +347,21 @@ namespace Collections.Tests
             Assert.Equal(listTest[1], destinationArray[1]);
             Assert.Equal(listTest[2], destinationArray[2]);
         }
+
+        [Fact]
+        public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+
+            listTest.ToReadOnly();
+
+            Assert.True(listTest.IsReadOnly);
+            Assert.Equal(1, listTest[0]);
+            Assert.Equal(2, listTest[1]);
+            Assert.Equal(3, listTest[2]);
+        }
     }
 }
