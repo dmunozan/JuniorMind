@@ -6,6 +6,7 @@ namespace Collections
 {
     public class List<T> : IList<T>
     {
+        const string IndexExceptionMessage = "Index has to be a positive integer smaller than the size of the collection";
         T[] listArray;
 
         public List()
@@ -25,7 +26,7 @@ namespace Collections
             {
                 if (index < 0 || index >= this.Count)
                 {
-                    return;
+                    throw new ArgumentOutOfRangeException("index", IndexExceptionMessage);
                 }
 
                 this.listArray[index] = value;
