@@ -117,6 +117,11 @@ namespace Collections
 
         public void RemoveAt(int index)
         {
+            if (this.IsReadOnly)
+            {
+                throw new NotSupportedException(NotSupportedExceptionMessage);
+            }
+
             if (index < 0 || index >= this.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index), IndexExceptionMessage);
