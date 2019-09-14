@@ -128,7 +128,7 @@ namespace Collections
 
             if (isNotLongEnough)
             {
-                return;
+                throw new ArgumentException("There is not enough space from the given index to the end of the array", nameof(array));
             }
 
             Array.Copy(this.listArray, 0, array, arrayIndex, this.Count);
