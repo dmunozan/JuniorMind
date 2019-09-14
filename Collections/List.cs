@@ -83,7 +83,7 @@ namespace Collections
         {
             if (index < 0 || index >= this.Count)
             {
-                return;
+                throw new ArgumentOutOfRangeException(nameof(index), IndexExceptionMessage);
             }
 
             this.EnsureCapacity();
