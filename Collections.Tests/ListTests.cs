@@ -102,6 +102,22 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void ClearWhenIsReadOnlyShouldThrowExceptionAndDoNothing()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+
+            listTest.ToReadOnly();
+
+            Assert.Throws<NotSupportedException>(() => listTest.Clear());
+
+            Assert.True(listTest.IsReadOnly);
+            Assert.Equal(3, listTest.Count);
+        }
+
+        [Fact]
         public void InsertWhenPosition0ShouldReturnElementOnIndex0()
         {
             List<int> listTest = new List<int>();
