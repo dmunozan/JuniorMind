@@ -58,7 +58,7 @@ namespace Collections
         {
             if (this.IsReadOnly)
             {
-                throw new InvalidOperationException("List is read only and cannot be modified.");
+                throw new NotSupportedException("List is read only and cannot be modified.");
             }
 
             this.EnsureCapacity();
