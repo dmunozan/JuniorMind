@@ -56,6 +56,11 @@ namespace Collections
 
         public virtual void Add(T item)
         {
+            if (this.IsReadOnly)
+            {
+                throw new InvalidOperationException("List is read only and cannot be modified.");
+            }
+
             this.EnsureCapacity();
 
             this.listArray[this.Count] = item;
