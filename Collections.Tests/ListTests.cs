@@ -252,7 +252,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void CopyToWhenNullShouldDoNothing()
+        public void CopyToWhenNullShouldThrowExceptionAndDoNothing()
         {
             List<int> listTest = new List<int>();
             listTest.Add(1);
@@ -261,7 +261,7 @@ namespace Collections.Tests
 
             int[] destinationArray = null;
 
-            listTest.CopyTo(destinationArray, 0);
+            Assert.Throws<ArgumentNullException>(() => listTest.CopyTo(destinationArray, 0));
 
             Assert.Null(destinationArray);
         }
