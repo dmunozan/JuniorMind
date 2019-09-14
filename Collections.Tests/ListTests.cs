@@ -33,7 +33,7 @@ namespace Collections.Tests
 
             listTest.ToReadOnly();
 
-            Assert.Throws<InvalidOperationException>(() => listTest.Add(4));
+            Assert.Throws<NotSupportedException>(() => listTest.Add(4));
 
             Assert.True(listTest.IsReadOnly);
             Assert.Equal(1, listTest[0]);
