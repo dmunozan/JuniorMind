@@ -6,6 +6,8 @@ namespace Collections
     public class SortedList<T> : List<T>
         where T : IComparable<T>
     {
+        const string InvalidOperationExceptionMessage = "Operation not allowed as it would break the sorting.";
+
         public SortedList() : base()
         {
         }
@@ -16,7 +18,7 @@ namespace Collections
             {
                 if ((index + 1 != this.Count && this[index + 1].CompareTo(value) < 0) || (index != 0 && this[index - 1].CompareTo(value) > 0))
                 {
-                    return;
+                    throw new InvalidOperationException(InvalidOperationExceptionMessage);
                 }
 
                 base[index] = value;
