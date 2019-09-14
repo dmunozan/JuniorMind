@@ -267,7 +267,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void CopyToWhenIndexIsNegativeShouldDoNothing()
+        public void CopyToWhenIndexIsNegativeShouldThrowExceptionAndDoNothing()
         {
             List<int> listTest = new List<int>();
             listTest.Add(1);
@@ -276,7 +276,7 @@ namespace Collections.Tests
 
             int[] destinationArray = new int[4];
 
-            listTest.CopyTo(destinationArray, -1);
+            Assert.Throws<ArgumentOutOfRangeException>(() => listTest.CopyTo(destinationArray, -1));
 
             Assert.Equal(0, destinationArray[0]);
             Assert.Equal(0, destinationArray[1]);
@@ -284,7 +284,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void CopyToWhenIndexIsGreaterThanDestinationArrayLengthShouldDoNothing()
+        public void CopyToWhenIndexIsGreaterThanDestinationArrayLengthShouldThrowExceptionAndDoNothing()
         {
             List<int> listTest = new List<int>();
             listTest.Add(1);
@@ -293,7 +293,7 @@ namespace Collections.Tests
 
             int[] destinationArray = new int[4];
 
-            listTest.CopyTo(destinationArray, 5);
+            Assert.Throws<ArgumentOutOfRangeException>(() => listTest.CopyTo(destinationArray, 5));
 
             Assert.Equal(0, destinationArray[0]);
             Assert.Equal(0, destinationArray[1]);
