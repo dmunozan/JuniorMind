@@ -170,14 +170,14 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void IndexerSetWhenPosition0Number7ShouldDoNothing()
+        public void IndexerSetWhenPosition0Number7ShouldThrowExceptionAndDoNothing()
         {
             SortedList<int> listTest = new SortedList<int>();
             listTest.Add(6);
             listTest.Add(7);
             listTest.Add(5);
 
-            listTest[0] = 7;
+            Assert.Throws<InvalidOperationException>(() => listTest[0] = 7);
 
             Assert.Equal(3, listTest.Count);
             Assert.Equal(5, listTest[0]);
@@ -186,14 +186,14 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void IndexerSetWhenLastPositionNumber5ShouldDoNothing()
+        public void IndexerSetWhenLastPositionNumber5ShouldThrowExceptionAndDoNothing()
         {
             SortedList<int> listTest = new SortedList<int>();
             listTest.Add(6);
             listTest.Add(7);
             listTest.Add(5);
 
-            listTest[2] = 5;
+            Assert.Throws<InvalidOperationException>(() => listTest[2] = 5);
 
             Assert.Equal(3, listTest.Count);
             Assert.Equal(5, listTest[0]);
