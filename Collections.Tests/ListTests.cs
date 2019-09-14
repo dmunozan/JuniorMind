@@ -101,14 +101,14 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void InsertWhenPoistionOutOfBoundsShouldDoNothing()
+        public void InsertWhenPoistionOutOfBoundsShouldThrowExceptionAndDoNothing()
         {
             List<int> listTest = new List<int>();
             listTest.Add(1);
             listTest.Add(2);
             listTest.Add(3);
 
-            listTest.Insert(3, 4);
+            Assert.Throws<ArgumentOutOfRangeException>(() => listTest.Insert(3, 4));
 
             Assert.Equal(3, listTest.Count);
             Assert.False(listTest.Contains(4));
