@@ -301,7 +301,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void CopyToWhenDestinationArrayLengthIsSmallerThanCountShouldDoNothing()
+        public void CopyToWhenDestinationArrayLengthIsSmallerThanCountShouldThrowExceptionAndDoNothing()
         {
             List<int> listTest = new List<int>();
             listTest.Add(1);
@@ -310,14 +310,14 @@ namespace Collections.Tests
 
             int[] destinationArray = new int[2];
 
-            listTest.CopyTo(destinationArray, 0);
+            Assert.Throws<ArgumentException>(() => listTest.CopyTo(destinationArray, 0));
 
             Assert.Equal(0, destinationArray[0]);
             Assert.Equal(0, destinationArray[1]);
         }
 
         [Fact]
-        public void CopyToWhenDestinationArrayAvailableSpaceIsSmallerThanCountShouldDoNothing()
+        public void CopyToWhenDestinationArrayAvailableSpaceIsSmallerThanCountShouldThrowExceptionAndDoNothing()
         {
             List<int> listTest = new List<int>();
             listTest.Add(1);
@@ -326,7 +326,7 @@ namespace Collections.Tests
 
             int[] destinationArray = new int[5];
 
-            listTest.CopyTo(destinationArray, 4);
+            Assert.Throws<ArgumentException>(() => listTest.CopyTo(destinationArray, 4));
 
             Assert.Equal(0, destinationArray[4]);
         }
