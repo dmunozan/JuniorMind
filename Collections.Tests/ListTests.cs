@@ -24,6 +24,24 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void AddWhenIsReadOnlyShouldThrowExceptionAndDoNothing()
+        {
+            List<int> listTest = new List<int>();
+            listTest.Add(1);
+            listTest.Add(2);
+            listTest.Add(3);
+
+            listTest.ToReadOnly();
+
+            Assert.Throws<InvalidOperationException>(() => listTest.Add(4));
+
+            Assert.True(listTest.IsReadOnly);
+            Assert.Equal(1, listTest[0]);
+            Assert.Equal(2, listTest[1]);
+            Assert.Equal(3, listTest[2]);
+        }
+
+        [Fact]
         public void IndexOfTextShouldReturn0()
         {
             List<string> listTest = new List<string>();
