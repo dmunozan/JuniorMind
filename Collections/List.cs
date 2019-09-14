@@ -118,9 +118,15 @@ namespace Collections
             }
 
             bool isOutOfBounds = arrayIndex < 0 || arrayIndex >= array.Length;
+
+            if (isOutOfBounds)
+            {
+                throw new ArgumentOutOfRangeException(nameof(arrayIndex), IndexExceptionMessage);
+            }
+
             bool isNotLongEnough = array.Length - arrayIndex < this.Count;
 
-            if (isOutOfBounds || isNotLongEnough)
+            if (isNotLongEnough)
             {
                 return;
             }
