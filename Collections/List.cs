@@ -7,6 +7,7 @@ namespace Collections
     public class List<T> : IList<T>
     {
         const string IndexExceptionMessage = "Index has to be a positive integer smaller than the size of the collection";
+        const string NotSupportedExceptionMessage = "List is read only and cannot be modified.";
         T[] listArray;
 
         public List()
@@ -24,6 +25,11 @@ namespace Collections
             get => this.listArray[index];
             set
             {
+                if (this.IsReadOnly)
+                {
+                    throw new NotSupportedException(NotSupportedExceptionMessage);
+                }
+
                 if (index < 0 || index >= this.Count)
                 {
                     throw new ArgumentOutOfRangeException("index", IndexExceptionMessage);
@@ -58,7 +64,7 @@ namespace Collections
         {
             if (this.IsReadOnly)
             {
-                throw new NotSupportedException("List is read only and cannot be modified.");
+                throw new NotSupportedException(NotSupportedExceptionMessage);
             }
 
             this.EnsureCapacity();
