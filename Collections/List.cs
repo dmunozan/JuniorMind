@@ -17,7 +17,7 @@ namespace Collections
 
         public int Count { get; private set; }
 
-        public bool IsReadOnly => false;
+        public bool IsReadOnly { get; private set; }
 
         public virtual T this[int index]
         {
@@ -141,6 +141,11 @@ namespace Collections
             this.RemoveAt(index);
 
             return index > -1;
+        }
+
+        public void ToReadOnly()
+        {
+            this.IsReadOnly = true;
         }
 
         private void EnsureCapacity()
