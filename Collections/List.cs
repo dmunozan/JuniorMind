@@ -6,8 +6,6 @@ namespace Collections
 {
     public class List<T> : IList<T>
     {
-        const string IndexExceptionMessage = "Index has to be a positive integer smaller than the size of the collection";
-        const string NotSupportedExceptionMessage = "List is read only and cannot be modified.";
         T[] listArray;
 
         public List()
@@ -25,15 +23,9 @@ namespace Collections
             get => this.listArray[index];
             set
             {
-                if (this.IsReadOnly)
-                {
-                    throw new NotSupportedException(NotSupportedExceptionMessage);
-                }
+                CheckModifiability();
 
-                if (index < 0 || index >= this.Count)
-                {
-                    throw new ArgumentOutOfRangeException("index", IndexExceptionMessage);
-                }
+                CheckIndex(index, this.Count, "index");
 
                 this.listArray[index] = value;
             }
@@ -62,10 +54,7 @@ namespace Collections
 
         public virtual void Add(T item)
         {
-            if (this.IsReadOnly)
-            {
-                throw new NotSupportedException(NotSupportedExceptionMessage);
-            }
+            CheckModifiability();
 
             this.EnsureCapacity();
 
@@ -87,25 +76,16 @@ namespace Collections
 
         public void Clear()
         {
-            if (this.IsReadOnly)
-            {
-                throw new NotSupportedException(NotSupportedExceptionMessage);
-            }
+            CheckModifiability();
 
             this.Count = 0;
         }
 
         public virtual void Insert(int index, T item)
         {
-            if (this.IsReadOnly)
-            {
-                throw new NotSupportedException(NotSupportedExceptionMessage);
-            }
+            CheckModifiability();
 
-            if (index < 0 || index >= this.Count)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index), IndexExceptionMessage);
-            }
+            CheckIndex(index, this.Count, nameof(index));
 
             this.EnsureCapacity();
 
@@ -117,15 +97,9 @@ namespace Collections
 
         public void RemoveAt(int index)
         {
-            if (this.IsReadOnly)
-            {
-                throw new NotSupportedException(NotSupportedExceptionMessage);
-            }
+            CheckModifiability();
 
-            if (index < 0 || index >= this.Count)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index), IndexExceptionMessage);
-            }
+            CheckIndex(index, this.Count, nameof(index));
 
             Array.Copy(this.listArray, index + 1, this.listArray, index, this.Count - index - 1);
             this.Count--;
@@ -143,12 +117,7 @@ namespace Collections
                 throw new ArgumentNullException(nameof(array), "The destination array must be a valid array");
             }
 
-            bool isOutOfBounds = arrayIndex < 0 || arrayIndex >= array.Length;
-
-            if (isOutOfBounds)
-            {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex), IndexExceptionMessage);
-            }
+            CheckIndex(arrayIndex, array.Length, nameof(arrayIndex));
 
             bool isNotLongEnough = array.Length - arrayIndex < this.Count;
 
@@ -184,6 +153,26 @@ namespace Collections
             }
 
             Array.Resize(ref this.listArray, this.listArray.Length * Double);
+        }
+
+        private void CheckModifiability()
+        {
+            if (!this.IsReadOnly)
+            {
+                return;
+            }
+
+            throw new NotSupportedException("List is read only and cannot be modified.");
+        }
+
+        private void CheckIndex(int index, int arrayLength, string paramName)
+        {
+            if (index >= 0 && index < arrayLength)
+            {
+                return;
+            }
+
+            throw new ArgumentOutOfRangeException(paramName, "Index has to be a positive integer smaller than the size of the collection");
         }
     }
 }
