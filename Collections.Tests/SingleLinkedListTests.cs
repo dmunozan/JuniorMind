@@ -19,5 +19,13 @@ namespace Collections.Tests
 
             Assert.Null(testSLList.First);
         }
+
+        [Fact]
+        public void LastWhenEmptyListShouldReturnNull()
+        {
+            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+
+            Assert.Null(testSLList.Last);
+        }
     }
 }
