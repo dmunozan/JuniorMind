@@ -5,8 +5,11 @@
         public SingleLinkedList()
         {
             Count = 0;
+            First = null;
         }
 
         public int Count { get; }
+
+        public Node<T> First { get; }
     }
 }
