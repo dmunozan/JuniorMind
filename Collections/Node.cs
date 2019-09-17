@@ -14,6 +14,6 @@ namespace Collections
 
         public T Value { get; }
 
-        public Node<T> NextNode { get; }
+        public Node<T> NextNode { get; set; }
     }
 }
