@@ -20,5 +20,16 @@ namespace Collections.Tests
 
             Assert.Null(testNode.NextNode);
         }
+
+        [Fact]
+        public void NextNodeWhenNodeShouldReturnAssignedNode()
+        {
+            Node<int> testNode = new Node<int>(0);
+            Node<int> testNextNode = new Node<int>(1);
+
+            testNode.NextNode = testNextNode;
+
+            Assert.Equal(testNextNode, testNode.NextNode);
+        }
     }
 }
