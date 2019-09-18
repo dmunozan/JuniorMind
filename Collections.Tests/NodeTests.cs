@@ -30,5 +30,14 @@ namespace Collections.Tests
 
             Assert.Equal(testNextNode, testNode.NextNode);
         }
+
+        [Fact]
+        public void EqualsWhenSameValueShouldReturnTrue()
+        {
+            Node<int> testNode = new Node<int>(0);
+            Node<int> sameNode = new Node<int>(0);
+
+            Assert.True(testNode.Equals(sameNode));
+        }
     }
 }
