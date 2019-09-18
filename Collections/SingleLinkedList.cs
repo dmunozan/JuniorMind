@@ -16,6 +16,16 @@ namespace Collections
 
         public void AddFirst(Node<T> node)
         {
+            if (node == null)
+            {
+                throw new ArgumentNullException(nameof(node), "Not possible to add null to a Single Linked List");
+            }
+
+            if (this.First != null)
+            {
+                node.NextNode = this.First;
+            }
+
             this.First = node;
             this.Count++;
         }
