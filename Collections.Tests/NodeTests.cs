@@ -39,5 +39,22 @@ namespace Collections.Tests
 
             Assert.True(testNode.Equals(sameNode));
         }
+
+        [Fact]
+        public void EqualsWhenNullShouldReturnFalse()
+        {
+            Node<int> testNode = new Node<int>(0);
+
+            Assert.False(testNode.Equals(null));
+        }
+
+        [Fact]
+        public void EqualsWhenDifferentValueShouldReturnFalse()
+        {
+            Node<int> testNode = new Node<int>(0);
+            Node<int> notSameNode = new Node<int>(1);
+
+            Assert.False(testNode.Equals(notSameNode));
+        }
     }
 }
