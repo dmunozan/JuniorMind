@@ -11,5 +11,16 @@
         public T Value { get; }
 
         public Node<T> NextNode { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Node<T> objNode = (Node<T>)obj;
+            return Value.Equals(objNode.Value);
+        }
     }
 }
