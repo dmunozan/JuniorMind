@@ -31,5 +31,25 @@ namespace Collections.Tests
             Assert.Equal(1, testSLList.Count);
             Assert.Equal("test", testSLList.First.Value);
         }
+
+        [Fact]
+        public void AddFirstWhenAlreadyExistingFirstShouldAddNodeToFirstExistingToNodeNextAndIncreaseCount()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> currentFirstNode = new Node<string>("currentFirst");
+            Node<string> newFirstNode = new Node<string>("newFirst");
+
+            testSLList.AddFirst(currentFirstNode);
+            
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal("currentFirst", testSLList.First.Value);
+            Assert.Null(testSLList.First.NextNode);
+
+            testSLList.AddFirst(newFirstNode);
+
+            Assert.Equal(2, testSLList.Count);
+            Assert.Equal("newFirst", testSLList.First.Value);
+            Assert.Equal(currentFirstNode, testSLList.First.NextNode);
+        }
     }
 }
