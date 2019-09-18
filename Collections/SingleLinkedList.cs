@@ -1,4 +1,6 @@
-﻿namespace Collections
+﻿using System;
+
+namespace Collections
 {
     public class SingleLinkedList<T>
     {
@@ -8,8 +10,14 @@
             First = null;
         }
 
-        public int Count { get; }
+        public int Count { get; private set; }
 
-        public Node<T> First { get; }
+        public Node<T> First { get; private set; }
+
+        public void AddFirst(Node<T> node)
+        {
+            this.First = node;
+            this.Count++;
+        }
     }
 }
