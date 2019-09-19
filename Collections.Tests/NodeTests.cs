@@ -32,6 +32,14 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void ListWhenNoAssignedShouldReturnNull()
+        {
+            Node<int> testNode = new Node<int>(0);
+
+            Assert.Null(testNode.List);
+        }
+
+        [Fact]
         public void EqualsWhenSameValueShouldReturnTrue()
         {
             Node<int> testNode = new Node<int>(0);
