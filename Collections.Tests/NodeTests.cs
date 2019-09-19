@@ -40,6 +40,17 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void ListWhenAssignedShouldReturnSingleLinkedList()
+        {
+            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+            Node<int> testNode = new Node<int>(0);
+
+            testNode.List = testSLList;
+
+            Assert.Equal(testSLList, testNode.List);
+        }
+
+        [Fact]
         public void EqualsWhenSameValueShouldReturnTrue()
         {
             Node<int> testNode = new Node<int>(0);
