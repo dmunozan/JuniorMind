@@ -26,6 +26,7 @@ namespace Collections
                 node.NextNode = this.First;
             }
 
+            node.List = this;
             this.First = node;
             this.Count++;
         }
