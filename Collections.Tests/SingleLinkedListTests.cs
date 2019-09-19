@@ -37,7 +37,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void AddFirstWhenAlreadyExistingFirstShouldAddNodeToFirstExistingToNodeNextAndIncreaseCount()
+        public void AddFirstWhenAlreadyExistingFirstShouldAddNode()
         {
             SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
             Node<string> currentFirstNode = new Node<string>("currentFirst");
@@ -46,14 +46,18 @@ namespace Collections.Tests
             testSLList.AddFirst(currentFirstNode);
             
             Assert.Equal(1, testSLList.Count);
+            Assert.Equal(currentFirstNode, testSLList.First);
             Assert.Equal("currentFirst", testSLList.First.Value);
             Assert.Null(testSLList.First.NextNode);
+            Assert.Equal(testSLList, testSLList.First.List);
 
             testSLList.AddFirst(newFirstNode);
 
             Assert.Equal(2, testSLList.Count);
+            Assert.Equal(newFirstNode, testSLList.First);
             Assert.Equal("newFirst", testSLList.First.Value);
             Assert.Equal(currentFirstNode, testSLList.First.NextNode);
+            Assert.Equal(testSLList, testSLList.First.List);
         }
 
         [Fact]
