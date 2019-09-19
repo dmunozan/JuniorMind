@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Collections.Tests
 {
@@ -50,6 +51,17 @@ namespace Collections.Tests
             Assert.Equal(2, testSLList.Count);
             Assert.Equal("newFirst", testSLList.First.Value);
             Assert.Equal(currentFirstNode, testSLList.First.NextNode);
+        }
+
+        [Fact]
+        public void AddFirstWhenNodeIsNullShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+
+            Assert.Throws<ArgumentNullException>(() => testSLList.AddFirst(null));
+
+            Assert.Equal(0, testSLList.Count);
+            Assert.Null(testSLList.First);
         }
     }
 }
