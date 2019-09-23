@@ -65,7 +65,7 @@ namespace Collections.Tests
         {
             SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
 
-            Assert.Throws<ArgumentNullException>(() => testSLList.AddFirst(null));
+            Assert.Throws<ArgumentNullException>(() => testSLList.AddFirst(null as Node<string>));
 
             Assert.Equal(0, testSLList.Count);
             Assert.Null(testSLList.First);
@@ -89,6 +89,20 @@ namespace Collections.Tests
 
             Assert.Equal(0, ourTestSLList.Count);
             Assert.Null(ourTestSLList.First);
+        }
+
+        [Fact]
+        public void AddFirstWhenTAndAnySLLShouldAddNode()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+
+            Node<string> node = testSLList.AddFirst("test");
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node, testSLList.First);
+            Assert.Equal("test", testSLList.First.Value);
+            Assert.Null(testSLList.First.NextNode);
+            Assert.Equal(testSLList, testSLList.First.List);
         }
     }
 }
