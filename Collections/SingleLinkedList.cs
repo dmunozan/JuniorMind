@@ -21,6 +21,11 @@ namespace Collections
                 throw new ArgumentNullException(nameof(node), "Not possible to add null to a Single Linked List");
             }
 
+            if (node.List != null)
+            {
+                throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
+            }
+
             if (this.First != null)
             {
                 node.NextNode = this.First;
