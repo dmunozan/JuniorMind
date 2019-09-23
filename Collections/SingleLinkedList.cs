@@ -35,5 +35,14 @@ namespace Collections
             this.First = node;
             this.Count++;
         }
+
+        public Node<T> AddFirst(T value)
+        {
+            Node<T> node = new Node<T>(value);
+
+            this.AddFirst(node);
+
+            return node;
+        }
     }
 }
