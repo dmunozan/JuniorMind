@@ -61,7 +61,7 @@ namespace Collections
 
             if (newNode == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(newNode), "Not possible to add null to a Single Linked List");
             }
 
             if (this.Last == node)
