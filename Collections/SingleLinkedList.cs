@@ -54,7 +54,12 @@ namespace Collections
 
         public void AddAfter(Node<T> node, Node<T> newNode)
         {
-            if (node == null || newNode == null)
+            if (node == null)
+            {
+                throw new ArgumentNullException(nameof(node), "Not possible to add null to a Single Linked List");
+            }
+
+            if (newNode == null)
             {
                 return;
             }
