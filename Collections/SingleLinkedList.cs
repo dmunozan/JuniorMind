@@ -29,9 +29,13 @@ namespace Collections
                 throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
             }
 
-            if (this.First != null)
+            if (this.Count != 0)
             {
                 node.NextNode = this.First;
+            }
+            else
+            {
+                this.Last = node;
             }
 
             node.List = this;
