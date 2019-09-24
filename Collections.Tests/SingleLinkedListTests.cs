@@ -292,5 +292,27 @@ namespace Collections.Tests
             Assert.Equal(node, testSLList.First);
             Assert.Equal(node, testSLList.Last);
         }
+
+        [Fact]
+        public void AddAfterWhenNodeNoExistShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+            Node<string> newNode = new Node<string>("newNode");
+
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node1, testSLList.Last);
+            Assert.Equal(testSLList, node1.List);
+
+            Assert.Throws<InvalidOperationException>(() => testSLList.AddAfter(node2, newNode));
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node1, testSLList.Last);
+        }
     }
 }
