@@ -44,5 +44,18 @@ namespace Collections
 
             return node;
         }
+
+        public void AddAfter(Node<T> node, Node<T> newNode)
+        {
+            if (node == null || newNode == null)
+            {
+                return;
+            }
+
+            newNode.List = this;
+            newNode.NextNode = node.NextNode;
+            node.NextNode = newNode;
+            this.Count++;
+        }
     }
 }
