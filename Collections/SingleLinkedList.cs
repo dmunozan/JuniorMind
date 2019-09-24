@@ -64,6 +64,11 @@ namespace Collections
                 throw new ArgumentNullException(nameof(newNode), "Not possible to add null to a Single Linked List");
             }
 
+            if (node.List != this)
+            {
+                throw new InvalidOperationException("Node is not in the current Single Linked List");
+            }
+
             if (this.Last == node)
             {
                 this.Last = newNode;
