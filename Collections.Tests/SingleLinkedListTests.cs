@@ -37,6 +37,17 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void FirstWhenNoEmptyListShouldReturnFirstNode()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node = new Node<string>("test");
+
+            testSLList.AddFirst(node);
+
+            Assert.Equal(node, testSLList.First);
+        }
+
+        [Fact]
         public void AddFirstWhenAnyShouldAddNode()
         {
             SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
