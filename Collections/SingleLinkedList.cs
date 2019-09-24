@@ -59,6 +59,11 @@ namespace Collections
                 return;
             }
 
+            if (this.Last == node)
+            {
+                this.Last = newNode;
+            }
+
             newNode.List = this;
             newNode.NextNode = node.NextNode;
             node.NextNode = newNode;
