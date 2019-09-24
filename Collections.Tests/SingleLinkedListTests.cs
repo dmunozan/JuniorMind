@@ -76,6 +76,7 @@ namespace Collections.Tests
 
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node, testSLList.First);
+            Assert.Equal(node, testSLList.Last);
             Assert.Equal("test", testSLList.First.Value);
             Assert.Null(testSLList.First.NextNode);
             Assert.Equal(testSLList, testSLList.First.List);
@@ -92,6 +93,7 @@ namespace Collections.Tests
             
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(currentFirstNode, testSLList.First);
+            Assert.Equal(currentFirstNode, testSLList.Last);
             Assert.Equal("currentFirst", testSLList.First.Value);
             Assert.Null(testSLList.First.NextNode);
             Assert.Equal(testSLList, testSLList.First.List);
@@ -100,6 +102,7 @@ namespace Collections.Tests
 
             Assert.Equal(2, testSLList.Count);
             Assert.Equal(newFirstNode, testSLList.First);
+            Assert.Equal(currentFirstNode, testSLList.Last);
             Assert.Equal("newFirst", testSLList.First.Value);
             Assert.Equal(currentFirstNode, testSLList.First.NextNode);
             Assert.Equal(testSLList, testSLList.First.List);
@@ -114,6 +117,7 @@ namespace Collections.Tests
 
             Assert.Equal(0, testSLList.Count);
             Assert.Null(testSLList.First);
+            Assert.Null(testSLList.Last);
         }
 
         [Fact]
@@ -128,12 +132,14 @@ namespace Collections.Tests
 
             Assert.Equal(1, anotherTestSLList.Count);
             Assert.Equal(node, anotherTestSLList.First);
+            Assert.Equal(node, anotherTestSLList.Last);
             Assert.Equal(anotherTestSLList, node.List);
 
             Assert.Throws<InvalidOperationException>(() => ourTestSLList.AddFirst(node));
 
             Assert.Equal(0, ourTestSLList.Count);
             Assert.Null(ourTestSLList.First);
+            Assert.Null(ourTestSLList.Last);
         }
 
         [Fact]
@@ -145,6 +151,7 @@ namespace Collections.Tests
 
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node, testSLList.First);
+            Assert.Equal(node, testSLList.Last);
             Assert.Equal("test", testSLList.First.Value);
             Assert.Null(testSLList.First.NextNode);
             Assert.Equal(testSLList, testSLList.First.List);
@@ -159,6 +166,7 @@ namespace Collections.Tests
 
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(currentFirstNode, testSLList.First);
+            Assert.Equal(currentFirstNode, testSLList.Last);
             Assert.Equal("currentFirst", testSLList.First.Value);
             Assert.Null(testSLList.First.NextNode);
             Assert.Equal(testSLList, testSLList.First.List);
@@ -167,6 +175,7 @@ namespace Collections.Tests
 
             Assert.Equal(2, testSLList.Count);
             Assert.Equal(newFirstNode, testSLList.First);
+            Assert.Equal(currentFirstNode, testSLList.Last);
             Assert.Equal("newFirst", testSLList.First.Value);
             Assert.Equal(currentFirstNode, testSLList.First.NextNode);
             Assert.Equal(testSLList, testSLList.First.List);
@@ -181,6 +190,7 @@ namespace Collections.Tests
 
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node, testSLList.First);
+            Assert.Equal(node, testSLList.Last);
             Assert.Null(testSLList.First.Value);
             Assert.Null(testSLList.First.NextNode);
             Assert.Equal(testSLList, testSLList.First.List);
@@ -199,6 +209,7 @@ namespace Collections.Tests
 
             Assert.Equal(2, testSLList.Count);
             Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node2, testSLList.Last);
             Assert.Equal("node1", testSLList.First.Value);
             Assert.Equal(node2, testSLList.First.NextNode);
             Assert.Equal(testSLList, testSLList.First.List);
@@ -207,6 +218,7 @@ namespace Collections.Tests
 
             Assert.Equal(3, testSLList.Count);
             Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node2, testSLList.Last);
             Assert.Equal(newNode, testSLList.First.NextNode);
             Assert.Equal("newNode", testSLList.First.NextNode.Value);
             Assert.Equal(testSLList, newNode.List);
