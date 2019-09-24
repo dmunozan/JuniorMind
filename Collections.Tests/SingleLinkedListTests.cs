@@ -48,6 +48,14 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void LastWhenEmptyListShouldReturnNull()
+        {
+            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+
+            Assert.Null(testSLList.Last);
+        }
+
+        [Fact]
         public void AddFirstWhenAnyShouldAddNode()
         {
             SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
