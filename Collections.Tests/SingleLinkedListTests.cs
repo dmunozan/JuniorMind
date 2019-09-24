@@ -253,5 +253,25 @@ namespace Collections.Tests
             Assert.Equal(testSLList, newNode.List);
             Assert.Null(newNode.NextNode);
         }
+
+        [Fact]
+        public void AddAfterWhenNodeIsNullShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node = new Node<string>("node");
+            Node<string> newNode = new Node<string>("newNode");
+
+            testSLList.AddFirst(node);
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node, testSLList.First);
+            Assert.Equal(node, testSLList.Last);
+
+            Assert.Throws<ArgumentNullException>(() => testSLList.AddAfter(null as Node<string>, newNode));
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node, testSLList.First);
+            Assert.Equal(node, testSLList.Last);
+        }
     }
 }
