@@ -14,6 +14,21 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void CountWhenNoEmptyListShouldReturnTheNumberOfNodes()
+        {
+            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+            Node<int> node1 = new Node<int>(1);
+            Node<int> node2 = new Node<int>(2);
+            Node<int> node3 = new Node<int>(3);
+
+            testSLList.AddFirst(node1);
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node3);
+
+            Assert.Equal(3, testSLList.Count);
+        }
+
+        [Fact]
         public void FirstWhenEmptyListShouldReturnNull()
         {
             SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
