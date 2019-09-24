@@ -8,11 +8,14 @@ namespace Collections
         {
             Count = 0;
             First = null;
+            Last = null;
         }
 
         public int Count { get; private set; }
 
         public Node<T> First { get; private set; }
+
+        public Node<T> Last { get; set; }
 
         public void AddFirst(Node<T> node)
         {
