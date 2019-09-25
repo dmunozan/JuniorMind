@@ -98,6 +98,12 @@ namespace Collections
         {
             Node<T> auxNode = this.First;
 
+            if (auxNode == node)
+            {
+                this.AddFirst(newNode);
+                return;
+            }
+
             while (auxNode != null && auxNode.NextNode != node)
             {
                 auxNode = auxNode.NextNode;
