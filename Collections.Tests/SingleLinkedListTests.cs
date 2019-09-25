@@ -374,5 +374,75 @@ namespace Collections.Tests
             Assert.Equal(testSLList, newNode.List);
             Assert.Equal(node2, newNode.NextNode);
         }
+
+        [Fact]
+        public void AddAfterWhenNodeIsLastNodeShouldAddTAsLastNode()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(2, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node2, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal(testSLList, testSLList.First.List);
+
+            Node<string> newNode = testSLList.AddAfter(node2, "newNode");
+
+            Assert.Equal(3, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(newNode, testSLList.Last);
+            Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal("newNode", testSLList.Last.Value);
+            Assert.Equal(testSLList, newNode.List);
+            Assert.Null(newNode.NextNode);
+        }
+
+        [Fact]
+        public void AddAfterWhenNodeIsNullAndTShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node = new Node<string>("node");
+            Node<string> newNode;
+
+            testSLList.AddFirst(node);
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node, testSLList.First);
+            Assert.Equal(node, testSLList.Last);
+
+            Assert.Throws<ArgumentNullException>(() => newNode = testSLList.AddAfter(null as Node<string>, "newNode"));
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node, testSLList.First);
+            Assert.Equal(node, testSLList.Last);
+        }
+
+        [Fact]
+        public void AddAfterWhenNodeNoExistAndTShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+            Node<string> newNode;
+
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node1, testSLList.Last);
+            Assert.Equal(testSLList, node1.List);
+
+            Assert.Throws<InvalidOperationException>(() => newNode = testSLList.AddAfter(node2, "newNode"));
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node1, testSLList.Last);
+        }
     }
 }
