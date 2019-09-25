@@ -93,5 +93,17 @@ namespace Collections
 
             return newNode;
         }
+
+        public void AddBefore(Node<T> node, Node<T> newNode)
+        {
+            Node<T> auxNode = this.First;
+
+            while (auxNode != null && auxNode.NextNode != node)
+            {
+                auxNode = auxNode.NextNode;
+            }
+
+            this.AddAfter(auxNode, newNode);
+        }
     }
 }
