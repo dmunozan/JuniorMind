@@ -69,6 +69,11 @@ namespace Collections
                 throw new InvalidOperationException("Node is not in the current Single Linked List");
             }
 
+            if (newNode.List != null)
+            {
+                throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
+            }
+
             if (this.Last == node)
             {
                 this.Last = newNode;
