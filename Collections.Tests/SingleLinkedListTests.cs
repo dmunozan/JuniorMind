@@ -501,5 +501,35 @@ namespace Collections.Tests
             Assert.Equal("newNode", testSLList.First.Value);
             Assert.Equal(testSLList, newNode.List);
         }
+
+        [Fact]
+        public void AddBeforeWhenMoreThanOneNodeWithTheSameValueExistShouldAddNewNodeBeforeNode()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+            Node<string> node3 = new Node<string>("node1");
+            Node<string> newNode = new Node<string>("newNode");
+
+            testSLList.AddFirst(node3);
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(3, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node3, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal("node1", testSLList.Last.Value);
+            Assert.Equal(node2, testSLList.First.NextNode);
+
+            testSLList.AddBefore(node3, newNode);
+
+            Assert.Equal(4, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node3, testSLList.Last);
+            Assert.Equal(newNode, node2.NextNode);
+            Assert.Equal(node3, newNode.NextNode);
+            Assert.Equal(testSLList, newNode.List);
+        }
     }
 }
