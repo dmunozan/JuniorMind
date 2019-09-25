@@ -21,7 +21,7 @@ namespace Collections
         {
             if (node == null)
             {
-                throw new ArgumentNullException(nameof(node), "Not possible to add null to a Single Linked List");
+                throw new ArgumentNullException(nameof(node), "Not possible to add null node to a Single Linked List");
             }
 
             if (node.List != null)
@@ -56,12 +56,12 @@ namespace Collections
         {
             if (node == null)
             {
-                throw new ArgumentNullException(nameof(node), "Not possible to add null to a Single Linked List");
+                throw new ArgumentNullException(nameof(node), "Not possible to search for null in a Single Linked List");
             }
 
             if (newNode == null)
             {
-                throw new ArgumentNullException(nameof(newNode), "Not possible to add null to a Single Linked List");
+                throw new ArgumentNullException(nameof(newNode), "Not possible to add null node to a Single Linked List");
             }
 
             if (node.List != this)
