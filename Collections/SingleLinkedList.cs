@@ -84,5 +84,14 @@ namespace Collections
             node.NextNode = newNode;
             this.Count++;
         }
+
+        public Node<T> AddAfter(Node<T> node, T value)
+        {
+            Node<T> newNode = new Node<T>(value);
+
+            this.AddAfter(node, newNode);
+
+            return newNode;
+        }
     }
 }
