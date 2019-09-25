@@ -15,7 +15,7 @@ namespace Collections
 
         public Node<T> First { get; private set; }
 
-        public Node<T> Last { get; set; }
+        public Node<T> Last { get; private set; }
 
         public void AddFirst(Node<T> node)
         {
