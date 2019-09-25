@@ -314,5 +314,37 @@ namespace Collections.Tests
             Assert.Equal(node1, testSLList.First);
             Assert.Equal(node1, testSLList.Last);
         }
+
+        [Fact]
+        public void AddAfterWhenNewNodeBelongsToAnotherListShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> ourTestSLList = new SingleLinkedList<string>();
+            SingleLinkedList<string> anotherTestSLList = new SingleLinkedList<string>();
+            Node<string> node = new Node<string>("node");
+            Node<string> newNode = new Node<string>("newNode");
+
+            ourTestSLList.AddFirst(node);
+            anotherTestSLList.AddFirst(newNode);
+
+            Assert.Equal(1, ourTestSLList.Count);
+            Assert.Equal(node, ourTestSLList.First);
+            Assert.Equal(node, ourTestSLList.Last);
+            Assert.Equal(ourTestSLList, node.List);
+            Assert.Equal(1, anotherTestSLList.Count);
+            Assert.Equal(newNode, anotherTestSLList.First);
+            Assert.Equal(newNode, anotherTestSLList.Last);
+            Assert.Equal(anotherTestSLList, newNode.List);
+
+            Assert.Throws<InvalidOperationException>(() => ourTestSLList.AddAfter(node, newNode));
+
+            Assert.Equal(1, ourTestSLList.Count);
+            Assert.Equal(node, ourTestSLList.First);
+            Assert.Equal(node, ourTestSLList.Last);
+            Assert.Equal(ourTestSLList, node.List);
+            Assert.Equal(1, anotherTestSLList.Count);
+            Assert.Equal(newNode, anotherTestSLList.First);
+            Assert.Equal(newNode, anotherTestSLList.Last);
+            Assert.Equal(anotherTestSLList, newNode.List);
+        }
     }
 }
