@@ -652,5 +652,103 @@ namespace Collections.Tests
             Assert.Equal(testSLList, newNode.List);
             Assert.Equal(node2, newNode.NextNode);
         }
+
+        [Fact]
+        public void AddBeforeWhenNodeIsFirstNodeShouldAddTAsFirstNode()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(2, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node2, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal(testSLList, testSLList.First.List);
+
+            Node<string> newNode = testSLList.AddBefore(node1, "newNode");
+
+            Assert.Equal(3, testSLList.Count);
+            Assert.Equal(newNode, testSLList.First);
+            Assert.Equal(node2, testSLList.Last);
+            Assert.Equal(node1, testSLList.First.NextNode);
+            Assert.Equal("newNode", testSLList.First.Value);
+            Assert.Equal(testSLList, newNode.List);
+        }
+
+        [Fact]
+        public void AddBeforeWhenMoreThanOneNodeWithTheSameValueExistShouldAddTBeforeNode()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+            Node<string> node3 = new Node<string>("node1");
+
+            testSLList.AddFirst(node3);
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(3, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node3, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal("node1", testSLList.Last.Value);
+            Assert.Equal(node2, testSLList.First.NextNode);
+
+            Node<string> newNode = testSLList.AddBefore(node3, "newNode");
+
+            Assert.Equal(4, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node3, testSLList.Last);
+            Assert.Equal(newNode, node2.NextNode);
+            Assert.Equal(node3, newNode.NextNode);
+            Assert.Equal(testSLList, newNode.List);
+        }
+
+        [Fact]
+        public void AddBeforeWhenNodeIsNullAndTShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node = new Node<string>("node");
+            Node<string> newNode;
+
+            testSLList.AddFirst(node);
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node, testSLList.First);
+            Assert.Equal(node, testSLList.Last);
+
+            Assert.Throws<ArgumentNullException>(() => newNode = testSLList.AddBefore(null as Node<string>, "newNode"));
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node, testSLList.First);
+            Assert.Equal(node, testSLList.Last);
+        }
+
+        [Fact]
+        public void AddBeforeWhenNodeNoExistAndTShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+            Node<string> newNode;
+
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node1, testSLList.Last);
+            Assert.Equal(testSLList, node1.List);
+
+            Assert.Throws<InvalidOperationException>(() => newNode = testSLList.AddBefore(node2, "newNode"));
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node1, testSLList.Last);
+        }
     }
 }
