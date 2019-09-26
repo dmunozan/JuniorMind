@@ -51,7 +51,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void EqualsWhenSameValueListNextNodeShouldReturnTrue()
+        public void EqualsWhenSameValueShouldReturnTrue()
         {
             Node<int> testNode = new Node<int>(0);
             Node<int> sameNode = new Node<int>(0);
