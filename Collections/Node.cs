@@ -23,6 +23,12 @@
             }
 
             Node<T> objNode = (Node<T>)obj;
+
+            if (objNode.List == null)
+            {
+                return false;
+            }
+
             return Value.Equals(objNode.Value);
         }
     }
