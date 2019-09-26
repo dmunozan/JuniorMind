@@ -24,7 +24,7 @@
 
             Node<T> objNode = (Node<T>)obj;
 
-            return Value.Equals(objNode.Value);
+            return this.Value.Equals(objNode.Value) && this.List == objNode.List;
         }
     }
 }
