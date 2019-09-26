@@ -51,10 +51,18 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void EqualsWhenSameValueShouldReturnTrue()
+        public void EqualsWhenSameValueListNextNodeAndNotNullShouldReturnTrue()
         {
+            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
             Node<int> testNode = new Node<int>(0);
             Node<int> sameNode = new Node<int>(0);
+            Node<int> nextNode = new Node<int>(1);
+
+            testNode.List = testSLList;
+            sameNode.List = testSLList;
+
+            testNode.NextNode = nextNode;
+            sameNode.NextNode = nextNode;
 
             Assert.True(testNode.Equals(sameNode));
         }
