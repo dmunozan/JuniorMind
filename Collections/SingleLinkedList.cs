@@ -96,17 +96,22 @@ namespace Collections
 
         public void AddBefore(Node<T> node, Node<T> newNode)
         {
+            if (node == null)
+            {
+                throw new ArgumentNullException(nameof(node), "Not possible to search for null in a Single Linked List");
+            }
+
+            if (node.List != this)
+            {
+                throw new InvalidOperationException("Node is not in the current Single Linked List");
+            }
+
             Node<T> auxNode = this.First;
 
             if (auxNode == node)
             {
                 this.AddFirst(newNode);
                 return;
-            }
-
-            if (node == null)
-            {
-                auxNode = null;
             }
 
             while (auxNode != null && auxNode.NextNode != node)
