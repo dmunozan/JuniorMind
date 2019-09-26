@@ -24,9 +24,7 @@
 
             Node<T> objNode = (Node<T>)obj;
 
-            bool isBothNullList = this.List == null && objNode.List == null;
-
-            return this.Value.Equals(objNode.Value) && (isBothNullList || this.List.Equals(objNode.List));
+            return this.Value.Equals(objNode.Value);
         }
     }
 }

@@ -75,19 +75,5 @@ namespace Collections.Tests
 
             Assert.False(testNode.Equals(notSameNode));
         }
-
-        [Fact]
-        public void EqualsWhenDifferentListShouldReturnFalse()
-        {
-            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
-            SingleLinkedList<int> anotherTestSLList = new SingleLinkedList<int>();
-            Node<int> testNode = new Node<int>(0);
-            Node<int> notSameNode = new Node<int>(0);
-
-            testNode.List = testSLList;
-            notSameNode.List = anotherTestSLList;
-
-            Assert.False(testNode.Equals(notSameNode));
-        }
     }
 }
