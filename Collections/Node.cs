@@ -24,7 +24,7 @@
 
             Node<T> objNode = (Node<T>)obj;
 
-            if (objNode.List == null)
+            if (objNode.List == null || objNode.NextNode == null)
             {
                 return false;
             }
