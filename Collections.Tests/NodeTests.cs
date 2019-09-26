@@ -51,18 +51,10 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void EqualsWhenSameValueListNextNodeAndNotNullShouldReturnTrue()
+        public void EqualsWhenSameValueListNextNodeShouldReturnTrue()
         {
-            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
             Node<int> testNode = new Node<int>(0);
             Node<int> sameNode = new Node<int>(0);
-            Node<int> nextNode = new Node<int>(1);
-
-            testNode.List = testSLList;
-            sameNode.List = testSLList;
-
-            testNode.NextNode = nextNode;
-            sameNode.NextNode = nextNode;
 
             Assert.True(testNode.Equals(sameNode));
         }
@@ -73,54 +65,6 @@ namespace Collections.Tests
             Node<int> testNode = new Node<int>(0);
 
             Assert.False(testNode.Equals(null));
-        }
-
-        [Fact]
-        public void EqualsWhenNullListShouldReturnFalse()
-        {
-            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
-            Node<int> testNode = new Node<int>(0);
-            Node<int> notSameNode = new Node<int>(0);
-            Node<int> nextNode = new Node<int>(1);
-
-            testNode.List = testSLList;
-
-            testNode.NextNode = nextNode;
-            notSameNode.NextNode = nextNode;
-
-            Assert.False(testNode.Equals(notSameNode));
-        }
-
-        [Fact]
-        public void EqualsWhenTestNodeNullListShouldReturnFalse()
-        {
-            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
-            Node<int> testNode = new Node<int>(0);
-            Node<int> notSameNode = new Node<int>(0);
-            Node<int> nextNode = new Node<int>(1);
-
-            notSameNode.List = testSLList;
-
-            testNode.NextNode = nextNode;
-            notSameNode.NextNode = nextNode;
-
-            Assert.False(testNode.Equals(notSameNode));
-        }
-
-        [Fact]
-        public void EqualsWhenNullNextNodeShouldReturnFalse()
-        {
-            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
-            Node<int> testNode = new Node<int>(0);
-            Node<int> notSameNode = new Node<int>(0);
-            Node<int> nextNode = new Node<int>(1);
-
-            testNode.List = testSLList;
-            notSameNode.List = testSLList;
-
-            testNode.NextNode = nextNode;
-
-            Assert.False(testNode.Equals(notSameNode));
         }
 
         [Fact]
