@@ -76,6 +76,22 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void EqualsWhenNullListShouldReturnFalse()
+        {
+            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+            Node<int> testNode = new Node<int>(0);
+            Node<int> notSameNode = new Node<int>(0);
+            Node<int> nextNode = new Node<int>(1);
+
+            testNode.List = testSLList;
+
+            testNode.NextNode = nextNode;
+            notSameNode.NextNode = nextNode;
+
+            Assert.False(testNode.Equals(notSameNode));
+        }
+
+        [Fact]
         public void EqualsWhenDifferentValueShouldReturnFalse()
         {
             Node<int> testNode = new Node<int>(0);
