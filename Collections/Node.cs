@@ -17,17 +17,12 @@
 
         public override bool Equals(object obj)
         {
-            if (obj == null || this.List == null)
+            if (obj == null)
             {
                 return false;
             }
 
             Node<T> objNode = (Node<T>)obj;
-
-            if (objNode.List == null || objNode.NextNode == null)
-            {
-                return false;
-            }
 
             return Value.Equals(objNode.Value);
         }
