@@ -121,5 +121,14 @@ namespace Collections
 
             this.AddAfter(auxNode, newNode);
         }
+
+        public Node<T> AddBefore(Node<T> node, T value)
+        {
+            Node<T> newNode = new Node<T>(value);
+
+            this.AddBefore(node, newNode);
+
+            return newNode;
+        }
     }
 }
