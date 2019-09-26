@@ -104,6 +104,11 @@ namespace Collections
                 return;
             }
 
+            if (node == null)
+            {
+                auxNode = null;
+            }
+
             while (auxNode != null && auxNode.NextNode != node)
             {
                 auxNode = auxNode.NextNode;
