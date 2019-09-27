@@ -183,12 +183,18 @@ namespace Collections
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            Node<T> auxNode = this.First;
+
+            while (auxNode != null)
+            {
+                yield return auxNode.Value;
+                auxNode = auxNode.NextNode;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return this.GetEnumerator();
         }
     }
 }
