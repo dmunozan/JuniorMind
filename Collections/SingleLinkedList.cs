@@ -161,6 +161,15 @@ namespace Collections
             this.Count++;
         }
 
+        public Node<T> AddLast(T value)
+        {
+            Node<T> node = new Node<T>(value);
+
+            this.AddLast(node);
+
+            return node;
+        }
+
         public void Add(T item)
         {
             throw new NotImplementedException();
