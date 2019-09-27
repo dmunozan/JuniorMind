@@ -805,5 +805,27 @@ namespace Collections.Tests
             Assert.Null(testSLList.First);
             Assert.Null(testSLList.Last);
         }
+
+        [Fact]
+        public void AddLastWhenNodeListIsNotNullShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> ourTestSLList = new SingleLinkedList<string>();
+            SingleLinkedList<string> anotherTestSLList = new SingleLinkedList<string>();
+
+            Node<string> node = new Node<string>("test");
+
+            anotherTestSLList.AddLast(node);
+
+            Assert.Equal(1, anotherTestSLList.Count);
+            Assert.Equal(node, anotherTestSLList.First);
+            Assert.Equal(node, anotherTestSLList.Last);
+            Assert.Equal(anotherTestSLList, node.List);
+
+            Assert.Throws<InvalidOperationException>(() => ourTestSLList.AddLast(node));
+
+            Assert.Equal(0, ourTestSLList.Count);
+            Assert.Null(ourTestSLList.First);
+            Assert.Null(ourTestSLList.Last);
+        }
     }
 }
