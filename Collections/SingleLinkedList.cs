@@ -130,5 +130,18 @@ namespace Collections
 
             return newNode;
         }
+
+        public void AddLast(Node<T> node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            this.First = node;
+            this.Last = node;
+            node.List = this;
+            this.Count++;
+        }
     }
 }
