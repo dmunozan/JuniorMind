@@ -866,5 +866,20 @@ namespace Collections.Tests
             Assert.Equal(newLastNode, testSLList.First.NextNode);
             Assert.Equal(testSLList, testSLList.Last.List);
         }
+
+        [Fact]
+        public void AddLastWhenTIsNullShouldAddNode()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+
+            Node<string> node = testSLList.AddLast(null as string);
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node, testSLList.First);
+            Assert.Equal(node, testSLList.Last);
+            Assert.Null(testSLList.Last.Value);
+            Assert.Null(testSLList.Last.NextNode);
+            Assert.Equal(testSLList, testSLList.Last.List);
+        }
     }
 }
