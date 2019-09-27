@@ -827,5 +827,20 @@ namespace Collections.Tests
             Assert.Null(ourTestSLList.First);
             Assert.Null(ourTestSLList.Last);
         }
+
+        [Fact]
+        public void AddLastWhenTAndAnySLLShouldAddNode()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+
+            Node<string> node = testSLList.AddLast("test");
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node, testSLList.First);
+            Assert.Equal(node, testSLList.Last);
+            Assert.Equal("test", testSLList.Last.Value);
+            Assert.Null(testSLList.Last.NextNode);
+            Assert.Equal(testSLList, testSLList.Last.List);
+        }
     }
 }
