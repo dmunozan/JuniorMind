@@ -135,7 +135,7 @@ namespace Collections
         {
             if (node == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(node), "Not possible to add null node to a Single Linked List");
             }
 
             if (this.Count == 0)
