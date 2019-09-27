@@ -138,7 +138,15 @@ namespace Collections
                 return;
             }
 
-            this.First = node;
+            if (this.Count == 0)
+            {
+                this.First = node;
+            }
+            else
+            {
+                this.Last.NextNode = node;
+            }
+
             this.Last = node;
             node.List = this;
             this.Count++;
