@@ -201,6 +201,11 @@ namespace Collections
                 throw new ArgumentNullException(nameof(node), "Not possible to search for null in a Single Linked List");
             }
 
+            if (node.List != this)
+            {
+                throw new InvalidOperationException("Node is not in the current Single Linked List");
+            }
+
             Node<T> previousNode = this.First;
 
             if (previousNode != node)
