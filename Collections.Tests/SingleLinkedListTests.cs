@@ -1174,5 +1174,38 @@ namespace Collections.Tests
             Assert.Equal("node4", testSLList.Last.Value);
             Assert.Equal(node3, node2.NextNode);
         }
+
+        [Fact]
+        public void RemoveWhenNodeBelongsToAnotherListShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            SingleLinkedList<string> anotherSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+            Node<string> node3 = new Node<string>("node3");
+            Node<string> node4 = new Node<string>("node4");
+
+            anotherSLList.AddFirst(node4);
+
+            testSLList.AddFirst(node3);
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(3, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node3, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal("node3", testSLList.Last.Value);
+            Assert.Equal(node3, node2.NextNode);
+
+            Assert.Throws<InvalidOperationException>(() => testSLList.Remove(node4));
+
+            Assert.Equal(3, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node3, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal("node3", testSLList.Last.Value);
+            Assert.Equal(node3, node2.NextNode);
+        }
     }
 }
