@@ -184,8 +184,7 @@ namespace Collections
 
         public Node<T> FindLast(T value)
         {
-            Console.WriteLine(value);
-            return this.Last;
+            return this.Find(value);
         }
 
         public void Add(T item)
