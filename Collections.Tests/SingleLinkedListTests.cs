@@ -927,5 +927,28 @@ namespace Collections.Tests
             Assert.Equal(foundNode, node3);
             Assert.Equal(node4, foundNode.NextNode);
         }
+
+        [Fact]
+        public void FindWhenMoreThanOneTExistShouldReturnFirstNodeContainingT()
+        {
+            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+
+            Node<int> node1 = new Node<int>(1);
+            Node<int> node2 = new Node<int>(2);
+            Node<int> node3 = new Node<int>(3);
+            Node<int> node4 = new Node<int>(2);
+            Node<int> node5 = new Node<int>(1);
+
+            testSLList.AddLast(node1);
+            testSLList.AddLast(node2);
+            testSLList.AddLast(node3);
+            testSLList.AddLast(node4);
+            testSLList.AddLast(node5);
+
+            Node<int> foundNode = testSLList.Find(2);
+
+            Assert.Equal(foundNode, node2);
+            Assert.Equal(node3, foundNode.NextNode);
+        }
     }
 }
