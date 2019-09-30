@@ -110,20 +110,13 @@ namespace Collections
                 throw new InvalidOperationException("Node is not in the current Single Linked List");
             }
 
-            Node<T> auxNode = this.First;
-
-            if (auxNode == node)
+            if (this.First == node)
             {
                 this.AddFirst(newNode);
                 return;
             }
 
-            while (auxNode != null && auxNode.NextNode != node)
-            {
-                auxNode = auxNode.NextNode;
-            }
-
-            this.AddAfter(auxNode, newNode);
+            this.AddAfter(FindPreviousNode(node), newNode);
         }
 
         public Node<T> AddBefore(Node<T> node, T value)
@@ -208,14 +201,11 @@ namespace Collections
                 return;
             }
 
-            Node<T> auxNode = this.First;
+            Node<T> previousNode = this.First;
 
-            if (auxNode != node)
+            if (previousNode != node)
             {
-                while (auxNode.NextNode != node)
-                {
-                    auxNode = auxNode.NextNode;
-                }
+                previousNode = FindPreviousNode(node);
             }
             else
             {
@@ -224,8 +214,8 @@ namespace Collections
 
             if (node == this.Last)
             {
-                this.Last = auxNode;
-                auxNode.NextNode = null;
+                this.Last = previousNode;
+                previousNode.NextNode = null;
             }
 
             node.NextNode = null;
@@ -272,6 +262,21 @@ namespace Collections
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        private Node<T> FindPreviousNode(Node<T> node)
+        {
+            Node<T> auxNode = this.First;
+
+            if (auxNode != node)
+            {
+                while (auxNode != null && auxNode.NextNode != node)
+                {
+                    auxNode = auxNode.NextNode;
+                }
+            }
+
+            return auxNode;
         }
     }
 }
