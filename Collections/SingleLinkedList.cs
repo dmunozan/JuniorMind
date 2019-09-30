@@ -201,6 +201,19 @@ namespace Collections
             return foundNode;
         }
 
+        public void Remove(Node<T> node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            this.First = node.NextNode;
+            node.NextNode = null;
+            node.List = null;
+            this.Count--;
+        }
+
         public void Add(T item)
         {
             throw new NotImplementedException();
