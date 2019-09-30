@@ -995,5 +995,28 @@ namespace Collections.Tests
             Assert.Equal(foundNode, node5);
             Assert.Null(foundNode.NextNode);
         }
+
+        [Fact]
+        public void FindLastWhenTExistAndNotLastShouldReturnLastNodeContainingT()
+        {
+            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+
+            Node<int> node1 = new Node<int>(1);
+            Node<int> node2 = new Node<int>(2);
+            Node<int> node3 = new Node<int>(3);
+            Node<int> node4 = new Node<int>(4);
+            Node<int> node5 = new Node<int>(5);
+
+            testSLList.AddLast(node1);
+            testSLList.AddLast(node2);
+            testSLList.AddLast(node3);
+            testSLList.AddLast(node4);
+            testSLList.AddLast(node5);
+
+            Node<int> foundNode = testSLList.FindLast(3);
+
+            Assert.Equal(foundNode, node3);
+            Assert.Equal(node4, foundNode.NextNode);
+        }
     }
 }
