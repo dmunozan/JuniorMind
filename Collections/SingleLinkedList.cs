@@ -208,7 +208,26 @@ namespace Collections
                 return;
             }
 
-            this.First = node.NextNode;
+            Node<T> auxNode = this.First;
+
+            if (auxNode != node)
+            {
+                while (auxNode.NextNode != node)
+                {
+                    auxNode = auxNode.NextNode;
+                }
+            }
+            else
+            {
+                this.First = node.NextNode;
+            }
+
+            if (node == this.Last)
+            {
+                this.Last = auxNode;
+                auxNode.NextNode = null;
+            }
+
             node.NextNode = null;
             node.List = null;
             this.Count--;
