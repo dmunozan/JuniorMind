@@ -881,5 +881,28 @@ namespace Collections.Tests
             Assert.Null(testSLList.Last.NextNode);
             Assert.Equal(testSLList, testSLList.Last.List);
         }
+
+        [Fact]
+        public void FindWhenTExistAndFirstShouldReturnFirstNode()
+        {
+            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+
+            Node<int> node1 = new Node<int>(1);
+            Node<int> node2 = new Node<int>(2);
+            Node<int> node3 = new Node<int>(3);
+            Node<int> node4 = new Node<int>(4);
+            Node<int> node5 = new Node<int>(5);
+
+            testSLList.AddLast(node1);
+            testSLList.AddLast(node2);
+            testSLList.AddLast(node3);
+            testSLList.AddLast(node4);
+            testSLList.AddLast(node5);
+
+            Node<int> foundNode = testSLList.Find(1);
+
+            Assert.Equal(foundNode, node1);
+            Assert.Equal(node2, foundNode.NextNode);
+        }
     }
 }
