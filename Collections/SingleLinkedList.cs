@@ -198,7 +198,7 @@ namespace Collections
         {
             if (node == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(node), "Not possible to search for null in a Single Linked List");
             }
 
             Node<T> previousNode = this.First;
