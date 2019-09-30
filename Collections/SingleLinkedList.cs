@@ -184,7 +184,21 @@ namespace Collections
 
         public Node<T> FindLast(T value)
         {
-            return this.Find(value);
+            Node<T> auxNode = this.First;
+
+            Node<T> foundNode = null;
+
+            while (auxNode != null)
+            {
+                if (auxNode.Value.Equals(value))
+                {
+                    foundNode = auxNode;
+                }
+
+                auxNode = auxNode.NextNode;
+            }
+
+            return foundNode;
         }
 
         public void Add(T item)
