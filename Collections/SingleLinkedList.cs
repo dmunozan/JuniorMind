@@ -170,6 +170,18 @@ namespace Collections
             return node;
         }
 
+        public Node<T> Find(T value)
+        {
+            Node<T> auxNode = this.First;
+
+            while (auxNode?.Value.Equals(value) == false)
+            {
+                auxNode = auxNode.NextNode;
+            }
+
+            return auxNode;
+        }
+
         public void Add(T item)
         {
             throw new NotImplementedException();
