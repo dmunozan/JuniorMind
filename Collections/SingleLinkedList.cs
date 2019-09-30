@@ -182,6 +182,12 @@ namespace Collections
             return auxNode;
         }
 
+        public Node<T> FindLast(T value)
+        {
+            Console.WriteLine(value);
+            return this.Last;
+        }
+
         public void Add(T item)
         {
             throw new NotImplementedException();
