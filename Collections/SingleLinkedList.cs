@@ -206,6 +206,7 @@ namespace Collections
             if (previousNode != node)
             {
                 previousNode = FindPreviousNode(node);
+                previousNode.NextNode = node.NextNode;
             }
             else
             {
@@ -215,7 +216,6 @@ namespace Collections
             if (node == this.Last)
             {
                 this.Last = previousNode;
-                previousNode.NextNode = null;
             }
 
             node.NextNode = null;
