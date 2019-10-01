@@ -258,7 +258,7 @@ namespace Collections
         {
             while (this.Count > 0)
             {
-                this.RemoveFirst();
+                this.Remove(this.First);
             }
         }
 
