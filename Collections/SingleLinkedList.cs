@@ -240,6 +240,11 @@ namespace Collections
 
         public void RemoveLast()
         {
+            if (this.Count == 0)
+            {
+                throw new InvalidOperationException("The current Single Linked List is empty");
+            }
+
             this.Remove(this.Last);
         }
 
