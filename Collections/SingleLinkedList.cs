@@ -250,7 +250,7 @@ namespace Collections
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            this.AddFirst(item);
         }
 
         public void Clear()
