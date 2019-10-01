@@ -228,6 +228,11 @@ namespace Collections
             this.Count--;
         }
 
+        public void RemoveFirst()
+        {
+            this.Remove(this.First);
+        }
+
         public void Add(T item)
         {
             throw new NotImplementedException();
