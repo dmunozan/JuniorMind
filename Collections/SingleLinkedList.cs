@@ -168,8 +168,18 @@ namespace Collections
         {
             Node<T> auxNode = this.First;
 
-            while (auxNode?.Value.Equals(value) == false)
+            while (auxNode != null)
             {
+                if (value == null && auxNode.Value == null)
+                {
+                    break;
+                }
+
+                if (auxNode.Value.Equals(value))
+                {
+                    break;
+                }
+
                 auxNode = auxNode.NextNode;
             }
 
