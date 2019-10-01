@@ -274,7 +274,19 @@ namespace Collections
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            if (array == null)
+            {
+                return;
+            }
+
+            Node<T> auxNode = this.First;
+
+            while (auxNode != null)
+            {
+                array[arrayIndex] = auxNode.Value;
+                arrayIndex++;
+                auxNode = auxNode.NextNode;
+            }
         }
 
         public bool Remove(T item)
