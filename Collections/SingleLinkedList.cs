@@ -256,7 +256,6 @@ namespace Collections
 
         public void Clear()
         {
-            throw new NotImplementedException();
         }
 
         public bool Contains(T item)
