@@ -1436,5 +1436,21 @@ namespace Collections.Tests
             Assert.Null(testSLList.First);
             Assert.Null(testSLList.Last);
         }
+
+        [Fact]
+        public void ClearWhenEmptyListShouldDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+
+            Assert.Equal(0, testSLList.Count);
+            Assert.Null(testSLList.First);
+            Assert.Null(testSLList.Last);
+
+            testSLList.Clear();
+
+            Assert.Equal(0, testSLList.Count);
+            Assert.Null(testSLList.First);
+            Assert.Null(testSLList.Last);
+        }
     }
 }
