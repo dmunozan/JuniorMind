@@ -1505,5 +1505,22 @@ namespace Collections.Tests
 
             Assert.True(testSLList.Contains("node2"));
         }
+
+        [Fact]
+        public void ContainsWhenExistAndNullValueShouldReturnTrue()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>(null);
+            Node<string> node2 = new Node<string>("node2");
+
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(2, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node2, testSLList.Last);
+
+            Assert.True(testSLList.Contains(null));
+        }
     }
 }
