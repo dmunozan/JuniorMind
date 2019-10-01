@@ -1399,5 +1399,26 @@ namespace Collections.Tests
             Assert.Equal(node1, testSLList.First);
             Assert.Equal(node1, testSLList.Last);
         }
+
+        [Fact]
+        public void RemoveLastWhenOnlyOneNodeShouldRemoveLastNode()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node1, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal(testSLList, testSLList.First.List);
+
+            testSLList.RemoveLast();
+
+            Assert.Equal(0, testSLList.Count);
+            Assert.Null(testSLList.First);
+            Assert.Null(testSLList.Last);
+        }
     }
 }
