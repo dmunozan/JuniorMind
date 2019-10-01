@@ -238,6 +238,11 @@ namespace Collections
             this.Remove(this.First);
         }
 
+        public void RemoveLast()
+        {
+            this.Remove(this.Last);
+        }
+
         public void Add(T item)
         {
             throw new NotImplementedException();
