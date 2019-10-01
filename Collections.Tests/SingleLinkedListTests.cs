@@ -1452,5 +1452,41 @@ namespace Collections.Tests
             Assert.Null(testSLList.First);
             Assert.Null(testSLList.Last);
         }
+
+        [Fact]
+        public void ClearWhenNotEmptyListShouldRemoveAllNodes()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+            Node<string> node3 = new Node<string>("node3");
+            Node<string> node4 = new Node<string>("node4");
+
+            testSLList.AddFirst(node4);
+            testSLList.AddFirst(node3);
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(4, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node4, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal("node4", testSLList.Last.Value);
+            Assert.Equal(node3, node2.NextNode);
+
+            testSLList.Clear();
+
+            Assert.Equal(0, testSLList.Count);
+            Assert.Null(testSLList.First);
+            Assert.Null(testSLList.Last);
+            Assert.Null(node1.NextNode);
+            Assert.Null(node1.List);
+            Assert.Null(node2.NextNode);
+            Assert.Null(node2.List);
+            Assert.Null(node3.NextNode);
+            Assert.Null(node3.List);
+            Assert.Null(node4.NextNode);
+            Assert.Null(node4.List);
+        }
     }
 }
