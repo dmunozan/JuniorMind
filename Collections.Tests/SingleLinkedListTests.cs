@@ -1420,5 +1420,21 @@ namespace Collections.Tests
             Assert.Null(testSLList.First);
             Assert.Null(testSLList.Last);
         }
+
+        [Fact]
+        public void RemoveLastWhenEmptyListShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+
+            Assert.Equal(0, testSLList.Count);
+            Assert.Null(testSLList.First);
+            Assert.Null(testSLList.Last);
+
+            Assert.Throws<InvalidOperationException>(() => testSLList.RemoveLast());
+
+            Assert.Equal(0, testSLList.Count);
+            Assert.Null(testSLList.First);
+            Assert.Null(testSLList.Last);
+        }
     }
 }
