@@ -206,9 +206,9 @@ namespace Collections
                 throw new InvalidOperationException("Node is not in the current Single Linked List");
             }
 
-            Node<T> previousNode = this.First;
+            Node<T> previousNode = null;
 
-            if (previousNode != node)
+            if (this.First != node)
             {
                 previousNode = FindPreviousNode(node);
                 previousNode.NextNode = node.NextNode;
