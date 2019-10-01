@@ -256,6 +256,10 @@ namespace Collections
 
         public void Clear()
         {
+            while (this.Count > 0)
+            {
+                this.RemoveFirst();
+            }
         }
 
         public bool Contains(T item)
