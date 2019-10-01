@@ -264,7 +264,9 @@ namespace Collections
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            Node<T> foundNode = this.Find(item);
+
+            return foundNode != null;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
