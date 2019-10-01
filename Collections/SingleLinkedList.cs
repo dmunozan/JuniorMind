@@ -250,7 +250,16 @@ namespace Collections
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            Node<T> foundNode = Find(item);
+
+            if (foundNode == null)
+            {
+                return false;
+            }
+
+            Remove(foundNode);
+
+            return true;
         }
 
         public IEnumerator<T> GetEnumerator()
