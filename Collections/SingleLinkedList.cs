@@ -170,12 +170,7 @@ namespace Collections
 
             while (auxNode != null)
             {
-                if (value == null && auxNode.Value == null)
-                {
-                    break;
-                }
-
-                if (auxNode.Value.Equals(value))
+                if ((value == null && auxNode.Value == null) || auxNode.Value.Equals(value))
                 {
                     break;
                 }
