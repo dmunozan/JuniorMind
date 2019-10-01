@@ -264,9 +264,7 @@ namespace Collections
 
         public bool Contains(T item)
         {
-            Node<T> foundNode = this.Find(item);
-
-            return foundNode != null;
+            return this.Find(item) != null;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
