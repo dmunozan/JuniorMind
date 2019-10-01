@@ -1207,5 +1207,29 @@ namespace Collections.Tests
             Assert.Equal("node3", testSLList.Last.Value);
             Assert.Equal(node3, node2.NextNode);
         }
+
+        [Fact]
+        public void RemoveWhenTExistShouldRemoveTAndReturnTrue()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(2, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node2, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal(testSLList, testSLList.First.List);
+
+            Assert.True(testSLList.Remove("node1"));
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node2, testSLList.First);
+            Assert.Equal(node2, testSLList.Last);
+        }
     }
 }
