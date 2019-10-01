@@ -1560,5 +1560,24 @@ namespace Collections.Tests
             Assert.Equal(node2.Value, destinationArray[1]);
             Assert.Equal(node3.Value, destinationArray[2]);
         }
+
+        [Fact]
+        public void CopyToWhenNullShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+            Node<string> node3 = new Node<string>("node3");
+
+            testSLList.AddFirst(node3);
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            string[] destinationArray = null;
+
+            Assert.Throws<ArgumentNullException>(() => testSLList.CopyTo(destinationArray, 0));
+
+            Assert.Null(destinationArray);
+        }
     }
 }
