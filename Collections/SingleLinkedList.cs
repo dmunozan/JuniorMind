@@ -230,6 +230,11 @@ namespace Collections
 
         public void RemoveFirst()
         {
+            if (this.Count == 0)
+            {
+                throw new InvalidOperationException("The current Single Linked List is empty");
+            }
+
             this.Remove(this.First);
         }
 
