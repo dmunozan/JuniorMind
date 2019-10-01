@@ -11,6 +11,7 @@ namespace Collections
             Count = 0;
             First = null;
             Last = null;
+            IsReadOnly = false;
         }
 
         public int Count { get; private set; }
@@ -19,7 +20,7 @@ namespace Collections
 
         public Node<T> Last { get; private set; }
 
-        public bool IsReadOnly => throw new NotImplementedException();
+        public bool IsReadOnly { get; }
 
         public void AddFirst(Node<T> node)
         {
