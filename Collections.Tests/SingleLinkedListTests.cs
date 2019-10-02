@@ -1579,5 +1579,26 @@ namespace Collections.Tests
 
             Assert.Null(destinationArray);
         }
+
+        [Fact]
+        public void CopyToWhenIndexIsNegativeShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+            Node<string> node3 = new Node<string>("node3");
+
+            testSLList.AddFirst(node3);
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            string[] destinationArray = new string[4];
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => testSLList.CopyTo(destinationArray, -1));
+
+            Assert.Null(destinationArray[0]);
+            Assert.Null(destinationArray[1]);
+            Assert.Null(destinationArray[2]);
+        }
     }
 }
