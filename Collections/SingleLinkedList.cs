@@ -284,6 +284,13 @@ namespace Collections
                 throw new ArgumentOutOfRangeException(nameof(arrayIndex), "Index has to be a positive integer smaller than the size of the collection");
             }
 
+            bool isNotLongEnough = array.Length - arrayIndex < this.Count;
+
+            if (isNotLongEnough)
+            {
+                throw new ArgumentException("There is not enough space from the given index to the end of the array", nameof(array));
+            }
+
             Node<T> auxNode = this.First;
 
             while (auxNode != null)
