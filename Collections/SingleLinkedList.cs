@@ -20,7 +20,7 @@ namespace Collections
 
         public Node<T> Last { get; private set; }
 
-        public bool IsReadOnly { get; }
+        public bool IsReadOnly { get; private set; }
 
         public void AddFirst(Node<T> node)
         {
@@ -313,6 +313,11 @@ namespace Collections
             Remove(foundNode);
 
             return true;
+        }
+
+        public void ToReadOnly()
+        {
+            this.IsReadOnly = true;
         }
 
         public IEnumerator<T> GetEnumerator()
