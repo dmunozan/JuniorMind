@@ -279,6 +279,11 @@ namespace Collections
                 throw new ArgumentNullException(nameof(array), "The destination array must be a valid array");
             }
 
+            if (arrayIndex < 0 || arrayIndex >= array.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(arrayIndex), "Index has to be a positive integer smaller than the size of the collection");
+            }
+
             Node<T> auxNode = this.First;
 
             while (auxNode != null)
