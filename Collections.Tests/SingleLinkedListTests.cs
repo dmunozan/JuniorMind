@@ -197,6 +197,21 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void AddFirstWhenSLLIsReadOnlyShouldThrowExceptionAndDoNothing()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node = new Node<string>("test");
+
+            testSLList.ToReadOnly();
+
+            Assert.Throws<NotSupportedException>(() => testSLList.AddFirst(node));
+
+            Assert.Equal(0, testSLList.Count);
+            Assert.Null(testSLList.First);
+            Assert.Null(testSLList.Last);
+        }
+
+        [Fact]
         public void AddAfterWhenNodeExistShouldAddNewNodeAfterNode()
         {
             SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
