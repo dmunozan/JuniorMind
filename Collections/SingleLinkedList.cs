@@ -24,6 +24,11 @@ namespace Collections
 
         public void AddFirst(Node<T> node)
         {
+            if (this.IsReadOnly)
+            {
+                throw new NotSupportedException("The Single Linked List is read only and cannot be modified");
+            }
+
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node), "Not possible to add null node to a Single Linked List");
