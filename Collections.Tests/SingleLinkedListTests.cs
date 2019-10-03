@@ -501,6 +501,29 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void AddAfterWhenTAndIsReadOnlyShouldThrowException()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+            Node<string> newNode;
+
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(2, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node2, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal(testSLList, testSLList.First.List);
+
+            testSLList.ToReadOnly();
+
+            Assert.Throws<NotSupportedException>(() => newNode = testSLList.AddAfter(node1, "newNode"));
+        }
+
+        [Fact]
         public void AddBeforeWhenNodeExistShouldAddNewNodeBeforeNode()
         {
             SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
