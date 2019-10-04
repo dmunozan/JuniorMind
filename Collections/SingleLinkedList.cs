@@ -24,10 +24,7 @@ namespace Collections
 
         public void AddFirst(Node<T> node)
         {
-            if (this.IsReadOnly)
-            {
-                throw new NotSupportedException("The Single Linked List is read only and cannot be modified");
-            }
+            CheckModifiability();
 
             if (node == null)
             {
@@ -64,10 +61,7 @@ namespace Collections
 
         public void AddAfter(Node<T> node, Node<T> newNode)
         {
-            if (this.IsReadOnly)
-            {
-                throw new NotSupportedException("The Single Linked List is read only and cannot be modified");
-            }
+            CheckModifiability();
 
             if (node == null)
             {
@@ -111,10 +105,7 @@ namespace Collections
 
         public void AddBefore(Node<T> node, Node<T> newNode)
         {
-            if (this.IsReadOnly)
-            {
-                throw new NotSupportedException("The Single Linked List is read only and cannot be modified");
-            }
+            CheckModifiability();
 
             if (node == null)
             {
@@ -146,6 +137,8 @@ namespace Collections
 
         public void AddLast(Node<T> node)
         {
+            CheckModifiability();
+
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node), "Not possible to add null node to a Single Linked List");
@@ -364,6 +357,16 @@ namespace Collections
             }
 
             return auxNode;
+        }
+
+        private void CheckModifiability()
+        {
+            if (!this.IsReadOnly)
+            {
+                return;
+            }
+
+            throw new NotSupportedException("The Single Linked List is read only and cannot be modified");
         }
     }
 }
