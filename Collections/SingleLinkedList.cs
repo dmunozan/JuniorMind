@@ -216,20 +216,14 @@ namespace Collections
 
         public void RemoveFirst()
         {
-            if (this.Count == 0)
-            {
-                throw new InvalidOperationException("The current Single Linked List is empty");
-            }
+            CheckIfEmpty();
 
             this.Remove(this.First);
         }
 
         public void RemoveLast()
         {
-            if (this.Count == 0)
-            {
-                throw new InvalidOperationException("The current Single Linked List is empty");
-            }
+            CheckIfEmpty();
 
             this.Remove(this.Last);
         }
@@ -376,6 +370,16 @@ namespace Collections
             }
 
             throw new InvalidOperationException("Node is not in the current Single Linked List");
+        }
+
+        private void CheckIfEmpty()
+        {
+            if (this.Count > 0)
+            {
+                return;
+            }
+
+            throw new InvalidOperationException("The current Single Linked List is empty");
         }
     }
 }
