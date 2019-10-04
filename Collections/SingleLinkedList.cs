@@ -210,6 +210,8 @@ namespace Collections
 
         public void Remove(Node<T> node)
         {
+            CheckModifiability();
+
             if (node == null)
             {
                 throw new ArgumentNullException(nameof(node), "Not possible to search for null in a Single Linked List");
