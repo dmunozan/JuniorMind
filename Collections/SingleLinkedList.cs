@@ -150,35 +150,20 @@ namespace Collections
 
         public Node<T> Find(T value)
         {
-            Node<T> auxNode = this.First;
-
-            while (auxNode != null)
-            {
-                if ((value == null && auxNode.Value == null) || auxNode.Value.Equals(value))
-                {
-                    break;
-                }
-
-                auxNode = auxNode.NextNode;
-            }
-
-            return auxNode;
+            return Find(value, this.First);
         }
 
         public Node<T> FindLast(T value)
         {
-            Node<T> auxNode = this.First;
+            Node<T> auxNode = Find(value, this.First);
 
             Node<T> foundNode = null;
 
             while (auxNode != null)
             {
-                if (auxNode.Value.Equals(value))
-                {
-                    foundNode = auxNode;
-                }
+                foundNode = auxNode;
 
-                auxNode = auxNode.NextNode;
+                auxNode = Find(value, auxNode.NextNode);
             }
 
             return foundNode;
@@ -325,6 +310,21 @@ namespace Collections
             }
 
             return auxNode;
+        }
+
+        private Node<T> Find(T value, Node<T> startNode)
+        {
+            while (startNode != null)
+            {
+                if ((value == null && startNode.Value == null) || startNode.Value.Equals(value))
+                {
+                    break;
+                }
+
+                startNode = startNode.NextNode;
+            }
+
+            return startNode;
         }
 
         private void CheckModifiability()
