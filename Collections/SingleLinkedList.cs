@@ -9,6 +9,8 @@ namespace Collections
         const string NullAdd = "nullAdd";
         const string NullSearch = "nullSearch";
         const string NullArray = "nullArray";
+        const string NotNullList = "NotNullList";
+        const string NotThisList = "NotThisList";
 
         public SingleLinkedList()
         {
@@ -32,7 +34,7 @@ namespace Collections
 
             CheckNullElement(node, NullAdd);
 
-            CheckList(node.List);
+            CheckList(node.List, NotNullList);
 
             if (this.Count != 0)
             {
@@ -65,12 +67,9 @@ namespace Collections
 
             CheckNullElement(newNode, NullAdd);
 
-            if (node.List != this)
-            {
-                throw new InvalidOperationException("Node is not in the current Single Linked List");
-            }
+            CheckList(node.List, NotThisList);
 
-            CheckList(newNode.List);
+            CheckList(newNode.List, NotNullList);
 
             if (this.Last == node)
             {
@@ -98,10 +97,7 @@ namespace Collections
 
             CheckNullElement(node, NullSearch);
 
-            if (node.List != this)
-            {
-                throw new InvalidOperationException("Node is not in the current Single Linked List");
-            }
+            CheckList(node.List, NotThisList);
 
             if (this.First == node)
             {
@@ -127,7 +123,7 @@ namespace Collections
 
             CheckNullElement(node, NullAdd);
 
-            CheckList(node.List);
+            CheckList(node.List, NotNullList);
 
             if (this.Count == 0)
             {
@@ -194,10 +190,7 @@ namespace Collections
 
             CheckNullElement(node, NullSearch);
 
-            if (node.List != this)
-            {
-                throw new InvalidOperationException("Node is not in the current Single Linked List");
-            }
+            CheckList(node.List, NotThisList);
 
             Node<T> previousNode = null;
 
@@ -370,14 +363,19 @@ namespace Collections
             throw new ArgumentNullException(nameof(element), "The destination array must be a valid array");
         }
 
-        private void CheckList(SingleLinkedList<T> list)
-        {
-            if (list == null)
+        private void CheckList(SingleLinkedList<T> list, string type)
+            {
+            if (list != null && type == "NotNullList")
+            {
+                throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
+            }
+
+            if (list == this || type != "NotThisList")
             {
                 return;
             }
 
-            throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
+            throw new InvalidOperationException("Node is not in the current Single Linked List");
         }
     }
 }
