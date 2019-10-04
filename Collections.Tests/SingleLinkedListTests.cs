@@ -1659,6 +1659,35 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void RemoveLastWhenSLLIsReadOnlyShouldThrowException()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+            Node<string> node2 = new Node<string>("node2");
+
+            testSLList.AddFirst(node2);
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(2, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node2, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal(testSLList, testSLList.First.List);
+
+            testSLList.ToReadOnly();
+
+            Assert.Throws<NotSupportedException>(() => testSLList.RemoveLast());
+
+            Assert.Equal(2, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node2, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal(testSLList, testSLList.First.List);
+        }
+
+        [Fact]
         public void ClearWhenEmptyListShouldDoNothing()
         {
             SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
