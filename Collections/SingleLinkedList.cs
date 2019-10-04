@@ -6,6 +6,9 @@ namespace Collections
 {
     public class SingleLinkedList<T> : ICollection<T>
     {
+        const string NullAdd = "nullAdd";
+        const string NotNullAdd = "";
+
         public SingleLinkedList()
         {
             Count = 0;
@@ -26,7 +29,7 @@ namespace Collections
         {
             CheckModifiability();
 
-            CheckNullElement(node);
+            CheckNullElement(node, NullAdd);
 
             if (node.List != null)
             {
@@ -60,12 +63,9 @@ namespace Collections
         {
             CheckModifiability();
 
-            if (node == null)
-            {
-                throw new ArgumentNullException(nameof(node), "Not possible to search for null in a Single Linked List");
-            }
+            CheckNullElement(node, NotNullAdd);
 
-            CheckNullElement(newNode);
+            CheckNullElement(newNode, NullAdd);
 
             if (node.List != this)
             {
@@ -101,10 +101,7 @@ namespace Collections
         {
             CheckModifiability();
 
-            if (node == null)
-            {
-                throw new ArgumentNullException(nameof(node), "Not possible to search for null in a Single Linked List");
-            }
+            CheckNullElement(node, NotNullAdd);
 
             if (node.List != this)
             {
@@ -133,7 +130,7 @@ namespace Collections
         {
             CheckModifiability();
 
-            CheckNullElement(node);
+            CheckNullElement(node, NullAdd);
 
             if (node.List != null)
             {
@@ -203,10 +200,7 @@ namespace Collections
         {
             CheckModifiability();
 
-            if (node == null)
-            {
-                throw new ArgumentNullException(nameof(node), "Not possible to search for null in a Single Linked List");
-            }
+            CheckNullElement(node, NotNullAdd);
 
             if (node.List != this)
             {
@@ -367,14 +361,19 @@ namespace Collections
             throw new NotSupportedException("The Single Linked List is read only and cannot be modified");
         }
 
-        private void CheckNullElement(object element)
+        private void CheckNullElement(object element, string type)
         {
             if (element != null)
             {
                 return;
             }
 
-            throw new ArgumentNullException(nameof(element), "Not possible to add null node to a Single Linked List");
+            if (type == "nullAdd")
+            {
+                throw new ArgumentNullException(nameof(element), "Not possible to add null node to a Single Linked List");
+            }
+
+            throw new ArgumentNullException(nameof(element), "Not possible to search for null in a Single Linked List");
         }
     }
 }
