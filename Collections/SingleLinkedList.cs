@@ -26,10 +26,7 @@ namespace Collections
         {
             CheckModifiability();
 
-            if (node == null)
-            {
-                throw new ArgumentNullException(nameof(node), "Not possible to add null node to a Single Linked List");
-            }
+            CheckNullElement(node);
 
             if (node.List != null)
             {
@@ -68,10 +65,7 @@ namespace Collections
                 throw new ArgumentNullException(nameof(node), "Not possible to search for null in a Single Linked List");
             }
 
-            if (newNode == null)
-            {
-                throw new ArgumentNullException(nameof(newNode), "Not possible to add null node to a Single Linked List");
-            }
+            CheckNullElement(newNode);
 
             if (node.List != this)
             {
@@ -139,10 +133,7 @@ namespace Collections
         {
             CheckModifiability();
 
-            if (node == null)
-            {
-                throw new ArgumentNullException(nameof(node), "Not possible to add null node to a Single Linked List");
-            }
+            CheckNullElement(node);
 
             if (node.List != null)
             {
@@ -374,6 +365,16 @@ namespace Collections
             }
 
             throw new NotSupportedException("The Single Linked List is read only and cannot be modified");
+        }
+
+        private void CheckNullElement(object element)
+        {
+            if (element != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(nameof(element), "Not possible to add null node to a Single Linked List");
         }
     }
 }
