@@ -1488,6 +1488,26 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void RemoveWhenTAndSLLIsReadOnlyShouldReturnFalse()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node1 = new Node<string>("node1");
+
+            testSLList.AddFirst(node1);
+
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node1, testSLList.Last);
+
+            testSLList.ToReadOnly();
+
+            Assert.False(testSLList.Remove("node1"));
+            Assert.Equal(1, testSLList.Count);
+            Assert.Equal(node1, testSLList.First);
+            Assert.Equal(node1, testSLList.Last);
+        }
+
+        [Fact]
         public void RemoveFirstWhenNoEmptyListShouldRemoveFirstNode()
         {
             SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
