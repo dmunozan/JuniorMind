@@ -313,6 +313,11 @@ namespace Collections
 
         public bool Remove(T item)
         {
+            if (this.IsReadOnly)
+            {
+                return false;
+            }
+
             Node<T> foundNode = Find(item);
 
             if (foundNode == null)
