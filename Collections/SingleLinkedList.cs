@@ -32,10 +32,7 @@ namespace Collections
 
             CheckNullElement(node, NullAdd);
 
-            if (node.List != null)
-            {
-                throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
-            }
+            CheckList(node.List);
 
             if (this.Count != 0)
             {
@@ -73,10 +70,7 @@ namespace Collections
                 throw new InvalidOperationException("Node is not in the current Single Linked List");
             }
 
-            if (newNode.List != null)
-            {
-                throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
-            }
+            CheckList(newNode.List);
 
             if (this.Last == node)
             {
@@ -133,10 +127,7 @@ namespace Collections
 
             CheckNullElement(node, NullAdd);
 
-            if (node.List != null)
-            {
-                throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
-            }
+            CheckList(node.List);
 
             if (this.Count == 0)
             {
@@ -377,6 +368,16 @@ namespace Collections
             }
 
             throw new ArgumentNullException(nameof(element), "The destination array must be a valid array");
+        }
+
+        private void CheckList(SingleLinkedList<T> list)
+        {
+            if (list == null)
+            {
+                return;
+            }
+
+            throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
         }
     }
 }
