@@ -7,7 +7,8 @@ namespace Collections
     public class SingleLinkedList<T> : ICollection<T>
     {
         const string NullAdd = "nullAdd";
-        const string NotNullAdd = "";
+        const string NullSearch = "nullSearch";
+        const string NullArray = "nullArray";
 
         public SingleLinkedList()
         {
@@ -63,7 +64,7 @@ namespace Collections
         {
             CheckModifiability();
 
-            CheckNullElement(node, NotNullAdd);
+            CheckNullElement(node, NullSearch);
 
             CheckNullElement(newNode, NullAdd);
 
@@ -101,7 +102,7 @@ namespace Collections
         {
             CheckModifiability();
 
-            CheckNullElement(node, NotNullAdd);
+            CheckNullElement(node, NullSearch);
 
             if (node.List != this)
             {
@@ -200,7 +201,7 @@ namespace Collections
         {
             CheckModifiability();
 
-            CheckNullElement(node, NotNullAdd);
+            CheckNullElement(node, NullSearch);
 
             if (node.List != this)
             {
@@ -269,10 +270,7 @@ namespace Collections
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException(nameof(array), "The destination array must be a valid array");
-            }
+            CheckNullElement(array, NullArray);
 
             if (arrayIndex < 0 || arrayIndex >= array.Length)
             {
@@ -373,7 +371,12 @@ namespace Collections
                 throw new ArgumentNullException(nameof(element), "Not possible to add null node to a Single Linked List");
             }
 
-            throw new ArgumentNullException(nameof(element), "Not possible to search for null in a Single Linked List");
+            if (type == "nullSearch")
+            {
+                throw new ArgumentNullException(nameof(element), "Not possible to search for null in a Single Linked List");
+            }
+
+            throw new ArgumentNullException(nameof(element), "The destination array must be a valid array");
         }
     }
 }
