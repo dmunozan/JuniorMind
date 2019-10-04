@@ -1003,6 +1003,21 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void AddLastWhenSLLIsReadOnlyShouldThrowException()
+        {
+            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            Node<string> node = new Node<string>("test");
+
+            testSLList.ToReadOnly();
+
+            Assert.Throws<NotSupportedException>(() => testSLList.AddLast(node));
+
+            Assert.Equal(0, testSLList.Count);
+            Assert.Null(testSLList.First);
+            Assert.Null(testSLList.Last);
+        }
+
+        [Fact]
         public void FindWhenTExistAndFirstShouldReturnFirstNode()
         {
             SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
