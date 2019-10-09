@@ -32,6 +32,14 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void PreviousNodeWhenNoNodeShouldReturnNull()
+        {
+            DNode<int> testNode = new DNode<int>(0);
+
+            Assert.Null(testNode.PreviousNode);
+        }
+
+        [Fact]
         public void ListWhenNoAssignedShouldReturnNull()
         {
             DNode<int> testNode = new DNode<int>(0);
