@@ -2,12 +2,12 @@
 
 namespace Collections.Tests
 {
-    public class NodeTests
+    public class DNodeTests
     {
         [Fact]
         public void ValueWhenAnyShouldReturnValueSavedOnNode()
         {
-            Node<int> testNode = new Node<int>(0);
+            DNode<int> testNode = new DNode<int>(0);
 
             Assert.Equal(0, testNode.Value);
         }
@@ -15,7 +15,7 @@ namespace Collections.Tests
         [Fact]
         public void NextNodeWhenNoNodeShouldReturnNull()
         {
-            Node<int> testNode = new Node<int>(0);
+            DNode<int> testNode = new DNode<int>(0);
 
             Assert.Null(testNode.NextNode);
         }
@@ -23,8 +23,8 @@ namespace Collections.Tests
         [Fact]
         public void NextNodeWhenNodeShouldReturnAssignedNode()
         {
-            Node<int> testNode = new Node<int>(0);
-            Node<int> testNextNode = new Node<int>(1);
+            DNode<int> testNode = new DNode<int>(0);
+            DNode<int> testNextNode = new DNode<int>(1);
 
             testNode.NextNode = testNextNode;
 
@@ -34,7 +34,7 @@ namespace Collections.Tests
         [Fact]
         public void ListWhenNoAssignedShouldReturnNull()
         {
-            Node<int> testNode = new Node<int>(0);
+            DNode<int> testNode = new DNode<int>(0);
 
             Assert.Null(testNode.List);
         }
@@ -42,38 +42,12 @@ namespace Collections.Tests
         [Fact]
         public void ListWhenAssignedShouldReturnSingleLinkedList()
         {
-            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
-            Node<int> testNode = new Node<int>(0);
+            DoubleLinkedList<int> testSLList = new DoubleLinkedList<int>();
+            DNode<int> testNode = new DNode<int>(0);
 
             testNode.List = testSLList;
 
             Assert.Equal(testSLList, testNode.List);
-        }
-
-        [Fact]
-        public void EqualsWhenSameValueShouldReturnTrue()
-        {
-            Node<int> testNode = new Node<int>(0);
-            Node<int> sameNode = new Node<int>(0);
-
-            Assert.True(testNode.Equals(sameNode));
-        }
-
-        [Fact]
-        public void EqualsWhenNullShouldReturnFalse()
-        {
-            Node<int> testNode = new Node<int>(0);
-
-            Assert.False(testNode.Equals(null));
-        }
-
-        [Fact]
-        public void EqualsWhenDifferentValueShouldReturnFalse()
-        {
-            Node<int> testNode = new Node<int>(0);
-            Node<int> notSameNode = new Node<int>(1);
-
-            Assert.False(testNode.Equals(notSameNode));
         }
     }
 }
