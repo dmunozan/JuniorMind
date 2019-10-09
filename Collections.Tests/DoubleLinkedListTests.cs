@@ -3,12 +3,12 @@ using Xunit;
 
 namespace Collections.Tests
 {
-    public class SingleLinkedListTests
+    public class DoubleLinkedListTests
     {
         [Fact]
         public void CountWhenEmptyListShouldReturn0()
         {
-            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+            DoubleLinkedList<int> testSLList = new DoubleLinkedList<int>();
 
             Assert.Equal(0, testSLList.Count);
         }
