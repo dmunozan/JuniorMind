@@ -40,7 +40,7 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void ListWhenAssignedShouldReturnSingleLinkedList()
+        public void ListWhenAssignedShouldReturnDoubleLinkedList()
         {
             DoubleLinkedList<int> testSLList = new DoubleLinkedList<int>();
             DNode<int> testNode = new DNode<int>(0);
