@@ -1,30 +1,21 @@
 ﻿namespace Collections
 {
-    public class Node<T>
+    public class DNode<T>
     {
-        public Node(T value)
+        public DNode(T value)
         {
             Value = value;
+            PreviousNode = null;
             NextNode = null;
             List = null;
         }
 
         public T Value { get; }
 
-        public Node<T> NextNode { get; set; }
+        public DNode<T> PreviousNode { get; set; }
 
-        public SingleLinkedList<T> List { get; set; }
+        public DNode<T> NextNode { get; set; }
 
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            Node<T> objNode = (Node<T>)obj;
-
-            return this.Value.Equals(objNode.Value);
-        }
+        public DoubleLinkedList<T> List { get; set; }
     }
 }
