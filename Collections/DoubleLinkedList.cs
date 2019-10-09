@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Collections
 {
-    public class SingleLinkedList<T> : ICollection<T>
+    public class DoubleLinkedList<T> : ICollection<T>
     {
         const string NullAdd = "nullAdd";
         const string NullSearch = "nullSearch";
@@ -12,7 +12,7 @@ namespace Collections
         const string NotNullList = "NotNullList";
         const string NotThisList = "NotThisList";
 
-        public SingleLinkedList()
+        public DoubleLinkedList()
         {
             Count = 0;
             First = null;
@@ -45,7 +45,7 @@ namespace Collections
                 this.Last = node;
             }
 
-            node.List = this;
+            node.List = new SingleLinkedList<T>(); // this
             this.First = node;
             this.Count++;
         }
@@ -76,7 +76,7 @@ namespace Collections
                 this.Last = newNode;
             }
 
-            newNode.List = this;
+            newNode.List = new SingleLinkedList<T>(); // this
             newNode.NextNode = node.NextNode;
             node.NextNode = newNode;
             this.Count++;
@@ -135,7 +135,7 @@ namespace Collections
             }
 
             this.Last = node;
-            node.List = this;
+            node.List = new SingleLinkedList<T>(); // this
             this.Count++;
         }
 
@@ -364,7 +364,8 @@ namespace Collections
                 throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
             }
 
-            if (list == this || type != "NotThisList")
+            // this
+            if (list == new SingleLinkedList<T>() || type != "NotThisList")
             {
                 return;
             }
