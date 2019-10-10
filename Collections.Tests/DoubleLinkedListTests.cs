@@ -148,15 +148,16 @@ namespace Collections.Tests
         [Fact]
         public void AddFirstWhenTAndAnySLLShouldAddNode()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
 
-            Node<string> node = testSLList.AddFirst("test");
+            DNode<string> node = testSLList.AddFirst("test");
 
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node, testSLList.First);
             Assert.Equal(node, testSLList.Last);
             Assert.Equal("test", testSLList.First.Value);
             Assert.Null(testSLList.First.NextNode);
+            Assert.Null(testSLList.First.PreviousNode);
             Assert.Equal(testSLList, testSLList.First.List);
         }
 
