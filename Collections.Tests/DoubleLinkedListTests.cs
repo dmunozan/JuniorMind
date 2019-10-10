@@ -827,9 +827,9 @@ namespace Collections.Tests
         [Fact]
         public void AddBeforeWhenNodeIsNullAndTShouldThrowExceptionAndDoNothing()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> node = new Node<string>("node");
-            Node<string> newNode;
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> node = new DNode<string>("node");
+            DNode<string> newNode;
 
             testSLList.AddFirst(node);
 
@@ -837,7 +837,7 @@ namespace Collections.Tests
             Assert.Equal(node, testSLList.First);
             Assert.Equal(node, testSLList.Last);
 
-            Assert.Throws<ArgumentNullException>(() => newNode = testSLList.AddBefore(null as Node<string>, "newNode"));
+            Assert.Throws<ArgumentNullException>(() => newNode = testSLList.AddBefore(null as DNode<string>, "newNode"));
 
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node, testSLList.First);
