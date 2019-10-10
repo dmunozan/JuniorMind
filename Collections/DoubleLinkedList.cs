@@ -22,13 +22,13 @@ namespace Collections
 
         public int Count { get; private set; }
 
-        public Node<T> First { get; private set; }
+        public DNode<T> First { get; private set; }
 
-        public Node<T> Last { get; private set; }
+        public DNode<T> Last { get; private set; }
 
         public bool IsReadOnly { get; private set; }
 
-        public void AddFirst(Node<T> node)
+        public void AddFirst(DNode<T> node)
         {
             CheckModifiability();
 
@@ -45,21 +45,21 @@ namespace Collections
                 this.Last = node;
             }
 
-            node.List = new SingleLinkedList<T>(); // this
+            node.List = this;
             this.First = node;
             this.Count++;
         }
 
-        public Node<T> AddFirst(T value)
+        public DNode<T> AddFirst(T value)
         {
-            Node<T> node = new Node<T>(value);
+            DNode<T> node = new DNode<T>(value);
 
             this.AddFirst(node);
 
             return node;
         }
 
-        public void AddAfter(Node<T> node, Node<T> newNode)
+        public void AddAfter(DNode<T> node, DNode<T> newNode)
         {
             CheckModifiability();
 
@@ -76,22 +76,22 @@ namespace Collections
                 this.Last = newNode;
             }
 
-            newNode.List = new SingleLinkedList<T>(); // this
+            newNode.List = this;
             newNode.NextNode = node.NextNode;
             node.NextNode = newNode;
             this.Count++;
         }
 
-        public Node<T> AddAfter(Node<T> node, T value)
+        public DNode<T> AddAfter(DNode<T> node, T value)
         {
-            Node<T> newNode = new Node<T>(value);
+            DNode<T> newNode = new DNode<T>(value);
 
             this.AddAfter(node, newNode);
 
             return newNode;
         }
 
-        public void AddBefore(Node<T> node, Node<T> newNode)
+        public void AddBefore(DNode<T> node, DNode<T> newNode)
         {
             CheckModifiability();
 
@@ -108,16 +108,16 @@ namespace Collections
             this.AddAfter(FindPreviousNode(node), newNode);
         }
 
-        public Node<T> AddBefore(Node<T> node, T value)
+        public DNode<T> AddBefore(DNode<T> node, T value)
         {
-            Node<T> newNode = new Node<T>(value);
+            DNode<T> newNode = new DNode<T>(value);
 
             this.AddBefore(node, newNode);
 
             return newNode;
         }
 
-        public void AddLast(Node<T> node)
+        public void AddLast(DNode<T> node)
         {
             CheckModifiability();
 
@@ -135,29 +135,29 @@ namespace Collections
             }
 
             this.Last = node;
-            node.List = new SingleLinkedList<T>(); // this
+            node.List = this;
             this.Count++;
         }
 
-        public Node<T> AddLast(T value)
+        public DNode<T> AddLast(T value)
         {
-            Node<T> node = new Node<T>(value);
+            DNode<T> node = new DNode<T>(value);
 
             this.AddLast(node);
 
             return node;
         }
 
-        public Node<T> Find(T value)
+        public DNode<T> Find(T value)
         {
             return Find(value, this.First);
         }
 
-        public Node<T> FindLast(T value)
+        public DNode<T> FindLast(T value)
         {
-            Node<T> auxNode = Find(value, this.First);
+            DNode<T> auxNode = Find(value, this.First);
 
-            Node<T> foundNode = null;
+            DNode<T> foundNode = null;
 
             while (auxNode != null)
             {
@@ -169,7 +169,7 @@ namespace Collections
             return foundNode;
         }
 
-        public void Remove(Node<T> node)
+        public void Remove(DNode<T> node)
         {
             CheckModifiability();
 
@@ -177,7 +177,7 @@ namespace Collections
 
             CheckList(node.List, NotThisList);
 
-            Node<T> previousNode = null;
+            DNode<T> previousNode = null;
 
             if (this.First != node)
             {
@@ -247,7 +247,7 @@ namespace Collections
                 throw new ArgumentException("There is not enough space from the given index to the end of the array", nameof(array));
             }
 
-            Node<T> auxNode = this.First;
+            DNode<T> auxNode = this.First;
 
             while (auxNode != null)
             {
@@ -264,7 +264,7 @@ namespace Collections
                 return false;
             }
 
-            Node<T> foundNode = Find(item);
+            DNode<T> foundNode = Find(item);
 
             if (foundNode == null)
             {
@@ -283,7 +283,7 @@ namespace Collections
 
         public IEnumerator<T> GetEnumerator()
         {
-            Node<T> auxNode = this.First;
+            DNode<T> auxNode = this.First;
 
             while (auxNode != null)
             {
@@ -297,9 +297,9 @@ namespace Collections
             return this.GetEnumerator();
         }
 
-        private Node<T> FindPreviousNode(Node<T> node)
+        private DNode<T> FindPreviousNode(DNode<T> node)
         {
-            Node<T> auxNode = this.First;
+            DNode<T> auxNode = this.First;
 
             if (auxNode != node)
             {
@@ -312,7 +312,7 @@ namespace Collections
             return auxNode;
         }
 
-        private Node<T> Find(T value, Node<T> startNode)
+        private DNode<T> Find(T value, DNode<T> startNode)
         {
             while (startNode != null)
             {
@@ -357,15 +357,14 @@ namespace Collections
             throw new ArgumentNullException(nameof(element), "The destination array must be a valid array");
         }
 
-        private void CheckList(SingleLinkedList<T> list, string type)
+        private void CheckList(DoubleLinkedList<T> list, string type)
         {
             if (list != null && type == "NotNullList")
             {
                 throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
             }
 
-            // this
-            if (list == new SingleLinkedList<T>() || type != "NotThisList")
+            if (list == this || type != "NotThisList")
             {
                 return;
             }
