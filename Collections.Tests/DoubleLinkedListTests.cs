@@ -1034,15 +1034,16 @@ namespace Collections.Tests
         [Fact]
         public void AddLastWhenTIsNullShouldAddNode()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
 
-            Node<string> node = testSLList.AddLast(null as string);
+            DNode<string> node = testSLList.AddLast(null as string);
 
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node, testSLList.First);
             Assert.Equal(node, testSLList.Last);
             Assert.Null(testSLList.Last.Value);
             Assert.Null(testSLList.Last.NextNode);
+            Assert.Null(testSLList.Last.PreviousNode);
             Assert.Equal(testSLList, testSLList.Last.List);
         }
 
