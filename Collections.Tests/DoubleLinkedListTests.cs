@@ -363,10 +363,10 @@ namespace Collections.Tests
         [Fact]
         public void AddAfterWhenNewNodeBelongsToAnotherListShouldThrowExceptionAndDoNothing()
         {
-            SingleLinkedList<string> ourTestSLList = new SingleLinkedList<string>();
-            SingleLinkedList<string> anotherTestSLList = new SingleLinkedList<string>();
-            Node<string> node = new Node<string>("node");
-            Node<string> newNode = new Node<string>("newNode");
+            DoubleLinkedList<string> ourTestSLList = new DoubleLinkedList<string>();
+            DoubleLinkedList<string> anotherTestSLList = new DoubleLinkedList<string>();
+            DNode<string> node = new DNode<string>("node");
+            DNode<string> newNode = new DNode<string>("newNode");
 
             ourTestSLList.AddFirst(node);
             anotherTestSLList.AddFirst(newNode);
