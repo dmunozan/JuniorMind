@@ -958,9 +958,9 @@ namespace Collections.Tests
         [Fact]
         public void AddLastWhenNodeIsNullShouldThrowExceptionAndDoNothing()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
 
-            Assert.Throws<ArgumentNullException>(() => testSLList.AddLast(null as Node<string>));
+            Assert.Throws<ArgumentNullException>(() => testSLList.AddLast(null as DNode<string>));
 
             Assert.Equal(0, testSLList.Count);
             Assert.Null(testSLList.First);
