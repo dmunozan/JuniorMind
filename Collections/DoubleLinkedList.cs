@@ -80,6 +80,8 @@ namespace Collections
             newNode.List = this;
             newNode.NextNode = node.NextNode;
             node.NextNode = newNode;
+            newNode.PreviousNode = node;
+            newNode.NextNode.PreviousNode = newNode;
             this.Count++;
         }
 
