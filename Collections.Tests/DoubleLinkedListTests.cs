@@ -16,10 +16,10 @@ namespace Collections.Tests
         [Fact]
         public void CountWhenNoEmptyListShouldReturnTheNumberOfNodes()
         {
-            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
-            Node<int> node1 = new Node<int>(1);
-            Node<int> node2 = new Node<int>(2);
-            Node<int> node3 = new Node<int>(3);
+            DoubleLinkedList<int> testSLList = new DoubleLinkedList<int>();
+            DNode<int> node1 = new DNode<int>(1);
+            DNode<int> node2 = new DNode<int>(2);
+            DNode<int> node3 = new DNode<int>(3);
 
             testSLList.AddFirst(node1);
             testSLList.AddFirst(node2);
