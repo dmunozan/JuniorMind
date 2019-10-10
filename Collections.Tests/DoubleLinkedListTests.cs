@@ -50,7 +50,7 @@ namespace Collections.Tests
         [Fact]
         public void LastWhenEmptyListShouldReturnNull()
         {
-            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+            DoubleLinkedList<int> testSLList = new DoubleLinkedList<int>();
 
             Assert.Null(testSLList.Last);
         }
