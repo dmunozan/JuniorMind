@@ -194,6 +194,7 @@ namespace Collections
             else
             {
                 this.First = node.NextNode;
+                this.First.PreviousNode = null;
             }
 
             if (node == this.Last)
@@ -202,6 +203,7 @@ namespace Collections
             }
 
             node.NextNode = null;
+            node.PreviousNode = null;
             node.List = null;
             this.Count--;
         }
