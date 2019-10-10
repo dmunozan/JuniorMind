@@ -911,8 +911,8 @@ namespace Collections.Tests
         [Fact]
         public void AddLastWhenEmptySLLShouldAddNode()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> node = new Node<string>("test");
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> node = new DNode<string>("test");
 
             testSLList.AddLast(node);
 
@@ -921,6 +921,7 @@ namespace Collections.Tests
             Assert.Equal(node, testSLList.Last);
             Assert.Equal("test", testSLList.Last.Value);
             Assert.Null(testSLList.Last.NextNode);
+            Assert.Null(testSLList.Last.PreviousNode);
             Assert.Equal(testSLList, testSLList.Last.List);
         }
 
