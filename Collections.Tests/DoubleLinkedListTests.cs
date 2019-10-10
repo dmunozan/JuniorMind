@@ -86,9 +86,9 @@ namespace Collections.Tests
         [Fact]
         public void AddFirstWhenAlreadyExistingFirstShouldAddNode()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> currentFirstNode = new Node<string>("currentFirst");
-            Node<string> newFirstNode = new Node<string>("newFirst");
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> currentFirstNode = new DNode<string>("currentFirst");
+            DNode<string> newFirstNode = new DNode<string>("newFirst");
 
             testSLList.AddFirst(currentFirstNode);
 
@@ -97,6 +97,7 @@ namespace Collections.Tests
             Assert.Equal(currentFirstNode, testSLList.Last);
             Assert.Equal("currentFirst", testSLList.First.Value);
             Assert.Null(testSLList.First.NextNode);
+            Assert.Null(testSLList.First.PreviousNode);
             Assert.Equal(testSLList, testSLList.First.List);
 
             testSLList.AddFirst(newFirstNode);
@@ -106,6 +107,7 @@ namespace Collections.Tests
             Assert.Equal(currentFirstNode, testSLList.Last);
             Assert.Equal("newFirst", testSLList.First.Value);
             Assert.Equal(currentFirstNode, testSLList.First.NextNode);
+            Assert.Equal(newFirstNode, testSLList.Last.PreviousNode);
             Assert.Equal(testSLList, testSLList.First.List);
         }
 
