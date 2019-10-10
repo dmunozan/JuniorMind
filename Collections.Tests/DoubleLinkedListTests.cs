@@ -1008,24 +1008,26 @@ namespace Collections.Tests
         [Fact]
         public void AddLastWhenTAndAlreadyExistingLastShouldAddNode()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
 
-            Node<string> currentLastNode = testSLList.AddLast("currentLast");
+            DNode<string> currentLastNode = testSLList.AddLast("currentLast");
 
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(currentLastNode, testSLList.First);
             Assert.Equal(currentLastNode, testSLList.Last);
             Assert.Equal("currentLast", testSLList.Last.Value);
             Assert.Null(testSLList.Last.NextNode);
+            Assert.Null(testSLList.Last.PreviousNode);
             Assert.Equal(testSLList, testSLList.Last.List);
 
-            Node<string> newLastNode = testSLList.AddLast("newLast");
+            DNode<string> newLastNode = testSLList.AddLast("newLast");
 
             Assert.Equal(2, testSLList.Count);
             Assert.Equal(newLastNode, testSLList.Last);
             Assert.Equal(currentLastNode, testSLList.First);
             Assert.Equal("newLast", testSLList.Last.Value);
             Assert.Equal(newLastNode, testSLList.First.NextNode);
+            Assert.Equal(currentLastNode, testSLList.Last.PreviousNode);
             Assert.Equal(testSLList, testSLList.Last.List);
         }
 
