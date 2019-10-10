@@ -890,10 +890,10 @@ namespace Collections.Tests
         [Fact]
         public void AddBeforeWhenIsReadOnlyAndTShouldThrowException()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> node1 = new Node<string>("node1");
-            Node<string> node2 = new Node<string>("node2");
-            Node<string> newNode;
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> node1 = new DNode<string>("node1");
+            DNode<string> node2 = new DNode<string>("node2");
+            DNode<string> newNode;
 
             testSLList.AddFirst(node2);
             testSLList.AddFirst(node1);
