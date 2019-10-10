@@ -1175,13 +1175,13 @@ namespace Collections.Tests
         [Fact]
         public void FindLastWhenTExistAndLastShouldReturnLastNode()
         {
-            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+            DoubleLinkedList<int> testSLList = new DoubleLinkedList<int>();
 
-            Node<int> node1 = new Node<int>(1);
-            Node<int> node2 = new Node<int>(2);
-            Node<int> node3 = new Node<int>(3);
-            Node<int> node4 = new Node<int>(4);
-            Node<int> node5 = new Node<int>(5);
+            DNode<int> node1 = new DNode<int>(1);
+            DNode<int> node2 = new DNode<int>(2);
+            DNode<int> node3 = new DNode<int>(3);
+            DNode<int> node4 = new DNode<int>(4);
+            DNode<int> node5 = new DNode<int>(5);
 
             testSLList.AddLast(node1);
             testSLList.AddLast(node2);
@@ -1189,10 +1189,11 @@ namespace Collections.Tests
             testSLList.AddLast(node4);
             testSLList.AddLast(node5);
 
-            Node<int> foundNode = testSLList.FindLast(5);
+            DNode<int> foundNode = testSLList.FindLast(5);
 
             Assert.Equal(foundNode, node5);
             Assert.Null(foundNode.NextNode);
+            Assert.Equal(node4, foundNode.PreviousNode);
         }
 
         [Fact]
