@@ -31,7 +31,7 @@ namespace Collections.Tests
         [Fact]
         public void FirstWhenEmptyListShouldReturnNull()
         {
-            SingleLinkedList<int> testSLList = new SingleLinkedList<int>();
+            DoubleLinkedList<int> testSLList = new DoubleLinkedList<int>();
 
             Assert.Null(testSLList.First);
         }
