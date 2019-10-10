@@ -992,15 +992,16 @@ namespace Collections.Tests
         [Fact]
         public void AddLastWhenTAndAnySLLShouldAddNode()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
 
-            Node<string> node = testSLList.AddLast("test");
+            DNode<string> node = testSLList.AddLast("test");
 
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node, testSLList.First);
             Assert.Equal(node, testSLList.Last);
             Assert.Equal("test", testSLList.Last.Value);
             Assert.Null(testSLList.Last.NextNode);
+            Assert.Null(testSLList.Last.PreviousNode);
             Assert.Equal(testSLList, testSLList.Last.List);
         }
 
