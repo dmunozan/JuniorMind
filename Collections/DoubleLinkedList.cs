@@ -38,6 +38,7 @@ namespace Collections
 
             if (this.Count != 0)
             {
+                this.First.PreviousNode = node;
                 node.NextNode = this.First;
             }
             else
