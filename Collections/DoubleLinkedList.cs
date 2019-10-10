@@ -138,6 +138,7 @@ namespace Collections
             else
             {
                 this.Last.NextNode = node;
+                node.PreviousNode = this.Last;
             }
 
             this.Last = node;
