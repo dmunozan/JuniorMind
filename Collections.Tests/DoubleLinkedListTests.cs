@@ -114,9 +114,9 @@ namespace Collections.Tests
         [Fact]
         public void AddFirstWhenNodeIsNullShouldThrowExceptionAndDoNothing()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
 
-            Assert.Throws<ArgumentNullException>(() => testSLList.AddFirst(null as Node<string>));
+            Assert.Throws<ArgumentNullException>(() => testSLList.AddFirst(null as DNode<string>));
 
             Assert.Equal(0, testSLList.Count);
             Assert.Null(testSLList.First);
