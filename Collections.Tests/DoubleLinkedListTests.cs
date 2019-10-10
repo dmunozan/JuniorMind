@@ -322,8 +322,8 @@ namespace Collections.Tests
         [Fact]
         public void AddAfterWhenNewNodeIsNullShouldThrowExceptionAndDoNothing()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> node = new Node<string>("node");
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> node = new DNode<string>("node");
 
             testSLList.AddFirst(node);
 
@@ -331,7 +331,7 @@ namespace Collections.Tests
             Assert.Equal(node, testSLList.First);
             Assert.Equal(node, testSLList.Last);
 
-            Assert.Throws<ArgumentNullException>(() => testSLList.AddAfter(node, null as Node<string>));
+            Assert.Throws<ArgumentNullException>(() => testSLList.AddAfter(node, null as DNode<string>));
 
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node, testSLList.First);
