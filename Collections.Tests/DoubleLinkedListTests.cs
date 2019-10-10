@@ -69,8 +69,8 @@ namespace Collections.Tests
         [Fact]
         public void AddFirstWhenAnyShouldAddNode()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> node = new Node<string>("test");
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> node = new DNode<string>("test");
 
             testSLList.AddFirst(node);
 
@@ -79,6 +79,7 @@ namespace Collections.Tests
             Assert.Equal(node, testSLList.Last);
             Assert.Equal("test", testSLList.First.Value);
             Assert.Null(testSLList.First.NextNode);
+            Assert.Null(testSLList.First.PreviousNode);
             Assert.Equal(testSLList, testSLList.First.List);
         }
 
