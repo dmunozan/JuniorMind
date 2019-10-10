@@ -221,11 +221,11 @@ namespace Collections.Tests
         [Fact]
         public void AddFirstWhenTAndSLLIsReadOnlyShouldThrowExceptionAndDoNothing()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
 
             testSLList.ToReadOnly();
 
-            Node<string> node = null;
+            DNode<string> node = null;
 
             Assert.Throws<NotSupportedException>(() => node = testSLList.AddFirst("test"));
 
