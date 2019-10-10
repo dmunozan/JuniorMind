@@ -1065,8 +1065,8 @@ namespace Collections.Tests
         [Fact]
         public void AddLastWhenTAndSLLIsReadOnlyShouldThrowException()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> node = null;
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> node = null;
 
             testSLList.ToReadOnly();
 
