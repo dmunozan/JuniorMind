@@ -126,10 +126,10 @@ namespace Collections.Tests
         [Fact]
         public void AddFirstWhenNodeListIsNotNullShouldThrowExceptionAndDoNothing()
         {
-            SingleLinkedList<string> ourTestSLList = new SingleLinkedList<string>();
-            SingleLinkedList<string> anotherTestSLList = new SingleLinkedList<string>();
+            DoubleLinkedList<string> ourTestSLList = new DoubleLinkedList<string>();
+            DoubleLinkedList<string> anotherTestSLList = new DoubleLinkedList<string>();
 
-            Node<string> node = new Node<string>("test");
+            DNode<string> node = new DNode<string>("test");
 
             anotherTestSLList.AddFirst(node);
 
