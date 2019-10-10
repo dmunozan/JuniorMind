@@ -201,6 +201,10 @@ namespace Collections
             {
                 this.Last = previousNode;
             }
+            else
+            {
+                node.NextNode.PreviousNode = previousNode;
+            }
 
             node.NextNode = null;
             node.PreviousNode = null;
