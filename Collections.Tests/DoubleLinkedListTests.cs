@@ -1621,8 +1621,8 @@ namespace Collections.Tests
         [Fact]
         public void RemoveFirstWhenOnlyOneNodeShouldRemoveFirstNode()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> node1 = new Node<string>("node1");
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> node1 = new DNode<string>("node1");
 
             testSLList.AddFirst(node1);
 
@@ -1630,6 +1630,8 @@ namespace Collections.Tests
             Assert.Equal(node1, testSLList.First);
             Assert.Equal(node1, testSLList.Last);
             Assert.Equal("node1", testSLList.First.Value);
+            Assert.Null(node1.NextNode);
+            Assert.Null(node1.PreviousNode);
             Assert.Equal(testSLList, testSLList.First.List);
 
             testSLList.RemoveFirst();
@@ -1637,6 +1639,9 @@ namespace Collections.Tests
             Assert.Equal(0, testSLList.Count);
             Assert.Null(testSLList.First);
             Assert.Null(testSLList.Last);
+            Assert.Null(node1.NextNode);
+            Assert.Null(node1.PreviousNode);
+            Assert.Null(node1.List);
         }
 
         [Fact]
