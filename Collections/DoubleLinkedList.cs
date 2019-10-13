@@ -184,12 +184,9 @@ namespace Collections
 
             CheckList(node.List, NotThisList);
 
-            DNode<T> previousNode = null;
-
             if (this.First != node)
             {
-                previousNode = FindPreviousNode(node);
-                previousNode.NextNode = node.NextNode;
+                node.PreviousNode.NextNode = node.NextNode;
             }
             else
             {
@@ -198,11 +195,11 @@ namespace Collections
 
             if (node == this.Last)
             {
-                this.Last = previousNode;
+                this.Last = node.PreviousNode;
             }
             else
             {
-                node.NextNode.PreviousNode = previousNode;
+                node.NextNode.PreviousNode = node.PreviousNode;
             }
 
             node.NextNode = null;
