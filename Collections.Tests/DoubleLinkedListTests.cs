@@ -1694,9 +1694,9 @@ namespace Collections.Tests
         [Fact]
         public void RemoveLastWhenNoEmptyListShouldRemoveLastNode()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> node1 = new Node<string>("node1");
-            Node<string> node2 = new Node<string>("node2");
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> node1 = new DNode<string>("node1");
+            DNode<string> node2 = new DNode<string>("node2");
 
             testSLList.AddFirst(node2);
             testSLList.AddFirst(node1);
@@ -1706,6 +1706,7 @@ namespace Collections.Tests
             Assert.Equal(node2, testSLList.Last);
             Assert.Equal("node1", testSLList.First.Value);
             Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal(node1, testSLList.Last.PreviousNode);
             Assert.Equal(testSLList, testSLList.First.List);
 
             testSLList.RemoveLast();
@@ -1713,6 +1714,11 @@ namespace Collections.Tests
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node1, testSLList.First);
             Assert.Equal(node1, testSLList.Last);
+            Assert.Null(node1.NextNode);
+            Assert.Null(node1.PreviousNode);
+            Assert.Null(node2.NextNode);
+            Assert.Null(node2.PreviousNode);
+            Assert.Null(node2.List);
         }
 
         [Fact]
