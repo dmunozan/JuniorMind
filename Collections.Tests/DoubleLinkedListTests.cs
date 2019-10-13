@@ -1386,14 +1386,14 @@ namespace Collections.Tests
         }
 
         [Fact]
-        public void RemoveWhenNodeBelongsToAnotherListShouldThrowExceptionAndDoNothing()
+        public void RemoveWhenNodeDoNotBelongToListShouldThrowExceptionAndDoNothing()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            SingleLinkedList<string> anotherSLList = new SingleLinkedList<string>();
-            Node<string> node1 = new Node<string>("node1");
-            Node<string> node2 = new Node<string>("node2");
-            Node<string> node3 = new Node<string>("node3");
-            Node<string> node4 = new Node<string>("node4");
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DoubleLinkedList<string> anotherSLList = new DoubleLinkedList<string>();
+            DNode<string> node1 = new DNode<string>("node1");
+            DNode<string> node2 = new DNode<string>("node2");
+            DNode<string> node3 = new DNode<string>("node3");
+            DNode<string> node4 = new DNode<string>("node4");
 
             anotherSLList.AddFirst(node4);
 
@@ -1406,7 +1406,8 @@ namespace Collections.Tests
             Assert.Equal(node3, testSLList.Last);
             Assert.Equal("node1", testSLList.First.Value);
             Assert.Equal("node3", testSLList.Last.Value);
-            Assert.Equal(node3, node2.NextNode);
+            Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal(node2, testSLList.Last.PreviousNode);
 
             Assert.Throws<InvalidOperationException>(() => testSLList.Remove(node4));
 
@@ -1415,7 +1416,8 @@ namespace Collections.Tests
             Assert.Equal(node3, testSLList.Last);
             Assert.Equal("node1", testSLList.First.Value);
             Assert.Equal("node3", testSLList.Last.Value);
-            Assert.Equal(node3, node2.NextNode);
+            Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal(node2, testSLList.Last.PreviousNode);
         }
 
         [Fact]
