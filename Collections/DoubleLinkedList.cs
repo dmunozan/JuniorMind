@@ -194,7 +194,10 @@ namespace Collections
             else
             {
                 this.First = node.NextNode;
-                this.First.PreviousNode = null;
+                if (this.First != null)
+                {
+                    this.First.PreviousNode = null;
+                }
             }
 
             if (node == this.Last)
