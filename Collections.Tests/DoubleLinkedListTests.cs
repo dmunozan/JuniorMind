@@ -1543,14 +1543,16 @@ namespace Collections.Tests
         [Fact]
         public void RemoveWhenSLLIsReadOnlyShouldThrowException()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> node1 = new Node<string>("node1");
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> node1 = new DNode<string>("node1");
 
             testSLList.AddFirst(node1);
 
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node1, testSLList.First);
             Assert.Equal(node1, testSLList.Last);
+            Assert.Null(node1.NextNode);
+            Assert.Null(node1.PreviousNode);
 
             testSLList.ToReadOnly();
 
@@ -1559,6 +1561,8 @@ namespace Collections.Tests
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node1, testSLList.First);
             Assert.Equal(node1, testSLList.Last);
+            Assert.Null(node1.NextNode);
+            Assert.Null(node1.PreviousNode);
         }
 
         [Fact]
