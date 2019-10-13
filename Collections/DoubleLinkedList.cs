@@ -306,21 +306,6 @@ namespace Collections
             return this.GetEnumerator();
         }
 
-        private DNode<T> FindPreviousNode(DNode<T> node)
-        {
-            DNode<T> auxNode = this.First;
-
-            if (auxNode != node)
-            {
-                while (auxNode != null && auxNode.NextNode != node)
-                {
-                    auxNode = auxNode.NextNode;
-                }
-            }
-
-            return auxNode;
-        }
-
         private DNode<T> Find(T value, DNode<T> startNode)
         {
             while (startNode != null)
