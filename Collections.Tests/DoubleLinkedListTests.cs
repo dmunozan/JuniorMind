@@ -1750,7 +1750,7 @@ namespace Collections.Tests
         [Fact]
         public void RemoveLastWhenEmptyListShouldThrowExceptionAndDoNothing()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
 
             Assert.Equal(0, testSLList.Count);
             Assert.Null(testSLList.First);
