@@ -6,9 +6,9 @@ namespace Collections
 {
     public class DoubleLinkedList<T> : ICollection<T>
     {
-        const string NullAdd = "nullAdd";
-        const string NullSearch = "nullSearch";
-        const string NullArray = "nullArray";
+        const string NullAdd = "NullAdd";
+        const string NullSearch = "NullSearch";
+        const string NullArray = "NullArray";
         const string NotNullList = "NotNullList";
         const string NotThisList = "NotThisList";
 
@@ -350,7 +350,7 @@ namespace Collections
                 return;
             }
 
-            throw new NotSupportedException("The Single Linked List is read only and cannot be modified");
+            throw new NotSupportedException("The Double Linked List is read only and cannot be modified");
         }
 
         private void CheckNullElement(object element, string type)
@@ -360,14 +360,14 @@ namespace Collections
                 return;
             }
 
-            if (type == "nullAdd")
+            if (type == "NullAdd")
             {
-                throw new ArgumentNullException(nameof(element), "Not possible to add null node to a Single Linked List");
+                throw new ArgumentNullException(nameof(element), "Not possible to add null node to a Double Linked List");
             }
 
-            if (type == "nullSearch")
+            if (type == "NullSearch")
             {
-                throw new ArgumentNullException(nameof(element), "Not possible to search for null in a Single Linked List");
+                throw new ArgumentNullException(nameof(element), "Not possible to search a null node in a Double Linked List");
             }
 
             throw new ArgumentNullException(nameof(element), "The destination array must be a valid array");
@@ -377,7 +377,7 @@ namespace Collections
         {
             if (list != null && type == "NotNullList")
             {
-                throw new InvalidOperationException("Not possible to add the node as it belongs to a different Single Linked List");
+                throw new InvalidOperationException("Not possible to add the node as it belongs to a different Double Linked List");
             }
 
             if (list == this || type != "NotThisList")
@@ -385,7 +385,7 @@ namespace Collections
                 return;
             }
 
-            throw new InvalidOperationException("Node is not in the current Single Linked List");
+            throw new InvalidOperationException("Node is not in the current Double Linked List");
         }
 
         private void CheckIfEmpty()
