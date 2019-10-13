@@ -11,6 +11,8 @@ namespace Collections
         const string NullArray = "NullArray";
         const string NotNullList = "NotNullList";
         const string NotThisList = "NotThisList";
+        const string RightDirection = "RightDirection";
+        const string LeftDirection = "LeftDirection";
 
         public DoubleLinkedList()
         {
@@ -157,23 +159,12 @@ namespace Collections
 
         public DNode<T> Find(T value)
         {
-            return Find(value, this.First);
+            return Find(value, this.First, RightDirection);
         }
 
         public DNode<T> FindLast(T value)
         {
-            DNode<T> auxNode = Find(value, this.First);
-
-            DNode<T> foundNode = null;
-
-            while (auxNode != null)
-            {
-                foundNode = auxNode;
-
-                auxNode = Find(value, auxNode.NextNode);
-            }
-
-            return foundNode;
+            return Find(value, this.Last, LeftDirection);
         }
 
         public void Remove(DNode<T> node)
@@ -306,7 +297,7 @@ namespace Collections
             return this.GetEnumerator();
         }
 
-        private DNode<T> Find(T value, DNode<T> startNode)
+        private DNode<T> Find(T value, DNode<T> startNode, string direction)
         {
             while (startNode != null)
             {
@@ -315,7 +306,7 @@ namespace Collections
                     break;
                 }
 
-                startNode = startNode.NextNode;
+                startNode = (direction == RightDirection) ? startNode.NextNode : startNode.PreviousNode;
             }
 
             return startNode;
