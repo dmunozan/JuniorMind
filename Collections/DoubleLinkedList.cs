@@ -111,7 +111,7 @@ namespace Collections
                 return;
             }
 
-            this.AddAfter(FindPreviousNode(node), newNode);
+            this.AddAfter(node.PreviousNode, newNode);
         }
 
         public DNode<T> AddBefore(DNode<T> node, T value)
