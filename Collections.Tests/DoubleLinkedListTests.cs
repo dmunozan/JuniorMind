@@ -1927,9 +1927,9 @@ namespace Collections.Tests
         [Fact]
         public void ContainsWhenNoExistShouldReturnFalse()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> node1 = new Node<string>("node1");
-            Node<string> node2 = new Node<string>("node2");
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> node1 = new DNode<string>("node1");
+            DNode<string> node2 = new DNode<string>("node2");
 
             testSLList.AddFirst(node2);
             testSLList.AddFirst(node1);
@@ -1937,6 +1937,10 @@ namespace Collections.Tests
             Assert.Equal(2, testSLList.Count);
             Assert.Equal(node1, testSLList.First);
             Assert.Equal(node2, testSLList.Last);
+            Assert.Equal("node1", testSLList.First.Value);
+            Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal(node1, testSLList.Last.PreviousNode);
+            Assert.Equal(testSLList, testSLList.First.List);
 
             Assert.False(testSLList.Contains("node3"));
         }
