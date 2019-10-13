@@ -1480,11 +1480,11 @@ namespace Collections.Tests
         [Fact]
         public void RemoveWhenMoreThanOneNodeContainingTExistShouldRemoveFirstTAndReturnTrue()
         {
-            SingleLinkedList<string> testSLList = new SingleLinkedList<string>();
-            Node<string> node1 = new Node<string>("node1");
-            Node<string> node2 = new Node<string>("node2");
-            Node<string> node3 = new Node<string>("node2");
-            Node<string> node4 = new Node<string>("node4");
+            DoubleLinkedList<string> testSLList = new DoubleLinkedList<string>();
+            DNode<string> node1 = new DNode<string>("node1");
+            DNode<string> node2 = new DNode<string>("node2");
+            DNode<string> node3 = new DNode<string>("node2");
+            DNode<string> node4 = new DNode<string>("node4");
 
             testSLList.AddFirst(node4);
             testSLList.AddFirst(node3);
@@ -1497,6 +1497,8 @@ namespace Collections.Tests
             Assert.Equal("node1", testSLList.First.Value);
             Assert.Equal("node4", testSLList.Last.Value);
             Assert.Equal(node3, node2.NextNode);
+            Assert.Equal(node2, testSLList.First.NextNode);
+            Assert.Equal(node3, testSLList.Last.PreviousNode);
 
             Assert.True(testSLList.Remove("node2"));
 
@@ -1504,6 +1506,9 @@ namespace Collections.Tests
             Assert.Equal(node1, testSLList.First);
             Assert.Equal(node4, testSLList.Last);
             Assert.Equal(node3, node1.NextNode);
+            Assert.Equal(node3, node4.PreviousNode);
+            Assert.Null(node2.NextNode);
+            Assert.Null(node2.PreviousNode);
         }
 
         [Fact]
