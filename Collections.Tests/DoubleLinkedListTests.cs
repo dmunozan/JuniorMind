@@ -1278,8 +1278,7 @@ namespace Collections.Tests
             Assert.Equal(1, testSLList.Count);
             Assert.Equal(node2, testSLList.First);
             Assert.Equal(node2, testSLList.Last);
-            Assert.Null(testSLList.Last.NextNode);
-            Assert.Null(testSLList.Last.PreviousNode);
+            Assert.Equal(testSLList.Last.NextNode, testSLList.Last.PreviousNode);
         }
 
         [Fact]
