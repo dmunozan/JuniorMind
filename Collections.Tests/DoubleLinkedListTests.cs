@@ -1718,15 +1718,13 @@ namespace Collections.Tests
             Assert.Equal(node1, testSLList.First);
             Assert.Equal(node1, testSLList.Last);
             Assert.Equal("node1", testSLList.First.Value);
-            Assert.Null(testSLList.First.NextNode);
-            Assert.Null(testSLList.First.PreviousNode);
+            Assert.Equal(testSLList.First.NextNode, testSLList.First.PreviousNode);
             Assert.Equal(testSLList, testSLList.First.List);
 
             testSLList.RemoveLast();
 
             Assert.Equal(0, testSLList.Count);
-            Assert.Null(testSLList.First);
-            Assert.Null(testSLList.Last);
+            Assert.Equal(testSLList.First, testSLList.Last);
             Assert.Null(node1.NextNode);
             Assert.Null(node1.PreviousNode);
             Assert.Null(node1.List);
