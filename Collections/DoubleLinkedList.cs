@@ -187,23 +187,8 @@ namespace Collections
 
             CheckList(node.List, NotThisList);
 
-            if (this.First != node)
-            {
-                node.PreviousNode.NextNode = node.NextNode;
-            }
-            else
-            {
-                this.First = node.NextNode;
-            }
-
-            if (node == this.Last)
-            {
-                this.Last = node.PreviousNode;
-            }
-            else
-            {
-                node.NextNode.PreviousNode = node.PreviousNode;
-            }
+            node.PreviousNode.NextNode = node.NextNode;
+            node.NextNode.PreviousNode = node.PreviousNode;
 
             node.NextNode = null;
             node.PreviousNode = null;
