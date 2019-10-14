@@ -160,18 +160,11 @@ namespace Collections
 
             CheckList(node.List, NotNullList);
 
-            if (this.Count == 0)
-            {
-                this.First = node;
-            }
-            else
-            {
-                this.Last.NextNode = node;
-                node.PreviousNode = this.Last;
-            }
-
-            this.Last = node;
             node.List = this;
+            this.sentinel.PreviousNode.NextNode = node;
+            node.PreviousNode = this.sentinel.PreviousNode;
+            this.sentinel.PreviousNode = node;
+            node.NextNode = this.sentinel;
             this.Count++;
         }
 
