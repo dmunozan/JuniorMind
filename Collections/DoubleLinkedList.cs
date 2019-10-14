@@ -248,7 +248,7 @@ namespace Collections
 
         public bool Contains(T item)
         {
-            return this.Find(item) != this.sentinel;
+            return this.Find(item) != null;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -329,7 +329,7 @@ namespace Collections
                 startNode = (direction == RightDirection) ? startNode.NextNode : startNode.PreviousNode;
             }
 
-            return startNode;
+            return (startNode == this.sentinel) ? null : startNode;
         }
 
         private void CheckModifiability()
