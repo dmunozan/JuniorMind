@@ -105,16 +105,8 @@ namespace Collections
             newNode.NextNode = node.NextNode;
             node.NextNode = newNode;
             newNode.PreviousNode = node;
+            newNode.NextNode.PreviousNode = newNode;
             this.Count++;
-
-            if (this.Last == node)
-            {
-                this.Last = newNode;
-            }
-            else
-            {
-                newNode.NextNode.PreviousNode = newNode;
-            }
         }
 
         public DNode<T> AddAfter(DNode<T> node, T value)
