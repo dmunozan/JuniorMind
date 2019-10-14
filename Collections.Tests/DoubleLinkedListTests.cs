@@ -1008,8 +1008,7 @@ namespace Collections.Tests
             Assert.Equal(currentLastNode, testSLList.First);
             Assert.Equal(currentLastNode, testSLList.Last);
             Assert.Equal("currentLast", testSLList.Last.Value);
-            Assert.Null(testSLList.Last.NextNode);
-            Assert.Null(testSLList.Last.PreviousNode);
+            Assert.Equal(testSLList.Last.NextNode, testSLList.Last.PreviousNode);
             Assert.Equal(testSLList, testSLList.Last.List);
 
             DNode<string> newLastNode = testSLList.AddLast("newLast");
