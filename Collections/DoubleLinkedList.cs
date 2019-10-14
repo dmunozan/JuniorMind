@@ -255,7 +255,7 @@ namespace Collections
 
         public bool Contains(T item)
         {
-            return this.Find(item) != null;
+            return this.Find(item) != this.sentinel;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
