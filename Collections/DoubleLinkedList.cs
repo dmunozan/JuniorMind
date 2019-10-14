@@ -72,12 +72,7 @@ namespace Collections
 
             CheckList(node.List, NotNullList);
 
-            node.List = this;
-            this.sentinel.NextNode.PreviousNode = node;
-            node.NextNode = this.sentinel.NextNode;
-            this.sentinel.NextNode = node;
-            node.PreviousNode = this.sentinel;
-            this.Count++;
+            this.AddAfterNode(this.sentinel, node);
         }
 
         public DNode<T> AddFirst(T value)
