@@ -19,6 +19,8 @@ namespace Collections
         public DoubleLinkedList()
         {
             Count = 0;
+            sentinel.NextNode = sentinel;
+            sentinel.PreviousNode = sentinel;
             IsReadOnly = false;
         }
 
@@ -28,6 +30,11 @@ namespace Collections
         {
             get
             {
+                if (this.Count == 0)
+                {
+                    return null;
+                }
+
                 return sentinel.NextNode;
             }
 
@@ -41,6 +48,11 @@ namespace Collections
         {
             get
             {
+                if (this.Count == 0)
+                {
+                    return null;
+                }
+
                 return sentinel.PreviousNode;
             }
 
