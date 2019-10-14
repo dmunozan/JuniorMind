@@ -1181,7 +1181,7 @@ namespace Collections.Tests
             DNode<int> foundNode = testSLList.FindLast(5);
 
             Assert.Equal(foundNode, node5);
-            Assert.Null(foundNode.NextNode);
+            Assert.Equal(foundNode.NextNode, testSLList.First.PreviousNode);
             Assert.Equal(node4, foundNode.PreviousNode);
         }
 
