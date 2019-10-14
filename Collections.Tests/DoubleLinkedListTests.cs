@@ -450,7 +450,7 @@ namespace Collections.Tests
             Assert.Equal(node2, testSLList.Last.PreviousNode);
             Assert.Equal("newNode", testSLList.Last.Value);
             Assert.Equal(testSLList, newNode.List);
-            Assert.Null(newNode.NextNode);
+            Assert.Equal(node1.PreviousNode, newNode.NextNode);
             Assert.Equal(node2, newNode.PreviousNode);
         }
 
