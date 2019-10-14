@@ -933,8 +933,7 @@ namespace Collections.Tests
             Assert.Equal(currentLastNode, testSLList.First);
             Assert.Equal(currentLastNode, testSLList.Last);
             Assert.Equal("currentLast", testSLList.Last.Value);
-            Assert.Null(testSLList.Last.NextNode);
-            Assert.Null(testSLList.Last.PreviousNode);
+            Assert.Equal(testSLList.First.NextNode, testSLList.First.PreviousNode);
             Assert.Equal(testSLList, testSLList.Last.List);
 
             testSLList.AddLast(newLastNode);
@@ -945,8 +944,7 @@ namespace Collections.Tests
             Assert.Equal("newLast", testSLList.Last.Value);
             Assert.Equal(newLastNode, testSLList.First.NextNode);
             Assert.Equal(currentLastNode, testSLList.Last.PreviousNode);
-            Assert.Null(testSLList.Last.NextNode);
-            Assert.Null(testSLList.First.PreviousNode);
+            Assert.Equal(testSLList.Last.NextNode, testSLList.First.PreviousNode);
             Assert.Equal(testSLList, testSLList.Last.List);
         }
 
