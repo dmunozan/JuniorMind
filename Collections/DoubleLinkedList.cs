@@ -62,16 +62,16 @@ namespace Collections
 
             if (this.Count != 0)
             {
-                this.First.PreviousNode = node;
-                node.NextNode = this.First;
+                this.sentinel.NextNode.PreviousNode = node;
+                node.NextNode = this.sentinel.NextNode;
             }
             else
             {
-                this.Last = node;
+                this.sentinel.PreviousNode = node;
             }
 
             node.List = this;
-            this.First = node;
+            this.sentinel.NextNode = node;
             this.Count++;
         }
 
