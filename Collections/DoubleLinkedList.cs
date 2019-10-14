@@ -140,12 +140,7 @@ namespace Collections
 
             CheckList(node.List, NotNullList);
 
-            node.List = this;
-            this.sentinel.PreviousNode.NextNode = node;
-            node.PreviousNode = this.sentinel.PreviousNode;
-            this.sentinel.PreviousNode = node;
-            node.NextNode = this.sentinel;
-            this.Count++;
+            this.AddAfterNode(this.sentinel.PreviousNode, node);
         }
 
         public DNode<T> AddLast(T value)
