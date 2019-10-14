@@ -101,12 +101,7 @@ namespace Collections
 
             CheckList(newNode.List, NotNullList);
 
-            newNode.List = this;
-            newNode.NextNode = node.NextNode;
-            node.NextNode = newNode;
-            newNode.PreviousNode = node;
-            newNode.NextNode.PreviousNode = newNode;
-            this.Count++;
+            AddAfterNode(node, newNode);
         }
 
         public DNode<T> AddAfter(DNode<T> node, T value)
@@ -307,6 +302,16 @@ namespace Collections
             }
 
             return (startNode == this.sentinel) ? null : startNode;
+        }
+
+        private void AddAfterNode(DNode<T> node, DNode<T> newNode)
+        {
+            newNode.List = this;
+            newNode.NextNode = node.NextNode;
+            node.NextNode = newNode;
+            newNode.PreviousNode = node;
+            newNode.NextNode.PreviousNode = newNode;
+            this.Count++;
         }
 
         private void CheckModifiability()
