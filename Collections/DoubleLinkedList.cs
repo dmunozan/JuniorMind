@@ -114,15 +114,13 @@ namespace Collections
 
             CheckNullElement(node, NullSearch);
 
+            CheckNullElement(newNode, NullAdd);
+
             CheckList(node.List, NotThisList);
 
-            if (this.First == node)
-            {
-                this.AddFirst(newNode);
-                return;
-            }
+            CheckList(newNode.List, NotNullList);
 
-            this.AddAfter(node.PreviousNode, newNode);
+            this.AddAfterNode(node.PreviousNode, newNode);
         }
 
         public DNode<T> AddBefore(DNode<T> node, T value)
