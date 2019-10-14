@@ -14,19 +14,41 @@ namespace Collections
         const string RightDirection = "RightDirection";
         const string LeftDirection = "LeftDirection";
 
+        private readonly DNode<T> sentinel = new DNode<T>(default);
+
         public DoubleLinkedList()
         {
             Count = 0;
-            First = null;
-            Last = null;
             IsReadOnly = false;
         }
 
         public int Count { get; private set; }
 
-        public DNode<T> First { get; private set; }
+        public DNode<T> First
+        {
+            get
+            {
+                return sentinel.NextNode;
+            }
 
-        public DNode<T> Last { get; private set; }
+            private set
+            {
+                sentinel.NextNode = value;
+            }
+        }
+
+        public DNode<T> Last
+        {
+            get
+            {
+                return sentinel.PreviousNode;
+            }
+
+            private set
+            {
+                sentinel.PreviousNode = value;
+            }
+        }
 
         public bool IsReadOnly { get; private set; }
 
