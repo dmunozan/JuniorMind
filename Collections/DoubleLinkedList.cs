@@ -66,11 +66,7 @@ namespace Collections
 
         public void AddFirst(DNode<T> node)
         {
-            CheckModifiability();
-
             CheckNullElement(node, NullAdd);
-
-            CheckList(node.List, NotNullList);
 
             this.AddAfterNode(this.sentinel, node);
         }
@@ -86,15 +82,11 @@ namespace Collections
 
         public void AddAfter(DNode<T> node, DNode<T> newNode)
         {
-            CheckModifiability();
-
             CheckNullElement(node, NullSearch);
 
             CheckNullElement(newNode, NullAdd);
 
             CheckList(node.List, NotThisList);
-
-            CheckList(newNode.List, NotNullList);
 
             AddAfterNode(node, newNode);
         }
@@ -110,15 +102,11 @@ namespace Collections
 
         public void AddBefore(DNode<T> node, DNode<T> newNode)
         {
-            CheckModifiability();
-
             CheckNullElement(node, NullSearch);
 
             CheckNullElement(newNode, NullAdd);
 
             CheckList(node.List, NotThisList);
-
-            CheckList(newNode.List, NotNullList);
 
             this.AddAfterNode(node.PreviousNode, newNode);
         }
@@ -134,11 +122,7 @@ namespace Collections
 
         public void AddLast(DNode<T> node)
         {
-            CheckModifiability();
-
             CheckNullElement(node, NullAdd);
-
-            CheckList(node.List, NotNullList);
 
             this.AddAfterNode(this.sentinel.PreviousNode, node);
         }
@@ -294,6 +278,10 @@ namespace Collections
 
         private void AddAfterNode(DNode<T> node, DNode<T> newNode)
         {
+            CheckModifiability();
+
+            CheckList(newNode.List, NotNullList);
+
             newNode.List = this;
             newNode.NextNode = node.NextNode;
             node.NextNode = newNode;
