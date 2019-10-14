@@ -1088,7 +1088,7 @@ namespace Collections.Tests
 
             Assert.Equal(foundNode, node1);
             Assert.Equal(node2, foundNode.NextNode);
-            Assert.Null(foundNode.PreviousNode);
+            Assert.Equal(foundNode.PreviousNode, testSLList.Last.NextNode);
         }
 
         [Fact]
