@@ -72,18 +72,11 @@ namespace Collections
 
             CheckList(node.List, NotNullList);
 
-            if (this.Count != 0)
-            {
-                this.sentinel.NextNode.PreviousNode = node;
-                node.NextNode = this.sentinel.NextNode;
-            }
-            else
-            {
-                this.sentinel.PreviousNode = node;
-            }
-
             node.List = this;
+            this.sentinel.NextNode.PreviousNode = node;
+            node.NextNode = this.sentinel.NextNode;
             this.sentinel.NextNode = node;
+            node.PreviousNode = this.sentinel;
             this.Count++;
         }
 
@@ -281,9 +274,9 @@ namespace Collections
                 throw new ArgumentException("There is not enough space from the given index to the end of the array", nameof(array));
             }
 
-            DNode<T> auxNode = this.First;
+            DNode<T> auxNode = this.sentinel.NextNode;
 
-            while (auxNode != null)
+            while (auxNode != this.sentinel)
             {
                 array[arrayIndex] = auxNode.Value;
                 arrayIndex++;
@@ -317,9 +310,9 @@ namespace Collections
 
         public IEnumerator<T> GetEnumerator()
         {
-            DNode<T> auxNode = this.First;
+            DNode<T> auxNode = this.sentinel.NextNode;
 
-            while (auxNode != null)
+            while (auxNode != this.sentinel)
             {
                 yield return auxNode.Value;
                 auxNode = auxNode.NextNode;
@@ -333,7 +326,7 @@ namespace Collections
 
         private DNode<T> Find(T value, DNode<T> startNode, string direction)
         {
-            while (startNode != null)
+            while (startNode != this.sentinel)
             {
                 if ((value == null && startNode.Value == null) || startNode.Value.Equals(value))
                 {

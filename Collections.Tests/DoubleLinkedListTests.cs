@@ -296,7 +296,7 @@ namespace Collections.Tests
             Assert.Equal("newNode", testSLList.Last.Value);
             Assert.Equal(testSLList, newNode.List);
             Assert.Equal(node2, newNode.PreviousNode);
-            Assert.Null(newNode.NextNode);
+            Assert.Equal(node1.PreviousNode, newNode.NextNode);
         }
 
         [Fact]
