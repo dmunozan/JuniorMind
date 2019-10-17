@@ -11,5 +11,15 @@ namespace Collections.Tests
 
             Assert.Equal(0, testDict.Count);
         }
+
+        [Fact]
+        public void AddWhenDictionaryIsEmptyAndThereIsAvailableSpaceShouldAddKeyValue()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>();
+
+            testDict.Add(1, "a");
+
+            Assert.Equal(1, testDict.Count);
+        }
     }
 }
