@@ -5,11 +5,15 @@ namespace Collections
 {
     public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
+        public Dictionary()
+        {
+        }
+
         public ICollection<TKey> Keys => throw new System.NotImplementedException();
 
         public ICollection<TValue> Values => throw new System.NotImplementedException();
 
-        public int Count => throw new System.NotImplementedException();
+        public int Count { get; }
 
         public bool IsReadOnly => throw new System.NotImplementedException();
 
