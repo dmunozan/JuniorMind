@@ -13,7 +13,7 @@ namespace Collections
 
         public ICollection<TValue> Values => throw new System.NotImplementedException();
 
-        public int Count { get; }
+        public int Count { get; private set; }
 
         public bool IsReadOnly => throw new System.NotImplementedException();
 
@@ -21,7 +21,7 @@ namespace Collections
 
         public void Add(TKey key, TValue value)
         {
-            throw new System.NotImplementedException();
+            this.Count++;
         }
 
         public void Add(KeyValuePair<TKey, TValue> item)
