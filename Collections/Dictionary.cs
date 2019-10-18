@@ -66,7 +66,32 @@ namespace Collections
 
         public bool IsReadOnly { get; private set; }
 
-        public TValue this[TKey key] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public TValue this[TKey key]
+        {
+            get
+            {
+                int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
+
+                int index = this.buckets[keyBucket];
+
+                TValue value = default;
+
+                while (index >= 0)
+                {
+                    if (this.elements[index].Key.Equals(key))
+                    {
+                        value = this.elements[index].Value;
+                        break;
+                    }
+
+                    index = this.elements[index].Next;
+                }
+
+                return value;
+            }
+
+            set => throw new System.NotImplementedException();
+        }
 
         public void Add(TKey key, TValue value)
         {
