@@ -33,5 +33,22 @@ namespace Collections.Tests
 
             Assert.Equal(0, keysCollection.Count);
         }
+
+        [Fact]
+        public void KeysWhenDictionaryIsNotEmptyShouldReturnCollectionOfKeys()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            ICollection<int> keysCollection = testDict.Keys;
+
+            Assert.Equal(3, keysCollection.Count);
+            Assert.True(keysCollection.Contains(1));
+            Assert.True(keysCollection.Contains(2));
+            Assert.True(keysCollection.Contains(3));
+        }
     }
 }
