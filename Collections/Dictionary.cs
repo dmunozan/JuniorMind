@@ -46,7 +46,13 @@ namespace Collections
             }
         }
 
-        public ICollection<TValue> Values => throw new System.NotImplementedException();
+        public ICollection<TValue> Values
+        {
+            get
+            {
+                return new Collection<TValue>();
+            }
+        }
 
         public int Count { get; private set; }
 
