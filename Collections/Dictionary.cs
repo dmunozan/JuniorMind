@@ -28,7 +28,8 @@ namespace Collections
                 this.buckets[i] = -1;
             }
 
-            freeIndex = 0;
+            this.freeIndex = 0;
+            this.IsReadOnly = false;
         }
 
         public ICollection<TKey> Keys
@@ -63,13 +64,7 @@ namespace Collections
 
         public int Count { get; private set; }
 
-        public bool IsReadOnly
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsReadOnly { get; private set; }
 
         public TValue this[TKey key] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
@@ -135,6 +130,11 @@ namespace Collections
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void ToReadOnly()
+        {
+            this.IsReadOnly = true;
         }
     }
 }
