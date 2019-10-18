@@ -77,5 +77,13 @@ namespace Collections.Tests
             Assert.True(valuesCollection.Contains("b"));
             Assert.True(valuesCollection.Contains("c"));
         }
+
+        [Fact]
+        public void IsReadOnlyWhenNewDictionaryShouldReturnFalse()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            Assert.False(testDict.IsReadOnly);
+        }
     }
 }
