@@ -85,5 +85,15 @@ namespace Collections.Tests
 
             Assert.False(testDict.IsReadOnly);
         }
+
+        [Fact]
+        public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.ToReadOnly();
+
+            Assert.True(testDict.IsReadOnly);
+        }
     }
 }
