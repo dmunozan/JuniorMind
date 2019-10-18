@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Collections
 {
@@ -30,7 +31,20 @@ namespace Collections
             freeIndex = 0;
         }
 
-        public ICollection<TKey> Keys => throw new System.NotImplementedException();
+        public ICollection<TKey> Keys
+        {
+            get
+            {
+                ICollection<TKey> collection = new Collection<TKey>();
+
+                for (int i = 0; i < this.Count; i++)
+                {
+                    collection.Add(this.elements[i].Key);
+                }
+
+                return collection;
+            }
+        }
 
         public ICollection<TValue> Values => throw new System.NotImplementedException();
 
