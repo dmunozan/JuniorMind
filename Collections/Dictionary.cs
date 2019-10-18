@@ -50,7 +50,14 @@ namespace Collections
         {
             get
             {
-                return new Collection<TValue>();
+                ICollection<TValue> collection = new Collection<TValue>();
+
+                for (int i = 0; i < this.Count; i++)
+                {
+                    collection.Add(this.elements[i].Value);
+                }
+
+                return collection;
             }
         }
 
