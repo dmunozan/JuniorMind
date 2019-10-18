@@ -63,7 +63,13 @@ namespace Collections
 
         public int Count { get; private set; }
 
-        public bool IsReadOnly => throw new System.NotImplementedException();
+        public bool IsReadOnly
+        {
+            get
+            {
+                return false;
+            }
+        }
 
         public TValue this[TKey key] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
