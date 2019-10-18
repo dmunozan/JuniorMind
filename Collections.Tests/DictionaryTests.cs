@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Xunit;
 
 namespace Collections.Tests
 {
@@ -20,6 +22,16 @@ namespace Collections.Tests
             testDict.Add(1, "a");
 
             Assert.Equal(1, testDict.Count);
+        }
+
+        [Fact]
+        public void KeysWhenDictionaryIsEmptyShouldReturnEmptyCollection()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            ICollection<int> keysCollection = testDict.Keys;
+
+            Assert.Equal(0, keysCollection.Count);
         }
     }
 }
