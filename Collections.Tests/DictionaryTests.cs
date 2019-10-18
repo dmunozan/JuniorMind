@@ -60,5 +60,22 @@ namespace Collections.Tests
 
             Assert.Equal(0, valuesCollection.Count);
         }
+
+        [Fact]
+        public void ValuesWhenDictionaryIsNotEmptyShouldReturnCollectionOfValues()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            ICollection<string> valuesCollection = testDict.Values;
+
+            Assert.Equal(3, valuesCollection.Count);
+            Assert.True(valuesCollection.Contains("a"));
+            Assert.True(valuesCollection.Contains("b"));
+            Assert.True(valuesCollection.Contains("c"));
+        }
     }
 }
