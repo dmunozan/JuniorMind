@@ -1,12 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Collections
 {
+    public struct Element<TKey, TValue>
+    {
+        public TKey Key;
+        public TValue Value;
+        public int Next;
+    }
+
     public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
-        public Dictionary()
+        private readonly int[] buckets;
+        private readonly Element<TKey, TValue>[] elements;
+        private int freeIndex;
+
+        public Dictionary(int capacity)
         {
+            this.buckets = new int[capacity];
+            this.elements = new Element<TKey, TValue>[capacity];
+
+            for (int i = 0; i < capacity; i++)
+            {
+                this.buckets[i] = -1;
+            }
+
+            freeIndex = 0;
         }
 
         public ICollection<TKey> Keys => throw new System.NotImplementedException();
@@ -21,6 +42,15 @@ namespace Collections
 
         public void Add(TKey key, TValue value)
         {
+            int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
+
+            this.elements[freeIndex].Key = key;
+            this.elements[freeIndex].Value = value;
+            this.elements[freeIndex].Next = buckets[keyBucket];
+
+            this.buckets[keyBucket] = freeIndex;
+
+            this.freeIndex++;
             this.Count++;
         }
 
