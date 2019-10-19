@@ -74,20 +74,17 @@ namespace Collections
 
                 int index = this.buckets[keyBucket];
 
-                TValue value = default;
-
                 while (index >= 0)
                 {
                     if (this.elements[index].Key.Equals(key))
                     {
-                        value = this.elements[index].Value;
-                        break;
+                        return this.elements[index].Value;
                     }
 
                     index = this.elements[index].Next;
                 }
 
-                return value;
+                throw new KeyNotFoundException("Key not found in the Dictionary");
             }
 
             set => throw new System.NotImplementedException();

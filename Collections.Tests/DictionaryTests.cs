@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Xunit;
 
@@ -90,6 +91,22 @@ namespace Collections.Tests
             testDict.Add(3, "c");
 
             Assert.Equal("a", testDict[1]);
+        }
+
+        [Fact]
+        public void IndexerWhenGetAndKeyNoExistShouldThrowException()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            string value = null;
+
+            Assert.Throws<KeyNotFoundException>(() => value = testDict[4]);
+
+            Assert.Null(value);
         }
 
         [Fact]
