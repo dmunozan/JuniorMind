@@ -87,7 +87,23 @@ namespace Collections
                 throw new KeyNotFoundException("Key not found in the Dictionary");
             }
 
-            set => throw new System.NotImplementedException();
+            set
+            {
+                int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
+
+                int index = this.buckets[keyBucket];
+
+                while (index >= 0)
+                {
+                    if (this.elements[index].Key.Equals(key))
+                    {
+                        this.elements[index].Value = value;
+                        break;
+                    }
+
+                    index = this.elements[index].Next;
+                }
+            }
         }
 
         public void Add(TKey key, TValue value)
