@@ -110,6 +110,20 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void IndexerWhenSetAndKeyExistShouldModifyAssociatedValue()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            testDict[1] = "d";
+
+            Assert.Equal("d", testDict[1]);
+        }
+
+        [Fact]
         public void IsReadOnlyWhenNewDictionaryShouldReturnFalse()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
