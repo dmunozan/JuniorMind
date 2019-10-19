@@ -98,11 +98,12 @@ namespace Collections
                     if (this.elements[index].Key.Equals(key))
                     {
                         this.elements[index].Value = value;
-                        break;
                     }
 
                     index = this.elements[index].Next;
                 }
+
+                this.Add(key, value);
             }
         }
 
