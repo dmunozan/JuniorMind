@@ -70,18 +70,11 @@ namespace Collections
         {
             get
             {
-                int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
+                int index = SearchElementIndex(key);
 
-                int index = this.buckets[keyBucket];
-
-                while (index >= 0)
+                if (index >= 0)
                 {
-                    if (this.elements[index].Key.Equals(key))
-                    {
-                        return this.elements[index].Value;
-                    }
-
-                    index = this.elements[index].Next;
+                    return this.elements[index].Value;
                 }
 
                 throw new KeyNotFoundException("Key not found in the Dictionary");
@@ -89,21 +82,16 @@ namespace Collections
 
             set
             {
-                int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
+                int index = SearchElementIndex(key);
 
-                int index = this.buckets[keyBucket];
-
-                while (index >= 0)
+                if (index >= 0)
                 {
-                    if (this.elements[index].Key.Equals(key))
-                    {
-                        this.elements[index].Value = value;
-                    }
-
-                    index = this.elements[index].Next;
+                    this.elements[index].Value = value;
                 }
-
-                this.Add(key, value);
+                else
+                {
+                    this.Add(key, value);
+                }
             }
         }
 
@@ -174,6 +162,25 @@ namespace Collections
         public void ToReadOnly()
         {
             this.IsReadOnly = true;
+        }
+
+        private int SearchElementIndex(TKey key)
+        {
+            int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
+
+            int index = this.buckets[keyBucket];
+
+            while (index >= 0)
+            {
+                if (this.elements[index].Key.Equals(key))
+                {
+                    break;
+                }
+
+                index = this.elements[index].Next;
+            }
+
+            return index;
         }
     }
 }
