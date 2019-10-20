@@ -176,6 +176,18 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void AddWhenKeyAlreadyExistShouldThrowException()
+        {
+            Dictionary<string, string> testDict = new Dictionary<string, string>(5);
+
+            testDict.Add("a", "a");
+
+            Assert.Throws<ArgumentException>(() => testDict.Add("a", "b"));
+
+            Assert.Equal("a", testDict["a"]);
+        }
+
+        [Fact]
         public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
