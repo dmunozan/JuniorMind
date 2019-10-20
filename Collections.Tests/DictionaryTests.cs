@@ -216,6 +216,18 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void AddWhenIsReadOnlyShouldThrowException()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(2);
+
+            testDict.ToReadOnly();
+
+            Assert.Throws<NotSupportedException>(() => testDict.Add(3, "c"));
+
+            Assert.Equal(0, testDict.Count);
+        }
+
+        [Fact]
         public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
