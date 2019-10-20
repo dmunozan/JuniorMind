@@ -145,7 +145,24 @@ namespace Collections
 
         public void Clear()
         {
-            throw new System.NotImplementedException();
+            this.Count = 0;
+
+            int index = 0;
+
+            for (; index < this.buckets.Length; index++)
+            {
+                this.buckets[index] = -1;
+                this.elements[index].Next = index + 1;
+            }
+
+            for (; index < this.elements.Length; index++)
+            {
+                this.elements[index].Next = index + 1;
+            }
+
+            this.elements[this.elements.Length - 1].Next = -1;
+
+            freeIndex = 0;
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
