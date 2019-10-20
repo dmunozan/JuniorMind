@@ -97,6 +97,11 @@ namespace Collections
 
         public void Add(TKey key, TValue value)
         {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key), "Key cannot be null");
+            }
+
             int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
 
             this.elements[freeIndex].Key = key;
