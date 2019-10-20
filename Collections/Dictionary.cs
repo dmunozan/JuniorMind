@@ -84,6 +84,11 @@ namespace Collections
 
             set
             {
+                if (IsReadOnly)
+                {
+                    throw new NotSupportedException("Dictionary is read only and cannot be modified.");
+                }
+
                 int index = SearchElementIndex(key);
 
                 if (index >= 0)
