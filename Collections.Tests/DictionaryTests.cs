@@ -156,6 +156,16 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void AddWhenValueIsNullShouldAddKeyValue()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, null);
+
+            Assert.Null(testDict[1]);
+        }
+
+        [Fact]
         public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
