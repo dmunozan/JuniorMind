@@ -140,6 +140,11 @@ namespace Collections
 
         public void Clear()
         {
+            if (IsReadOnly)
+            {
+                throw new NotSupportedException("Dictionary is read only and cannot be modified.");
+            }
+
             this.Count = 0;
 
             InitializeArrays();
