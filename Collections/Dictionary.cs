@@ -102,6 +102,11 @@ namespace Collections
                 throw new ArgumentNullException(nameof(key), "Key cannot be null");
             }
 
+            if (SearchElementIndex(key) >= 0)
+            {
+                throw new ArgumentException("Key already exist on the Dictionary", nameof(key));
+            }
+
             int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
 
             this.elements[freeIndex].Key = key;
