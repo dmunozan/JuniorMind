@@ -104,6 +104,11 @@ namespace Collections
 
         public void Add(TKey key, TValue value)
         {
+            if (IsReadOnly)
+            {
+                throw new NotSupportedException("Dictionary is read only and cannot be modified.");
+            }
+
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key), "Key cannot be null");
