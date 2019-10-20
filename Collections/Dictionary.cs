@@ -25,7 +25,6 @@ namespace Collections
 
             InitializeArrays();
 
-            this.elements[capacity - 1].Next = -1;
             this.freeIndex = 0;
             this.IsReadOnly = false;
         }
@@ -246,6 +245,8 @@ namespace Collections
                 this.buckets[i] = -1;
                 this.elements[i].Next = i + 1;
             }
+
+            this.elements[this.elements.Length - 1].Next = -1;
         }
     }
 }
