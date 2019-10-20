@@ -111,20 +111,7 @@ namespace Collections
 
             if (freeIndex == -1)
             {
-                const int Double = 2;
-
-                int capacity = this.elements.Length;
-
-                Array.Resize(ref this.elements, capacity * Double);
-
-                for (int i = capacity; i < this.elements.Length; i++)
-                {
-                    this.elements[i].Next = i + 1;
-                }
-
-                this.elements[this.elements.Length - 1].Next = -1;
-
-                freeIndex = this.elements[capacity].Next;
+                ExtendCapacity();
             }
 
             int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
@@ -213,6 +200,24 @@ namespace Collections
             }
 
             return index;
+        }
+
+        private void ExtendCapacity()
+        {
+            const int Double = 2;
+
+            int capacity = this.elements.Length;
+
+            Array.Resize(ref this.elements, capacity * Double);
+
+            for (int i = capacity; i < this.elements.Length; i++)
+            {
+                this.elements[i].Next = i + 1;
+            }
+
+            this.elements[this.elements.Length - 1].Next = -1;
+
+            freeIndex = this.elements[capacity].Next;
         }
     }
 }
