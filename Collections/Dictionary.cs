@@ -244,7 +244,7 @@ namespace Collections
 
             this.elements[this.elements.Length - 1].Next = -1;
 
-            freeIndex = this.elements[capacity].Next;
+            freeIndex = capacity;
         }
     }
 }
