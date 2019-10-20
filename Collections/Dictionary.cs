@@ -15,7 +15,7 @@ namespace Collections
     public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
         private readonly int[] buckets;
-        private readonly Element<TKey, TValue>[] elements;
+        private Element<TKey, TValue>[] elements;
         private int freeIndex;
 
         public Dictionary(int capacity)
@@ -26,8 +26,10 @@ namespace Collections
             for (int i = 0; i < capacity; i++)
             {
                 this.buckets[i] = -1;
+                this.elements[i].Next = i + 1;
             }
 
+            this.elements[capacity - 1].Next = -1;
             this.freeIndex = 0;
             this.IsReadOnly = false;
         }
@@ -107,7 +109,27 @@ namespace Collections
                 throw new ArgumentException("Key already exist on the Dictionary", nameof(key));
             }
 
+            if (freeIndex == -1)
+            {
+                const int Double = 2;
+
+                int capacity = this.elements.Length;
+
+                Array.Resize(ref this.elements, capacity * Double);
+
+                for (int i = capacity; i < this.elements.Length; i++)
+                {
+                    this.elements[i].Next = i + 1;
+                }
+
+                this.elements[this.elements.Length - 1].Next = -1;
+
+                freeIndex = this.elements[capacity].Next;
+            }
+
             int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
+
+            int newFreeIndex = this.elements[freeIndex].Next;
 
             this.elements[freeIndex].Key = key;
             this.elements[freeIndex].Value = value;
@@ -115,7 +137,7 @@ namespace Collections
 
             this.buckets[keyBucket] = freeIndex;
 
-            this.freeIndex++;
+            this.freeIndex = newFreeIndex;
             this.Count++;
         }
 
