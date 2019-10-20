@@ -23,11 +23,7 @@ namespace Collections
             this.buckets = new int[capacity];
             this.elements = new Element<TKey, TValue>[capacity];
 
-            for (int i = 0; i < capacity; i++)
-            {
-                this.buckets[i] = -1;
-                this.elements[i].Next = i + 1;
-            }
+            InitializeArrays();
 
             this.elements[capacity - 1].Next = -1;
             this.freeIndex = 0;
@@ -147,13 +143,9 @@ namespace Collections
         {
             this.Count = 0;
 
-            int index = 0;
+            int index = buckets.Length;
 
-            for (; index < this.buckets.Length; index++)
-            {
-                this.buckets[index] = -1;
-                this.elements[index].Next = index + 1;
-            }
+            InitializeArrays();
 
             for (; index < this.elements.Length; index++)
             {
@@ -245,6 +237,15 @@ namespace Collections
             this.elements[this.elements.Length - 1].Next = -1;
 
             freeIndex = capacity;
+        }
+
+        private void InitializeArrays()
+        {
+            for (int i = 0; i < this.buckets.Length; i++)
+            {
+                this.buckets[i] = -1;
+                this.elements[i].Next = i + 1;
+            }
         }
     }
 }
