@@ -59,7 +59,7 @@ namespace Collections.Tests
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
 
-            ICollection<int> valuesCollection = testDict.Keys;
+            ICollection<string> valuesCollection = testDict.Values;
 
             Assert.Equal(0, valuesCollection.Count);
         }
@@ -225,6 +225,28 @@ namespace Collections.Tests
             Assert.Throws<NotSupportedException>(() => testDict.Add(3, "c"));
 
             Assert.Equal(0, testDict.Count);
+        }
+
+        [Fact]
+        public void ClearShouldSetCountTo0AndSetPointers()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            testDict.Clear();
+
+            Assert.Equal(0, testDict.Count);
+
+            ICollection<int> keysCollection = testDict.Keys;
+
+            Assert.Equal(0, keysCollection.Count);
+
+            ICollection<string> valuesCollection = testDict.Values;
+
+            Assert.Equal(0, valuesCollection.Count);
         }
 
         [Fact]
