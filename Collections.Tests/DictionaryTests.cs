@@ -213,6 +213,13 @@ namespace Collections.Tests
             testDict.Add(3, "c");
 
             Assert.Equal(3, testDict.Count);
+
+            ICollection<int> keysCollection = testDict.Keys;
+
+            Assert.Equal(3, keysCollection.Count);
+            Assert.True(keysCollection.Contains(1));
+            Assert.True(keysCollection.Contains(2));
+            Assert.True(keysCollection.Contains(3));
         }
 
         [Fact]
