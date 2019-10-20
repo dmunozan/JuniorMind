@@ -142,16 +142,9 @@ namespace Collections
         {
             this.Count = 0;
 
-            int index = buckets.Length;
-
             InitializeArrays();
 
-            for (; index < this.elements.Length; index++)
-            {
-                this.elements[index].Next = index + 1;
-            }
-
-            this.elements[this.elements.Length - 1].Next = -1;
+            InitializeNewElements(this.buckets.Length);
 
             freeIndex = 0;
         }
@@ -228,12 +221,7 @@ namespace Collections
 
             Array.Resize(ref this.elements, capacity * Double);
 
-            for (int i = capacity; i < this.elements.Length; i++)
-            {
-                this.elements[i].Next = i + 1;
-            }
-
-            this.elements[this.elements.Length - 1].Next = -1;
+            InitializeNewElements(capacity);
 
             freeIndex = capacity;
         }
@@ -244,6 +232,16 @@ namespace Collections
             {
                 this.buckets[i] = -1;
                 this.elements[i].Next = i + 1;
+            }
+
+            this.elements[this.elements.Length - 1].Next = -1;
+        }
+
+        private void InitializeNewElements(int index)
+        {
+            for (; index < this.elements.Length; index++)
+            {
+                this.elements[index].Next = index + 1;
             }
 
             this.elements[this.elements.Length - 1].Next = -1;
