@@ -156,6 +156,11 @@ namespace Collections
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
+            if (item.Key == null)
+            {
+                throw new ArgumentNullException(nameof(item), "Key cannot be null");
+            }
+
             int index = SearchElementIndex(item.Key);
 
             if (index < 0)
