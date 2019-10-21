@@ -161,6 +161,11 @@ namespace Collections
 
         public bool ContainsKey(TKey key)
         {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key), "Key cannot be null");
+            }
+
             int keyBucket = Math.Abs(key.GetHashCode()) % buckets.Length;
 
             int index = buckets[keyBucket];
