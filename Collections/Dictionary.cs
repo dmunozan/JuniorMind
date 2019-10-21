@@ -156,7 +156,16 @@ namespace Collections
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            throw new System.NotImplementedException();
+            int index = SearchElementIndex(item.Key);
+
+            if (index < 0)
+            {
+                return false;
+            }
+
+            bool equalNullValue = elements[index].Value == null && item.Value == null;
+
+            return equalNullValue || elements[index].Value.Equals(item.Value);
         }
 
         public bool ContainsKey(TKey key)
