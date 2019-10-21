@@ -183,6 +183,13 @@ namespace Collections
             return false;
         }
 
+        public bool ContainsValue(TValue value)
+        {
+            ICollection<TValue> collection = Values;
+
+            return collection.Contains(value);
+        }
+
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
             throw new System.NotImplementedException();
