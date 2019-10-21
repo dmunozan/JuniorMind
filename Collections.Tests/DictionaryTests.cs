@@ -282,6 +282,20 @@ namespace Collections.Tests
             testDict.Add(3, "c");
 
             Assert.True(testDict.ContainsKey(1));
+            Assert.True(testDict.ContainsKey(2));
+            Assert.True(testDict.ContainsKey(3));
+        }
+
+        [Fact]
+        public void ContainsKeyWhenNoExistShouldReturnFalse()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            Assert.False(testDict.ContainsKey(4));
         }
 
         [Fact]
