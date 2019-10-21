@@ -166,21 +166,7 @@ namespace Collections
                 throw new ArgumentNullException(nameof(key), "Key cannot be null");
             }
 
-            int keyBucket = Math.Abs(key.GetHashCode()) % buckets.Length;
-
-            int index = buckets[keyBucket];
-
-            while (index != -1)
-            {
-                if (elements[index].Key.Equals(key))
-                {
-                    return true;
-                }
-
-                index = elements[index].Next;
-            }
-
-            return false;
+            return SearchElementIndex(key) >= 0;
         }
 
         public bool ContainsValue(TValue value)
