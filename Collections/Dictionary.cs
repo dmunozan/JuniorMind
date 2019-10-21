@@ -135,7 +135,7 @@ namespace Collections
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
-            throw new System.NotImplementedException();
+            Add(item.Key, item.Value);
         }
 
         public void Clear()
@@ -161,7 +161,21 @@ namespace Collections
 
         public bool ContainsKey(TKey key)
         {
-            throw new System.NotImplementedException();
+            int keyBucket = Math.Abs(key.GetHashCode()) % buckets.Length;
+
+            int index = buckets[keyBucket];
+
+            while (index != -1)
+            {
+                if (elements[index].Key.Equals(key))
+                {
+                    return true;
+                }
+
+                index = elements[index].Next;
+            }
+
+            return false;
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
