@@ -299,6 +299,18 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void ContainsWhenKeyIsNullShouldThrowException()
+        {
+            Dictionary<string, string> testDict = new Dictionary<string, string>(5);
+
+            testDict.Add("a", "a");
+            testDict.Add("b", "b");
+            testDict.Add("c", "c");
+
+            Assert.Throws<ArgumentNullException>(() => testDict.Contains(new KeyValuePair<string, string>(null, "a")));
+        }
+
+        [Fact]
         public void ContainsKeyWhenExistShouldReturnTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
