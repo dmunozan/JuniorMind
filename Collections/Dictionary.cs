@@ -20,13 +20,13 @@ namespace Collections
 
         public Dictionary(int capacity)
         {
-            this.buckets = new int[capacity];
-            this.elements = new Element<TKey, TValue>[capacity];
+            buckets = new int[capacity];
+            elements = new Element<TKey, TValue>[capacity];
 
             InitializeArrays();
 
-            this.freeIndex = 0;
-            this.IsReadOnly = false;
+            freeIndex = 0;
+            IsReadOnly = false;
         }
 
         public ICollection<TKey> Keys
@@ -35,9 +35,9 @@ namespace Collections
             {
                 ICollection<TKey> collection = new Collection<TKey>();
 
-                for (int i = 0; i < this.Count; i++)
+                for (int i = 0; i < Count; i++)
                 {
-                    collection.Add(this.elements[i].Key);
+                    collection.Add(elements[i].Key);
                 }
 
                 return collection;
@@ -50,9 +50,9 @@ namespace Collections
             {
                 ICollection<TValue> collection = new Collection<TValue>();
 
-                for (int i = 0; i < this.Count; i++)
+                for (int i = 0; i < Count; i++)
                 {
-                    collection.Add(this.elements[i].Value);
+                    collection.Add(elements[i].Value);
                 }
 
                 return collection;
@@ -71,7 +71,7 @@ namespace Collections
 
                 if (index >= 0)
                 {
-                    return this.elements[index].Value;
+                    return elements[index].Value;
                 }
 
                 throw new KeyNotFoundException("Key not found in the Dictionary");
@@ -88,11 +88,11 @@ namespace Collections
 
                 if (index >= 0)
                 {
-                    this.elements[index].Value = value;
+                    elements[index].Value = value;
                 }
                 else
                 {
-                    this.Add(key, value);
+                    Add(key, value);
                 }
             }
         }
@@ -119,18 +119,18 @@ namespace Collections
                 ExtendCapacity();
             }
 
-            int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
+            int keyBucket = Math.Abs(key.GetHashCode()) % buckets.Length;
 
-            int newFreeIndex = this.elements[freeIndex].Next;
+            int newFreeIndex = elements[freeIndex].Next;
 
-            this.elements[freeIndex].Key = key;
-            this.elements[freeIndex].Value = value;
-            this.elements[freeIndex].Next = buckets[keyBucket];
+            elements[freeIndex].Key = key;
+            elements[freeIndex].Value = value;
+            elements[freeIndex].Next = buckets[keyBucket];
 
-            this.buckets[keyBucket] = freeIndex;
+            buckets[keyBucket] = freeIndex;
 
-            this.freeIndex = newFreeIndex;
-            this.Count++;
+            freeIndex = newFreeIndex;
+            Count++;
         }
 
         public void Add(KeyValuePair<TKey, TValue> item)
@@ -145,11 +145,11 @@ namespace Collections
                 throw new NotSupportedException("Dictionary is read only and cannot be modified.");
             }
 
-            this.Count = 0;
+            Count = 0;
 
             InitializeArrays();
 
-            InitializeNewElements(this.buckets.Length);
+            InitializeNewElements(buckets.Length);
 
             freeIndex = 0;
         }
@@ -196,23 +196,23 @@ namespace Collections
 
         public void ToReadOnly()
         {
-            this.IsReadOnly = true;
+            IsReadOnly = true;
         }
 
         private int SearchElementIndex(TKey key)
         {
-            int keyBucket = Math.Abs(key.GetHashCode()) % this.buckets.Length;
+            int keyBucket = Math.Abs(key.GetHashCode()) % buckets.Length;
 
-            int index = this.buckets[keyBucket];
+            int index = buckets[keyBucket];
 
             while (index >= 0)
             {
-                if (this.elements[index].Key.Equals(key))
+                if (elements[index].Key.Equals(key))
                 {
                     break;
                 }
 
-                index = this.elements[index].Next;
+                index = elements[index].Next;
             }
 
             return index;
@@ -222,9 +222,9 @@ namespace Collections
         {
             const int Double = 2;
 
-            int capacity = this.elements.Length;
+            int capacity = elements.Length;
 
-            Array.Resize(ref this.elements, capacity * Double);
+            Array.Resize(ref elements, capacity * Double);
 
             InitializeNewElements(capacity);
 
@@ -233,23 +233,23 @@ namespace Collections
 
         private void InitializeArrays()
         {
-            for (int i = 0; i < this.buckets.Length; i++)
+            for (int i = 0; i < buckets.Length; i++)
             {
-                this.buckets[i] = -1;
-                this.elements[i].Next = i + 1;
+                buckets[i] = -1;
+                elements[i].Next = i + 1;
             }
 
-            this.elements[this.elements.Length - 1].Next = -1;
+            elements[elements.Length - 1].Next = -1;
         }
 
         private void InitializeNewElements(int index)
         {
-            for (; index < this.elements.Length; index++)
+            for (; index < elements.Length; index++)
             {
-                this.elements[index].Next = index + 1;
+                elements[index].Next = index + 1;
             }
 
-            this.elements[this.elements.Length - 1].Next = -1;
+            elements[elements.Length - 1].Next = -1;
         }
     }
 }
