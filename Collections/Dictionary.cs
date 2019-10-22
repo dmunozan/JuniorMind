@@ -14,6 +14,9 @@ namespace Collections
 
     public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
+        const string NullKey = "NullKey";
+        const string NullArray = "NullArray";
+
         private readonly int[] buckets;
         private Element<TKey, TValue>[] elements;
         private int freeIndex;
@@ -104,10 +107,7 @@ namespace Collections
                 throw new NotSupportedException("Dictionary is read only and cannot be modified.");
             }
 
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key), "Key cannot be null");
-            }
+            CheckNullElement(key, NullKey);
 
             if (SearchElementIndex(key) >= 0)
             {
@@ -156,10 +156,7 @@ namespace Collections
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            if (item.Key == null)
-            {
-                throw new ArgumentNullException(nameof(item), "Key cannot be null");
-            }
+            CheckNullElement(item.Key, NullKey);
 
             int index = SearchElementIndex(item.Key);
 
@@ -175,10 +172,7 @@ namespace Collections
 
         public bool ContainsKey(TKey key)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key), "Key cannot be null");
-            }
+            CheckNullElement(key, NullKey);
 
             return SearchElementIndex(key) >= 0;
         }
@@ -192,10 +186,7 @@ namespace Collections
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException(nameof(array), "The destination array must be a valid array");
-            }
+            CheckNullElement(array, NullArray);
 
             if (arrayIndex < 0 || arrayIndex >= array.Length)
             {
@@ -240,6 +231,8 @@ namespace Collections
 
         public bool Remove(TKey key)
         {
+            CheckNullElement(key, NullKey);
+
             int keyBucket = Math.Abs(key.GetHashCode()) % buckets.Length;
 
             int index = buckets[keyBucket];
@@ -350,6 +343,21 @@ namespace Collections
             }
 
             elements[elements.Length - 1].Next = -1;
+        }
+
+        private void CheckNullElement(object element, string type)
+        {
+            if (element != null)
+            {
+                return;
+            }
+
+            if (type == "NullKey")
+            {
+                throw new ArgumentNullException(nameof(element), "Key cannot be null");
+            }
+
+            throw new ArgumentNullException(nameof(element), "The destination array must be a valid array");
         }
     }
 }
