@@ -202,7 +202,7 @@ namespace Collections
                 throw new ArgumentOutOfRangeException(nameof(arrayIndex), "Index has to be a positive integer smaller than the size of the collection");
             }
 
-            bool isNotLongEnough = array.Length < this.Count;
+            bool isNotLongEnough = array.Length < Count;
 
             if (isNotLongEnough)
             {
