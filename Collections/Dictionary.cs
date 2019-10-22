@@ -226,7 +226,18 @@ namespace Collections
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            int currentIndex = 0;
+
+            foreach (KeyValuePair<TKey, TValue> item in this)
+            {
+                if (currentIndex == this.Count)
+                {
+                    yield break;
+                }
+
+                currentIndex++;
+                yield return item;
+            }
         }
 
         public bool Remove(TKey key)
@@ -246,7 +257,7 @@ namespace Collections
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return GetEnumerator();
         }
 
         public void ToReadOnly()
