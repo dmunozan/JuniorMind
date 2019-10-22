@@ -437,6 +437,20 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void CopyToWhenDestinationArrayLengthIsSmallerThanCountShouldThrowException()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            KeyValuePair<int, string>[] destinationArray = new KeyValuePair<int, string>[2];
+
+            Assert.Throws<ArgumentException>(() => testDict.CopyTo(destinationArray, 0));
+        }
+
+        [Fact]
         public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
