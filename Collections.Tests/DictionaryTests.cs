@@ -375,6 +375,24 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void CopyToWhenPairsFitsShouldCopyPairs()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            KeyValuePair<int, string>[] destinationArray = new KeyValuePair<int, string>[4];
+
+            testDict.CopyTo(destinationArray, 0);
+
+            Assert.Contains(destinationArray[0], testDict);
+            Assert.Contains(destinationArray[1], testDict);
+            Assert.Contains(destinationArray[2], testDict);
+        }
+
+        [Fact]
         public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
