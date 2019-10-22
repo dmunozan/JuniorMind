@@ -511,6 +511,18 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void RemoveWhenNullShouldThrowException()
+        {
+            Dictionary<string, string> testDict = new Dictionary<string, string>(5);
+
+            testDict.Add("a", "a");
+            testDict.Add("b", "b");
+            testDict.Add("c", "c");
+
+            Assert.Throws<ArgumentNullException>(() => testDict.Remove(null));
+        }
+
+        [Fact]
         public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
