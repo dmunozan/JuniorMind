@@ -465,6 +465,24 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void CopyToWhenDestinationArrayIsOfTheSameSizeShouldCopyTheElements()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            KeyValuePair<int, string>[] destinationArray = new KeyValuePair<int, string>[3];
+
+            testDict.CopyTo(destinationArray, 0);
+
+            Assert.Equal(testDict[destinationArray[0].Key], destinationArray[0].Value);
+            Assert.Equal(testDict[destinationArray[1].Key], destinationArray[1].Value);
+            Assert.Equal(testDict[destinationArray[2].Key], destinationArray[2].Value);
+        }
+
+        [Fact]
         public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
