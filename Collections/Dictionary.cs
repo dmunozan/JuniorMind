@@ -192,7 +192,24 @@ namespace Collections
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
-            throw new System.NotImplementedException();
+            if (array == null)
+            {
+                return;
+            }
+
+            int elementIndex;
+
+            for (int i = 0; i < buckets.Length; i++)
+            {
+                elementIndex = buckets[i];
+
+                while (elementIndex >= 0)
+                {
+                    array[arrayIndex] = new KeyValuePair<TKey, TValue>(elements[elementIndex].Key, elements[elementIndex].Value);
+                    arrayIndex++;
+                    elementIndex = elements[elementIndex].Next;
+                }
+            }
         }
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
