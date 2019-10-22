@@ -423,6 +423,20 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void CopyToWhenIndexIsGreaterThanDestinationArrayLengthShouldThrowException()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            KeyValuePair<int, string>[] destinationArray = new KeyValuePair<int, string>[4];
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => testDict.CopyTo(destinationArray, 5));
+        }
+
+        [Fact]
         public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
