@@ -194,7 +194,7 @@ namespace Collections
         {
             if (array == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(array), "The destination array must be a valid array");
             }
 
             int elementIndex;
