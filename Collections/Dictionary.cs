@@ -82,10 +82,7 @@ namespace Collections
 
             set
             {
-                if (IsReadOnly)
-                {
-                    throw new NotSupportedException("Dictionary is read only and cannot be modified.");
-                }
+                CheckModifiability();
 
                 int index = SearchElementIndex(key);
 
@@ -102,10 +99,7 @@ namespace Collections
 
         public void Add(TKey key, TValue value)
         {
-            if (IsReadOnly)
-            {
-                throw new NotSupportedException("Dictionary is read only and cannot be modified.");
-            }
+            CheckModifiability();
 
             CheckNullElement(key, NullKey);
 
@@ -231,6 +225,8 @@ namespace Collections
 
         public bool Remove(TKey key)
         {
+            CheckModifiability();
+
             CheckNullElement(key, NullKey);
 
             int keyBucket = Math.Abs(key.GetHashCode()) % buckets.Length;
@@ -343,6 +339,16 @@ namespace Collections
             }
 
             elements[elements.Length - 1].Next = -1;
+        }
+
+        private void CheckModifiability()
+        {
+            if (!this.IsReadOnly)
+            {
+                return;
+            }
+
+            throw new NotSupportedException("Dictionary is read only and cannot be modified");
         }
 
         private void CheckNullElement(object element, string type)
