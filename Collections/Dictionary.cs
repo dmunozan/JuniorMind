@@ -197,6 +197,11 @@ namespace Collections
                 throw new ArgumentNullException(nameof(array), "The destination array must be a valid array");
             }
 
+            if (arrayIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(arrayIndex), "Index has to be a positive integer smaller than the size of the collection");
+            }
+
             int elementIndex;
 
             for (int i = 0; i < buckets.Length; i++)
