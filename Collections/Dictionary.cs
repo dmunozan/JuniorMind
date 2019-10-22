@@ -226,23 +226,57 @@ namespace Collections
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            int currentIndex = 0;
-
-            foreach (KeyValuePair<TKey, TValue> item in this)
+            for (int i = 0; i < buckets.Length; i++)
             {
-                if (currentIndex == this.Count)
-                {
-                    yield break;
-                }
+                int index = buckets[i];
 
-                currentIndex++;
-                yield return item;
+                while (index >= 0)
+                {
+                    yield return new KeyValuePair<TKey, TValue>(elements[index].Key, elements[index].Value);
+                    index = elements[index].Next;
+                }
             }
         }
 
         public bool Remove(TKey key)
         {
-            throw new System.NotImplementedException();
+            int keyBucket = Math.Abs(key.GetHashCode()) % buckets.Length;
+
+            int index = buckets[keyBucket];
+            int previousIndex = -1;
+            int newFreeIndex;
+
+            while (index >= 0)
+            {
+                if (elements[index].Key.Equals(key))
+                {
+                    break;
+                }
+
+                previousIndex = index;
+                index = elements[index].Next;
+            }
+
+            if (index < 0)
+            {
+                return false;
+            }
+
+            if (previousIndex < 0)
+            {
+                newFreeIndex = buckets[keyBucket];
+                buckets[keyBucket] = elements[index].Next;
+            }
+            else
+            {
+                newFreeIndex = elements[previousIndex].Next;
+                elements[previousIndex].Next = elements[index].Next;
+            }
+
+            elements[index].Next = freeIndex;
+            freeIndex = newFreeIndex;
+
+            return true;
         }
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
