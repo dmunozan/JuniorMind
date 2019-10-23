@@ -38,15 +38,9 @@ namespace Collections
             {
                 ICollection<TKey> collection = new Collection<TKey>();
 
-                for (int i = 0; i < buckets.Length; i++)
+                foreach (KeyValuePair<TKey, TValue> item in this)
                 {
-                    int index = buckets[i];
-
-                    while (index >= 0)
-                    {
-                        collection.Add(this.elements[index].Key);
-                        index = elements[index].Next;
-                    }
+                    collection.Add(item.Key);
                 }
 
                 return collection;
