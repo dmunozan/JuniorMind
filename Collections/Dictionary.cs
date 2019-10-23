@@ -38,9 +38,15 @@ namespace Collections
             {
                 ICollection<TKey> collection = new Collection<TKey>();
 
-                for (int i = 0; i < Count; i++)
+                for (int i = 0; i < buckets.Length; i++)
                 {
-                    collection.Add(elements[i].Key);
+                    int index = buckets[i];
+
+                    while (index >= 0)
+                    {
+                        collection.Add(this.elements[index].Key);
+                        index = elements[index].Next;
+                    }
                 }
 
                 return collection;
@@ -329,6 +335,7 @@ namespace Collections
 
             elements[index].Next = freeIndex;
             freeIndex = newFreeIndex;
+            Count--;
         }
 
         private void ExtendCapacity()
