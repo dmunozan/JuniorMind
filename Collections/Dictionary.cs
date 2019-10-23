@@ -255,6 +255,8 @@ namespace Collections
 
         public bool TryGetValue(TKey key, out TValue value)
         {
+            CheckNullElement(key, NullKey);
+
             if (!ContainsKey(key))
             {
                 value = default;
