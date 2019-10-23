@@ -255,7 +255,9 @@ namespace Collections
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            throw new System.NotImplementedException();
+            value = this[key];
+
+            return true;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
