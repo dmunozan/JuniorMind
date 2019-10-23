@@ -563,6 +563,18 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void RemoveWhenPairWithNullKeyShouldThrowException()
+        {
+            Dictionary<string, string> testDict = new Dictionary<string, string>(5);
+
+            testDict.Add("a", "a");
+            testDict.Add("b", "b");
+            testDict.Add("c", "c");
+
+            Assert.Throws<ArgumentNullException>(() => testDict.Remove(new KeyValuePair<string, string>(null, "c")));
+        }
+
+        [Fact]
         public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
