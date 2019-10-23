@@ -537,6 +537,20 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void RemoveWhenPairExistShouldReturnTrue()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            Assert.True(testDict.Remove(new KeyValuePair<int, string>(2, "b")));
+
+            Assert.DoesNotContain(new KeyValuePair<int, string>(2, "b"), testDict);
+        }
+
+        [Fact]
         public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
