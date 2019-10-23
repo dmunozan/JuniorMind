@@ -255,6 +255,12 @@ namespace Collections
 
         public bool TryGetValue(TKey key, out TValue value)
         {
+            if (!ContainsKey(key))
+            {
+                value = default;
+                return false;
+            }
+
             value = this[key];
 
             return true;
