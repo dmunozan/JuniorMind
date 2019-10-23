@@ -604,6 +604,21 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void TryGetValueWhenKeyNoExistShouldReturnFalseAndDefaultValue()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            string value;
+
+            Assert.False(testDict.TryGetValue(4, out value));
+            Assert.Equal(default, value);
+        }
+
+        [Fact]
         public void ToReadOnlyWhenAnyShouldSetIsReadOnlyAsTrue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
