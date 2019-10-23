@@ -240,6 +240,8 @@ namespace Collections
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
+            CheckModifiability();
+
             CheckNullElement(item.Key, NullKey);
 
             if (!Contains(item))
