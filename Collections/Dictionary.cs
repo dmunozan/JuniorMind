@@ -70,7 +70,7 @@ namespace Collections
         {
             get
             {
-                int index = SearchElementIndex(key);
+                int index = SearchIndex(key);
 
                 if (index >= 0)
                 {
@@ -84,7 +84,7 @@ namespace Collections
             {
                 CheckModifiability();
 
-                int index = SearchElementIndex(key);
+                int index = SearchIndex(key);
 
                 if (index >= 0)
                 {
@@ -103,7 +103,7 @@ namespace Collections
 
             CheckNullElement(key, NullKey);
 
-            if (SearchElementIndex(key) >= 0)
+            if (SearchIndex(key) >= 0)
             {
                 throw new ArgumentException("Key already exist on the Dictionary", nameof(key));
             }
@@ -152,7 +152,7 @@ namespace Collections
         {
             CheckNullElement(item.Key, NullKey);
 
-            int index = SearchElementIndex(item.Key);
+            int index = SearchIndex(item.Key);
 
             if (index < 0)
             {
@@ -168,7 +168,7 @@ namespace Collections
         {
             CheckNullElement(key, NullKey);
 
-            return SearchElementIndex(key) >= 0;
+            return SearchIndex(key) >= 0;
         }
 
         public bool ContainsValue(TValue value)
@@ -331,7 +331,7 @@ namespace Collections
             IsReadOnly = true;
         }
 
-        private int SearchElementIndex(TKey key)
+        private int SearchIndex(TKey key)
         {
             int keyBucket = Math.Abs(key.GetHashCode()) % buckets.Length;
 
