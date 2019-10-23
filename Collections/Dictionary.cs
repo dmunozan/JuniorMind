@@ -53,9 +53,9 @@ namespace Collections
             {
                 ICollection<TValue> collection = new Collection<TValue>();
 
-                for (int i = 0; i < Count; i++)
+                foreach (KeyValuePair<TKey, TValue> item in this)
                 {
-                    collection.Add(elements[i].Value);
+                    collection.Add(item.Value);
                 }
 
                 return collection;
