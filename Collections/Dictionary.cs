@@ -229,90 +229,23 @@ namespace Collections
 
             CheckNullElement(key, NullKey);
 
-            int keyBucket = Math.Abs(key.GetHashCode()) % buckets.Length;
-
-            int index = buckets[keyBucket];
-            int previousIndex = -1;
-            int newFreeIndex;
-
-            while (index >= 0)
-            {
-                if (elements[index].Key.Equals(key))
-                {
-                    break;
-                }
-
-                previousIndex = index;
-                index = elements[index].Next;
-            }
-
-            if (index < 0)
+            if (!ContainsKey(key))
             {
                 return false;
             }
 
-            if (previousIndex < 0)
-            {
-                newFreeIndex = buckets[keyBucket];
-                buckets[keyBucket] = elements[index].Next;
-            }
-            else
-            {
-                newFreeIndex = elements[previousIndex].Next;
-                elements[previousIndex].Next = elements[index].Next;
-            }
-
-            elements[index].Next = freeIndex;
-            freeIndex = newFreeIndex;
-
+            RemoveElement(key);
             return true;
         }
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
-            int keyBucket = Math.Abs(item.Key.GetHashCode()) % buckets.Length;
-
-            int index = buckets[keyBucket];
-            int previousIndex = -1;
-            int newFreeIndex;
-
-            while (index >= 0)
-            {
-                if (elements[index].Key.Equals(item.Key))
-                {
-                    break;
-                }
-
-                previousIndex = index;
-                index = elements[index].Next;
-            }
-
-            if (index < 0)
+            if (!Contains(item))
             {
                 return false;
             }
 
-            bool equalNullValue = elements[index].Value == null && item.Value == null;
-
-            if (!equalNullValue && !elements[index].Value.Equals(item.Value))
-            {
-                return false;
-            }
-
-            if (previousIndex < 0)
-            {
-                newFreeIndex = buckets[keyBucket];
-                buckets[keyBucket] = elements[index].Next;
-            }
-            else
-            {
-                newFreeIndex = elements[previousIndex].Next;
-                elements[previousIndex].Next = elements[index].Next;
-            }
-
-            elements[index].Next = freeIndex;
-            freeIndex = newFreeIndex;
-
+            RemoveElement(item.Key);
             return true;
         }
 
@@ -348,6 +281,40 @@ namespace Collections
             }
 
             return index;
+        }
+
+        private void RemoveElement(TKey key)
+        {
+            int keyBucket = Math.Abs(key.GetHashCode()) % buckets.Length;
+
+            int index = buckets[keyBucket];
+            int previousIndex = -1;
+            int newFreeIndex;
+
+            while (index >= 0)
+            {
+                if (elements[index].Key.Equals(key))
+                {
+                    break;
+                }
+
+                previousIndex = index;
+                index = elements[index].Next;
+            }
+
+            if (previousIndex < 0)
+            {
+                newFreeIndex = buckets[keyBucket];
+                buckets[keyBucket] = elements[index].Next;
+            }
+            else
+            {
+                newFreeIndex = elements[previousIndex].Next;
+                elements[previousIndex].Next = elements[index].Next;
+            }
+
+            elements[index].Next = freeIndex;
+            freeIndex = newFreeIndex;
         }
 
         private void ExtendCapacity()
