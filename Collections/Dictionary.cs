@@ -134,10 +134,7 @@ namespace Collections
 
         public void Clear()
         {
-            if (IsReadOnly)
-            {
-                throw new NotSupportedException("Dictionary is read only and cannot be modified.");
-            }
+            CheckModifiability();
 
             Count = 0;
 
