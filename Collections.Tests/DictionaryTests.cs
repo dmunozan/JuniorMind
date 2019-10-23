@@ -100,6 +100,24 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void ValuesWhenDictionaryIsNotEmptyAfterRemovingShouldReturnCollectionOfValues()
+        {
+            Dictionary<int, string> testDict = new Dictionary<int, string>(5);
+
+            testDict.Add(1, "a");
+            testDict.Add(2, "b");
+            testDict.Add(3, "c");
+
+            Assert.True(testDict.Remove(2));
+
+            ICollection<string> valuesCollection = testDict.Values;
+
+            Assert.Equal(2, valuesCollection.Count);
+            Assert.True(valuesCollection.Contains("a"));
+            Assert.True(valuesCollection.Contains("c"));
+        }
+
+        [Fact]
         public void IndexerWhenGetAndKeyExistShouldReturnAssociatedValue()
         {
             Dictionary<int, string> testDict = new Dictionary<int, string>(5);
