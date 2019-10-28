@@ -6,6 +6,14 @@ namespace LINQ.Tests
     public class ExtensionMethodsTests
     {
         [Fact]
+        public void AllWhenEmptyShouldReturnTrue()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            Assert.True(testList.All<int>(e => e % 2 == 0));
+        }
+
+        [Fact]
         public void AllWhenAllTheElementsMeetTheConditionShouldReturnTrue()
         {
             ListCollection<int> testList = new ListCollection<int>();
