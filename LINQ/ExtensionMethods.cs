@@ -9,7 +9,7 @@ namespace LINQ
         {
             if (source == null)
             {
-                return false;
+                throw new ArgumentNullException(nameof(source), "Source argument is null");
             }
 
             foreach (var element in source)
