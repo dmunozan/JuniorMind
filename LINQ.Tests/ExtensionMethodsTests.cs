@@ -16,5 +16,18 @@ namespace LINQ.Tests
 
             Assert.True(testList.All<int>(e => e % 2 == 0));
         }
+
+        [Fact]
+        public void AllWhenNotAllTheElementsMeetTheConditionShouldReturnFalse()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(2);
+            testList.Add(4);
+            testList.Add(6);
+            testList.Add(9);
+
+            Assert.False(testList.All<int>(e => e % 2 == 0));
+        }
     }
 }
