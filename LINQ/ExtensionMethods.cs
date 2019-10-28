@@ -12,6 +12,11 @@ namespace LINQ
                 throw new ArgumentNullException(nameof(source), "Source argument is null");
             }
 
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate), "Predicate argument is null");
+            }
+
             foreach (var element in source)
             {
                 if (!predicate(element))
