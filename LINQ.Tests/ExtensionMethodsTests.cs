@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 
 namespace LINQ.Tests
@@ -28,6 +29,14 @@ namespace LINQ.Tests
             testList.Add(9);
 
             Assert.False(testList.All<int>(e => e % 2 == 0));
+        }
+
+        [Fact]
+        public void AllWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<int> testList = null;
+
+            Assert.Throws<ArgumentNullException>(() => testList.All<int>(e => e % 2 == 0));
         }
     }
 }
