@@ -223,5 +223,15 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testList.Select(selector));
         }
+
+        [Fact]
+        public void SelectManyWhenEmptyShouldReturnEmptySequence()
+        {
+            ListCollection<string[]> testList = new ListCollection<string[]>();
+
+            IEnumerable<string> resultList = testList.SelectMany(e => e);
+
+            Assert.Empty(resultList);
+        }
     }
 }
