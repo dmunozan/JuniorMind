@@ -127,5 +127,18 @@ namespace LINQ.Tests
 
             Assert.Equal(2, testList.First(e => e % 2 == 0));
         }
+
+        [Fact]
+        public void FirstWhenNoneOfTheElementsMeetTheConditionShouldThrowException()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(1);
+            testList.Add(3);
+            testList.Add(7);
+            testList.Add(9);
+
+            Assert.Throws<InvalidOperationException>(() => testList.First(e => e % 2 == 0));
+        }
     }
 }
