@@ -114,5 +114,18 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testList.Any(null));
         }
+
+        [Fact]
+        public void FirstWhenAtLeastOneElementMeetTheConditionShouldReturnFirstElementMatchingTheCondition()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(1);
+            testList.Add(2);
+            testList.Add(6);
+            testList.Add(9);
+
+            Assert.Equal(2, testList.First(e => e % 2 == 0));
+        }
     }
 }
