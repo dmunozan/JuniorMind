@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace LINQ.Tests
@@ -168,6 +169,16 @@ namespace LINQ.Tests
             testList.Add(8);
 
             Assert.Throws<ArgumentNullException>(() => testList.First(null));
+        }
+
+        [Fact]
+        public void SelectWhenEmptyShouldReturnEmptySequence()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            IEnumerable<int> resultList = testList.Select(e => e * e);
+
+            Assert.Empty(resultList);
         }
     }
 }
