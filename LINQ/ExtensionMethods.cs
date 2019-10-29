@@ -30,7 +30,18 @@ namespace LINQ
 
         public static bool Any<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            Console.WriteLine(source + " " + predicate);
+            if (source == null)
+            {
+                return false;
+            }
+
+            foreach (var element in source)
+            {
+                if (predicate(element))
+                {
+                    return true;
+                }
+            }
 
             return false;
         }
