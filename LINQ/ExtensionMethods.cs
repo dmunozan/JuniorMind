@@ -69,6 +69,20 @@ namespace LINQ
             return InternalSelect(source, selector);
         }
 
+        public static IEnumerable<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, IEnumerable<TResult>> selector)
+        {
+            CheckNullElement(source, Source);
+
+            List<TResult> result = new List<TResult>();
+
+            foreach (TSource element in source)
+            {
+                result.AddRange(selector(element));
+            }
+
+            return result;
+        }
+
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
         {
             foreach (var element in source)
