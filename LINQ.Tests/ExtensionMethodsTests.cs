@@ -10,7 +10,7 @@ namespace LINQ.Tests
         {
             ListCollection<int> testList = new ListCollection<int>();
 
-            Assert.True(testList.All<int>(e => e % 2 == 0));
+            Assert.True(testList.All(e => e % 2 == 0));
         }
 
         [Fact]
@@ -23,7 +23,7 @@ namespace LINQ.Tests
             testList.Add(6);
             testList.Add(8);
 
-            Assert.True(testList.All<int>(e => e % 2 == 0));
+            Assert.True(testList.All(e => e % 2 == 0));
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace LINQ.Tests
             testList.Add(6);
             testList.Add(9);
 
-            Assert.False(testList.All<int>(e => e % 2 == 0));
+            Assert.False(testList.All(e => e % 2 == 0));
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace LINQ.Tests
         {
             ListCollection<int> testList = null;
 
-            Assert.Throws<ArgumentNullException>(() => testList.All<int>(e => e % 2 == 0));
+            Assert.Throws<ArgumentNullException>(() => testList.All(e => e % 2 == 0));
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace LINQ.Tests
             testList.Add(6);
             testList.Add(8);
 
-            Assert.Throws<ArgumentNullException>(() => testList.All<int>(null));
+            Assert.Throws<ArgumentNullException>(() => testList.All(null));
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace LINQ.Tests
         {
             ListCollection<int> testList = new ListCollection<int>();
 
-            Assert.False(testList.Any<int>(e => e % 2 == 0));
+            Assert.False(testList.Any(e => e % 2 == 0));
         }
     }
 }
