@@ -91,7 +91,15 @@ namespace LINQ.Tests
             testList.Add(5);
             testList.Add(9);
 
-            Assert.False(testList.All(e => e % 2 == 0));
+            Assert.False(testList.Any(e => e % 2 == 0));
+        }
+
+        [Fact]
+        public void AnyWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<int> testList = null;
+
+            Assert.Throws<ArgumentNullException>(() => testList.Any(e => e % 2 == 0));
         }
     }
 }
