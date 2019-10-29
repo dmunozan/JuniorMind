@@ -233,5 +233,21 @@ namespace LINQ.Tests
 
             Assert.Empty(resultList);
         }
+
+        [Fact]
+        public void SelectManyWhenAnyElementShouldReturnSequenceWithProcessedElements()
+        {
+            ListCollection<string[]> testList = new ListCollection<string[]>();
+
+            testList.Add(new[] { "a", "b" });
+            testList.Add(new[] { "c", "d" });
+
+            IEnumerable<string> resultList = testList.SelectMany(e => e);
+
+            Assert.Contains("a", resultList);
+            Assert.Contains("b", resultList);
+            Assert.Contains("c", resultList);
+            Assert.Contains("d", resultList);
+        }
     }
 }
