@@ -140,5 +140,13 @@ namespace LINQ.Tests
 
             Assert.Throws<InvalidOperationException>(() => testList.First(e => e % 2 == 0));
         }
+
+        [Fact]
+        public void FirstWhenEmptyShouldThrowException()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            Assert.Throws<InvalidOperationException>(() => testList.First(e => e % 2 == 0));
+        }
     }
 }
