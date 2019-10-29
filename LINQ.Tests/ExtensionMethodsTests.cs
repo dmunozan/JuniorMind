@@ -59,5 +59,13 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testList.All<int>(null));
         }
+
+        [Fact]
+        public void AnyWhenEmptyShouldReturnFalse()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            Assert.False(testList.Any<int>(e => e % 2 == 0));
+        }
     }
 }
