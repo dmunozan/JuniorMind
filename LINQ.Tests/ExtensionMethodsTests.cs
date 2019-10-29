@@ -208,5 +208,20 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testList.Select(e => e * e));
         }
+
+        [Fact]
+        public void SelectWhenPredicateIsNullShouldThrowException()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(1);
+            testList.Add(2);
+            testList.Add(3);
+            testList.Add(4);
+
+            Func<int, int> selector = null;
+
+            Assert.Throws<ArgumentNullException>(() => testList.Select(selector));
+        }
     }
 }
