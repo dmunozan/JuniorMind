@@ -180,5 +180,25 @@ namespace LINQ.Tests
 
             Assert.Empty(resultList);
         }
+
+        [Fact]
+        public void SelectWhenAnyElementShouldReturnSequenceWithProcessedElements()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(1);
+            testList.Add(2);
+            testList.Add(3);
+            testList.Add(4);
+
+            IEnumerable<int> resultList = testList.Select(e => e * e);
+
+            Assert.Contains(1, resultList);
+            Assert.DoesNotContain(2, resultList);
+            Assert.DoesNotContain(3, resultList);
+            Assert.Contains(4, resultList);
+            Assert.Contains(9, resultList);
+            Assert.Contains(16, resultList);
+        }
     }
 }
