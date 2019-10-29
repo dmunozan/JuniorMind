@@ -5,17 +5,14 @@ namespace LINQ
 {
     public static class ExtensionMethods
     {
+        const string Source = "Source";
+        const string Predicate = "Predicate";
+
         public static bool All<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source), "Source argument is null");
-            }
+            CheckNullElement(source, Source);
 
-            if (predicate == null)
-            {
-                throw new ArgumentNullException(nameof(predicate), "Predicate argument is null");
-            }
+            CheckNullElement(predicate, Predicate);
 
             foreach (var element in source)
             {
@@ -30,15 +27,9 @@ namespace LINQ
 
         public static bool Any<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source), "Source argument is null");
-            }
+            CheckNullElement(source, Source);
 
-            if (predicate == null)
-            {
-                throw new ArgumentNullException(nameof(predicate), "Predicate argument is null");
-            }
+            CheckNullElement(predicate, Predicate);
 
             foreach (var element in source)
             {
@@ -53,15 +44,9 @@ namespace LINQ
 
         public static TSource First<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source), "Source argument is null");
-            }
+            CheckNullElement(source, Source);
 
-            if (predicate == null)
-            {
-                throw new ArgumentNullException(nameof(predicate), "Predicate argument is null");
-            }
+            CheckNullElement(predicate, Predicate);
 
             foreach (var element in source)
             {
@@ -72,6 +57,26 @@ namespace LINQ
             }
 
             throw new InvalidOperationException("No element satisfies the condition");
+        }
+
+        public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        {
+            CheckNullElement(source, Source);
+
+            foreach (var element in source)
+            {
+                yield return selector(element);
+            }
+        }
+
+        private static void CheckNullElement(object obj, string objName)
+        {
+            if (obj != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(nameof(obj), objName + " argument is null");
         }
     }
 }
