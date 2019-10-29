@@ -63,6 +63,11 @@ namespace LINQ
         {
             CheckNullElement(source, Source);
 
+            return InternalSelect(source, selector);
+        }
+
+        private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        {
             foreach (var element in source)
             {
                 yield return selector(element);
