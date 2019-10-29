@@ -27,5 +27,12 @@ namespace LINQ
 
             return true;
         }
+
+        public static bool Any<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            Console.WriteLine(source + " " + predicate);
+
+            return false;
+        }
     }
 }
