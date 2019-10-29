@@ -67,5 +67,18 @@ namespace LINQ.Tests
 
             Assert.False(testList.Any(e => e % 2 == 0));
         }
+
+        [Fact]
+        public void AnyWhenAtLeastOneElementMeetTheConditionShouldReturnTrue()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(1);
+            testList.Add(3);
+            testList.Add(6);
+            testList.Add(9);
+
+            Assert.True(testList.Any(e => e % 2 == 0));
+        }
     }
 }
