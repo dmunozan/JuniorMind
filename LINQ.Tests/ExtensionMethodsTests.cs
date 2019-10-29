@@ -249,5 +249,13 @@ namespace LINQ.Tests
             Assert.Contains("c", resultList);
             Assert.Contains("d", resultList);
         }
+
+        [Fact]
+        public void SelectManyWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<string[]> testList = null;
+
+            Assert.Throws<ArgumentNullException>(() => testList.SelectMany(e => e));
+        }
     }
 }
