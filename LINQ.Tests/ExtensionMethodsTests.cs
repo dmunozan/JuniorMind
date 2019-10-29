@@ -200,5 +200,15 @@ namespace LINQ.Tests
             Assert.Contains(9, resultList);
             Assert.Contains(16, resultList);
         }
+
+        [Fact]
+        public void SelectWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<int> testList = null;
+
+            IEnumerable<int> resultList;
+
+            Assert.Throws<ArgumentNullException>(() => resultList = testList.Select(e => e * e));
+        }
     }
 }
