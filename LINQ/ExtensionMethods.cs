@@ -73,6 +73,8 @@ namespace LINQ
         {
             CheckNullElement(source, Source);
 
+            CheckNullElement(selector, Selector);
+
             List<TResult> result = new List<TResult>();
 
             foreach (TSource element in source)
