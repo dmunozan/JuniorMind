@@ -7,6 +7,7 @@ namespace LINQ
     {
         const string Source = "Source";
         const string Predicate = "Predicate";
+        const string Selector = "Selector";
 
         public static bool All<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
@@ -62,6 +63,8 @@ namespace LINQ
         public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
         {
             CheckNullElement(source, Source);
+
+            CheckNullElement(selector, Selector);
 
             return InternalSelect(source, selector);
         }
