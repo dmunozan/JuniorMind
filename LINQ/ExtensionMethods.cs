@@ -66,7 +66,7 @@ namespace LINQ
                 }
             }
 
-            return default;
+            throw new InvalidOperationException("No element satisfies the condition");
         }
     }
 }
