@@ -210,7 +210,7 @@ namespace LINQ.Tests
         }
 
         [Fact]
-        public void SelectWhenPredicateIsNullShouldThrowException()
+        public void SelectWhenSelectorIsNullShouldThrowException()
         {
             ListCollection<int> testList = new ListCollection<int>();
 
@@ -256,6 +256,19 @@ namespace LINQ.Tests
             ListCollection<string[]> testList = null;
 
             Assert.Throws<ArgumentNullException>(() => testList.SelectMany(e => e));
+        }
+
+        [Fact]
+        public void SelectManyWhenSelectorIsNullShouldThrowException()
+        {
+            ListCollection<string[]> testList = new ListCollection<string[]>();
+
+            testList.Add(new[] { "a", "b" });
+            testList.Add(new[] { "c", "d" });
+
+            Func<string[], string> selector = null;
+
+            Assert.Throws<ArgumentNullException>(() => testList.SelectMany(selector));
         }
     }
 }
