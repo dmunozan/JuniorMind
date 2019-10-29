@@ -55,7 +55,7 @@ namespace LINQ
         {
             if (source == null)
             {
-                return default;
+                throw new ArgumentNullException(nameof(source), "Source argument is null");
             }
 
             foreach (var element in source)
