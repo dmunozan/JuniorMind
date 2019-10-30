@@ -358,5 +358,13 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentException>(() => testList.ToDictionary(e => Math.Abs(e.GetHashCode()), e => e));
         }
+
+        [Fact]
+        public void ToDictionaryWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<int> testList = null;
+
+            Assert.Throws<ArgumentNullException>(() => testList.ToDictionary(e => Math.Abs(e.GetHashCode()), e => e));
+        }
     }
 }
