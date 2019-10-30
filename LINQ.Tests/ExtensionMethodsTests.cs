@@ -347,5 +347,16 @@ namespace LINQ.Tests
             Assert.Contains(new KeyValuePair<int, string>(Math.Abs("mouse".GetHashCode()), "mouse"), dictionary);
             Assert.Contains(new KeyValuePair<int, string>(Math.Abs("bird".GetHashCode()), "bird"), dictionary);
         }
+
+        [Fact]
+        public void ToDictionaryWhenAnyElementAndKeyIsRepeatedShouldThrowException()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("cat");
+            testList.Add("cat");
+
+            Assert.Throws<ArgumentException>(() => testList.ToDictionary(e => Math.Abs(e.GetHashCode()), e => e));
+        }
     }
 }
