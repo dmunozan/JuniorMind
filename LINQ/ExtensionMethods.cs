@@ -8,6 +8,7 @@ namespace LINQ
         const string Source = "Source";
         const string Predicate = "Predicate";
         const string Selector = "Selector";
+        const string KeySelector = "KeySelector";
 
         public static bool All<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
@@ -109,6 +110,8 @@ namespace LINQ
             Dictionary<TKey, TElement> dictionary = new Dictionary<TKey, TElement>();
 
             CheckNullElement(source, Source);
+
+            CheckNullElement(keySelector, KeySelector);
 
             foreach (var element in source)
             {
