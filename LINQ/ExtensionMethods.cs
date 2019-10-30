@@ -87,12 +87,9 @@ namespace LINQ
 
         public static IEnumerable<TSource> Where<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            List<TSource> result = new List<TSource>();
+            CheckNullElement(source, Source);
 
-            if (source == null)
-            {
-                return result;
-            }
+            List<TSource> result = new List<TSource>();
 
             foreach (var element in source)
             {
