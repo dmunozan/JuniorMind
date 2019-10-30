@@ -89,6 +89,8 @@ namespace LINQ
         {
             CheckNullElement(source, Source);
 
+            CheckNullElement(predicate, Predicate);
+
             List<TSource> result = new List<TSource>();
 
             foreach (var element in source)
