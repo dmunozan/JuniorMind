@@ -306,5 +306,18 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testList.Where(e => e % 2 == 0));
         }
+
+        [Fact]
+        public void WhereWhenPredicateIsNullShouldThrowException()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(1);
+            testList.Add(2);
+            testList.Add(3);
+            testList.Add(4);
+
+            Assert.Throws<ArgumentNullException>(() => testList.Where(null));
+        }
     }
 }
