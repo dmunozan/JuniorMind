@@ -270,5 +270,15 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testList.SelectMany(selector));
         }
+
+        [Fact]
+        public void WhereWhenEmptyShouldReturnEmptySequence()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            IEnumerable<int> resultList = testList.Where(e => e % 2 == 0);
+
+            Assert.Empty(resultList);
+        }
     }
 }
