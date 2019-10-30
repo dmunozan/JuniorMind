@@ -280,5 +280,23 @@ namespace LINQ.Tests
 
             Assert.Empty(resultList);
         }
+
+        [Fact]
+        public void WhereWhenAnyElementShouldReturnSequenceWithElementsThatMeetTheCondition()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(1);
+            testList.Add(2);
+            testList.Add(3);
+            testList.Add(4);
+
+            IEnumerable<int> resultList = testList.Where(e => e % 2 == 0);
+
+            Assert.DoesNotContain(1, resultList);
+            Assert.Contains(2, resultList);
+            Assert.DoesNotContain(3, resultList);
+            Assert.Contains(4, resultList);
+        }
     }
 }
