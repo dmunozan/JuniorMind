@@ -298,5 +298,13 @@ namespace LINQ.Tests
             Assert.DoesNotContain(3, resultList);
             Assert.Contains(4, resultList);
         }
+
+        [Fact]
+        public void WhereWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<int> testList = null;
+
+            Assert.Throws<ArgumentNullException>(() => testList.Where(e => e % 2 == 0));
+        }
     }
 }
