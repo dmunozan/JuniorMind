@@ -104,6 +104,13 @@ namespace LINQ
             return result;
         }
 
+        public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
+        {
+            Console.WriteLine(source + " " + keySelector + " " + elementSelector);
+
+            return new Dictionary<TKey, TElement>();
+        }
+
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
         {
             foreach (var element in source)
