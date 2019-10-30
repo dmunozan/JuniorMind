@@ -319,5 +319,15 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testList.Where(null));
         }
+
+        [Fact]
+        public void ToDictionaryWhenEmptyShouldReturnEmptyDictionary()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            Dictionary<int, string> dictionary = testList.ToDictionary(e => Math.Abs(e.GetHashCode()), e => e);
+
+            Assert.Empty(dictionary);
+        }
     }
 }
