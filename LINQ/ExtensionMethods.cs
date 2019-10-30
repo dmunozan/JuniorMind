@@ -108,10 +108,7 @@ namespace LINQ
         {
             Dictionary<TKey, TElement> dictionary = new Dictionary<TKey, TElement>();
 
-            if (source == null)
-            {
-                return dictionary;
-            }
+            CheckNullElement(source, Source);
 
             foreach (var element in source)
             {
