@@ -85,6 +85,13 @@ namespace LINQ
             return result;
         }
 
+        public static IEnumerable<TSource> Where<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            Console.WriteLine(source + "" + predicate);
+
+            return new List<TSource>();
+        }
+
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
         {
             foreach (var element in source)
