@@ -9,6 +9,7 @@ namespace LINQ
         const string Predicate = "Predicate";
         const string Selector = "Selector";
         const string KeySelector = "KeySelector";
+        const string ElementSelector = "ElementSelector";
 
         public static bool All<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
@@ -112,6 +113,8 @@ namespace LINQ
             CheckNullElement(source, Source);
 
             CheckNullElement(keySelector, KeySelector);
+
+            CheckNullElement(elementSelector, ElementSelector);
 
             foreach (var element in source)
             {
