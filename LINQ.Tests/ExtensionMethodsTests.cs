@@ -329,5 +329,23 @@ namespace LINQ.Tests
 
             Assert.Empty(dictionary);
         }
+
+        [Fact]
+        public void ToDictionaryWhenAnyElementAndNoKeyIsRepeatedShouldReturnDictionary()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("cat");
+            testList.Add("dog");
+            testList.Add("mouse");
+            testList.Add("bird");
+
+            Dictionary<int, string> dictionary = testList.ToDictionary(e => Math.Abs(e.GetHashCode()), e => e);
+
+            Assert.Contains(new KeyValuePair<int, string>(Math.Abs("cat".GetHashCode()), "cat"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(Math.Abs("dog".GetHashCode()), "dog"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(Math.Abs("mouse".GetHashCode()), "mouse"), dictionary);
+            Assert.Contains(new KeyValuePair<int, string>(Math.Abs("bird".GetHashCode()), "bird"), dictionary);
+        }
     }
 }
