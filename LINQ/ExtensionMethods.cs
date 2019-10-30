@@ -115,7 +115,7 @@ namespace LINQ
 
             foreach (var element in source)
             {
-                dictionary.TryAdd(keySelector(element), elementSelector(element));
+                dictionary.Add(keySelector(element), elementSelector(element));
             }
 
             return dictionary;
