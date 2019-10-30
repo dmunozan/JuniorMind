@@ -396,5 +396,20 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testList.ToDictionary(e => Math.Abs(e.GetHashCode()), elementSelector));
         }
+
+        [Fact]
+        public void ToDictionaryWhenKeySelectorProducesNullKeyShouldThrowException()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("cat");
+            testList.Add("dog");
+            testList.Add("mouse");
+            testList.Add("bird");
+
+            Func<string, string> keySelector = e => null;
+
+            Assert.Throws<ArgumentNullException>(() => testList.ToDictionary(keySelector, e => e)); ;
+        }
     }
 }
