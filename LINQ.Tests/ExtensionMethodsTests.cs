@@ -411,5 +411,16 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testList.ToDictionary(keySelector, e => e)); ;
         }
+
+        [Fact]
+        public void ZipWhenAtLeastOneEmptySequenceShouldReturnEmptySequence()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
+            IEnumerable<int> resultList = firstTestList.Zip(secondTestList, (first, second) => first + second);
+
+            Assert.Empty(resultList);
+        }
     }
 }
