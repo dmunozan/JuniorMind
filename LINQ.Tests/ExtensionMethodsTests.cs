@@ -467,5 +467,15 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => firstTestList.Zip(secondTestList, (first, second) => first + second));
         }
+
+        [Fact]
+        public void ZipWhenSecondIsNullShouldThrowException()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            ListCollection<int> secondTestList = null;
+
+            Assert.Throws<ArgumentNullException>(() => firstTestList.Zip(secondTestList, (first, second) => first + second));
+        }
     }
 }
