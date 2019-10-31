@@ -422,5 +422,34 @@ namespace LINQ.Tests
 
             Assert.Empty(resultList);
         }
+
+        [Fact]
+        public void ZipWhenNoneEmptySequenceShouldReturnSequenceWithMergedElementsAsLongAsShortestSequence()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            firstTestList.Add(1);
+            firstTestList.Add(2);
+            firstTestList.Add(3);
+            firstTestList.Add(4);
+
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
+            secondTestList.Add(1);
+            secondTestList.Add(2);
+            secondTestList.Add(3);
+            secondTestList.Add(4);
+            secondTestList.Add(5);
+
+            IEnumerable<int> resultList = firstTestList.Zip(secondTestList, (first, second) => first + second);
+
+            Assert.DoesNotContain(1, resultList);
+            Assert.Contains(2, resultList);
+            Assert.DoesNotContain(3, resultList);
+            Assert.Contains(4, resultList);
+            Assert.DoesNotContain(5, resultList);
+            Assert.Contains(6, resultList);
+            Assert.Contains(8, resultList);
+        }
     }
 }
