@@ -124,6 +124,13 @@ namespace LINQ
             return dictionary;
         }
 
+        public static IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
+        {
+            Console.WriteLine(first + " " + second + " " + resultSelector);
+
+            return new List<TResult>();
+        }
+
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
         {
             foreach (var element in source)
