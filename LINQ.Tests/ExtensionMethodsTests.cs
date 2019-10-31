@@ -451,5 +451,21 @@ namespace LINQ.Tests
             Assert.Contains(6, resultList);
             Assert.Contains(8, resultList);
         }
+
+        [Fact]
+        public void ZipWhenFirstIsNullShouldThrowException()
+        {
+            ListCollection<int> firstTestList = null;
+
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
+            secondTestList.Add(1);
+            secondTestList.Add(2);
+            secondTestList.Add(3);
+            secondTestList.Add(4);
+            secondTestList.Add(5);
+
+            Assert.Throws<ArgumentNullException>(() => firstTestList.Zip(secondTestList, (first, second) => first + second));
+        }
     }
 }
