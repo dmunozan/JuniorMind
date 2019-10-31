@@ -5,17 +5,11 @@ namespace LINQ
 {
     public static class ExtensionMethods
     {
-        const string Source = "Source";
-        const string Predicate = "Predicate";
-        const string Selector = "Selector";
-        const string KeySelector = "KeySelector";
-        const string ElementSelector = "ElementSelector";
-
         public static bool All<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            CheckNullElement(source, Source);
+            CheckNullElement(source);
 
-            CheckNullElement(predicate, Predicate);
+            CheckNullElement(predicate);
 
             foreach (var element in source)
             {
@@ -30,9 +24,9 @@ namespace LINQ
 
         public static bool Any<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            CheckNullElement(source, Source);
+            CheckNullElement(source);
 
-            CheckNullElement(predicate, Predicate);
+            CheckNullElement(predicate);
 
             foreach (var element in source)
             {
@@ -47,9 +41,9 @@ namespace LINQ
 
         public static TSource First<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            CheckNullElement(source, Source);
+            CheckNullElement(source);
 
-            CheckNullElement(predicate, Predicate);
+            CheckNullElement(predicate);
 
             foreach (var element in source)
             {
@@ -64,18 +58,18 @@ namespace LINQ
 
         public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
         {
-            CheckNullElement(source, Source);
+            CheckNullElement(source);
 
-            CheckNullElement(selector, Selector);
+            CheckNullElement(selector);
 
             return InternalSelect(source, selector);
         }
 
         public static IEnumerable<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, IEnumerable<TResult>> selector)
         {
-            CheckNullElement(source, Source);
+            CheckNullElement(source);
 
-            CheckNullElement(selector, Selector);
+            CheckNullElement(selector);
 
             List<TResult> result = new List<TResult>();
 
@@ -89,9 +83,9 @@ namespace LINQ
 
         public static IEnumerable<TSource> Where<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            CheckNullElement(source, Source);
+            CheckNullElement(source);
 
-            CheckNullElement(predicate, Predicate);
+            CheckNullElement(predicate);
 
             List<TSource> result = new List<TSource>();
 
@@ -108,13 +102,13 @@ namespace LINQ
 
         public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
         {
+            CheckNullElement(source);
+
+            CheckNullElement(keySelector);
+
+            CheckNullElement(elementSelector);
+
             Dictionary<TKey, TElement> dictionary = new Dictionary<TKey, TElement>();
-
-            CheckNullElement(source, Source);
-
-            CheckNullElement(keySelector, KeySelector);
-
-            CheckNullElement(elementSelector, ElementSelector);
 
             foreach (var element in source)
             {
@@ -126,9 +120,11 @@ namespace LINQ
 
         public static IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
         {
+            CheckNullElement(first);
+
             List<TResult> result = new List<TResult>();
 
-            if (first == null || second == null)
+            if (second == null)
             {
                 return result;
             }
@@ -152,14 +148,14 @@ namespace LINQ
             }
         }
 
-        private static void CheckNullElement(object obj, string objName)
+        private static void CheckNullElement(object obj)
         {
             if (obj != null)
             {
                 return;
             }
 
-            throw new ArgumentNullException(nameof(obj), objName + " argument is null");
+            throw new ArgumentNullException(nameof(obj), "One of the arguments is null");
         }
     }
 }
