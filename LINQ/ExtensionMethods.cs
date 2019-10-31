@@ -126,9 +126,22 @@ namespace LINQ
 
         public static IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
         {
-            Console.WriteLine(first + " " + second + " " + resultSelector);
+            List<TResult> result = new List<TResult>();
 
-            return new List<TResult>();
+            if (first == null || second == null)
+            {
+                return result;
+            }
+
+            var firstEnumerator = first.GetEnumerator();
+            var secondEnumerator = second.GetEnumerator();
+
+            while (firstEnumerator.MoveNext() && secondEnumerator.MoveNext())
+            {
+                result.Add(resultSelector(firstEnumerator.Current, secondEnumerator.Current));
+            }
+
+            return result;
         }
 
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
