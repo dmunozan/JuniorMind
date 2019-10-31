@@ -122,6 +122,8 @@ namespace LINQ
         {
             CheckNullElement(first);
 
+            CheckNullElement(second);
+
             List<TResult> result = new List<TResult>();
 
             if (second == null)
