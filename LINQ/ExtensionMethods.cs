@@ -144,12 +144,9 @@ namespace LINQ
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> func)
         {
-            TAccumulate result = seed;
+            CheckNullElement(source);
 
-            if (source == null)
-            {
-                return seed;
-            }
+            TAccumulate result = seed;
 
             foreach (var element in source)
             {
