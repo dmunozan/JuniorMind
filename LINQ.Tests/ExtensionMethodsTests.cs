@@ -500,5 +500,17 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => firstTestList.Zip(secondTestList, resultSelector));
         }
+
+        [Fact]
+        public void AggregateWhenEmptyShouldReturnSeed()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            int seed = 0;
+
+            int aggregatedResult = testList.Aggregate(seed, (total, next) => next % 2 == 0 ? total++ : total);
+
+            Assert.Equal(aggregatedResult, seed);
+        }
     }
 }
