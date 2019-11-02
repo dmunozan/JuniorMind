@@ -144,9 +144,19 @@ namespace LINQ
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> func)
         {
-            Console.WriteLine(source + " " + func);
+            TAccumulate result = seed;
 
-            return seed;
+            if (source == null)
+            {
+                return seed;
+            }
+
+            foreach (var element in source)
+            {
+                result = func(result, element);
+            }
+
+            return result;
         }
 
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
