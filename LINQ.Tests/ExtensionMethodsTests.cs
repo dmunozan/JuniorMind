@@ -533,5 +533,13 @@ namespace LINQ.Tests
 
             Assert.Equal(aggregatedResult, numOfevenNumbers);
         }
+
+        [Fact]
+        public void AggregateWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<int> testList = null;
+
+            Assert.Throws<ArgumentNullException>(() => testList.Aggregate(0, (total, next) => next % 2 == 0 ? total + 1 : total));
+        }
     }
 }
