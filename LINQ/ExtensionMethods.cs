@@ -128,11 +128,6 @@ namespace LINQ
 
             List<TResult> result = new List<TResult>();
 
-            if (second == null)
-            {
-                return result;
-            }
-
             var firstEnumerator = first.GetEnumerator();
             var secondEnumerator = second.GetEnumerator();
 
