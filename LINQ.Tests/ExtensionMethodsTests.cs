@@ -512,5 +512,26 @@ namespace LINQ.Tests
 
             Assert.Equal(aggregatedResult, seed);
         }
+
+        [Fact]
+        public void AggregateWhenNoEmptyShouldReturnProcessedValues()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(1);
+            testList.Add(2);
+            testList.Add(3);
+            testList.Add(4);
+            testList.Add(5);
+            testList.Add(6);
+            testList.Add(7);
+            testList.Add(8);
+
+            int numOfevenNumbers = 4;
+
+            int aggregatedResult = testList.Aggregate(0, (total, next) => next % 2 == 0 ? total + 1 : total);
+
+            Assert.Equal(aggregatedResult, numOfevenNumbers);
+        }
     }
 }
