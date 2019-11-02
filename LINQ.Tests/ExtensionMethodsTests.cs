@@ -477,5 +477,28 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => firstTestList.Zip(secondTestList, (first, second) => first + second));
         }
+
+        [Fact]
+        public void ZipWhenResultSelectorIsNullShouldThrowException()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            firstTestList.Add(1);
+            firstTestList.Add(2);
+            firstTestList.Add(3);
+            firstTestList.Add(4);
+
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
+            secondTestList.Add(1);
+            secondTestList.Add(2);
+            secondTestList.Add(3);
+            secondTestList.Add(4);
+            secondTestList.Add(5);
+
+            Func<int, int, int> resultSelector = null;
+
+            Assert.Throws<ArgumentNullException>(() => firstTestList.Zip(secondTestList, resultSelector));
+        }
     }
 }
