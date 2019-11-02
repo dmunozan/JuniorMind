@@ -146,6 +146,8 @@ namespace LINQ
         {
             CheckNullElement(source);
 
+            CheckNullElement(func);
+
             TAccumulate result = seed;
 
             foreach (var element in source)
