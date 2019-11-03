@@ -158,6 +158,18 @@ namespace LINQ
             return result;
         }
 
+        public static IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>(
+            this IEnumerable<TOuter> outer,
+            IEnumerable<TInner> inner,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TOuter, TInner, TResult> resultSelector)
+        {
+            Console.WriteLine(outer + " " + inner + " " + outerKeySelector + " " + innerKeySelector + " " + resultSelector);
+
+            return new List<TResult>();
+        }
+
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
         {
             foreach (var element in source)
