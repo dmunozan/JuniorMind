@@ -630,5 +630,24 @@ namespace LINQ.Tests
                     (person, pet) =>
                         person + " - " + pet[0]));
         }
+
+        [Fact]
+        public void JoinWhenNullInnerShouldThrowException()
+        {
+            ListCollection<string> outerTestList = new ListCollection<string>();
+
+            outerTestList.Add("Hedlund, Magnus");
+            outerTestList.Add("Adams, Terry");
+            outerTestList.Add("Weiss, Charlotte");
+
+            ListCollection<string[]> innerTestList = null;
+
+            Assert.Throws<ArgumentNullException>(() =>
+                outerTestList.Join(innerTestList,
+                    person => person,
+                    pet => pet[1],
+                    (person, pet) =>
+                        person + " - " + pet[0]));
+        }
     }
 }
