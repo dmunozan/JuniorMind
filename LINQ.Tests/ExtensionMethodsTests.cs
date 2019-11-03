@@ -564,18 +564,51 @@ namespace LINQ.Tests
         [Fact]
         public void JoinWhenAtLeastOneEmptySequenceShouldReturnEmptySequence()
         {
-            ListCollection<string[]> outerTestList = new ListCollection<string[]>();
+            ListCollection<string> outerTestList = new ListCollection<string>();
 
             ListCollection<string[]> innerTestList = new ListCollection<string[]>();
 
             IEnumerable<string> resultList =
                 outerTestList.Join(innerTestList,
-                    person => person[0],
+                    person => person,
                     pet => pet[1],
                     (person, pet) =>
-                        person[0] + " - " + pet[0]);
+                        person + " - " + pet[0]);
 
             Assert.Empty(resultList);
+        }
+
+        [Fact]
+        public void JoinWhenNoEmptySequenceShouldReturnJoinedSequence()
+        {
+            ListCollection<string> outerTestList = new ListCollection<string>();
+
+            outerTestList.Add("Hedlund, Magnus");
+            outerTestList.Add("Adams, Terry");
+            outerTestList.Add("Weiss, Charlotte");
+
+            ListCollection<string[]> innerTestList = new ListCollection<string[]>();
+
+            innerTestList.Add(new string[] { "Barley", "Adams, Terry" });
+            innerTestList.Add(new string[] { "Boots", "Adams, Terry" });
+            innerTestList.Add(new string[] { "Whiskers", "Weiss, Charlotte" });
+            innerTestList.Add(new string[] { "Daisy", "Hedlund, Magnus" });
+
+            IEnumerable<string> resultList =
+                outerTestList.Join(innerTestList,
+                    person => person,
+                    pet => pet[1],
+                    (person, pet) =>
+                        person + " - " + pet[0]);
+
+            Assert.Contains("Hedlund, Magnus - Daisy", resultList);
+            Assert.Contains("Adams, Terry - Barley", resultList);
+            Assert.Contains("Adams, Terry - Boots", resultList);
+            Assert.Contains("Weiss, Charlotte - Whiskers", resultList);
+            Assert.DoesNotContain("Weiss, Charlotte - Barley", resultList);
+            Assert.DoesNotContain("Adams, Terry - Whiskers", resultList);
+            Assert.DoesNotContain("Adams, Terry - Daisy", resultList);
+            Assert.DoesNotContain("Hedlund, Magnus - Boots", resultList);
         }
     }
 }
