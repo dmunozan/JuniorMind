@@ -165,9 +165,25 @@ namespace LINQ
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, TInner, TResult> resultSelector)
         {
-            Console.WriteLine(outer + " " + inner + " " + outerKeySelector + " " + innerKeySelector + " " + resultSelector);
+            List<TResult> result = new List<TResult>();
 
-            return new List<TResult>();
+            if (outer == null)
+            {
+                return result;
+            }
+
+            foreach (var outerElement in outer)
+            {
+                foreach (var innerElement in inner)
+                {
+                    if (outerKeySelector(outerElement).Equals(innerKeySelector(innerElement)))
+                    {
+                        result.Add(resultSelector(outerElement, innerElement));
+                    }
+                }
+            }
+
+            return result;
         }
 
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
