@@ -610,5 +610,25 @@ namespace LINQ.Tests
             Assert.DoesNotContain("Adams, Terry - Daisy", resultList);
             Assert.DoesNotContain("Hedlund, Magnus - Boots", resultList);
         }
+
+        [Fact]
+        public void JoinWhenNullOuterShouldThrowException()
+        {
+            ListCollection<string> outerTestList = null;
+
+            ListCollection<string[]> innerTestList = new ListCollection<string[]>();
+
+            innerTestList.Add(new string[] { "Barley", "Adams, Terry" });
+            innerTestList.Add(new string[] { "Boots", "Adams, Terry" });
+            innerTestList.Add(new string[] { "Whiskers", "Weiss, Charlotte" });
+            innerTestList.Add(new string[] { "Daisy", "Hedlund, Magnus" });
+
+            Assert.Throws<ArgumentNullException>(() =>
+                outerTestList.Join(innerTestList,
+                    person => person,
+                    pet => pet[1],
+                    (person, pet) =>
+                        person + " - " + pet[0]));
+        }
     }
 }
