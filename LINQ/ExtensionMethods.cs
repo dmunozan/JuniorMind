@@ -169,6 +169,8 @@ namespace LINQ
 
             CheckNullElement(inner);
 
+            CheckNullElement(outerKeySelector);
+
             List<TResult> result = new List<TResult>();
 
             foreach (var outerElement in outer)
