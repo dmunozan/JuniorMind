@@ -560,5 +560,22 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testList.Aggregate(0, func));
         }
+
+        [Fact]
+        public void JoinWhenAtLeastOneEmptySequenceShouldReturnEmptySequence()
+        {
+            ListCollection<string[]> outerTestList = new ListCollection<string[]>();
+
+            ListCollection<string[]> innerTestList = new ListCollection<string[]>();
+
+            IEnumerable<string> resultList =
+                outerTestList.Join(innerTestList,
+                    person => person[0],
+                    pet => pet[1],
+                    (person, pet) =>
+                        person[0] + " - " + pet[0]);
+
+            Assert.Empty(resultList);
+        }
     }
 }
