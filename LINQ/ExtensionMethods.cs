@@ -165,12 +165,9 @@ namespace LINQ
             Func<TInner, TKey> innerKeySelector,
             Func<TOuter, TInner, TResult> resultSelector)
         {
-            List<TResult> result = new List<TResult>();
+            CheckNullElement(outer);
 
-            if (outer == null)
-            {
-                return result;
-            }
+            List<TResult> result = new List<TResult>();
 
             foreach (var outerElement in outer)
             {
