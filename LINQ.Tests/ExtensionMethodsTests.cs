@@ -846,10 +846,10 @@ namespace LINQ.Tests
 
             ListCollection<int> secondTestList = new ListCollection<int>();
 
-            firstTestList.Add(5);
-            firstTestList.Add(4);
-            firstTestList.Add(5);
-            firstTestList.Add(6);
+            secondTestList.Add(5);
+            secondTestList.Add(4);
+            secondTestList.Add(5);
+            secondTestList.Add(6);
 
             IEnumerable<int> resultList = firstTestList.Union(
                 secondTestList,
@@ -875,10 +875,10 @@ namespace LINQ.Tests
 
             ListCollection<int> secondTestList = new ListCollection<int>();
 
-            firstTestList.Add(5);
-            firstTestList.Add(4);
-            firstTestList.Add(5);
-            firstTestList.Add(6);
+            secondTestList.Add(5);
+            secondTestList.Add(4);
+            secondTestList.Add(5);
+            secondTestList.Add(6);
 
             IEnumerable<int> resultList = firstTestList.Union(
                 secondTestList,
@@ -890,6 +890,24 @@ namespace LINQ.Tests
                                             item => Assert.Equal(5, item),
                                             item => Assert.Equal(4, item),
                                             item => Assert.Equal(6, item));
+        }
+
+        [Fact]
+        public void UnionWhenFirstIsNullShouldThrowException()
+        {
+            ListCollection<int> firstTestList = null;
+
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
+            secondTestList.Add(5);
+            secondTestList.Add(4);
+            secondTestList.Add(5);
+            secondTestList.Add(6);
+
+            Assert.Throws<ArgumentNullException>(() =>
+                firstTestList.Union(
+                secondTestList,
+                EqualityComparer<int>.Default));
         }
     }
 }
