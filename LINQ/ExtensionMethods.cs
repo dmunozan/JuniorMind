@@ -195,9 +195,21 @@ namespace LINQ
             this IEnumerable<TSource> source,
             IEqualityComparer<TSource> comparer)
         {
-            Console.WriteLine(source + " " + comparer);
+            Console.WriteLine(comparer);
 
-            return new List<TSource>();
+            List<TSource> result = new List<TSource>();
+
+            if (source == null)
+            {
+                return result;
+            }
+
+            foreach (var element in source)
+            {
+                result.Add(element);
+            }
+
+            return result;
         }
 
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
