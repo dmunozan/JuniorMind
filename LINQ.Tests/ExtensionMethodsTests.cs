@@ -1026,5 +1026,22 @@ namespace LINQ.Tests
                 secondTestList,
                 EqualityComparer<int>.Default));
         }
+
+        [Fact]
+        public void IntersectWhenNullSecondShouldThrowException()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            firstTestList.Add(3);
+            firstTestList.Add(4);
+            firstTestList.Add(5);
+
+            ListCollection<int> secondTestList = null;
+
+            Assert.Throws<ArgumentNullException>(() =>
+                firstTestList.Intersect(
+                secondTestList,
+                EqualityComparer<int>.Default));
+        }
     }
 }
