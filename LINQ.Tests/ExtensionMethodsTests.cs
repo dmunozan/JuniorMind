@@ -805,7 +805,8 @@ namespace LINQ.Tests
 
             ListCollection<int> secondTestList = new ListCollection<int>();
 
-            IEnumerable<int> resultList = firstTestList.Union(secondTestList,
+            IEnumerable<int> resultList = firstTestList.Union(
+                secondTestList,
                 EqualityComparer<int>.Default);
 
             Assert.Empty(resultList);
@@ -823,13 +824,43 @@ namespace LINQ.Tests
 
             ListCollection<int> secondTestList = new ListCollection<int>();
 
-            IEnumerable<int> resultList = firstTestList.Union(secondTestList,
+            IEnumerable<int> resultList = firstTestList.Union(
+                secondTestList,
                 EqualityComparer<int>.Default);
 
             Assert.Contains(1, resultList);
             Assert.Contains(2, resultList);
             Assert.Contains(3, resultList);
             Assert.Contains(4, resultList);
+        }
+
+        [Fact]
+        public void UnionWhenNoEmptySequenceShouldReturnDistinctElementsOfBothSequences()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            firstTestList.Add(1);
+            firstTestList.Add(2);
+            firstTestList.Add(3);
+            firstTestList.Add(2);
+
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
+            firstTestList.Add(5);
+            firstTestList.Add(4);
+            firstTestList.Add(5);
+            firstTestList.Add(6);
+
+            IEnumerable<int> resultList = firstTestList.Union(
+                secondTestList,
+                EqualityComparer<int>.Default);
+
+            Assert.Collection(resultList, item => Assert.Equal(1, item),
+                                            item => Assert.Equal(2, item),
+                                            item => Assert.Equal(3, item),
+                                            item => Assert.Equal(5, item),
+                                            item => Assert.Equal(4, item),
+                                            item => Assert.Equal(6, item));
         }
     }
 }
