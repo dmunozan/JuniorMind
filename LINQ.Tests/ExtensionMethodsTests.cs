@@ -941,5 +941,27 @@ namespace LINQ.Tests
 
             Assert.Empty(resultList);
         }
+
+        [Fact]
+        public void IntersectWhenNoMatchingElementsShouldReturnEmptySequence()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            firstTestList.Add(1);
+            firstTestList.Add(2);
+            firstTestList.Add(3);
+
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
+            secondTestList.Add(4);
+            secondTestList.Add(5);
+            secondTestList.Add(6);
+
+            IEnumerable<int> resultList = firstTestList.Intersect(
+                secondTestList,
+                EqualityComparer<int>.Default);
+
+            Assert.Empty(resultList);
+        }
     }
 }
