@@ -732,7 +732,7 @@ namespace LINQ.Tests
         {
             ListCollection<int> testList = new ListCollection<int>();
 
-            IEnumerable<int> resultList = testList.Distinct(default);
+            IEnumerable<int> resultList = testList.Distinct(EqualityComparer<int>.Default);
 
             Assert.Empty(resultList);
         }
@@ -747,12 +747,29 @@ namespace LINQ.Tests
             testList.Add(3);
             testList.Add(4);
 
-            IEnumerable<int> resultList = testList.Distinct(default);
+            IEnumerable<int> resultList = testList.Distinct(EqualityComparer<int>.Default);
 
             Assert.Contains(1, resultList);
             Assert.Contains(2, resultList);
             Assert.Contains(3, resultList);
             Assert.Contains(4, resultList);
+        }
+
+        [Fact]
+        public void DistinctWhenRepeatedElementsShouldReturnSequenceWithDistinctElements()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(1);
+            testList.Add(2);
+            testList.Add(3);
+            testList.Add(2);
+
+            IEnumerable<int> resultList = testList.Distinct(EqualityComparer<int>.Default);
+
+            Assert.Collection(resultList, item => Assert.Equal(1, item),
+                                            item => Assert.Equal(2, item),
+                                            item => Assert.Equal(3, item));
         }
     }
 }
