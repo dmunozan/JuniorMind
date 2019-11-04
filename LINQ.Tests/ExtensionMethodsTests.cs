@@ -771,5 +771,22 @@ namespace LINQ.Tests
                                             item => Assert.Equal(2, item),
                                             item => Assert.Equal(3, item));
         }
+
+        [Fact]
+        public void DistinctWhenComparerIsNullShouldUseDefaultComparer()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(1);
+            testList.Add(2);
+            testList.Add(3);
+            testList.Add(2);
+
+            IEnumerable<int> resultList = testList.Distinct(null);
+
+            Assert.Collection(resultList, item => Assert.Equal(1, item),
+                                            item => Assert.Equal(2, item),
+                                            item => Assert.Equal(3, item));
+        }
     }
 }
