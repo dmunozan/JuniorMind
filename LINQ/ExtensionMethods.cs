@@ -175,20 +175,10 @@ namespace LINQ
 
             CheckNullElement(resultSelector);
 
-            List<TResult> result = new List<TResult>();
-
-            foreach (var outerElement in outer)
-            {
-                foreach (var innerElement in inner)
-                {
-                    if (outerKeySelector(outerElement).Equals(innerKeySelector(innerElement)))
-                    {
-                        result.Add(resultSelector(outerElement, innerElement));
-                    }
-                }
-            }
-
-            return result;
+            return outer.ComparatorSelector(
+                inner,
+                (outerElement, innerElement) => outerKeySelector(outerElement).Equals(innerKeySelector(innerElement)),
+                (outerElement, innerElement) => resultSelector(outerElement, innerElement));
         }
 
         public static IEnumerable<TSource> Distinct<TSource>(
@@ -251,17 +241,29 @@ namespace LINQ
 
             CheckNullElement(second);
 
-            List<TSource> result = new List<TSource>();
-
             comparer = comparer ?? EqualityComparer<TSource>.Default;
 
-            foreach (var firstListElement in first)
+            return first.ComparatorSelector(
+                second,
+                (firstListElement, secondListElement) => comparer.Equals(firstListElement, secondListElement),
+                (firstListElement, secondListElement) => firstListElement);
+        }
+
+        private static IEnumerable<TResult> ComparatorSelector<TOuter, TInner, TResult>(
+            this IEnumerable<TOuter> outer,
+            IEnumerable<TInner> inner,
+            Func<TOuter, TInner, bool> comparator,
+            Func<TOuter, TInner, TResult> resultSelector)
+        {
+            List<TResult> result = new List<TResult>();
+
+            foreach (var outerElement in outer)
             {
-                foreach (var secondListElement in second)
+                foreach (var innerElement in inner)
                 {
-                    if (comparer.Equals(firstListElement, secondListElement))
+                    if (comparator(outerElement, innerElement))
                     {
-                        result.Add(firstListElement);
+                        result.Add(resultSelector(outerElement, innerElement));
                     }
                 }
             }
