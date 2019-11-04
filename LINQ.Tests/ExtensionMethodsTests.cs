@@ -726,5 +726,15 @@ namespace LINQ.Tests
                     pet => pet[1],
                     resultSelector));
         }
+
+        [Fact]
+        public void DistinctWhenEmptyShouldReturnEmptySequence()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            IEnumerable<int> resultList = testList.Distinct(default);
+
+            Assert.Empty(resultList);
+        }
     }
 }
