@@ -232,12 +232,9 @@ namespace LINQ
         {
             CheckNullElement(first);
 
-            List<TSource> result = new List<TSource>();
+            CheckNullElement(second);
 
-            if (second == null)
-            {
-                return result;
-            }
+            List<TSource> result = new List<TSource>();
 
             result.AddRange(first);
             result.AddRange(second);
