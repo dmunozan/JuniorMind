@@ -247,9 +247,25 @@ namespace LINQ
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer)
         {
-            Console.WriteLine(first + "" + second + comparer);
+            List<TSource> result = new List<TSource>();
 
-            return new List<TSource>();
+            if (first == null || second == null || comparer == null)
+            {
+                return result;
+            }
+
+            foreach (var firstListElement in first)
+            {
+                foreach (var secondListElement in second)
+                {
+                    if (comparer.Equals(firstListElement, secondListElement))
+                    {
+                        result.Add(firstListElement);
+                    }
+                }
+            }
+
+            return result;
         }
 
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
