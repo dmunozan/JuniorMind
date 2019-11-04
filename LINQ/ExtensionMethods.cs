@@ -223,6 +223,16 @@ namespace LINQ
             return result;
         }
 
+        public static IEnumerable<TSource> Union<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource> comparer)
+        {
+            Console.WriteLine(first + " " + second + " " + comparer);
+
+            return new List<TSource>();
+        }
+
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
         {
             foreach (var element in source)
