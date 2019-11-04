@@ -195,12 +195,9 @@ namespace LINQ
             this IEnumerable<TSource> source,
             IEqualityComparer<TSource> comparer)
         {
-            List<TSource> result = new List<TSource>();
+            CheckNullElement(source);
 
-            if (source == null)
-            {
-                return result;
-            }
+            List<TSource> result = new List<TSource>();
 
             comparer = comparer ?? EqualityComparer<TSource>.Default;
 
