@@ -197,10 +197,12 @@ namespace LINQ
         {
             List<TSource> result = new List<TSource>();
 
-            if (source == null || comparer == null)
+            if (source == null)
             {
                 return result;
             }
+
+            comparer = comparer ?? EqualityComparer<TSource>.Default;
 
             bool foundElement = false;
 
