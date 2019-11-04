@@ -963,5 +963,28 @@ namespace LINQ.Tests
 
             Assert.Empty(resultList);
         }
+
+        [Fact]
+        public void IntersectWhenMatchingElementsShouldReturnSequenceWithMatchingElements()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            firstTestList.Add(3);
+            firstTestList.Add(4);
+            firstTestList.Add(5);
+
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
+            secondTestList.Add(4);
+            secondTestList.Add(5);
+            secondTestList.Add(6);
+
+            IEnumerable<int> resultList = firstTestList.Intersect(
+                secondTestList,
+                EqualityComparer<int>.Default);
+
+            Assert.Collection(resultList, item => Assert.Equal(4, item),
+                                            item => Assert.Equal(5, item));
+        }
     }
 }
