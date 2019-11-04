@@ -797,5 +797,18 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentNullException>(() =>
                 testList.Distinct(EqualityComparer<int>.Default));
         }
+
+        [Fact]
+        public void UnionWhenTwoEmptySequencesShouldReturnEmptySequence()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
+            IEnumerable<int> resultList = firstTestList.Union(secondTestList,
+                EqualityComparer<int>.Default);
+
+            Assert.Empty(resultList);
+        }
     }
 }
