@@ -249,14 +249,11 @@ namespace LINQ
         {
             CheckNullElement(first);
 
+            CheckNullElement(second);
+
             List<TSource> result = new List<TSource>();
 
             comparer = comparer ?? EqualityComparer<TSource>.Default;
-
-            if (second == null)
-            {
-                return result;
-            }
 
             foreach (var firstListElement in first)
             {
