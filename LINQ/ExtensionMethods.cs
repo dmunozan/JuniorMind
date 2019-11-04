@@ -232,7 +232,7 @@ namespace LINQ
         {
             List<TSource> result = new List<TSource>();
 
-            if (first == null || second == null || comparer == null)
+            if (first == null || second == null)
             {
                 return result;
             }
