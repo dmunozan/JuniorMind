@@ -195,18 +195,30 @@ namespace LINQ
             this IEnumerable<TSource> source,
             IEqualityComparer<TSource> comparer)
         {
-            Console.WriteLine(comparer);
-
             List<TSource> result = new List<TSource>();
 
-            if (source == null)
+            if (source == null || comparer == null)
             {
                 return result;
             }
 
-            foreach (var element in source)
+            bool foundElement = false;
+
+            foreach (var sourceElement in source)
             {
-                result.Add(element);
+                foreach (var resultElement in result)
+                {
+                    if (comparer.Equals(sourceElement, resultElement))
+                    {
+                        foundElement = true;
+                        break;
+                    }
+                }
+
+                if (!foundElement)
+                {
+                    result.Add(sourceElement);
+                }
             }
 
             return result;
