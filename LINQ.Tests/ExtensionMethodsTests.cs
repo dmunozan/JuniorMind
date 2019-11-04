@@ -788,5 +788,14 @@ namespace LINQ.Tests
                                             item => Assert.Equal(2, item),
                                             item => Assert.Equal(3, item));
         }
+
+        [Fact]
+        public void DistinctWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<int> testList = null;
+
+            Assert.Throws<ArgumentNullException>(() =>
+                testList.Distinct(EqualityComparer<int>.Default));
+        }
     }
 }
