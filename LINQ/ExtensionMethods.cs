@@ -247,11 +247,13 @@ namespace LINQ
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer)
         {
+            CheckNullElement(first);
+
             List<TSource> result = new List<TSource>();
 
             comparer = comparer ?? EqualityComparer<TSource>.Default;
 
-            if (first == null || second == null)
+            if (second == null)
             {
                 return result;
             }
