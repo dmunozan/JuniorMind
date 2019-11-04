@@ -228,9 +228,17 @@ namespace LINQ
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer)
         {
-            Console.WriteLine(first + " " + second + " " + comparer);
+            List<TSource> result = new List<TSource>();
 
-            return new List<TSource>();
+            if (first == null || second == null || comparer == null)
+            {
+                return result;
+            }
+
+            result.AddRange(first);
+            result.AddRange(second);
+
+            return result.Distinct(comparer);
         }
 
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
