@@ -986,5 +986,28 @@ namespace LINQ.Tests
             Assert.Collection(resultList, item => Assert.Equal(4, item),
                                             item => Assert.Equal(5, item));
         }
+
+        [Fact]
+        public void IntersectWhenNullComparerShouldUseDefaultComparer()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            firstTestList.Add(3);
+            firstTestList.Add(4);
+            firstTestList.Add(5);
+
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
+            secondTestList.Add(4);
+            secondTestList.Add(5);
+            secondTestList.Add(6);
+
+            IEnumerable<int> resultList = firstTestList.Intersect(
+                secondTestList,
+                null);
+
+            Assert.Collection(resultList, item => Assert.Equal(4, item),
+                                            item => Assert.Equal(5, item));
+        }
     }
 }
