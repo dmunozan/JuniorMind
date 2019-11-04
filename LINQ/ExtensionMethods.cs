@@ -201,10 +201,12 @@ namespace LINQ
 
             comparer = comparer ?? EqualityComparer<TSource>.Default;
 
-            bool foundElement = false;
+            bool foundElement;
 
             foreach (var sourceElement in source)
             {
+                foundElement = false;
+
                 foreach (var resultElement in result)
                 {
                     if (comparer.Equals(sourceElement, resultElement))
