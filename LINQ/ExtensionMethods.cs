@@ -254,9 +254,9 @@ namespace LINQ
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer)
         {
-            Console.WriteLine(first + "" + second + comparer);
+            Console.WriteLine("" + second);
 
-            return new List<TSource>();
+            return first.Distinct(comparer);
         }
 
         private static IEnumerable<TResult> ComparatorSelector<TOuter, TInner, TResult>(
