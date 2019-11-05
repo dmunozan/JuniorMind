@@ -1179,5 +1179,23 @@ namespace LINQ.Tests
                 secondTestList,
                 EqualityComparer<int>.Default));
         }
+
+        [Fact]
+        public void GroupByWhenEmptySequenceShouldReturnEmptySequence()
+        {
+            ListCollection<double> testList = new ListCollection<double>();
+
+            IEnumerable<object> resultList = testList.GroupBy(
+                num => Math.Floor(num),
+                num => num,
+                (key, numCollection) => new
+                {
+                    Key = key,
+                    First = numCollection.First(num => Math.Floor(num) == key)
+                },
+                EqualityComparer<double>.Default);
+
+            Assert.Empty(resultList);
+        }
     }
 }
