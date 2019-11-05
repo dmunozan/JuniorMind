@@ -249,6 +249,16 @@ namespace LINQ
                 (firstListElement, secondListElement) => firstListElement);
         }
 
+        public static IEnumerable<TSource> Except<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource> comparer)
+        {
+            Console.WriteLine(first + "" + second + comparer);
+
+            return new List<TSource>();
+        }
+
         private static IEnumerable<TResult> ComparatorSelector<TOuter, TInner, TResult>(
             this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner,
