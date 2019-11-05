@@ -1120,5 +1120,29 @@ namespace LINQ.Tests
             Assert.Collection(resultList, item => Assert.Equal(1, item),
                                             item => Assert.Equal(2, item));
         }
+
+        [Fact]
+        public void ExceptWhenNullComparerShouldUseDefaultComparer()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            firstTestList.Add(1);
+            firstTestList.Add(2);
+            firstTestList.Add(3);
+            firstTestList.Add(2);
+
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
+            secondTestList.Add(4);
+            secondTestList.Add(5);
+            secondTestList.Add(3);
+
+            IEnumerable<int> resultList = firstTestList.Except(
+                secondTestList,
+                null);
+
+            Assert.Collection(resultList, item => Assert.Equal(1, item),
+                                            item => Assert.Equal(2, item));
+        }
     }
 }
