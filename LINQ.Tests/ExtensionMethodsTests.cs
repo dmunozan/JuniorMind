@@ -1051,6 +1051,24 @@ namespace LINQ.Tests
 
             ListCollection<int> secondTestList = new ListCollection<int>();
 
+            secondTestList.Add(4);
+            secondTestList.Add(5);
+            secondTestList.Add(6);
+
+            IEnumerable<int> resultList = firstTestList.Except(
+                secondTestList,
+                EqualityComparer<int>.Default);
+
+            Assert.Empty(resultList);
+        }
+
+        [Fact]
+        public void ExceptWhenFirstEmptySequenceShouldReturnEmptySequence()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            ListCollection<int> secondTestList = new ListCollection<int>();
+
             IEnumerable<int> resultList = firstTestList.Except(
                 secondTestList,
                 EqualityComparer<int>.Default);
