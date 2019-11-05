@@ -269,6 +269,18 @@ namespace LINQ
             return result;
         }
 
+        public static IEnumerable<TResult> GroupBy<TSource, TKey, TElement, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Console.WriteLine(source + "" + keySelector + elementSelector + resultSelector + comparer);
+
+            return new List<TResult>();
+        }
+
         private static IEnumerable<TResult> ComparatorSelector<TOuter, TInner, TResult>(
             this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner,
