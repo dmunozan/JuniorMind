@@ -256,6 +256,8 @@ namespace LINQ
         {
             List<TSource> result = new List<TSource>();
 
+            comparer = comparer ?? EqualityComparer<TSource>.Default;
+
             foreach (var element in first.Distinct(comparer))
             {
                 if (!second.Any(num => comparer.Equals(num, element)))
