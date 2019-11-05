@@ -1161,5 +1161,23 @@ namespace LINQ.Tests
                 secondTestList,
                 EqualityComparer<int>.Default));
         }
+
+        [Fact]
+        public void ExceptWhenNullSecondShouldThrowException()
+        {
+            ListCollection<int> firstTestList = new ListCollection<int>();
+
+            firstTestList.Add(1);
+            firstTestList.Add(2);
+            firstTestList.Add(3);
+            firstTestList.Add(2);
+
+            ListCollection<int> secondTestList = null;
+
+            Assert.Throws<ArgumentNullException>(() =>
+                firstTestList.Except(
+                secondTestList,
+                EqualityComparer<int>.Default));
+        }
     }
 }
