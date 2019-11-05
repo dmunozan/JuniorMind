@@ -254,9 +254,17 @@ namespace LINQ
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer)
         {
-            Console.WriteLine("" + second);
+            List<TSource> result = new List<TSource>();
 
-            return first.Distinct(comparer);
+            foreach (var element in first.Distinct(comparer))
+            {
+                if (!second.Any(num => comparer.Equals(num, element)))
+                {
+                    result.Add(element);
+                }
+            }
+
+            return result;
         }
 
         private static IEnumerable<TResult> ComparatorSelector<TOuter, TInner, TResult>(
