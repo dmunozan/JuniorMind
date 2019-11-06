@@ -276,9 +276,57 @@ namespace LINQ
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Console.WriteLine(source + "" + keySelector + elementSelector + resultSelector + comparer);
+            List<TResult> result = new List<TResult>();
 
-            return new List<TResult>();
+            if (source == null)
+            {
+                return result;
+            }
+
+            List<TKey> keyList = new List<TKey>();
+
+            foreach (var sourceElement in source)
+            {
+                keyList.Add(keySelector(sourceElement));
+            }
+
+            List<TKey> uniqueKeyList = new List<TKey>();
+
+            uniqueKeyList.AddRange(keyList.Distinct(comparer));
+
+            KeyElementList<TKey, TElement>[] keyElementLists = new KeyElementList<TKey, TElement>[uniqueKeyList.Count];
+
+            int index = 0;
+
+            foreach (var keyItem in uniqueKeyList)
+            {
+                keyElementLists[index].Key = keyItem;
+                keyElementLists[index].ElementList = new List<TElement>();
+                index++;
+            }
+
+            TKey key;
+
+            foreach (var sourceElement in source)
+            {
+                key = keySelector(sourceElement);
+
+                foreach (var keyElementList in keyElementLists)
+                {
+                    if (comparer.Equals(key, keyElementList.Key))
+                    {
+                        keyElementList.ElementList.Add(elementSelector(sourceElement));
+                        break;
+                    }
+                }
+            }
+
+            foreach (var keyElementList in keyElementLists)
+            {
+                result.Add(resultSelector(keyElementList.Key, keyElementList.ElementList));
+            }
+
+            return result;
         }
 
         private static IEnumerable<TResult> ComparatorSelector<TOuter, TInner, TResult>(
@@ -319,6 +367,12 @@ namespace LINQ
             }
 
             throw new ArgumentNullException(nameof(obj), "One of the arguments is null");
+        }
+
+        private struct KeyElementList<TKey, TElement>
+        {
+            public TKey Key;
+            public List<TElement> ElementList;
         }
     }
 }
