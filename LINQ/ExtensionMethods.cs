@@ -278,6 +278,8 @@ namespace LINQ
         {
             CheckNullElement(source);
 
+            CheckNullElement(keySelector);
+
             comparer = comparer ?? EqualityComparer<TKey>.Default;
 
             List<TResult> result = new List<TResult>();
