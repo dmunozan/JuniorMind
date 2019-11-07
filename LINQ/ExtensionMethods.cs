@@ -283,13 +283,9 @@ namespace LINQ
                 return result;
             }
 
-            List<TKey> keyList = new List<TKey>();
-
-            keyList.AddRange(source.Select(keySelector));
-
             List<TKey> uniqueKeyList = new List<TKey>();
 
-            uniqueKeyList.AddRange(keyList.Distinct(comparer));
+            uniqueKeyList.AddRange(source.Select(keySelector).Distinct(comparer));
 
             KeyElementList<TKey, TElement>[] keyElementLists = new KeyElementList<TKey, TElement>[uniqueKeyList.Count];
 
