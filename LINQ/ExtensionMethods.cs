@@ -285,10 +285,7 @@ namespace LINQ
 
             List<TKey> keyList = new List<TKey>();
 
-            foreach (var sourceElement in source)
-            {
-                keyList.Add(keySelector(sourceElement));
-            }
+            keyList.AddRange(source.Select(keySelector));
 
             List<TKey> uniqueKeyList = new List<TKey>();
 
