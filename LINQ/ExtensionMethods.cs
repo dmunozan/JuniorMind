@@ -276,14 +276,11 @@ namespace LINQ
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
+            CheckNullElement(source);
+
             comparer = comparer ?? EqualityComparer<TKey>.Default;
 
             List<TResult> result = new List<TResult>();
-
-            if (source == null)
-            {
-                return result;
-            }
 
             List<TKey> uniqueKeyList = new List<TKey>();
 
