@@ -1287,5 +1287,22 @@ namespace LINQ.Tests
                     First = 0.5
                 }, item));
         }
+
+        [Fact]
+        public void GroupByWhenNullSourceShouldThrowException()
+        {
+            ListCollection<double> testList = null;
+
+            Assert.Throws<ArgumentNullException>(() =>
+                testList.GroupBy(
+                num => Math.Floor(num),
+                num => num,
+                (key, numCollection) => new
+                {
+                    Key = key,
+                    First = numCollection.First(x => Math.Floor(x) == key)
+                },
+                EqualityComparer<double>.Default));
+        }
     }
 }
