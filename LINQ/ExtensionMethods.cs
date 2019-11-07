@@ -282,6 +282,8 @@ namespace LINQ
 
             CheckNullElement(elementSelector);
 
+            CheckNullElement(resultSelector);
+
             comparer = comparer ?? EqualityComparer<TKey>.Default;
 
             List<TResult> result = new List<TResult>();
