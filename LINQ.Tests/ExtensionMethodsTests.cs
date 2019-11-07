@@ -1242,5 +1242,50 @@ namespace LINQ.Tests
                     First = 0.5
                 }, item));
         }
+
+        [Fact]
+        public void GroupByWhenNullComparerShouldUseDefaultComparer()
+        {
+            ListCollection<double> testList = new ListCollection<double>();
+
+            testList.Add(6.6);
+            testList.Add(1.7);
+            testList.Add(8.5);
+            testList.Add(0.5);
+            testList.Add(1.4);
+            testList.Add(8.8);
+
+            IEnumerable<object> resultList = testList.GroupBy(
+                num => Math.Floor(num),
+                num => num,
+                (key, numCollection) => new
+                {
+                    Key = key,
+                    First = numCollection.First(x => Math.Floor(x) == key)
+                },
+                null);
+
+            Assert.Collection(resultList,
+                item => Assert.Equal(new
+                {
+                    Key = 6d,
+                    First = 6.6
+                }, item),
+                item => Assert.Equal(new
+                {
+                    Key = 1d,
+                    First = 1.7
+                }, item),
+                item => Assert.Equal(new
+                {
+                    Key = 8d,
+                    First = 8.5
+                }, item),
+                item => Assert.Equal(new
+                {
+                    Key = 0d,
+                    First = 0.5
+                }, item));
+        }
     }
 }
