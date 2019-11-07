@@ -276,6 +276,8 @@ namespace LINQ
             Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
+            comparer = comparer ?? EqualityComparer<TKey>.Default;
+
             List<TResult> result = new List<TResult>();
 
             if (source == null)
