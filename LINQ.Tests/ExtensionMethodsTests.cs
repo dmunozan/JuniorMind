@@ -1328,5 +1328,31 @@ namespace LINQ.Tests
                 },
                 EqualityComparer<double>.Default));
         }
+
+        [Fact]
+        public void GroupByWhenNullElementSelectorShouldThrowException()
+        {
+            ListCollection<double> testList = new ListCollection<double>();
+
+            testList.Add(6.6);
+            testList.Add(1.7);
+            testList.Add(8.5);
+            testList.Add(0.5);
+            testList.Add(1.4);
+            testList.Add(8.8);
+
+            Func<double, double> elementSelector = null;
+
+            Assert.Throws<ArgumentNullException>(() =>
+                testList.GroupBy(
+                num => Math.Floor(num),
+                elementSelector,
+                (key, numCollection) => new
+                {
+                    Key = key,
+                    First = numCollection.First(x => Math.Floor(x) == key)
+                },
+                EqualityComparer<double>.Default));
+        }
     }
 }
