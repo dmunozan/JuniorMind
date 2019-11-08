@@ -189,7 +189,7 @@ namespace LINQ
 
             List<TSource> result = new List<TSource>();
 
-            comparer = comparer ?? EqualityComparer<TSource>.Default;
+            comparer ??= EqualityComparer<TSource>.Default;
 
             bool foundElement;
 
@@ -241,7 +241,7 @@ namespace LINQ
 
             CheckNullElement(second);
 
-            comparer = comparer ?? EqualityComparer<TSource>.Default;
+            comparer ??= EqualityComparer<TSource>.Default;
 
             return first.ComparatorSelector(
                 second,
@@ -256,7 +256,7 @@ namespace LINQ
         {
             List<TSource> result = new List<TSource>();
 
-            comparer = comparer ?? EqualityComparer<TSource>.Default;
+            comparer ??= EqualityComparer<TSource>.Default;
 
             foreach (var element in first.Distinct(comparer))
             {
@@ -284,7 +284,7 @@ namespace LINQ
 
             CheckNullElement(resultSelector);
 
-            comparer = comparer ?? EqualityComparer<TKey>.Default;
+            comparer ??= EqualityComparer<TKey>.Default;
 
             List<TResult> result = new List<TResult>();
 
