@@ -313,20 +313,16 @@ namespace LINQ
             Func<TOuter, TInner, bool> comparator,
             Func<TOuter, TInner, TResult> resultSelector)
         {
-            List<TResult> result = new List<TResult>();
-
             foreach (var outerElement in outer)
             {
                 foreach (var innerElement in inner)
                 {
                     if (comparator(outerElement, innerElement))
                     {
-                        result.Add(resultSelector(outerElement, innerElement));
+                        yield return resultSelector(outerElement, innerElement);
                     }
                 }
             }
-
-            return result;
         }
 
         private static IEnumerable<TResult> InternalSelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
