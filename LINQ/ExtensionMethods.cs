@@ -87,17 +87,7 @@ namespace LINQ
 
             CheckNullElement(predicate);
 
-            List<TSource> result = new List<TSource>();
-
-            foreach (var element in source)
-            {
-                if (predicate(element))
-                {
-                    result.Add(element);
-                }
-            }
-
-            return result;
+            return InternalWhere(source, predicate);
         }
 
         public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
@@ -354,6 +344,17 @@ namespace LINQ
             foreach (var element in source)
             {
                 yield return selector(element);
+            }
+        }
+
+        private static IEnumerable<TSource> InternalWhere<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            foreach (var element in source)
+            {
+                if (predicate(element))
+                {
+                    yield return element;
+                }
             }
         }
 
