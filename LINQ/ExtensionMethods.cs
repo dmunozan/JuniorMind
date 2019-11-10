@@ -291,7 +291,7 @@ namespace LINQ
 
                 foreach (var keyElementList in keyElementLists)
                 {
-                    if (comparer.Equals(key, keyElementList.Key))
+                    if (comparer.GetHashCode(key) == comparer.GetHashCode(keyElementList.Key))
                     {
                         keyElementList.ElementList.Add(elementSelector(sourceElement));
                         break;
