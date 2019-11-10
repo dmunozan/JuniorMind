@@ -240,7 +240,7 @@ namespace LINQ
 
             foreach (var element in first.Distinct(comparer))
             {
-                if (!second.Any(num => comparer.Equals(num, element)))
+                if (!second.Any(num => comparer.GetHashCode(num) == comparer.GetHashCode(element)))
                 {
                     result.Add(element);
                 }
