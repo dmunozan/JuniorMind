@@ -179,7 +179,7 @@ namespace LINQ
 
                 foreach (var resultElement in result)
                 {
-                    if (comparer.Equals(sourceElement, resultElement))
+                    if (comparer.GetHashCode(sourceElement) == comparer.GetHashCode(resultElement))
                     {
                         foundElement = true;
                         break;
