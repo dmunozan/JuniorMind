@@ -225,7 +225,7 @@ namespace LINQ
 
             return first.ComparatorSelector(
                 second,
-                (firstListElement, secondListElement) => comparer.Equals(firstListElement, secondListElement),
+                (firstListElement, secondListElement) => comparer.GetHashCode(firstListElement) == comparer.GetHashCode(secondListElement),
                 (firstListElement, secondListElement) => firstListElement);
         }
 
