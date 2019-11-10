@@ -62,7 +62,7 @@ namespace LINQ
 
             CheckNullElement(selector);
 
-            return InternalSelect(source, selector);
+            return source.InternalSelect(selector);
         }
 
         public static IEnumerable<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, IEnumerable<TResult>> selector)
@@ -87,7 +87,7 @@ namespace LINQ
 
             CheckNullElement(predicate);
 
-            return InternalWhere(source, predicate);
+            return source.InternalWhere(predicate);
         }
 
         public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
@@ -116,17 +116,7 @@ namespace LINQ
 
             CheckNullElement(resultSelector);
 
-            List<TResult> result = new List<TResult>();
-
-            var firstEnumerator = first.GetEnumerator();
-            var secondEnumerator = second.GetEnumerator();
-
-            while (firstEnumerator.MoveNext() && secondEnumerator.MoveNext())
-            {
-                result.Add(resultSelector(firstEnumerator.Current, secondEnumerator.Current));
-            }
-
-            return result;
+            return first.InternalZip(second, resultSelector);
         }
 
         public static TAccumulate Aggregate<TSource, TAccumulate>(
@@ -355,6 +345,17 @@ namespace LINQ
                 {
                     yield return element;
                 }
+            }
+        }
+
+        private static IEnumerable<TResult> InternalZip<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
+        {
+            var firstEnumerator = first.GetEnumerator();
+            var secondEnumerator = second.GetEnumerator();
+
+            while (firstEnumerator.MoveNext() && secondEnumerator.MoveNext())
+            {
+                yield return resultSelector(firstEnumerator.Current, secondEnumerator.Current);
             }
         }
 
