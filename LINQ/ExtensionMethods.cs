@@ -172,10 +172,6 @@ namespace LINQ
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer)
         {
-            CheckNullElement(first);
-
-            CheckNullElement(second);
-
             HashSet<TSource> result = new HashSet<TSource>(first, comparer);
 
             result.UnionWith(second);
