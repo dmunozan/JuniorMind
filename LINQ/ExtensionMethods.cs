@@ -228,15 +228,13 @@ namespace LINQ
 
             List<TResult> result = new List<TResult>();
 
-            List<TKey> uniqueKeyList = new List<TKey>();
+            HashSet<TKey> uniqueKeySet = new HashSet<TKey>(source.Select(keySelector), comparer);
 
-            uniqueKeyList.AddRange(source.Select(keySelector).Distinct(comparer));
-
-            KeyElementList<TKey, TElement>[] keyElementLists = new KeyElementList<TKey, TElement>[uniqueKeyList.Count];
+            KeyElementList<TKey, TElement>[] keyElementLists = new KeyElementList<TKey, TElement>[uniqueKeySet.Count];
 
             int index = 0;
 
-            foreach (var keyItem in uniqueKeyList)
+            foreach (var keyItem in uniqueKeySet)
             {
                 keyElementLists[index].Key = keyItem;
                 keyElementLists[index].ElementList = new List<TElement>();
