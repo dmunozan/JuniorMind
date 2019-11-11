@@ -167,32 +167,9 @@ namespace LINQ
         {
             CheckNullElement(source);
 
-            List<TSource> result = new List<TSource>();
-
             comparer ??= EqualityComparer<TSource>.Default;
 
-            bool foundElement;
-
-            foreach (var sourceElement in source)
-            {
-                foundElement = false;
-
-                foreach (var resultElement in result)
-                {
-                    if (comparer.GetHashCode(sourceElement) == comparer.GetHashCode(resultElement))
-                    {
-                        foundElement = true;
-                        break;
-                    }
-                }
-
-                if (!foundElement)
-                {
-                    result.Add(sourceElement);
-                }
-            }
-
-            return result;
+            return new HashSet<TSource>(source, comparer);
         }
 
         public static IEnumerable<TSource> Union<TSource>(
