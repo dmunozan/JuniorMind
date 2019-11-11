@@ -199,10 +199,11 @@ namespace LINQ
 
             comparer ??= EqualityComparer<TSource>.Default;
 
-            return first.ComparatorSelector(
-                second,
-                (firstListElement, secondListElement) => comparer.GetHashCode(firstListElement) == comparer.GetHashCode(secondListElement),
-                (firstListElement, secondListElement) => firstListElement);
+            HashSet<TSource> result = new HashSet<TSource>(first, comparer);
+
+            result.IntersectWith(second);
+
+            return result;
         }
 
         public static IEnumerable<TSource> Except<TSource>(
