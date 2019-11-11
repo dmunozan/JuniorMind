@@ -172,6 +172,8 @@ namespace LINQ
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer)
         {
+            comparer ??= EqualityComparer<TSource>.Default;
+
             HashSet<TSource> result = new HashSet<TSource>(first, comparer);
 
             result.UnionWith(second);
@@ -198,17 +200,11 @@ namespace LINQ
             IEnumerable<TSource> second,
             IEqualityComparer<TSource> comparer)
         {
-            List<TSource> result = new List<TSource>();
-
             comparer ??= EqualityComparer<TSource>.Default;
 
-            foreach (var element in first.Distinct(comparer))
-            {
-                if (!second.Any(num => comparer.GetHashCode(num) == comparer.GetHashCode(element)))
-                {
-                    result.Add(element);
-                }
-            }
+            HashSet<TSource> result = new HashSet<TSource>(first, comparer);
+
+            result.ExceptWith(second);
 
             return result;
         }
