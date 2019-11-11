@@ -155,10 +155,7 @@ namespace LINQ
 
             CheckNullElement(resultSelector);
 
-            return outer.ComparatorSelector(
-                inner,
-                (outerElement, innerElement) => outerKeySelector(outerElement).Equals(innerKeySelector(innerElement)),
-                (outerElement, innerElement) => resultSelector(outerElement, innerElement));
+            return outer.InternalJoin(inner, outerKeySelector, innerKeySelector, resultSelector);
         }
 
         public static IEnumerable<TSource> Distinct<TSource>(
@@ -284,17 +281,18 @@ namespace LINQ
             return result;
         }
 
-        private static IEnumerable<TResult> ComparatorSelector<TOuter, TInner, TResult>(
+        private static IEnumerable<TResult> InternalJoin<TOuter, TInner, TKey, TResult>(
             this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner,
-            Func<TOuter, TInner, bool> comparator,
+            Func<TOuter, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
             Func<TOuter, TInner, TResult> resultSelector)
         {
             foreach (var outerElement in outer)
             {
                 foreach (var innerElement in inner)
                 {
-                    if (comparator(outerElement, innerElement))
+                    if (outerKeySelector(outerElement).Equals(innerKeySelector(innerElement)))
                     {
                         yield return resultSelector(outerElement, innerElement);
                     }
