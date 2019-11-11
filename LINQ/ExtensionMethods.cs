@@ -181,12 +181,11 @@ namespace LINQ
 
             CheckNullElement(second);
 
-            List<TSource> result = new List<TSource>();
+            HashSet<TSource> result = new HashSet<TSource>(first, comparer);
 
-            result.AddRange(first);
-            result.AddRange(second);
+            result.UnionWith(second);
 
-            return result.Distinct(comparer);
+            return result;
         }
 
         public static IEnumerable<TSource> Intersect<TSource>(
