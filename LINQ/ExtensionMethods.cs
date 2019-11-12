@@ -226,43 +226,7 @@ namespace LINQ
 
             comparer ??= EqualityComparer<TKey>.Default;
 
-            List<TResult> result = new List<TResult>();
-
-            HashSet<TKey> uniqueKeySet = new HashSet<TKey>(source.Select(keySelector), comparer);
-
-            KeyElementList<TKey, TElement>[] keyElementLists = new KeyElementList<TKey, TElement>[uniqueKeySet.Count];
-
-            int index = 0;
-
-            foreach (var keyItem in uniqueKeySet)
-            {
-                keyElementLists[index].Key = keyItem;
-                keyElementLists[index].ElementList = new List<TElement>();
-                index++;
-            }
-
-            TKey key;
-
-            foreach (var sourceElement in source)
-            {
-                key = keySelector(sourceElement);
-
-                foreach (var keyElementList in keyElementLists)
-                {
-                    if (key.Equals(keyElementList.Key))
-                    {
-                        keyElementList.ElementList.Add(elementSelector(sourceElement));
-                        break;
-                    }
-                }
-            }
-
-            foreach (var keyElementList in keyElementLists)
-            {
-                result.Add(resultSelector(keyElementList.Key, keyElementList.ElementList));
-            }
-
-            return result;
+            return source.InternalGroupBy(keySelector, elementSelector, resultSelector, comparer);
         }
 
         private static IEnumerable<TResult> InternalJoin<TOuter, TInner, TKey, TResult>(
@@ -314,6 +278,35 @@ namespace LINQ
             }
         }
 
+        private static IEnumerable<TResult> InternalGroupBy<TSource, TKey, TElement, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Dictionary<TKey, List<TElement>> groupDictionary = new Dictionary<TKey, List<TElement>>(comparer);
+
+            TKey key;
+
+            foreach (var sourceElement in source)
+            {
+                key = keySelector(sourceElement);
+
+                if (!groupDictionary.ContainsKey(key))
+                {
+                    groupDictionary.Add(key, new List<TElement>());
+                }
+
+                groupDictionary[key].Add(elementSelector(sourceElement));
+            }
+
+            foreach (var keyElementListPair in groupDictionary)
+            {
+                yield return resultSelector(keyElementListPair.Key, keyElementListPair.Value);
+            }
+        }
+
         private static void CheckNullElement(object obj)
         {
             if (obj != null)
@@ -322,12 +315,6 @@ namespace LINQ
             }
 
             throw new ArgumentNullException(nameof(obj), "One of the arguments is null");
-        }
-
-        private struct KeyElementList<TKey, TElement>
-        {
-            public TKey Key;
-            public List<TElement> ElementList;
         }
     }
 }
