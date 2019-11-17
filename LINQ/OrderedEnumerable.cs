@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LINQ
 {
-    public class IOrderedEnumerable<TElement> : IEnumerable<TElement>
+    public class OrderedEnumerable<TElement> : IOrderedEnumerable<TElement>
     {
         readonly List<TElement> orderedList = new List<TElement>();
 
-        public IOrderedEnumerable(IEnumerable<TElement> source)
+        public OrderedEnumerable(IEnumerable<TElement> source)
         {
             orderedList.AddRange(source);
         }
 
-        public IOrderedEnumerable<TElement> CreateOrderedEnumerable<TKey>(Func<TElement, TKey> keySelector, IComparer<TKey> comparer)
+        public IOrderedEnumerable<TElement> CreateOrderedEnumerable<TKey>(Func<TElement, TKey> keySelector, IComparer<TKey> comparer, bool descending)
         {
-            Console.WriteLine(keySelector + "" + comparer);
+            Console.WriteLine(keySelector + "" + comparer + descending);
 
             return this;
         }
