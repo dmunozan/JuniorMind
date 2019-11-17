@@ -11,9 +11,9 @@ namespace LINQ.Tests
         {
             string[] testArray = {  };
 
-            OrderedEnumerable<string> initialList = new OrderedEnumerable<string>(testArray);
-
-            IOrderedEnumerable<string> orderedList = initialList.CreateOrderedEnumerable(x => 1, Comparer<int>.Default, false);
+            OrderedEnumerable<string> orderedList =
+                (OrderedEnumerable<string>)new OrderedEnumerable<string>(testArray)
+                        .CreateOrderedEnumerable(x => 1, Comparer<int>.Default, false);
 
             Assert.Empty(orderedList);
         }
