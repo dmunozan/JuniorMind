@@ -22,12 +22,9 @@ namespace LINQ
 
         private static IEnumerable<int> InternalRange(int start, int count)
         {
-            int end = start + count;
-
-            while (start < end)
+            for (int i = 0; i < count; i++)
             {
-                yield return start;
-                start++;
+                yield return start + i;
             }
         }
     }
