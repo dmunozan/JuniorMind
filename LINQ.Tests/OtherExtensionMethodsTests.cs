@@ -53,5 +53,13 @@ namespace LINQ.Tests
             Assert.Collection(numbers,
                 item => Assert.Equal(int.MaxValue, item));
         }
+
+        [Fact]
+        public void RangeWhenStartIsMinValueAndCount0ShouldReturnEmptySequence()
+        {
+            IEnumerable<int> numbers = OtherExtensionMethods.Range(int.MinValue, 0);
+
+            Assert.Empty(numbers);
+        }
     }
 }
