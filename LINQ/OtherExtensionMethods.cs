@@ -28,6 +28,14 @@ namespace LINQ
             }
         }
 
+        public static IEnumerable<TResult> Repeat<TResult>(TResult element, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                yield return element;
+            }
+        }
+
         private static IEnumerable<int> InternalRange(int start, int count)
         {
             for (int i = 0; i < count; i++)
