@@ -74,9 +74,14 @@ namespace LINQ
             this IEnumerable<TSource> first,
             IEnumerable<TSource> second)
         {
-            Console.WriteLine(first + "" + second);
+            List<TSource> concatenatedList = new List<TSource>(first);
 
-            return (first.Count(x => true) != 0) ? first : second;
+            concatenatedList.AddRange(second);
+
+            foreach (var element in concatenatedList)
+            {
+                yield return element;
+            }
         }
 
         private static IEnumerable<int> InternalRange(int start, int count)
