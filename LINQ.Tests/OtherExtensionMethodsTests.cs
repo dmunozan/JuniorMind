@@ -35,5 +35,14 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 numbers = OtherExtensionMethods.Range(1, -1));
         }
+
+        [Fact]
+        public void RangeWhenLastValueIsMoreThanMaxValueShouldThrowException()
+        {
+            IEnumerable<int> numbers;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                numbers = OtherExtensionMethods.Range(int.MaxValue, 2));
+        }
     }
 }
