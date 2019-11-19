@@ -42,9 +42,22 @@ namespace LINQ
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
         {
-            Console.WriteLine(source + "" + predicate);
+            if (source == null)
+            {
+                return 0;
+            }
 
-            return 0;
+            int count = 0;
+
+            foreach (var element in source)
+            {
+                if (predicate(element))
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
 
         private static IEnumerable<int> InternalRange(int start, int count)
