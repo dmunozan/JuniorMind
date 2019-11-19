@@ -44,7 +44,7 @@ namespace LINQ
         {
             if (source == null)
             {
-                return 0;
+                throw new ArgumentNullException(nameof(source));
             }
 
             int count = 0;
