@@ -208,5 +208,20 @@ namespace LINQ.Tests
                 item => Assert.Equal("green", item),
                 item => Assert.Equal("blue", item));
         }
+
+        [Fact]
+        public void ConcatWhenNullFirstShouldThrowException()
+        {
+            ListCollection<string> firstTestList = null;
+
+            ListCollection<string> secondTestList = new ListCollection<string>();
+
+            secondTestList.Add("green");
+            secondTestList.Add("blue");
+
+            IEnumerable<string> resultList;
+
+            Assert.Throws<ArgumentNullException>(() => resultList = firstTestList.Concat(secondTestList));
+        }
     }
 }
