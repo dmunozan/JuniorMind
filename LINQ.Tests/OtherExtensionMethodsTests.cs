@@ -117,5 +117,13 @@ namespace LINQ.Tests
 
             Assert.Equal(2, testList.Count(x => x % 2 == 0));
         }
+
+        [Fact]
+        public void CountWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<int> testList = null;
+
+            Assert.Throws<ArgumentNullException>(() => testList.Count(x => x % 2 == 0));
+        }
     }
 }
