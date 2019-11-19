@@ -61,5 +61,13 @@ namespace LINQ.Tests
 
             Assert.Empty(numbers);
         }
+
+        [Fact]
+        public void EmptyWhenAnyShouldReturnEmptySequence()
+        {
+            IEnumerable<int> emptySequence = OtherExtensionMethods.Empty<int>();
+
+            Assert.Empty(emptySequence);
+        }
     }
 }
