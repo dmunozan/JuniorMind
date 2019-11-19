@@ -69,5 +69,13 @@ namespace LINQ.Tests
 
             Assert.Empty(emptySequence);
         }
+
+        [Fact]
+        public void RepeatWhenCountIs0ShouldReturnEmptySequence()
+        {
+            IEnumerable<string> strings = OtherExtensionMethods.Repeat("test", 0);
+
+            Assert.Empty(strings);
+        }
     }
 }
