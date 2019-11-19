@@ -152,5 +152,22 @@ namespace LINQ.Tests
 
             Assert.Empty(resultList);
         }
+
+        [Fact]
+        public void ConcatWhenFirstEmptySequenceShouldReturnSecondSequence()
+        {
+            ListCollection<string> firstTestList = new ListCollection<string>();
+
+            ListCollection<string> secondTestList = new ListCollection<string>();
+
+            secondTestList.Add("green");
+            secondTestList.Add("blue");
+
+            IEnumerable<string> resultList = firstTestList.Concat(secondTestList);
+
+            Assert.Collection(resultList,
+                item => Assert.Equal("green", item),
+                item => Assert.Equal("blue", item));
+        }
     }
 }
