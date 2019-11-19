@@ -76,7 +76,7 @@ namespace LINQ
         {
             Console.WriteLine(first + "" + second);
 
-            return new List<TSource>();
+            return second;
         }
 
         private static IEnumerable<int> InternalRange(int start, int count)
