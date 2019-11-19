@@ -70,6 +70,15 @@ namespace LINQ
             return count;
         }
 
+        public static IEnumerable<TSource> Concat<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second)
+        {
+            Console.WriteLine(first + "" + second);
+
+            return new List<TSource>();
+        }
+
         private static IEnumerable<int> InternalRange(int start, int count)
         {
             for (int i = 0; i < count; i++)
