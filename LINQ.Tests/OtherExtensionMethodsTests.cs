@@ -77,5 +77,15 @@ namespace LINQ.Tests
 
             Assert.Empty(strings);
         }
+
+        [Fact]
+        public void RepeatWhenCountIsMoreThan0ShouldReturnSequenceWithCountElements()
+        {
+            IEnumerable<string> strings = OtherExtensionMethods.Repeat("test", 2);
+
+            Assert.Collection(strings,
+                item => Assert.Equal("test", item),
+                item => Assert.Equal("test", item));
+        }
     }
 }
