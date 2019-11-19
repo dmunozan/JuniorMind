@@ -20,6 +20,14 @@ namespace LINQ
             return InternalRange(start, count);
         }
 
+        public static IEnumerable<TResult> Empty<TResult>()
+        {
+            foreach (var element in new List<TResult>())
+            {
+                yield return element;
+            }
+        }
+
         private static IEnumerable<int> InternalRange(int start, int count)
         {
             for (int i = 0; i < count; i++)
