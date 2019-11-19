@@ -140,5 +140,17 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testList.Count(predicate));
         }
+
+        [Fact]
+        public void ConcatWhenTwoEmptySequencesShouldReturnEmptySequence()
+        {
+            ListCollection<string> firstTestList = new ListCollection<string>();
+
+            ListCollection<string> secondTestList = new ListCollection<string>();
+
+            IEnumerable<string> resultList = firstTestList.Concat(secondTestList);
+
+            Assert.Empty(resultList);
+        }
     }
 }
