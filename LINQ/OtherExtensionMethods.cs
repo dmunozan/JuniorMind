@@ -76,7 +76,7 @@ namespace LINQ
         {
             Console.WriteLine(first + "" + second);
 
-            return second;
+            return (first.Count(x => true) != 0) ? first : second;
         }
 
         private static IEnumerable<int> InternalRange(int start, int count)
