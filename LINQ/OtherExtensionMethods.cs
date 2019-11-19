@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LINQ
 {
-    public class OtherExtensionMethods
+    public static class OtherExtensionMethods
     {
         public static IEnumerable<int> Range(int start, int count)
         {
@@ -36,6 +36,15 @@ namespace LINQ
             }
 
             return InternalRepeat(element, count);
+        }
+
+        public static int Count<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate)
+        {
+            Console.WriteLine(source + "" + predicate);
+
+            return 0;
         }
 
         private static IEnumerable<int> InternalRange(int start, int count)
