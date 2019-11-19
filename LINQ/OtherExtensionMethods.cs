@@ -12,7 +12,7 @@ namespace LINQ
                 throw new ArgumentOutOfRangeException(nameof(count), "count is less than 0");
             }
 
-            if (count > 0 && start > int.MaxValue - (count - 1))
+            if ((long)start + (long)count - 1 > int.MaxValue)
             {
                 throw new ArgumentOutOfRangeException(nameof(start), "the last value of the range is over MaxValue");
             }
