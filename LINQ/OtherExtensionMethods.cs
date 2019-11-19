@@ -30,10 +30,12 @@ namespace LINQ
 
         public static IEnumerable<TResult> Repeat<TResult>(TResult element, int count)
         {
-            for (int i = 0; i < count; i++)
+            if (count < 0)
             {
-                yield return element;
+                throw new ArgumentOutOfRangeException(nameof(count), "count is less than 0");
             }
+
+            return InternalRepeat(element, count);
         }
 
         private static IEnumerable<int> InternalRange(int start, int count)
@@ -41,6 +43,14 @@ namespace LINQ
             for (int i = 0; i < count; i++)
             {
                 yield return start + i;
+            }
+        }
+
+        private static IEnumerable<TResult> InternalRepeat<TResult>(TResult element, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                yield return element;
             }
         }
     }
