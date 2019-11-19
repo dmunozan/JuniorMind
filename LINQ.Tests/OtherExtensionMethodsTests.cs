@@ -87,5 +87,14 @@ namespace LINQ.Tests
                 item => Assert.Equal("test", item),
                 item => Assert.Equal("test", item));
         }
+
+        [Fact]
+        public void RepeatWhenCountIsLessThan0ShouldThrowException()
+        {
+            IEnumerable<string> strings;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                strings = OtherExtensionMethods.Repeat("test", -1));
+        }
     }
 }
