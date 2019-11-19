@@ -47,6 +47,11 @@ namespace LINQ
                 throw new ArgumentNullException(nameof(source));
             }
 
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
             int count = 0;
 
             foreach (var element in source)
