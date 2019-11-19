@@ -17,5 +17,13 @@ namespace LINQ.Tests
                 item => Assert.Equal(4, item),
                 item => Assert.Equal(5, item));
         }
+
+        [Fact]
+        public void RangeWhenCountIs0ShouldReturnEmptySequence()
+        {
+            IEnumerable<int> numbers = OtherExtensionMethods.Range(1, 0);
+
+            Assert.Empty(numbers);
+        }
     }
 }
