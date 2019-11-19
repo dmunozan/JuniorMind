@@ -58,6 +58,11 @@ namespace LINQ
             {
                 if (predicate(element))
                 {
+                    if (count == int.MaxValue)
+                    {
+                        throw new OverflowException(nameof(count));
+                    }
+
                     count++;
                 }
             }
