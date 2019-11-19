@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace LINQ.Tests
@@ -24,6 +25,15 @@ namespace LINQ.Tests
             IEnumerable<int> numbers = OtherExtensionMethods.Range(1, 0);
 
             Assert.Empty(numbers);
+        }
+
+        [Fact]
+        public void RangeWhenCountIsLessThan0ShouldThrowException()
+        {
+            IEnumerable<int> numbers;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                numbers = OtherExtensionMethods.Range(1, -1));
         }
     }
 }
