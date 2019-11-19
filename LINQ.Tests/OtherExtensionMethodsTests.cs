@@ -186,5 +186,27 @@ namespace LINQ.Tests
                 item => Assert.Equal("red", item),
                 item => Assert.Equal("green", item));
         }
+
+        [Fact]
+        public void ConcatWhenNoEmptySequenceShouldReturnConcatenatedSequences()
+        {
+            ListCollection<string> firstTestList = new ListCollection<string>();
+
+            firstTestList.Add("red");
+            firstTestList.Add("green");
+
+            ListCollection<string> secondTestList = new ListCollection<string>();
+
+            secondTestList.Add("green");
+            secondTestList.Add("blue");
+
+            IEnumerable<string> resultList = firstTestList.Concat(secondTestList);
+
+            Assert.Collection(resultList,
+                item => Assert.Equal("red", item),
+                item => Assert.Equal("green", item),
+                item => Assert.Equal("green", item),
+                item => Assert.Equal("blue", item));
+        }
     }
 }
