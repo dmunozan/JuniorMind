@@ -44,5 +44,14 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 numbers = OtherExtensionMethods.Range(int.MaxValue, 2));
         }
+
+        [Fact]
+        public void RangeWhenStartIsMaxValueAndCount1ShouldReturnMaxValueAsOnlyValue()
+        {
+            IEnumerable<int> numbers = OtherExtensionMethods.Range(int.MaxValue, 1);
+
+            Assert.Collection(numbers,
+                item => Assert.Equal(int.MaxValue, item));
+        }
     }
 }
