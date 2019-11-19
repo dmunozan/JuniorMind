@@ -104,5 +104,18 @@ namespace LINQ.Tests
 
             Assert.Equal(0, testList.Count(x => x % 2 == 0));
         }
+
+        [Fact]
+        public void CountWhenAnyElementShouldReturnNumberOfElementsThatMatchesPredicate()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(1);
+            testList.Add(2);
+            testList.Add(3);
+            testList.Add(4);
+
+            Assert.Equal(2, testList.Count(x => x % 2 == 0));
+        }
     }
 }
