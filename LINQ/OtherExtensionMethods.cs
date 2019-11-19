@@ -78,10 +78,7 @@ namespace LINQ
 
             concatenatedList.AddRange(second);
 
-            foreach (var element in concatenatedList)
-            {
-                yield return element;
-            }
+            return concatenatedList.InternalConcat();
         }
 
         private static IEnumerable<int> InternalRange(int start, int count)
@@ -95,6 +92,15 @@ namespace LINQ
         private static IEnumerable<TResult> InternalRepeat<TResult>(TResult element, int count)
         {
             for (int i = 0; i < count; i++)
+            {
+                yield return element;
+            }
+        }
+
+        private static IEnumerable<TSource> InternalConcat<TSource>(
+            this IEnumerable<TSource> concatenatedList)
+        {
+            foreach (var element in concatenatedList)
             {
                 yield return element;
             }
