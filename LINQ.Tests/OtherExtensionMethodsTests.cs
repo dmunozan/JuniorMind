@@ -96,5 +96,13 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 strings = OtherExtensionMethods.Repeat("test", -1));
         }
+
+        [Fact]
+        public void CountWhenEmptySequenceShouldReturn0()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            Assert.Equal(0, testList.Count(x => x % 2 == 0));
+        }
     }
 }
