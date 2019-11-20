@@ -85,9 +85,20 @@ namespace LINQ
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
         {
-            Console.WriteLine(source + "" + predicate);
+            if (source == null)
+            {
+                return default;
+            }
 
-            throw new InvalidOperationException("No element satisfies the condition");
+            foreach (var element in source)
+            {
+                if (predicate(element))
+                {
+                    return element;
+                }
+            }
+
+            throw new InvalidOperationException("The sequence is empty");
         }
 
         private static IEnumerable<int> InternalRange(int start, int count)
