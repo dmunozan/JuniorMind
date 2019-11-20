@@ -81,6 +81,15 @@ namespace LINQ
             return concatenatedList.InternalConcat();
         }
 
+        public static TSource LinqSingle<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate)
+        {
+            Console.WriteLine(source + "" + predicate);
+
+            throw new InvalidOperationException("No element satisfies the condition");
+        }
+
         private static IEnumerable<int> InternalRange(int start, int count)
         {
             for (int i = 0; i < count; i++)
