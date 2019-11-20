@@ -238,5 +238,15 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => resultList = firstTestList.Concat(secondTestList));
         }
+
+        [Fact]
+        public void LinqSingleWhenEmptySequenceShouldThrowException()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            string resultList;
+
+            Assert.Throws<InvalidOperationException>(() => resultList = testList.LinqSingle(x => x.Length == 5));
+        }
     }
 }
