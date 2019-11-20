@@ -244,9 +244,23 @@ namespace LINQ.Tests
         {
             ListCollection<string> testList = new ListCollection<string>();
 
-            string resultList;
+            string resultString;
 
-            Assert.Throws<InvalidOperationException>(() => resultList = testList.LinqSingle(x => x.Length == 5));
+            Assert.Throws<InvalidOperationException>(() => resultString = testList.LinqSingle(x => x.Length == 5));
+        }
+
+        [Fact]
+        public void LinqSingleWhenOnlyOneMatchingElementShouldReturnElement()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("red");
+            testList.Add("green");
+            testList.Add("blue");
+
+            string resultString = testList.LinqSingle(x => x.Length == 5);
+
+            Assert.Equal("green", resultString);
         }
     }
 }
