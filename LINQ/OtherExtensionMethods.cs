@@ -90,6 +90,11 @@ namespace LINQ
                 throw new ArgumentNullException(nameof(source), "Source is null");
             }
 
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate), "Predicate is null");
+            }
+
             if (!source.Any(x => true))
             {
                 throw new InvalidOperationException("The sequence is empty");
