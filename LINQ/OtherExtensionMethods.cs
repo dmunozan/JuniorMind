@@ -95,12 +95,26 @@ namespace LINQ
                 throw new InvalidOperationException("The sequence is empty");
             }
 
+            bool found = false;
+            TSource singleElement = default;
+
             foreach (var element in source)
             {
                 if (predicate(element))
                 {
-                    return element;
+                    if (found)
+                    {
+                        throw new InvalidOperationException("More than one element satisfies the condition");
+                    }
+
+                    found = true;
+                    singleElement = element;
                 }
+            }
+
+            if (found)
+            {
+                return singleElement;
             }
 
             throw new InvalidOperationException("No element satisfies the condition");
