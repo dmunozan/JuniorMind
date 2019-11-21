@@ -354,5 +354,15 @@ namespace LINQ.Tests
 
             Assert.Throws<InvalidOperationException>(() => resultString = testList.Last(x => x.Length == 5));
         }
+
+        [Fact]
+        public void LastWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<string> testList = null;
+
+            string resultString;
+
+            Assert.Throws<ArgumentNullException>(() => resultString = testList.Last(x => x.Length == 5));
+        }
     }
 }
