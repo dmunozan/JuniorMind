@@ -300,5 +300,21 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => resultString = testList.LinqSingle(x => x.Length == 5));
         }
+
+        [Fact]
+        public void LinqSingleWhenPredicateIsNullShouldThrowException()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("red");
+            testList.Add("green");
+            testList.Add("blue");
+
+            Func<string, bool> predicate = null;
+
+            string resultString;
+
+            Assert.Throws<ArgumentNullException>(() => resultString = testList.LinqSingle(predicate));
+        }
     }
 }
