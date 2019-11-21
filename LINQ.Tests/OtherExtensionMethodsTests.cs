@@ -341,5 +341,18 @@ namespace LINQ.Tests
 
             Assert.Equal("black", resultString);
         }
+
+        [Fact]
+        public void LastWhenNoElementMatchesShouldThrowException()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("red");
+            testList.Add("blue");
+
+            string resultString;
+
+            Assert.Throws<InvalidOperationException>(() => resultString = testList.Last(x => x.Length == 5));
+        }
     }
 }
