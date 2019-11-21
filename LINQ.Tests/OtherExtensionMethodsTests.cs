@@ -262,5 +262,18 @@ namespace LINQ.Tests
 
             Assert.Equal("green", resultString);
         }
+
+        [Fact]
+        public void LinqSingleWhenNoElementMatchShouldThrowException()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("red");
+            testList.Add("blue");
+
+            string resultString;
+
+            Assert.Throws<InvalidOperationException>(() => resultString = testList.LinqSingle(x => x.Length == 5));
+        }
     }
 }
