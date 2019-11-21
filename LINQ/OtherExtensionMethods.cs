@@ -129,7 +129,27 @@ namespace LINQ
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
         {
-            Console.WriteLine(source + "" + predicate);
+            if (source == null)
+            {
+                return default;
+            }
+
+            bool found = false;
+            TSource lastElement = default;
+
+            foreach (var element in source)
+            {
+                if (predicate(element))
+                {
+                    found = true;
+                    lastElement = element;
+                }
+            }
+
+            if (found)
+            {
+                return lastElement;
+            }
 
             throw new InvalidOperationException("The sequence is empty");
         }
