@@ -134,6 +134,11 @@ namespace LINQ
                 return default;
             }
 
+            if (!source.Any(x => true))
+            {
+                throw new InvalidOperationException("The sequence is empty");
+            }
+
             bool found = false;
             TSource lastElement = default;
 
@@ -151,7 +156,7 @@ namespace LINQ
                 return lastElement;
             }
 
-            throw new InvalidOperationException("The sequence is empty");
+            throw new InvalidOperationException("No element satisfies the condition");
         }
 
         private static IEnumerable<int> InternalRange(int start, int count)
