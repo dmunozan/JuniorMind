@@ -290,5 +290,15 @@ namespace LINQ.Tests
 
             Assert.Throws<InvalidOperationException>(() => resultString = testList.LinqSingle(x => x.Length == 5));
         }
+
+        [Fact]
+        public void LinqSingleWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<string> testList = null;
+
+            string resultString;
+
+            Assert.Throws<ArgumentNullException>(() => resultString = testList.LinqSingle(x => x.Length == 5));
+        }
     }
 }
