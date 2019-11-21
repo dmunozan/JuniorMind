@@ -316,5 +316,15 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => resultString = testList.LinqSingle(predicate));
         }
+
+        [Fact]
+        public void LastWhenEmptySequenceShouldThrowException()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            string resultString;
+
+            Assert.Throws<InvalidOperationException>(() => resultString = testList.Last(x => x.Length == 5));
+        }
     }
 }
