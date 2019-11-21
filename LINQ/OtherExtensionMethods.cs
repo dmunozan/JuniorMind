@@ -125,6 +125,15 @@ namespace LINQ
             throw new InvalidOperationException("No element satisfies the condition");
         }
 
+        public static TSource Last<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate)
+        {
+            Console.WriteLine(source + "" + predicate);
+
+            throw new InvalidOperationException("The sequence is empty");
+        }
+
         private static IEnumerable<int> InternalRange(int start, int count)
         {
             for (int i = 0; i < count; i++)
