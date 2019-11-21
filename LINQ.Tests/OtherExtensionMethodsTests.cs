@@ -326,5 +326,20 @@ namespace LINQ.Tests
 
             Assert.Throws<InvalidOperationException>(() => resultString = testList.Last(x => x.Length == 5));
         }
+
+        [Fact]
+        public void LastWhenMatchingElementsShouldReturnLastMatchingElement()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("red");
+            testList.Add("green");
+            testList.Add("blue");
+            testList.Add("black");
+
+            string resultString = testList.Last(x => x.Length == 5);
+
+            Assert.Equal("black", resultString);
+        }
     }
 }
