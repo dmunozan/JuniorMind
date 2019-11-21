@@ -87,7 +87,7 @@ namespace LINQ
         {
             if (source == null)
             {
-                return default;
+                throw new ArgumentNullException(nameof(source), "Source is null");
             }
 
             if (!source.Any(x => true))
