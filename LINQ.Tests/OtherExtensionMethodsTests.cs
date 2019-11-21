@@ -364,5 +364,21 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => resultString = testList.Last(x => x.Length == 5));
         }
+
+        [Fact]
+        public void LastWhenPredicateIsNullShouldThrowException()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("red");
+            testList.Add("green");
+            testList.Add("blue");
+
+            Func<string, bool> predicate = null;
+
+            string resultString;
+
+            Assert.Throws<ArgumentNullException>(() => resultString = testList.Last(predicate));
+        }
     }
 }
