@@ -275,5 +275,20 @@ namespace LINQ.Tests
 
             Assert.Throws<InvalidOperationException>(() => resultString = testList.LinqSingle(x => x.Length == 5));
         }
+
+        [Fact]
+        public void LinqSingleWhenMoreThanOneElementMatchShouldThrowException()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("red");
+            testList.Add("green");
+            testList.Add("blue");
+            testList.Add("black");
+
+            string resultString;
+
+            Assert.Throws<InvalidOperationException>(() => resultString = testList.LinqSingle(x => x.Length == 5));
+        }
     }
 }
