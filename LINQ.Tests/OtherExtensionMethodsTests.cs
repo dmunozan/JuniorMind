@@ -380,5 +380,16 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => resultString = testList.Last(predicate));
         }
+
+        [Fact]
+        public void TakeWhileWhenEmptySequenceShouldReturnEmptySequence()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            IEnumerable<string> resultList =
+                testList.TakeWhile(fruit => String.Compare("mango", fruit, true) != 0);
+
+            Assert.Empty(resultList);
+        }
     }
 }
