@@ -161,20 +161,9 @@ namespace LINQ
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
         {
-            Console.WriteLine(predicate);
+            CheckNullElement(source);
 
-            source ??= new List<TSource>();
-
-            bool yieldValues = false;
-
-            foreach (var element in source)
-            {
-                if (yieldValues || !predicate(element))
-                {
-                    yieldValues = true;
-                    yield return element;
-                }
-            }
+            return source.InternalSkipWhile(predicate);
         }
 
         private static IEnumerable<int> InternalRange(int start, int count)
@@ -214,6 +203,22 @@ namespace LINQ
                 }
 
                 yield return element;
+            }
+        }
+
+        private static IEnumerable<TSource> InternalSkipWhile<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate)
+        {
+            bool yieldValues = false;
+
+            foreach (var element in source)
+            {
+                if (yieldValues || !predicate(element))
+                {
+                    yieldValues = true;
+                    yield return element;
+                }
             }
         }
 
