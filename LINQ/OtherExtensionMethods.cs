@@ -165,9 +165,15 @@ namespace LINQ
 
             source ??= new List<TSource>();
 
+            bool yieldValues = false;
+
             foreach (var element in source)
             {
-                yield return element;
+                if (yieldValues || !predicate(element))
+                {
+                    yieldValues = true;
+                    yield return element;
+                }
             }
         }
 
