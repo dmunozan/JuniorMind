@@ -164,6 +164,20 @@ namespace LINQ
             throw new InvalidOperationException("No element satisfies the condition");
         }
 
+        public static IEnumerable<TSource> TakeWhile<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate)
+        {
+            Console.WriteLine(predicate);
+
+            source ??= new List<TSource>();
+
+            foreach (var element in source)
+            {
+                yield return element;
+            }
+        }
+
         private static IEnumerable<int> InternalRange(int start, int count)
         {
             for (int i = 0; i < count; i++)
