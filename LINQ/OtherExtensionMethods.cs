@@ -168,17 +168,12 @@ namespace LINQ
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
         {
-            source ??= new List<TSource>();
-
-            foreach (var element in source)
+            if (source == null)
             {
-                if (!predicate(element))
-                {
-                    yield break;
-                }
-
-                yield return element;
+                throw new ArgumentNullException(nameof(source), "Source is null");
             }
+
+            return source.InternalTakeWhile(predicate);
         }
 
         private static IEnumerable<int> InternalRange(int start, int count)
@@ -202,6 +197,21 @@ namespace LINQ
         {
             foreach (var element in concatenatedList)
             {
+                yield return element;
+            }
+        }
+
+        private static IEnumerable<TSource> InternalTakeWhile<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate)
+        {
+            foreach (var element in source)
+            {
+                if (!predicate(element))
+                {
+                    yield break;
+                }
+
                 yield return element;
             }
         }
