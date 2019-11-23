@@ -163,6 +163,8 @@ namespace LINQ
         {
             CheckNullElement(source);
 
+            CheckNullElement(predicate);
+
             return source.InternalSkipWhile(predicate);
         }
 
