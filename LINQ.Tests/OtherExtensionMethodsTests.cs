@@ -449,5 +449,23 @@ namespace LINQ.Tests
 
             Assert.Empty(resultList);
         }
+
+        [Fact]
+        public void SkipWhileWhenNoEmptyShouldReturnElementsFromFalsePredicateToTheEnd()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(95);
+            testList.Add(82);
+            testList.Add(70);
+            testList.Add(89);
+
+            IEnumerable<int> resultList =
+                testList.SkipWhile(grade => grade >= 80);
+
+            Assert.Collection(resultList,
+                item => Assert.Equal(70, item),
+                item => Assert.Equal(89, item));
+        }
     }
 }
