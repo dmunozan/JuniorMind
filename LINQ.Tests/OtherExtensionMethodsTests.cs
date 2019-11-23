@@ -438,5 +438,16 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentNullException>(() => resultList =
                 testList.TakeWhile(predicate));
         }
+
+        [Fact]
+        public void SkipWhileWhenEmptySequenceShouldReturnEmptySequence()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            IEnumerable<int> resultList =
+                testList.SkipWhile(grade => grade >= 80);
+
+            Assert.Empty(resultList);
+        }
     }
 }
