@@ -420,5 +420,23 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentNullException>(() => resultList =
                 testList.TakeWhile(fruit => String.Compare("mango", fruit, true) != 0));
         }
+
+        [Fact]
+        public void TakeWhileWhenPredicateIsNullShouldThrowException()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("apple");
+            testList.Add("banana");
+            testList.Add("mango");
+            testList.Add("orange");
+
+            IEnumerable<string> resultList;
+
+            Func<string, bool> predicate = null;
+
+            Assert.Throws<ArgumentNullException>(() => resultList =
+                testList.TakeWhile(predicate));
+        }
     }
 }
