@@ -168,12 +168,15 @@ namespace LINQ
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
         {
-            Console.WriteLine(predicate);
-
             source ??= new List<TSource>();
 
             foreach (var element in source)
             {
+                if (!predicate(element))
+                {
+                    yield break;
+                }
+
                 yield return element;
             }
         }
