@@ -391,5 +391,23 @@ namespace LINQ.Tests
 
             Assert.Empty(resultList);
         }
+
+        [Fact]
+        public void TakeWhileWhenNoEmptyShouldReturnElementsWhileTruePredicate()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            testList.Add("apple");
+            testList.Add("banana");
+            testList.Add("mango");
+            testList.Add("orange");
+
+            IEnumerable<string> resultList =
+                testList.TakeWhile(fruit => String.Compare("mango", fruit, true) != 0);
+
+            Assert.Collection(resultList,
+                item => Assert.Equal("apple", item),
+                item => Assert.Equal("banana", item));
+        }
     }
 }
