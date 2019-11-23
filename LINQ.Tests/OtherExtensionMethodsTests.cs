@@ -467,5 +467,16 @@ namespace LINQ.Tests
                 item => Assert.Equal(70, item),
                 item => Assert.Equal(89, item));
         }
+
+        [Fact]
+        public void SkipWhileWhenNullSourceShouldThrowException()
+        {
+            ListCollection<int> testList = null;
+
+            IEnumerable<int> resultList;
+
+            Assert.Throws<ArgumentNullException>(() => resultList =
+                testList.SkipWhile(grade => grade >= 80));
+        }
     }
 }
