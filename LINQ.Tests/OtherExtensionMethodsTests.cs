@@ -409,5 +409,16 @@ namespace LINQ.Tests
                 item => Assert.Equal("apple", item),
                 item => Assert.Equal("banana", item));
         }
+
+        [Fact]
+        public void TakeWhileWhenSourceIsNullShouldThrowException()
+        {
+            ListCollection<string> testList = null;
+
+            IEnumerable<string> resultList;
+            
+            Assert.Throws<ArgumentNullException>(() => resultList =
+                testList.TakeWhile(fruit => String.Compare("mango", fruit, true) != 0));
+        }
     }
 }
