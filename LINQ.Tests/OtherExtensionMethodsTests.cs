@@ -478,5 +478,23 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentNullException>(() => resultList =
                 testList.SkipWhile(grade => grade >= 80));
         }
+
+        [Fact]
+        public void SkipWhileWhenNullPredicateShouldThrowException()
+        {
+            ListCollection<int> testList = new ListCollection<int>();
+
+            testList.Add(95);
+            testList.Add(82);
+            testList.Add(70);
+            testList.Add(89);
+
+            IEnumerable<int> resultList;
+
+            Func<int, bool> predicate = null;
+
+            Assert.Throws<ArgumentNullException>(() => resultList =
+                testList.SkipWhile(predicate));
+        }
     }
 }
