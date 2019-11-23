@@ -42,15 +42,9 @@ namespace LINQ
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
+            CheckNullElement(source);
 
-            if (predicate == null)
-            {
-                throw new ArgumentNullException(nameof(predicate));
-            }
+            CheckNullElement(predicate);
 
             int count = 0;
 
@@ -85,15 +79,9 @@ namespace LINQ
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source), "Source is null");
-            }
+            CheckNullElement(source);
 
-            if (predicate == null)
-            {
-                throw new ArgumentNullException(nameof(predicate), "Predicate is null");
-            }
+            CheckNullElement(predicate);
 
             if (!source.Any(x => true))
             {
@@ -129,15 +117,9 @@ namespace LINQ
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source), "Source is null");
-            }
+            CheckNullElement(source);
 
-            if (predicate == null)
-            {
-                throw new ArgumentNullException(nameof(source), "Predicate is null");
-            }
+            CheckNullElement(predicate);
 
             if (!source.Any(x => true))
             {
@@ -168,15 +150,9 @@ namespace LINQ
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source), "Source is null");
-            }
+            CheckNullElement(source);
 
-            if (predicate == null)
-            {
-                throw new ArgumentNullException(nameof(source), "Predicate is null");
-            }
+            CheckNullElement(predicate);
 
             return source.InternalTakeWhile(predicate);
         }
@@ -219,6 +195,16 @@ namespace LINQ
 
                 yield return element;
             }
+        }
+
+        private static void CheckNullElement(object obj)
+        {
+            if (obj != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(nameof(obj), "One of the arguments is null");
         }
     }
 }
