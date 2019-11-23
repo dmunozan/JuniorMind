@@ -157,6 +157,20 @@ namespace LINQ
             return source.InternalTakeWhile(predicate);
         }
 
+        public static IEnumerable<TSource> SkipWhile<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate)
+        {
+            Console.WriteLine(predicate);
+
+            source ??= new List<TSource>();
+
+            foreach (var element in source)
+            {
+                yield return element;
+            }
+        }
+
         private static IEnumerable<int> InternalRange(int start, int count)
         {
             for (int i = 0; i < count; i++)
