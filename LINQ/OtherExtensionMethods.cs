@@ -173,6 +173,11 @@ namespace LINQ
                 throw new ArgumentNullException(nameof(source), "Source is null");
             }
 
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(source), "Predicate is null");
+            }
+
             return source.InternalTakeWhile(predicate);
         }
 
