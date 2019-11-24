@@ -7,11 +7,11 @@ namespace LINQ
 {
     public class OrderedEnumerable<TElement> : IOrderedEnumerable<TElement>
     {
-        readonly List<TElement> orderedList = new List<TElement>();
+        readonly List<TElement> orderedList;
 
         public OrderedEnumerable(IEnumerable<TElement> source)
         {
-            orderedList.AddRange(source);
+            orderedList = new List<TElement>(source);
         }
 
         public IOrderedEnumerable<TElement> CreateOrderedEnumerable<TKey>(Func<TElement, TKey> keySelector, IComparer<TKey> comparer, bool descending)
