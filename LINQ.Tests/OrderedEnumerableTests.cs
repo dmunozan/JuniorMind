@@ -7,6 +7,17 @@ namespace LINQ.Tests
     public class OrderedEnumerableTests
     {
         [Fact]
+        public void ConstructorWhenNoElementsShouldCreateEmptyOrderedEnumerable()
+        {
+            string[] testArray = { };
+
+            OrderedEnumerable<string> orderedList =
+                (OrderedEnumerable<string>)new OrderedEnumerable<string>(testArray);
+
+            Assert.Empty(orderedList);
+        }
+
+        [Fact]
         public void CreateOrderedEnumerableWhenNoElementsShouldReturnEmptySequence()
         {
             string[] testArray = {  };
