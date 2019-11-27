@@ -47,7 +47,7 @@ namespace LINQ
             return this.GetEnumerator();
         }
 
-        public List<TElement> MergeSort(
+        private List<TElement> MergeSort(
             IEnumerable<TElement> source)
         {
             List<TElement> unorderedList = new List<TElement>(source);
@@ -77,41 +77,38 @@ namespace LINQ
             return Merge(left, right);
         }
 
-        public List<TElement> Merge(
+        private List<TElement> Merge(
             List<TElement> left,
             List<TElement> right)
         {
-            List<TElement> leftList = left ?? new List<TElement>();
-            List<TElement> rightList = right ?? new List<TElement>();
-
             List<TElement> orderedList = new List<TElement>();
 
-            while (leftList.Count > 0 || rightList.Count > 0)
+            while (left.Count > 0 || right.Count > 0)
             {
-                if (leftList.Count > 0 && rightList.Count > 0)
+                if (left.Count > 0 && right.Count > 0)
                 {
                     if (this.comparer.Compare(
-                        this.keySelector(leftList.First()),
-                        this.keySelector(rightList.First())) <= 0)
+                        this.keySelector(left.First()),
+                        this.keySelector(right.First())) <= 0)
                     {
-                        orderedList.Add(leftList.First());
-                        leftList.Remove(leftList.First());
+                        orderedList.Add(left.First());
+                        left.Remove(left.First());
                     }
                     else
                     {
-                        orderedList.Add(rightList.First());
-                        rightList.Remove(rightList.First());
+                        orderedList.Add(right.First());
+                        right.Remove(right.First());
                     }
                 }
-                else if (leftList.Count > 0)
+                else if (left.Count > 0)
                 {
-                    orderedList.Add(leftList.First());
-                    leftList.Remove(leftList.First());
+                    orderedList.Add(left.First());
+                    left.Remove(left.First());
                 }
-                else if (rightList.Count > 0)
+                else if (right.Count > 0)
                 {
-                    orderedList.Add(rightList.First());
-                    rightList.Remove(rightList.First());
+                    orderedList.Add(right.First());
+                    right.Remove(right.First());
                 }
             }
 
