@@ -39,6 +39,31 @@ namespace LINQ.Tests
         }
 
         [Fact]
+        public void ConstructorWhenRepeatedElementsShouldCreateStableOrderedEnumerable()
+        {
+            ListCollection<string[]> testList = new ListCollection<string[]>();
+
+            testList.Add(new string[] { "apricot", "1" });
+            testList.Add(new string[] { "orange", "1" });
+            testList.Add(new string[] { "apricot", "2" });
+            testList.Add(new string[] { "banana", "1" });
+            testList.Add(new string[] { "mango", "1" });
+
+            OrderedEnumerable<string[], int> orderedList =
+                (OrderedEnumerable<string[], int>)new OrderedEnumerable<string[], int>(
+                    testList,
+                    fruit => fruit[0].Length,
+                    Comparer<int>.Default);
+
+            Assert.Collection(orderedList,
+                item => Assert.Equal(new string[] { "mango", "1" }, item),
+                item => Assert.Equal(new string[] { "orange", "1" }, item),
+                item => Assert.Equal(new string[] { "banana", "1" }, item),
+                item => Assert.Equal(new string[] { "apricot", "1" }, item),
+                item => Assert.Equal(new string[] { "apricot", "2" }, item));
+        }
+
+        [Fact]
         public void CreateOrderedEnumerableWhenNoElementsShouldReturnEmptySequence()
         {
             string[] testArray = {  };
