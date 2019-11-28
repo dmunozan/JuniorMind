@@ -7,9 +7,9 @@ namespace LINQ
 {
     public class OrderedEnumerable<TElement, TPrimaryKey> : IOrderedEnumerable<TElement>
     {
-        readonly List<TElement> orderedEnumerableList;
         readonly Func<TElement, TPrimaryKey> keySelector;
         readonly IComparer<TPrimaryKey> comparer;
+        List<TElement> orderedEnumerableList;
 
         public OrderedEnumerable(
             IEnumerable<TElement> source,
@@ -21,7 +21,7 @@ namespace LINQ
             this.keySelector = keySelector;
             this.comparer = comparer;
 
-            this.orderedEnumerableList = MergeSort(source);
+            this.orderedEnumerableList = MergeSort(source, keySelector, comparer);
         }
 
         public IOrderedEnumerable<TElement> CreateOrderedEnumerable<TSecondaryKey>(
@@ -29,7 +29,7 @@ namespace LINQ
             IComparer<TSecondaryKey> comparer,
             bool descending)
         {
-            Console.WriteLine(keySelector + "" + comparer + descending);
+            this.orderedEnumerableList = MergeSort(this.orderedEnumerableList, keySelector, comparer);
 
             return this;
         }
@@ -47,8 +47,10 @@ namespace LINQ
             return this.GetEnumerator();
         }
 
-        private List<TElement> MergeSort(
-            IEnumerable<TElement> source)
+        private List<TElement> MergeSort<TKey>(
+            IEnumerable<TElement> source,
+            Func<TElement, TKey> keySelector,
+            IComparer<TKey> comparer)
         {
             List<TElement> unorderedList = new List<TElement>(source);
 
@@ -71,15 +73,17 @@ namespace LINQ
                 right.Add(unorderedList[i]);
             }
 
-            left = MergeSort(left);
-            right = MergeSort(right);
+            left = MergeSort(left, keySelector, comparer);
+            right = MergeSort(right, keySelector, comparer);
 
-            return Merge(left, right);
+            return Merge(left, right, keySelector, comparer);
         }
 
-        private List<TElement> Merge(
+        private List<TElement> Merge<TKey>(
             List<TElement> left,
-            List<TElement> right)
+            List<TElement> right,
+            Func<TElement, TKey> keySelector,
+            IComparer<TKey> comparer)
         {
             List<TElement> orderedList = new List<TElement>();
 
@@ -87,9 +91,11 @@ namespace LINQ
             {
                 if (left.Count > 0 && right.Count > 0)
                 {
-                    if (this.comparer.Compare(
-                        this.keySelector(left.First()),
-                        this.keySelector(right.First())) <= 0)
+                    if (CompareValues(
+                        left.First(),
+                        right.First(),
+                        keySelector,
+                        comparer) <= 0)
                     {
                         orderedList.Add(left.First());
                         left.Remove(left.First());
@@ -113,6 +119,26 @@ namespace LINQ
             }
 
             return orderedList;
+        }
+
+        private int CompareValues<TKey>(
+            TElement leftElement,
+            TElement rightElement,
+            Func<TElement, TKey> keySelector,
+            IComparer<TKey> comparer)
+        {
+            int result = this.comparer.Compare(
+                this.keySelector(leftElement),
+                this.keySelector(rightElement));
+
+            if (result == 0)
+            {
+                result = comparer.Compare(
+                keySelector(leftElement),
+                keySelector(rightElement));
+            }
+
+            return result;
         }
     }
 }
