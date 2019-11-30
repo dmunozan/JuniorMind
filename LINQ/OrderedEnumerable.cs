@@ -7,8 +7,7 @@ namespace LINQ
 {
     public class OrderedEnumerable<TElement, TPrimaryKey> : IOrderedEnumerable<TElement>
     {
-        readonly Func<TElement, TPrimaryKey> keySelector;
-        readonly IComparer<TPrimaryKey> comparer;
+        IComparer<TElement> currentComparer;
         List<TElement> orderedEnumerableList;
 
         public OrderedEnumerable(
@@ -18,10 +17,15 @@ namespace LINQ
         {
             source ??= new List<TElement>();
 
-            this.keySelector = keySelector;
-            this.comparer = comparer;
+            currentComparer = Comparer<TElement>.Create(
+                (leftElement, rightElement) =>
+                {
+                    return comparer.Compare(
+                        keySelector(leftElement),
+                        keySelector(rightElement));
+                });
 
-            this.orderedEnumerableList = MergeSort(source, keySelector, comparer);
+            orderedEnumerableList = MergeSort(source);
         }
 
         public IOrderedEnumerable<TElement> CreateOrderedEnumerable<TSecondaryKey>(
@@ -29,7 +33,26 @@ namespace LINQ
             IComparer<TSecondaryKey> comparer,
             bool descending)
         {
-            this.orderedEnumerableList = MergeSort(this.orderedEnumerableList, keySelector, comparer);
+            IComparer<TElement> compoundComparer = currentComparer;
+
+            currentComparer = Comparer<TElement>.Create(
+                (leftElement, rightElement) =>
+                {
+                    int result = compoundComparer.Compare(
+                        leftElement,
+                        rightElement);
+
+                    if (result == 0)
+                    {
+                        result = comparer.Compare(
+                        keySelector(leftElement),
+                        keySelector(rightElement));
+                    }
+
+                    return result;
+                });
+
+            orderedEnumerableList = MergeSort(orderedEnumerableList);
 
             return this;
         }
@@ -47,10 +70,8 @@ namespace LINQ
             return this.GetEnumerator();
         }
 
-        private List<TElement> MergeSort<TKey>(
-            IEnumerable<TElement> source,
-            Func<TElement, TKey> keySelector,
-            IComparer<TKey> comparer)
+        private List<TElement> MergeSort(
+            IEnumerable<TElement> source)
         {
             List<TElement> unorderedList = new List<TElement>(source);
 
@@ -73,17 +94,15 @@ namespace LINQ
                 right.Add(unorderedList[i]);
             }
 
-            left = MergeSort(left, keySelector, comparer);
-            right = MergeSort(right, keySelector, comparer);
+            left = MergeSort(left);
+            right = MergeSort(right);
 
-            return Merge(left, right, keySelector, comparer);
+            return Merge(left, right);
         }
 
-        private List<TElement> Merge<TKey>(
+        private List<TElement> Merge(
             List<TElement> left,
-            List<TElement> right,
-            Func<TElement, TKey> keySelector,
-            IComparer<TKey> comparer)
+            List<TElement> right)
         {
             List<TElement> orderedList = new List<TElement>();
 
@@ -91,11 +110,9 @@ namespace LINQ
             {
                 if (left.Count > 0 && right.Count > 0)
                 {
-                    if (CompareValues(
+                    if (currentComparer.Compare(
                         left.First(),
-                        right.First(),
-                        keySelector,
-                        comparer) <= 0)
+                        right.First()) <= 0)
                     {
                         orderedList.Add(left.First());
                         left.Remove(left.First());
@@ -119,26 +136,6 @@ namespace LINQ
             }
 
             return orderedList;
-        }
-
-        private int CompareValues<TKey>(
-            TElement leftElement,
-            TElement rightElement,
-            Func<TElement, TKey> keySelector,
-            IComparer<TKey> comparer)
-        {
-            int result = this.comparer.Compare(
-                this.keySelector(leftElement),
-                this.keySelector(rightElement));
-
-            if (result == 0)
-            {
-                result = comparer.Compare(
-                keySelector(leftElement),
-                keySelector(rightElement));
-            }
-
-            return result;
         }
     }
 }
