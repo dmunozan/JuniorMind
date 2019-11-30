@@ -105,5 +105,52 @@ namespace LINQ.Tests
                 item => Assert.Equal("apricot", item),
                 item => Assert.Equal("strawberry", item));
         }
+
+        [Fact]
+        public void CreateOrderedEnumerableWhenMultipleCallsShouldReturnSubordinateOrderedSequence()
+        {
+            ListCollection<string[]> testList = new ListCollection<string[]>();
+
+            testList.Add(new[] { "E", "3", "C1", "2E" });
+            testList.Add(new[] { "D", "2", "A2", "1C" });
+            testList.Add(new[] { "C", "1", "D2", "1D" });
+            testList.Add(new[] { "A", "1", "C1", "2A" });
+            testList.Add(new[] { "B", "3", "D1", "4C" });
+            testList.Add(new[] { "A", "3", "D4", "3B" });
+            testList.Add(new[] { "C", "4", "A0", "0A" });
+            testList.Add(new[] { "C", "3", "D4", "3B" });
+            testList.Add(new[] { "B", "3", "C0", "4C" });
+            testList.Add(new[] { "E", "3", "C1", "2B" });
+
+            OrderedEnumerable<string[], string> orderedList =
+                (OrderedEnumerable<string[], string>)new OrderedEnumerable<string[], string>(
+                    testList,
+                    x => x[0],
+                    Comparer<string>.Default).
+                        CreateOrderedEnumerable(
+                            x => x[1],
+                            Comparer<string>.Default,
+                            false).
+                                CreateOrderedEnumerable(
+                                    x => x[2],
+                                    Comparer<string>.Default,
+                                    false).
+                                        CreateOrderedEnumerable(
+                                            x => x[3],
+                                            Comparer<string>.Default,
+                                            false);
+
+            Assert.Collection(orderedList,
+                item => Assert.Equal(new[] { "A", "1", "C1", "2A" }, item),
+                item => Assert.Equal(new[] { "A", "3", "D4", "3B" }, item),
+                item => Assert.Equal(new[] { "B", "3", "C0", "4C" }, item),
+                item => Assert.Equal(new[] { "B", "3", "D1", "4C" }, item),
+                item => Assert.Equal(new[] { "C", "1", "D2", "1D" }, item),
+                item => Assert.Equal(new[] { "C", "3", "D4", "3B" }, item),
+                item => Assert.Equal(new[] { "C", "4", "A0", "0A" }, item),
+                item => Assert.Equal(new[] { "D", "2", "A2", "1C" }, item),
+                item => Assert.Equal(new[] { "E", "3", "C1", "2B" }, item),
+                item => Assert.Equal(new[] { "E", "3", "C1", "2E" }, item));
+        }
     }
 }
