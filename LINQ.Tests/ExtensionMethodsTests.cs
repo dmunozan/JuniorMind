@@ -1469,5 +1469,21 @@ namespace LINQ.Tests
                 null,
                 Comparer<int>.Default));
         }
+
+        [Fact]
+        public void ThenByWhenEmptySequenceShouldReturnEmptySequence()
+        {
+            string[] testArray = { };
+
+            OrderedEnumerable<string, int> orderedList =
+                testArray.OrderBy(
+                    fruit => fruit.Length,
+                    Comparer<int>.Default)
+                        .ThenBy(
+                            x => 1,
+                            Comparer<int>.Default);
+
+            Assert.Empty(orderedList);
+        }
     }
 }
