@@ -1427,5 +1427,21 @@ namespace LINQ.Tests
                 item => Assert.Equal(new string[] { "apricot", "1" }, item),
                 item => Assert.Equal(new string[] { "apricot", "2" }, item));
         }
+
+        [Fact]
+        public void OrderByWhenNullComparerShouldUseDefaultComparer()
+        {
+            string[] testArray = { "apricot", "orange", "banana", "mango" };
+
+            OrderedEnumerable<string, int> orderedList = testArray.OrderBy(
+                item => item.Length,
+                null);
+
+            Assert.Collection(orderedList,
+                item => Assert.Equal("mango", item),
+                item => Assert.Equal("orange", item),
+                item => Assert.Equal("banana", item),
+                item => Assert.Equal("apricot", item));
+        }
     }
 }
