@@ -229,6 +229,14 @@ namespace LINQ
             return source.InternalGroupBy(keySelector, elementSelector, resultSelector, comparer);
         }
 
+        public static OrderedEnumerable<TSource, TKey> OrderBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IComparer<TKey> comparer)
+        {
+            return new OrderedEnumerable<TSource, TKey>(source, keySelector, comparer);
+        }
+
         private static IEnumerable<TResult> InternalJoin<TOuter, TInner, TKey, TResult>(
             this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner,
