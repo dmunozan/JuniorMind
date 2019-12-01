@@ -234,6 +234,8 @@ namespace LINQ
             Func<TSource, TKey> keySelector,
             IComparer<TKey> comparer)
         {
+            CheckNullElement(source);
+
             comparer ??= Comparer<TKey>.Default;
 
             return new OrderedEnumerable<TSource, TKey>(source, keySelector, comparer);
