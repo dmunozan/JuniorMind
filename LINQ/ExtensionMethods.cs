@@ -243,6 +243,16 @@ namespace LINQ
             return new OrderedEnumerable<TSource, TKey>(source, keySelector, comparer);
         }
 
+        public static OrderedEnumerable<TSource, TKey> ThenBy<TSource, TKey>(
+            this OrderedEnumerable<TSource, TKey> source,
+            Func<TSource, TKey> keySelector,
+            IComparer<TKey> comparer)
+        {
+            source ??= new OrderedEnumerable<TSource, TKey>(new List<TSource>(), keySelector, comparer);
+
+            return (OrderedEnumerable<TSource, TKey>)source.CreateOrderedEnumerable<TKey>(keySelector, comparer, false);
+        }
+
         private static IEnumerable<TResult> InternalJoin<TOuter, TInner, TKey, TResult>(
             this IEnumerable<TOuter> outer,
             IEnumerable<TInner> inner,
