@@ -1382,9 +1382,10 @@ namespace LINQ.Tests
         {
             ListCollection<string> testList = new ListCollection<string>();
 
-            OrderedEnumerable<string, int> resultList = testList.OrderBy(
-                item => item.Length,
-                Comparer<int>.Default);
+            OrderedEnumerable<string, int> resultList =
+                (OrderedEnumerable<string, int>)testList.OrderBy(
+                    item => item.Length,
+                    Comparer<int>.Default);
 
             Assert.Empty(resultList);
         }
@@ -1394,9 +1395,10 @@ namespace LINQ.Tests
         {
             string[] testArray = { "apricot", "orange", "banana", "mango" };
 
-            OrderedEnumerable<string, int> orderedList = testArray.OrderBy(
-                item => item.Length,
-                Comparer<int>.Default);
+            OrderedEnumerable<string, int> orderedList =
+                (OrderedEnumerable<string, int>)testArray.OrderBy(
+                    item => item.Length,
+                    Comparer<int>.Default);
 
             Assert.Collection(orderedList,
                 item => Assert.Equal("mango", item),
@@ -1416,9 +1418,10 @@ namespace LINQ.Tests
             testList.Add(new string[] { "banana", "1" });
             testList.Add(new string[] { "mango", "1" });
 
-            OrderedEnumerable<string[], int> orderedList = testList.OrderBy(
-                fruit => fruit[0].Length,
-                Comparer<int>.Default);
+            OrderedEnumerable<string[], int> orderedList =
+                (OrderedEnumerable<string[], int>)testList.OrderBy(
+                    fruit => fruit[0].Length,
+                    Comparer<int>.Default);
 
             Assert.Collection(orderedList,
                 item => Assert.Equal(new string[] { "mango", "1" }, item),
@@ -1433,9 +1436,10 @@ namespace LINQ.Tests
         {
             string[] testArray = { "apricot", "orange", "banana", "mango" };
 
-            OrderedEnumerable<string, int> orderedList = testArray.OrderBy(
-                item => item.Length,
-                null);
+            OrderedEnumerable<string, int> orderedList =
+                (OrderedEnumerable<string, int>)testArray.OrderBy(
+                    item => item.Length,
+                    null);
 
             Assert.Collection(orderedList,
                 item => Assert.Equal("mango", item),
@@ -1452,9 +1456,10 @@ namespace LINQ.Tests
             OrderedEnumerable<string, int> orderedList;
 
             Assert.Throws<ArgumentNullException>(() =>
-                orderedList = testArray.OrderBy(
-                item => item.Length,
-                Comparer<int>.Default));
+                orderedList =
+                    (OrderedEnumerable<string, int>)testArray.OrderBy(
+                        item => item.Length,
+                        Comparer<int>.Default));
         }
 
         [Fact]
@@ -1465,9 +1470,10 @@ namespace LINQ.Tests
             OrderedEnumerable<string, int> orderedList;
 
             Assert.Throws<ArgumentNullException>(() =>
-                orderedList = testArray.OrderBy(
-                null,
-                Comparer<int>.Default));
+                orderedList =
+                    (OrderedEnumerable<string, int>)testArray.OrderBy(
+                        null,
+                        Comparer<int>.Default));
         }
 
         [Fact]
@@ -1476,7 +1482,7 @@ namespace LINQ.Tests
             string[] testArray = { };
 
             OrderedEnumerable<string, int> orderedList =
-                testArray.OrderBy(
+                (OrderedEnumerable<string, int>)testArray.OrderBy(
                     fruit => fruit.Length,
                     Comparer<int>.Default)
                         .ThenBy(
