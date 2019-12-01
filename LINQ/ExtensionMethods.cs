@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LINQ
 {
@@ -229,7 +230,7 @@ namespace LINQ
             return source.InternalGroupBy(keySelector, elementSelector, resultSelector, comparer);
         }
 
-        public static OrderedEnumerable<TSource, TKey> OrderBy<TSource, TKey>(
+        public static IOrderedEnumerable<TSource> OrderBy<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey> comparer)
@@ -243,14 +244,14 @@ namespace LINQ
             return new OrderedEnumerable<TSource, TKey>(source, keySelector, comparer);
         }
 
-        public static OrderedEnumerable<TSource, TKey> ThenBy<TSource, TKey>(
-            this OrderedEnumerable<TSource, TKey> source,
+        public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(
+            this IOrderedEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IComparer<TKey> comparer)
         {
-            source ??= new OrderedEnumerable<TSource, TKey>(new List<TSource>(), keySelector, comparer);
+            CheckNullElement(source);
 
-            return (OrderedEnumerable<TSource, TKey>)source.CreateOrderedEnumerable<TKey>(keySelector, comparer, false);
+            return source.CreateOrderedEnumerable(keySelector, comparer, false);
         }
 
         private static IEnumerable<TResult> InternalJoin<TOuter, TInner, TKey, TResult>(
