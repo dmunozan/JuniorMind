@@ -1388,5 +1388,21 @@ namespace LINQ.Tests
 
             Assert.Empty(resultList);
         }
+
+        [Fact]
+        public void OrderByWhenElementsShouldReturnOrderedSequence()
+        {
+            string[] testArray = { "apricot", "orange", "banana", "mango" };
+
+            OrderedEnumerable<string, int> orderedList = testArray.OrderBy(
+                item => item.Length,
+                Comparer<int>.Default);
+
+            Assert.Collection(orderedList,
+                item => Assert.Equal("mango", item),
+                item => Assert.Equal("orange", item),
+                item => Assert.Equal("banana", item),
+                item => Assert.Equal("apricot", item));
+        }
     }
 }
