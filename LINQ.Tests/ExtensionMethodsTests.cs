@@ -1404,5 +1404,28 @@ namespace LINQ.Tests
                 item => Assert.Equal("banana", item),
                 item => Assert.Equal("apricot", item));
         }
+
+        [Fact]
+        public void OrderByWhenRepeatedElementsShouldCreateStableOrderedSequence()
+        {
+            ListCollection<string[]> testList = new ListCollection<string[]>();
+
+            testList.Add(new string[] { "apricot", "1" });
+            testList.Add(new string[] { "orange", "1" });
+            testList.Add(new string[] { "apricot", "2" });
+            testList.Add(new string[] { "banana", "1" });
+            testList.Add(new string[] { "mango", "1" });
+
+            OrderedEnumerable<string[], int> orderedList = testList.OrderBy(
+                fruit => fruit[0].Length,
+                Comparer<int>.Default);
+
+            Assert.Collection(orderedList,
+                item => Assert.Equal(new string[] { "mango", "1" }, item),
+                item => Assert.Equal(new string[] { "orange", "1" }, item),
+                item => Assert.Equal(new string[] { "banana", "1" }, item),
+                item => Assert.Equal(new string[] { "apricot", "1" }, item),
+                item => Assert.Equal(new string[] { "apricot", "2" }, item));
+        }
     }
 }
