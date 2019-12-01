@@ -1443,5 +1443,18 @@ namespace LINQ.Tests
                 item => Assert.Equal("banana", item),
                 item => Assert.Equal("apricot", item));
         }
+
+        [Fact]
+        public void OrderByWhenNullSourceShouldThrowException()
+        {
+            string[] testArray = null;
+
+            OrderedEnumerable<string, int> orderedList;
+
+            Assert.Throws<ArgumentNullException>(() =>
+                orderedList = testArray.OrderBy(
+                item => item.Length,
+                Comparer<int>.Default));
+        }
     }
 }
