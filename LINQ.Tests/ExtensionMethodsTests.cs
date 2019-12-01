@@ -1376,5 +1376,17 @@ namespace LINQ.Tests
                 resultSelector,
                 EqualityComparer<double>.Default));
         }
+
+        [Fact]
+        public void OrderByWhenEmptySequenceShouldReturnEmptySequence()
+        {
+            ListCollection<string> testList = new ListCollection<string>();
+
+            OrderedEnumerable<string, int> resultList = testList.OrderBy(
+                item => item.Length,
+                Comparer<int>.Default);
+
+            Assert.Empty(resultList);
+        }
     }
 }
