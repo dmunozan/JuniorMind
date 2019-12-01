@@ -1456,5 +1456,18 @@ namespace LINQ.Tests
                 item => item.Length,
                 Comparer<int>.Default));
         }
+
+        [Fact]
+        public void OrderByWhenNullKeySelectorShouldThrowException()
+        {
+            string[] testArray = { "apricot", "orange", "banana", "mango" };
+
+            OrderedEnumerable<string, int> orderedList;
+
+            Assert.Throws<ArgumentNullException>(() =>
+                orderedList = testArray.OrderBy(
+                null,
+                Comparer<int>.Default));
+        }
     }
 }
