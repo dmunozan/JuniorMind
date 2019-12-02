@@ -1491,5 +1491,27 @@ namespace LINQ.Tests
 
             Assert.Empty(orderedList);
         }
+
+        [Fact]
+        public void ThenByWhenElementsShouldReturnSubordinateOrderedSequence()
+        {
+            string[] testArray = { "apricot", "orange", "banana", "mango", "apple", "grape", "strawberry" };
+
+            OrderedEnumerable<string, int> orderedList =
+                (OrderedEnumerable<string, int>)testArray.OrderBy(
+                    fruit => fruit.Length,
+                    Comparer<int>.Default).ThenBy(
+                            fruit => fruit,
+                            Comparer<string>.Default);
+
+            Assert.Collection(orderedList,
+                item => Assert.Equal("apple", item),
+                item => Assert.Equal("grape", item),
+                item => Assert.Equal("mango", item),
+                item => Assert.Equal("banana", item),
+                item => Assert.Equal("orange", item),
+                item => Assert.Equal("apricot", item),
+                item => Assert.Equal("strawberry", item));
+        }
     }
 }
