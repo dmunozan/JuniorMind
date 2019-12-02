@@ -251,6 +251,8 @@ namespace LINQ
         {
             CheckNullElement(source);
 
+            CheckNullElement(keySelector);
+
             comparer ??= Comparer<TKey>.Default;
 
             return source.CreateOrderedEnumerable(keySelector, comparer, false);
