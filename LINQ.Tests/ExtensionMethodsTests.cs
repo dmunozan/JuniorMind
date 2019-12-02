@@ -1592,5 +1592,21 @@ namespace LINQ.Tests
                             fruit => fruit,
                             Comparer<string>.Default));
         }
+
+        [Fact]
+        public void ThenByWhenNullKeySelectorShouldThrowException()
+        {
+            string[] testArray = { "apricot", "orange", "banana", "mango", "apple", "grape", "strawberry" };
+
+            OrderedEnumerable<string, int> orderedList;
+
+            Assert.Throws<ArgumentNullException>(() =>
+                orderedList =
+                (OrderedEnumerable<string, int>)testArray.OrderBy(
+                    fruit => fruit.Length,
+                    Comparer<int>.Default).ThenBy(
+                            null,
+                            Comparer<string>.Default));
+        }
     }
 }
