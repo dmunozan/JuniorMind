@@ -1578,5 +1578,19 @@ namespace LINQ.Tests
                 item => Assert.Equal("apricot", item),
                 item => Assert.Equal("strawberry", item));
         }
+
+        [Fact]
+        public void ThenByWhenNullSourceShouldThrowException()
+        {
+            OrderedEnumerable<string, int> initialList = null;
+
+            OrderedEnumerable<string, int> orderedList;
+
+            Assert.Throws<ArgumentNullException>(() =>
+                orderedList =
+                (OrderedEnumerable<string, int>)initialList.ThenBy(
+                            fruit => fruit,
+                            Comparer<string>.Default));
+        }
     }
 }
