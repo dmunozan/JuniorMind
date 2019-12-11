@@ -2,14 +2,14 @@
 {
     public class Product
     {
-        readonly int quantity;
-
         public Product(string name, int quantity)
         {
             Name = name;
-            this.quantity = quantity;
+            Quantity = quantity;
         }
 
         public string Name { get; set; }
+
+        public int Quantity { get; set; }
     }
 }
