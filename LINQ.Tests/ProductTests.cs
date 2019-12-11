@@ -29,5 +29,15 @@ namespace LINQ.Tests
 
             Assert.Equal(8, testProduct.Quantity);
         }
+
+        [Fact]
+        public void QuantityWhenSetShouldSetProductQuantity()
+        {
+            Product testProduct = new Product("apricot", 8);
+
+            testProduct.Quantity = 4;
+
+            Assert.Equal(4, testProduct.Quantity);
+        }
     }
 }
