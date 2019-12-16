@@ -20,7 +20,14 @@ namespace LINQ
                 return;
             }
 
-            productList.Add(product.Name, product);
+            if (productList.ContainsKey(product.Name))
+            {
+                productList[product.Name].Quantity += product.Quantity;
+            }
+            else
+            {
+                productList.Add(product.Name, product);
+            }
         }
 
         public int Check(Product product)
