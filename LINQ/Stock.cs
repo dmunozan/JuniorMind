@@ -27,6 +27,18 @@ namespace LINQ
             }
         }
 
+        public bool Remove(Product product)
+        {
+            if (product == null)
+            {
+                return false;
+            }
+
+            productList[product.Name].Quantity -= product.Quantity;
+
+            return true;
+        }
+
         public int Check(Product product)
         {
             CheckNullArgument(product);
