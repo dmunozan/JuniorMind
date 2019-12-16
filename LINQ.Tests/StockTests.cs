@@ -25,6 +25,19 @@ namespace LINQ.Tests
         }
 
         [Fact]
+        public void AddWhenProductExistShouldIncreaseQuantity()
+        {
+            Stock stockTest = new Stock();
+
+            Product testProduct = new Product("apricot", 8);
+
+            stockTest.Add(testProduct);
+            stockTest.Add(testProduct);
+
+            Assert.Equal(16, stockTest.Check(testProduct));
+        }
+
+        [Fact]
         public void CheckWhenProductNoExistShouldReturnMinus1()
         {
             Stock stockTest = new Stock();
