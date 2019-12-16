@@ -74,6 +74,16 @@ namespace LINQ.Tests
         }
 
         [Fact]
+        public void RemoveWhenNullProductShouldThrowException()
+        {
+            Stock stockTest = new Stock();
+
+            Product testProduct = null;
+
+            Assert.Throws<ArgumentNullException>(() => stockTest.Remove(testProduct));
+        }
+
+        [Fact]
         public void CheckWhenProductNoExistShouldReturnMinus1()
         {
             Stock stockTest = new Stock();
