@@ -71,13 +71,13 @@ namespace LINQ.Tests
         }
 
         [Fact]
-        public void CheckWhenNullProductShouldReturnMinus1()
+        public void CheckWhenNullProductShouldThrowException()
         {
             Stock stockTest = new Stock();
 
             Product testProduct = null;
 
-            Assert.Equal(-1, stockTest.Check(testProduct));
+            Assert.Throws<ArgumentNullException>(() => stockTest.Check(testProduct));
         }
     }
 }
