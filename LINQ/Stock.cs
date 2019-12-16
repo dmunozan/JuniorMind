@@ -34,8 +34,12 @@ namespace LINQ
                 return false;
             }
 
-            productList[product.Name].Quantity -= product.Quantity;
+            if (!productList.ContainsKey(product.Name))
+            {
+                return false;
+            }
 
+            productList[product.Name].Quantity -= product.Quantity;
             return true;
         }
 
