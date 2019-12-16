@@ -49,6 +49,21 @@ namespace LINQ.Tests
         }
 
         [Fact]
+        public void RemoveWhenProductExistAndThereIsAtLeast10ProductsLeftShouldReturnTrueAndRemoveQuantity()
+        {
+            Stock stockTest = new Stock();
+
+            Product testProduct = new Product("apricot", 16);
+
+            stockTest.Add(testProduct);
+
+            Product productToRemove = new Product("apricot", 6);
+
+            Assert.True(stockTest.Remove(productToRemove));
+            Assert.Equal(10, stockTest.Check(testProduct));
+        }
+
+        [Fact]
         public void CheckWhenProductNoExistShouldReturnMinus1()
         {
             Stock stockTest = new Stock();
