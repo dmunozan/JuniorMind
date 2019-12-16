@@ -17,7 +17,7 @@ namespace LINQ
         {
             if (product == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(product), "Not possible to add a null Product");
             }
 
             if (productList.ContainsKey(product.Name))
