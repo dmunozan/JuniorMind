@@ -45,5 +45,17 @@ namespace LINQ.Tests
 
             Assert.Equal(8, stockTest.Check(testProduct));
         }
+
+        [Fact]
+        public void CheckWhenNullProductShouldReturnMinus1()
+        {
+            Stock stockTest = new Stock();
+
+            Product testProduct = null;
+
+            stockTest.Add(testProduct);
+
+            Assert.Equal(-1, stockTest.Check(testProduct));
+        }
     }
 }
