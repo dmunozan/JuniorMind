@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace LINQ
@@ -10,6 +11,13 @@ namespace LINQ
         public Stock()
         {
             productList = new Dictionary<string, Product>();
+        }
+
+        public int Check(Product product)
+        {
+            Console.WriteLine(product);
+
+            return -1;
         }
 
         public IEnumerator GetEnumerator()
