@@ -13,13 +13,37 @@ namespace LINQ.Tests
         }
 
         [Fact]
-        public void CheckWhenNoExistShouldReturnMinus1()
+        public void AddWhenProductNoExistShouldAddProduct()
+        {
+            Stock stockTest = new Stock();
+
+            Product testProduct = new Product("apricot", 8);
+
+            stockTest.Add(testProduct);
+
+            Assert.Equal(8, stockTest.Check(testProduct));
+        }
+
+        [Fact]
+        public void CheckWhenProductNoExistShouldReturnMinus1()
         {
             Stock stockTest = new Stock();
 
             Product testProduct = new Product("apricot", 8);
 
             Assert.Equal(-1, stockTest.Check(testProduct));
+        }
+
+        [Fact]
+        public void CheckWhenProductExistShouldReturnQuantity()
+        {
+            Stock stockTest = new Stock();
+
+            Product testProduct = new Product("apricot", 8);
+
+            stockTest.Add(testProduct);
+
+            Assert.Equal(8, stockTest.Check(testProduct));
         }
     }
 }
