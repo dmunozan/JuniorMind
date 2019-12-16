@@ -15,10 +15,7 @@ namespace LINQ
 
         public void Add(Product product)
         {
-            if (product == null)
-            {
-                throw new ArgumentNullException(nameof(product), "Not possible to add a null Product");
-            }
+            CheckNullArgument(product);
 
             if (productList.ContainsKey(product.Name))
             {
@@ -32,10 +29,7 @@ namespace LINQ
 
         public int Check(Product product)
         {
-            if (product == null)
-            {
-                throw new ArgumentNullException(nameof(product), "Product cannot be null");
-            }
+            CheckNullArgument(product);
 
             if (productList.ContainsKey(product.Name))
             {
@@ -48,6 +42,16 @@ namespace LINQ
         public IEnumerator GetEnumerator()
         {
             return productList.GetEnumerator();
+        }
+
+        private void CheckNullArgument(Product product)
+        {
+            if (product != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(nameof(product), "Product cannot be null");
         }
     }
 }
