@@ -29,10 +29,7 @@ namespace LINQ
 
         public bool Remove(Product product)
         {
-            if (product == null)
-            {
-                return false;
-            }
+            CheckNullArgument(product);
 
             if (!productList.ContainsKey(product.Name))
             {
