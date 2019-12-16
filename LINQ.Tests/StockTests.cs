@@ -7,9 +7,19 @@ namespace LINQ.Tests
         [Fact]
         public void StockWhenAnyShouldCreateEmptyStock()
         {
-            Stock test = new Stock();
+            Stock stockTest = new Stock();
 
-            Assert.Empty(test);
+            Assert.Empty(stockTest);
+        }
+
+        [Fact]
+        public void CheckWhenNoExistShouldReturnMinus1()
+        {
+            Stock stockTest = new Stock();
+
+            Product testProduct = new Product("apricot", 8);
+
+            Assert.Equal(-1, stockTest.Check(testProduct));
         }
     }
 }
