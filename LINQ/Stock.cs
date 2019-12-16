@@ -13,9 +13,27 @@ namespace LINQ
             productList = new Dictionary<string, Product>();
         }
 
+        public void Add(Product product)
+        {
+            if (product == null)
+            {
+                return;
+            }
+
+            productList.Add(product.Name, product);
+        }
+
         public int Check(Product product)
         {
-            Console.WriteLine(product);
+            if (product == null)
+            {
+                return -1;
+            }
+
+            if (productList.ContainsKey(product.Name))
+            {
+                return productList[product.Name].Quantity;
+            }
 
             return -1;
         }
