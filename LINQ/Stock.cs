@@ -34,7 +34,7 @@ namespace LINQ
         {
             if (product == null)
             {
-                return -1;
+                throw new ArgumentNullException(nameof(product), "Product cannot be null");
             }
 
             if (productList.ContainsKey(product.Name))
