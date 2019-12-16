@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace LINQ.Tests
 {
@@ -38,6 +39,16 @@ namespace LINQ.Tests
         }
 
         [Fact]
+        public void AddWhenNullProductShouldThrowException()
+        {
+            Stock stockTest = new Stock();
+
+            Product testProduct = null;
+
+            Assert.Throws<ArgumentNullException>(() => stockTest.Add(testProduct));
+        }
+
+        [Fact]
         public void CheckWhenProductNoExistShouldReturnMinus1()
         {
             Stock stockTest = new Stock();
@@ -65,8 +76,6 @@ namespace LINQ.Tests
             Stock stockTest = new Stock();
 
             Product testProduct = null;
-
-            stockTest.Add(testProduct);
 
             Assert.Equal(-1, stockTest.Check(testProduct));
         }
