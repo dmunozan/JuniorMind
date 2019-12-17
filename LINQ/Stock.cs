@@ -8,6 +8,10 @@ namespace LINQ
     {
         readonly Dictionary<string, Product> productList;
 
+        readonly Action<Product> sendNotification =
+            product => Console.WriteLine(
+                "There are {0} {1} left", product.Quantity, product);
+
         public Stock()
         {
             productList = new Dictionary<string, Product>();
@@ -31,12 +35,21 @@ namespace LINQ
         {
             CheckNullArgument(product);
 
+            const int FirstNotificationLimit = 10;
+
             if (!productList.ContainsKey(product.Name))
             {
                 return false;
             }
 
             productList[product.Name].Quantity -= product.Quantity;
+
+            if (productList[product.Name].Quantity >= FirstNotificationLimit)
+            {
+                return true;
+            }
+
+            sendNotification(productList[product.Name]);
             return true;
         }
 
