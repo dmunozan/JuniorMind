@@ -8,9 +8,13 @@ namespace LINQ
     {
         readonly Dictionary<string, Product> productList;
 
-        readonly Action<Product> sendNotification =
+        readonly Action<Product> lowAmountNotification =
             product => Console.WriteLine(
                 "There are {0} {1} left", product.Quantity, product);
+
+        readonly Action<Product> notEnoughNotification =
+            product => Console.WriteLine(
+                "There are not enough {0} to satisfy the request. Only {1} left.", product, product.Quantity);
 
         public Stock()
         {
@@ -42,14 +46,22 @@ namespace LINQ
                 return false;
             }
 
-            productList[product.Name].Quantity -= product.Quantity;
+            int leftAmount = productList[product.Name].Quantity - product.Quantity;
+
+            if (leftAmount < 0)
+            {
+                notEnoughNotification(product);
+                return false;
+            }
+
+            productList[product.Name].Quantity = leftAmount;
 
             if (productList[product.Name].Quantity >= FirstNotificationLimit)
             {
                 return true;
             }
 
-            sendNotification(productList[product.Name]);
+            lowAmountNotification(productList[product.Name]);
             return true;
         }
 
