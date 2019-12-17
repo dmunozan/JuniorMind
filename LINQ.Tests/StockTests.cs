@@ -68,14 +68,56 @@ namespace LINQ.Tests
         {
             Stock stockTest = new Stock();
 
-            Product testProduct = new Product("apricot", 16);
+            stockTest.Add(new Product("apricot", 16));
+            stockTest.Add(new Product("orange", 16));
 
-            stockTest.Add(testProduct);
+            Assert.True(stockTest.Remove(new Product("apricot", 7)));
+            Assert.True(stockTest.Remove(new Product("orange", 11)));
 
-            Product productToRemove = new Product("apricot", 7);
+            Assert.Equal(9, stockTest.Check(new Product("apricot", 0)));
+            Assert.Equal(5, stockTest.Check(new Product("orange", 0)));
+        }
 
-            Assert.True(stockTest.Remove(productToRemove));
-            Assert.Equal(9, stockTest.Check(testProduct));
+        [Fact]
+        public void RemoveWhenProductExistAndThereIsBetween2And4ProductsLeftShouldReturnTrueRemoveQuantityAndSendNotification()
+        {
+            Stock stockTest = new Stock();
+
+            stockTest.Add(new Product("apricot", 16));
+            stockTest.Add(new Product("orange", 16));
+
+            Assert.True(stockTest.Remove(new Product("apricot", 12)));
+            Assert.True(stockTest.Remove(new Product("orange", 14)));
+
+            Assert.Equal(4, stockTest.Check(new Product("apricot", 0)));
+            Assert.Equal(2, stockTest.Check(new Product("orange", 0)));
+        }
+
+        [Fact]
+        public void RemoveWhenProductExistAndThereIsLessThan2ProductsLeftShouldReturnTrueRemoveQuantityAndSendNotification()
+        {
+            Stock stockTest = new Stock();
+
+            stockTest.Add(new Product("apricot", 16));
+            stockTest.Add(new Product("orange", 16));
+
+            Assert.True(stockTest.Remove(new Product("apricot", 15)));
+            Assert.True(stockTest.Remove(new Product("orange", 16)));
+
+            Assert.Equal(1, stockTest.Check(new Product("apricot", 0)));
+            Assert.Equal(0, stockTest.Check(new Product("orange", 0)));
+        }
+
+        [Fact]
+        public void RemoveWhenProductExistAndThereIsNotEnoughProductsAnd10OrMoreLeftShouldReturnFalse()
+        {
+            Stock stockTest = new Stock();
+
+            stockTest.Add(new Product("apricot", 16));
+
+            Assert.False(stockTest.Remove(new Product("apricot", 20)));
+
+            Assert.Equal(16, stockTest.Check(new Product("apricot", 0)));
         }
 
         [Fact]
