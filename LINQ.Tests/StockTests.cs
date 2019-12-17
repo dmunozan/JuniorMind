@@ -109,7 +109,7 @@ namespace LINQ.Tests
         }
 
         [Fact]
-        public void RemoveWhenProductExistAndThereIsNotEnoughProductsAnd10OrMoreLeftShouldReturnFalse()
+        public void RemoveWhenProductExistAndThereIsNotEnoughProductsShouldReturnFalse()
         {
             Stock stockTest = new Stock();
 
