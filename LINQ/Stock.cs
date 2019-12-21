@@ -4,17 +4,11 @@ using System.Collections.Generic;
 
 namespace LINQ
 {
+    public delegate void ProcessProduct(Product product);
+
     public class Stock : IEnumerable
     {
         readonly Dictionary<string, Product> productList;
-
-        readonly Action<Product> lowAmountNotification =
-            product => Console.WriteLine(
-                "There are {0} {1} left", product.Quantity, product);
-
-        readonly Action<Product> notEnoughNotification =
-            product => Console.WriteLine(
-                "There are not enough {0} to satisfy the request. Only {1} left.", product, product.Quantity);
 
         public Stock()
         {
@@ -35,9 +29,11 @@ namespace LINQ
             }
         }
 
-        public bool Remove(Product product)
+        public bool Remove(Product product, ProcessProduct processProduct)
         {
             CheckNullArgument(product);
+
+            CheckNullArgument(processProduct);
 
             const int FirstNotificationLimit = 10;
 
@@ -50,18 +46,18 @@ namespace LINQ
 
             if (leftAmount < 0)
             {
-                notEnoughNotification(product);
+                processProduct(productList[product.Name]);
                 return false;
             }
 
             productList[product.Name].Quantity = leftAmount;
 
-            if (productList[product.Name].Quantity >= FirstNotificationLimit)
+            if (leftAmount >= FirstNotificationLimit)
             {
                 return true;
             }
 
-            lowAmountNotification(productList[product.Name]);
+            processProduct(productList[product.Name]);
             return true;
         }
 
@@ -82,14 +78,16 @@ namespace LINQ
             return productList.GetEnumerator();
         }
 
-        private void CheckNullArgument(Product product)
+        private void CheckNullArgument(object obj)
         {
-            if (product != null)
+            if (obj != null)
             {
                 return;
             }
 
-            throw new ArgumentNullException(nameof(product), "Product cannot be null");
+            const string errorMessage = nameof(obj) + " cannot be null";
+
+            throw new ArgumentNullException(nameof(obj), errorMessage);
         }
     }
 }
