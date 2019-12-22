@@ -9,10 +9,14 @@ namespace LINQ
     public class Stock : IEnumerable
     {
         readonly Dictionary<string, Product> productList;
+        readonly ProcessProduct processProduct;
 
-        public Stock()
+        public Stock(ProcessProduct processProduct)
         {
+            CheckNullArgument(processProduct);
+
             productList = new Dictionary<string, Product>();
+            this.processProduct = processProduct;
         }
 
         public void Add(Product product)
@@ -29,11 +33,9 @@ namespace LINQ
             }
         }
 
-        public bool Remove(Product product, ProcessProduct processProduct)
+        public bool Remove(Product product)
         {
             CheckNullArgument(product);
-
-            CheckNullArgument(processProduct);
 
             const int FirstNotificationLimit = 10;
 
