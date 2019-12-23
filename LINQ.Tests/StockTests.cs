@@ -126,9 +126,9 @@ namespace LINQ.Tests
         }
 
         [Fact]
-        public void RemoveWhenProductExistAndThereIs9ProductsLeftShouldReturnTrueRemoveQuantityAndSendNotification()
+        public void RemoveWhenThereIsLessThan10ProductsShouldSendNotification()
         {
-            Product testProduct = new Product("apricot", 16);
+            Product testProduct = new Product("apricot", 9);
 
             Action<Product> notification =
             product =>
@@ -146,139 +146,19 @@ namespace LINQ.Tests
             Product productToRemove = new Product("apricot", 7);
 
             Assert.True(stockTest.Remove(productToRemove));
-            Assert.Equal(9, stockTest.Check(testProduct));
-        }
-
-        [Fact]
-        public void RemoveWhenProductExistAndThereIs5ProductsLeftShouldReturnTrueRemoveQuantityAndSendNotification()
-        {
-            Product testProduct = new Product("apricot", 16);
-
-            Action<Product> notification =
-            product =>
-            {
-                Assert.Equal(testProduct, product);
-                Assert.Equal(5, product.Quantity);
-            };
-
-            ProcessProduct testNotification = new ProcessProduct(notification);
-
-            Stock stockTest = new Stock(testNotification);
-
-            stockTest.Add(testProduct);
-
-            Product productToRemove = new Product("apricot", 11);
-
-            Assert.True(stockTest.Remove(productToRemove));
-            Assert.Equal(5, stockTest.Check(testProduct));
-        }
-
-        [Fact]
-        public void RemoveWhenProductExistAndThereIs4ProductsLeftShouldReturnTrueRemoveQuantityAndSendNotification()
-        {
-            Product testProduct = new Product("apricot", 16);
-
-            Action<Product> notification =
-            product =>
-            {
-                Assert.Equal(testProduct, product);
-                Assert.Equal(4, product.Quantity);
-            };
-
-            ProcessProduct testNotification = new ProcessProduct(notification);
-
-            Stock stockTest = new Stock(testNotification);
-
-            stockTest.Add(testProduct);
-
-            Product productToRemove = new Product("apricot", 12);
-
-            Assert.True(stockTest.Remove(productToRemove));
-            Assert.Equal(4, stockTest.Check(testProduct));
-        }
-
-        [Fact]
-        public void RemoveWhenProductExistAndThereIs2ProductsLeftShouldReturnTrueRemoveQuantityAndSendNotification()
-        {
-            Product testProduct = new Product("apricot", 16);
-
-            Action<Product> notification =
-            product =>
-            {
-                Assert.Equal(testProduct, product);
-                Assert.Equal(2, product.Quantity);
-            };
-
-            ProcessProduct testNotification = new ProcessProduct(notification);
-
-            Stock stockTest = new Stock(testNotification);
-
-            stockTest.Add(testProduct);
-
-            Product productToRemove = new Product("apricot", 14);
-
-            Assert.True(stockTest.Remove(productToRemove));
             Assert.Equal(2, stockTest.Check(testProduct));
         }
 
         [Fact]
-        public void RemoveWhenProductExistAndThereIs1ProductsLeftShouldReturnTrueRemoveQuantityAndSendNotification()
+        public void RemoveWhenProductExistAndThereIsNotEnoughProductsShouldReturnFalse()
         {
             Product testProduct = new Product("apricot", 16);
 
             Action<Product> notification =
             product =>
             {
-                Assert.Equal(testProduct, product);
-                Assert.Equal(1, product.Quantity);
-            };
-
-            ProcessProduct testNotification = new ProcessProduct(notification);
-
-            Stock stockTest = new Stock(testNotification);
-
-            stockTest.Add(testProduct);
-
-            Product productToRemove = new Product("apricot", 15);
-
-            Assert.True(stockTest.Remove(productToRemove));
-            Assert.Equal(1, stockTest.Check(testProduct));
-        }
-
-        [Fact]
-        public void RemoveWhenProductExistAndThereIs0ProductsLeftShouldReturnTrueRemoveQuantityAndSendNotification()
-        {
-            Product testProduct = new Product("apricot", 16);
-
-            Action<Product> notification =
-            product =>
-            {
-                Assert.Equal(testProduct, product);
-                Assert.Equal(0, product.Quantity);
-            };
-
-            ProcessProduct testNotification = new ProcessProduct(notification);
-
-            Stock stockTest = new Stock(testNotification);
-
-            stockTest.Add(testProduct);
-
-            Product productToRemove = new Product("apricot", 16);
-
-            Assert.True(stockTest.Remove(productToRemove));
-            Assert.Equal(0, stockTest.Check(testProduct));
-        }
-
-        [Fact]
-        public void RemoveWhenProductExistAndThereIsNotEnoughProductsShouldReturnFalseAndSendNotification()
-        {
-            Product testProduct = new Product("apricot", 16);
-
-            Action<Product> notification =
-            product =>
-            {
-                Assert.Equal(testProduct, product);
-                Assert.Equal(16, product.Quantity);
+                // Notification will not be sent at any given moment
+                Assert.True(false);
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
