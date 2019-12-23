@@ -48,18 +48,16 @@ namespace LINQ
 
             if (leftAmount < 0)
             {
-                processProduct(productList[product.Name]);
                 return false;
+            }
+
+            if (productList[product.Name].Quantity < FirstNotificationLimit)
+            {
+                processProduct(productList[product.Name]);
             }
 
             productList[product.Name].Quantity = leftAmount;
 
-            if (leftAmount >= FirstNotificationLimit)
-            {
-                return true;
-            }
-
-            processProduct(productList[product.Name]);
             return true;
         }
 
