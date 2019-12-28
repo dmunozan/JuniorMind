@@ -44,20 +44,22 @@ namespace LINQ
                 return false;
             }
 
-            int leftAmount = productList[product.Name].Quantity - product.Quantity;
+            int initialAmount = productList[product.Name].Quantity;
+            int leftAmount = initialAmount - product.Quantity;
 
             if (leftAmount < 0)
             {
                 return false;
             }
 
-            if (productList[product.Name].Quantity < FirstNotificationLimit)
-            {
-                processProduct(productList[product.Name]);
-            }
-
             productList[product.Name].Quantity = leftAmount;
 
+            if (initialAmount < FirstNotificationLimit || leftAmount >= FirstNotificationLimit)
+            {
+                return true;
+            }
+
+            processProduct(productList[product.Name]);
             return true;
         }
 
