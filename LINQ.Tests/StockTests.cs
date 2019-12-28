@@ -144,16 +144,20 @@ namespace LINQ.Tests
         }
 
         [Fact]
-        public void RemoveWhenThereIsLessThan10ProductsShouldSendNotification()
+        public void RemoveWhenThereIsBeetwen9and5ProductsLeftShouldSendNotificationOnce()
         {
-            Product testProduct = new Product("apricot", 9);
+            Product testProduct = new Product("apricot", 11);
 
-            Product notifiedProduct = null;
+            string notifiedProduct = null;
+            int notifiedQuantity = -1;
+            int numberOfNotifications = 0;
 
             Action<Product> notification =
             product =>
             {
-                notifiedProduct = product;
+                notifiedProduct = product.Name;
+                notifiedQuantity = product.Quantity;
+                numberOfNotifications++;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -162,12 +166,20 @@ namespace LINQ.Tests
 
             stockTest.Add(testProduct);
 
-            Product productToRemove = new Product("apricot", 7);
+            Product productToRemove = new Product("apricot", 2);
 
             Assert.True(stockTest.Remove(productToRemove));
-            Assert.Equal(2, stockTest.Check(testProduct));
-            Assert.Equal(testProduct.Name, notifiedProduct.Name);
-            Assert.Equal(2, notifiedProduct.Quantity);
+            Assert.Equal(9, stockTest.Check(testProduct));
+            Assert.Equal(testProduct.Name, notifiedProduct);
+            Assert.Equal(9, notifiedQuantity);
+            Assert.Equal(1, numberOfNotifications);
+
+            // Second Remove, no notification sent
+            Assert.True(stockTest.Remove(productToRemove));
+            Assert.Equal(7, stockTest.Check(testProduct));
+            Assert.Equal(testProduct.Name, notifiedProduct);
+            Assert.Equal(9, notifiedQuantity);
+            Assert.Equal(1, numberOfNotifications);
         }
 
         [Fact]
