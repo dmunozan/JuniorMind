@@ -8,11 +8,13 @@ namespace LINQ.Tests
         [Fact]
         public void StockWhenAnyShouldCreateEmptyStock()
         {
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -20,16 +22,19 @@ namespace LINQ.Tests
             Stock stockTest = new Stock(testNotification);
 
             Assert.Empty(stockTest);
+            Assert.False(notificationSent);
         }
 
         [Fact]
         public void StockWhenNullProcessProductShouldThrowException()
         {
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = null;
@@ -37,16 +42,19 @@ namespace LINQ.Tests
             Stock stockTest;
 
             Assert.Throws<ArgumentNullException>(() => stockTest = new Stock(testNotification));
+            Assert.False(notificationSent);
         }
 
         [Fact]
         public void AddWhenProductNoExistShouldAddProduct()
         {
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -58,16 +66,19 @@ namespace LINQ.Tests
             stockTest.Add(testProduct);
 
             Assert.Equal(8, stockTest.Check(testProduct));
+            Assert.False(notificationSent);
         }
 
         [Fact]
         public void AddWhenProductExistShouldIncreaseQuantity()
         {
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -80,16 +91,19 @@ namespace LINQ.Tests
             stockTest.Add(testProduct);
 
             Assert.Equal(16, stockTest.Check(testProduct));
+            Assert.False(notificationSent);
         }
 
         [Fact]
         public void AddWhenNullProductShouldThrowException()
         {
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -99,16 +113,19 @@ namespace LINQ.Tests
             Product testProduct = null;
 
             Assert.Throws<ArgumentNullException>(() => stockTest.Add(testProduct));
+            Assert.False(notificationSent);
         }
 
         [Fact]
         public void RemoveWhenProductExistAndThereIsAtLeast10ProductsLeftShouldReturnTrueAndRemoveQuantity()
         {
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -123,6 +140,7 @@ namespace LINQ.Tests
 
             Assert.True(stockTest.Remove(productToRemove));
             Assert.Equal(10, stockTest.Check(testProduct));
+            Assert.False(notificationSent);
         }
 
         [Fact]
@@ -130,11 +148,12 @@ namespace LINQ.Tests
         {
             Product testProduct = new Product("apricot", 9);
 
+            Product notifiedProduct = null;
+
             Action<Product> notification =
             product =>
             {
-                Assert.Equal(testProduct, product);
-                Assert.Equal(9, product.Quantity);
+                notifiedProduct = product;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -147,6 +166,8 @@ namespace LINQ.Tests
 
             Assert.True(stockTest.Remove(productToRemove));
             Assert.Equal(2, stockTest.Check(testProduct));
+            Assert.Equal(testProduct.Name, notifiedProduct.Name);
+            Assert.Equal(2, notifiedProduct.Quantity);
         }
 
         [Fact]
@@ -154,11 +175,13 @@ namespace LINQ.Tests
         {
             Product testProduct = new Product("apricot", 16);
 
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -172,16 +195,19 @@ namespace LINQ.Tests
             Assert.False(stockTest.Remove(productToRemove));
 
             Assert.Equal(16, stockTest.Check(new Product("apricot", 0)));
+            Assert.False(notificationSent);
         }
 
         [Fact]
         public void RemoveWhenProductNoExistShouldReturnFalse()
         {
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -191,6 +217,7 @@ namespace LINQ.Tests
             Product productToRemove = new Product("apricot", 6);
 
             Assert.False(stockTest.Remove(productToRemove));
+            Assert.False(notificationSent);
         }
 
         [Fact]
@@ -198,11 +225,13 @@ namespace LINQ.Tests
         {
             Product testProduct = null;
 
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -210,6 +239,7 @@ namespace LINQ.Tests
             Stock stockTest = new Stock(testNotification);
 
             Assert.Throws<ArgumentNullException>(() => stockTest.Remove(testProduct));
+            Assert.False(notificationSent);
         }
 
         [Fact]
@@ -217,11 +247,13 @@ namespace LINQ.Tests
         {
             Product testProduct = new Product("apricot", 8);
 
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -229,6 +261,7 @@ namespace LINQ.Tests
             Stock stockTest = new Stock(testNotification);
 
             Assert.Equal(-1, stockTest.Check(testProduct));
+            Assert.False(notificationSent);
         }
 
         [Fact]
@@ -236,11 +269,13 @@ namespace LINQ.Tests
         {
             Product testProduct = new Product("apricot", 8);
 
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -250,6 +285,7 @@ namespace LINQ.Tests
             stockTest.Add(testProduct);
 
             Assert.Equal(8, stockTest.Check(testProduct));
+            Assert.False(notificationSent);
         }
 
         [Fact]
@@ -257,11 +293,13 @@ namespace LINQ.Tests
         {
             Product testProduct = null;
 
+            bool notificationSent = false;
+
             Action<Product> notification =
             product =>
             {
                 // Notification will not be sent at any given moment
-                Assert.True(false);
+                notificationSent = true;
             };
 
             ProcessProduct testNotification = new ProcessProduct(notification);
@@ -269,6 +307,7 @@ namespace LINQ.Tests
             Stock stockTest = new Stock(testNotification);
 
             Assert.Throws<ArgumentNullException>(() => stockTest.Check(testProduct));
+            Assert.False(notificationSent);
         }
     }
 }
