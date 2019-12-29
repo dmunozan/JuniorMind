@@ -80,24 +80,22 @@ namespace LINQ
             const int SecondNotificationLimit = 4;
             const int ThirdNotificationLimit = 1;
 
-            if (leftAmount > FirstNotificationLimit)
-            {
-                return;
-            }
+            int limit;
 
             if (initialAmount > FirstNotificationLimit)
             {
-                processProduct(product);
-                return;
+                limit = FirstNotificationLimit;
             }
-
-            if (initialAmount > SecondNotificationLimit && leftAmount <= SecondNotificationLimit)
+            else if (initialAmount > SecondNotificationLimit)
             {
-                processProduct(product);
-                return;
+                limit = SecondNotificationLimit;
+            }
+            else
+            {
+                limit = ThirdNotificationLimit;
             }
 
-            if (initialAmount <= ThirdNotificationLimit || leftAmount > ThirdNotificationLimit)
+            if (initialAmount <= limit || leftAmount > limit)
             {
                 return;
             }
