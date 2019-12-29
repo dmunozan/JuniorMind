@@ -261,6 +261,79 @@ namespace LINQ.Tests
         }
 
         [Fact]
+        public void RemoveWhenDifferentNotificationsTriggeredShouldSendEachNotificationOnce()
+        {
+            Product initialtestProduct = new Product("apricot", 10);
+
+            string notifiedProduct = null;
+            int notifiedQuantity = -1;
+            int numberOfNotifications = 0;
+
+            Action<Product> notification =
+            product =>
+            {
+                notifiedProduct = product.Name;
+                notifiedQuantity = product.Quantity;
+                numberOfNotifications++;
+            };
+
+            ProcessProduct testNotification = new ProcessProduct(notification);
+
+            Stock stockTest = new Stock(testNotification);
+
+            stockTest.Add(initialtestProduct);
+
+            Product productToRemove = new Product("apricot", 1);
+
+            Assert.True(stockTest.Remove(productToRemove));
+            Assert.Equal(9, stockTest.Check(initialtestProduct));
+            Assert.Equal(initialtestProduct.Name, notifiedProduct);
+            Assert.Equal(9, notifiedQuantity);
+            Assert.Equal(1, numberOfNotifications);
+
+            // Second Remove, no notification sent
+            Assert.True(stockTest.Remove(productToRemove));
+            Assert.Equal(8, stockTest.Check(initialtestProduct));
+            Assert.Equal(initialtestProduct.Name, notifiedProduct);
+            Assert.Equal(9, notifiedQuantity);
+            Assert.Equal(1, numberOfNotifications);
+
+            // Third Remove, second notification sent (less than 5 products)
+            productToRemove.Quantity = 4;
+
+            Assert.True(stockTest.Remove(productToRemove));
+            Assert.Equal(4, stockTest.Check(initialtestProduct));
+            Assert.Equal(initialtestProduct.Name, notifiedProduct);
+            Assert.Equal(4, notifiedQuantity);
+            Assert.Equal(2, numberOfNotifications);
+
+            // Fourth Remove, no notification sent
+            productToRemove.Quantity = 2;
+
+            Assert.True(stockTest.Remove(productToRemove));
+            Assert.Equal(2, stockTest.Check(initialtestProduct));
+            Assert.Equal(initialtestProduct.Name, notifiedProduct);
+            Assert.Equal(4, notifiedQuantity);
+            Assert.Equal(2, numberOfNotifications);
+
+            // Fifth Remove, third notification sent (less than 2 products)
+            productToRemove.Quantity = 1;
+
+            Assert.True(stockTest.Remove(productToRemove));
+            Assert.Equal(1, stockTest.Check(initialtestProduct));
+            Assert.Equal(initialtestProduct.Name, notifiedProduct);
+            Assert.Equal(1, notifiedQuantity);
+            Assert.Equal(3, numberOfNotifications);
+
+            // Fourth Remove, no notification sent
+            Assert.True(stockTest.Remove(productToRemove));
+            Assert.Equal(0, stockTest.Check(initialtestProduct));
+            Assert.Equal(initialtestProduct.Name, notifiedProduct);
+            Assert.Equal(1, notifiedQuantity);
+            Assert.Equal(3, numberOfNotifications);
+        }
+
+        [Fact]
         public void RemoveWhenProductExistAndThereIsNotEnoughProductsShouldReturnFalse()
         {
             Product testProduct = new Product("apricot", 16);
