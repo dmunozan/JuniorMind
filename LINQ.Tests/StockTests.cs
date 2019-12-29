@@ -222,6 +222,45 @@ namespace LINQ.Tests
         }
 
         [Fact]
+        public void RemoveWhenThereIsBeetwen1and0ProductsLeftShouldSendNotificationOnce()
+        {
+            Product testProduct = new Product("apricot", 2);
+
+            string notifiedProduct = null;
+            int notifiedQuantity = -1;
+            int numberOfNotifications = 0;
+
+            Action<Product> notification =
+            product =>
+            {
+                notifiedProduct = product.Name;
+                notifiedQuantity = product.Quantity;
+                numberOfNotifications++;
+            };
+
+            ProcessProduct testNotification = new ProcessProduct(notification);
+
+            Stock stockTest = new Stock(testNotification);
+
+            stockTest.Add(testProduct);
+
+            Product productToRemove = new Product("apricot", 1);
+
+            Assert.True(stockTest.Remove(productToRemove));
+            Assert.Equal(1, stockTest.Check(testProduct));
+            Assert.Equal(testProduct.Name, notifiedProduct);
+            Assert.Equal(1, notifiedQuantity);
+            Assert.Equal(1, numberOfNotifications);
+
+            // Second Remove, no notification sent
+            Assert.True(stockTest.Remove(productToRemove));
+            Assert.Equal(0, stockTest.Check(testProduct));
+            Assert.Equal(testProduct.Name, notifiedProduct);
+            Assert.Equal(1, notifiedQuantity);
+            Assert.Equal(1, numberOfNotifications);
+        }
+
+        [Fact]
         public void RemoveWhenProductExistAndThereIsNotEnoughProductsShouldReturnFalse()
         {
             Product testProduct = new Product("apricot", 16);
