@@ -37,8 +37,6 @@ namespace LINQ
         {
             CheckNullArgument(product);
 
-            const int FirstNotificationLimit = 10;
-
             if (!productList.ContainsKey(product.Name))
             {
                 return false;
@@ -54,12 +52,8 @@ namespace LINQ
 
             productList[product.Name].Quantity = leftAmount;
 
-            if (initialAmount < FirstNotificationLimit || leftAmount >= FirstNotificationLimit)
-            {
-                return true;
-            }
+            CheckNotification(initialAmount, leftAmount, productList[product.Name]);
 
-            processProduct(productList[product.Name]);
             return true;
         }
 
@@ -78,6 +72,30 @@ namespace LINQ
         public IEnumerator GetEnumerator()
         {
             return productList.GetEnumerator();
+        }
+
+        private void CheckNotification(int initialAmount, int leftAmount, Product product)
+            {
+            const int FirstNotificationLimit = 9;
+            const int SecondNotificationLimit = 4;
+
+            if (leftAmount > FirstNotificationLimit)
+            {
+                return;
+            }
+
+            if (initialAmount > FirstNotificationLimit)
+            {
+                processProduct(product);
+                return;
+            }
+
+            if (initialAmount <= SecondNotificationLimit || leftAmount > SecondNotificationLimit)
+            {
+                return;
+            }
+
+            processProduct(product);
         }
 
         private void CheckNullArgument(object obj)
