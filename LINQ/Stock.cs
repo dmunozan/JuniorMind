@@ -78,6 +78,7 @@ namespace LINQ
             {
             const int FirstNotificationLimit = 9;
             const int SecondNotificationLimit = 4;
+            const int ThirdNotificationLimit = 1;
 
             if (leftAmount > FirstNotificationLimit)
             {
@@ -90,7 +91,13 @@ namespace LINQ
                 return;
             }
 
-            if (initialAmount <= SecondNotificationLimit || leftAmount > SecondNotificationLimit)
+            if (initialAmount > SecondNotificationLimit && leftAmount <= SecondNotificationLimit)
+            {
+                processProduct(product);
+                return;
+            }
+
+            if (initialAmount <= ThirdNotificationLimit || leftAmount > ThirdNotificationLimit)
             {
                 return;
             }
