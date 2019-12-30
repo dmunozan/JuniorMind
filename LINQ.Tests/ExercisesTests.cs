@@ -29,5 +29,13 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testExercise.NumberOfVocals(null));
         }
+
+        [Fact]
+        public void NumberOfConsonantsWhenEmptyStringShouldReturn0()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Equal(0, testExercise.NumberOfConsonants(""));
+        }
     }
 }
