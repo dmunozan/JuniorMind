@@ -1,27 +1,28 @@
 ﻿using System;
+using System.Linq;
 
 namespace LINQ
 {
     public class Exercises
     {
-        public int NumberOfVocals(string text)
+        public int NumberOfVowels(string text)
         {
-            return text.Count(
-                c =>
-                {
-                    var isA = c == 'a' || c == 'A';
-                    var isE = isA || c == 'e' || c == 'E';
-                    var isI = isE || c == 'i' || c == 'I';
-                    var isO = isI || c == 'o' || c == 'O';
-                    return isO || c == 'u' || c == 'U';
-                });
+            if (string.IsNullOrEmpty(text))
+            {
+                return 0;
+            }
+
+            return text.Split("aeiou".ToCharArray()).Length - 1;
         }
 
         public int NumberOfConsonants(string text)
         {
-            Console.WriteLine(text);
+            if (string.IsNullOrEmpty(text))
+            {
+                return 0;
+            }
 
-            return 0;
+            return text.Split(" .?!".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(w => w.Length).Sum() - NumberOfVowels(text);
         }
     }
 }
