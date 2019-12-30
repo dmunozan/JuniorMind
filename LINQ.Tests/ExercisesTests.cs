@@ -43,5 +43,13 @@ namespace LINQ.Tests
 
             Assert.Equal(12, testExercise.NumberOfConsonants("This is a test string."));
         }
+
+        [Fact]
+        public void NumberOfConsonantsWhenNullStringShouldReturn0()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Equal(0, testExercise.NumberOfConsonants(null));
+        }
     }
 }
