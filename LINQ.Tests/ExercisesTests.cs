@@ -21,5 +21,13 @@ namespace LINQ.Tests
 
             Assert.Equal(5, testExercise.NumberOfVocals("This is a test string"));
         }
+
+        [Fact]
+        public void NumberOfVocalsWhenNullStringShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.NumberOfVocals(null));
+        }
     }
 }
