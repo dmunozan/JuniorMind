@@ -13,5 +13,13 @@ namespace LINQ.Tests
             
             Assert.Equal(0, testExercise.NumberOfVocals(""));
         }
+
+        [Fact]
+        public void NumberOfVocalsWhenNoEmptyStringShouldReturnNumberOfVocals()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Equal(5, testExercise.NumberOfVocals("This is a test string"));
+        }
     }
 }
