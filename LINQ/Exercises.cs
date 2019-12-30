@@ -16,5 +16,12 @@ namespace LINQ
                     return isO || c == 'u' || c == 'U';
                 });
         }
+
+        public int NumberOfConsonants(string text)
+        {
+            Console.WriteLine(text);
+
+            return 0;
+        }
     }
 }
