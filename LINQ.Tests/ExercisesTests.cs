@@ -1,33 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using Xunit;
+﻿using Xunit;
 
 namespace LINQ.Tests
 {
     public class ExercisesTests
     {
         [Fact]
-        public void NumberOfVocalsWhenEmptyStringShouldReturn0()
+        public void NumberOfVowelsWhenEmptyStringShouldReturn0()
         {
             Exercises testExercise = new Exercises();
             
-            Assert.Equal(0, testExercise.NumberOfVocals(""));
+            Assert.Equal(0, testExercise.NumberOfVowels(""));
         }
 
         [Fact]
-        public void NumberOfVocalsWhenNoEmptyStringShouldReturnNumberOfVocals()
+        public void NumberOfVowelsWhenNoEmptyStringShouldReturnNumberOfVowels()
         {
             Exercises testExercise = new Exercises();
 
-            Assert.Equal(5, testExercise.NumberOfVocals("This is a test string"));
+            Assert.Equal(5, testExercise.NumberOfVowels("This is a test string"));
         }
 
         [Fact]
-        public void NumberOfVocalsWhenNullStringShouldThrowException()
+        public void NumberOfVowelsWhenNullStringShouldReturn0()
         {
             Exercises testExercise = new Exercises();
 
-            Assert.Throws<ArgumentNullException>(() => testExercise.NumberOfVocals(null));
+            Assert.Equal(0, testExercise.NumberOfVowels(null));
         }
 
         [Fact]
@@ -36,6 +34,14 @@ namespace LINQ.Tests
             Exercises testExercise = new Exercises();
 
             Assert.Equal(0, testExercise.NumberOfConsonants(""));
+        }
+
+        [Fact]
+        public void NumberOfConsonantsWhenNoEmptyStringShouldReturnNumberOfConsonants()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Equal(12, testExercise.NumberOfConsonants("This is a test string."));
         }
     }
 }
