@@ -75,24 +75,18 @@ namespace LINQ
         }
 
         private void CheckNotification(int initialAmount, int leftAmount, Product product)
-            {
-            const int FirstNotificationLimit = 9;
-            const int SecondNotificationLimit = 4;
-            const int ThirdNotificationLimit = 1;
+        {
+            int[] notifications = { 9, 4, 1 };
 
-            int limit;
+            int limit = notifications[^1];
 
-            if (initialAmount > FirstNotificationLimit)
+            for (int i = 0; i < notifications.Length - 1; i++)
             {
-                limit = FirstNotificationLimit;
-            }
-            else if (initialAmount > SecondNotificationLimit)
-            {
-                limit = SecondNotificationLimit;
-            }
-            else
-            {
-                limit = ThirdNotificationLimit;
+                if (initialAmount > notifications[i])
+                {
+                    limit = notifications[i];
+                    break;
+                }
             }
 
             if (initialAmount <= limit || leftAmount > limit)
