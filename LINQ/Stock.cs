@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LINQ
 {
@@ -78,16 +79,7 @@ namespace LINQ
         {
             int[] notifications = { 9, 4, 1 };
 
-            int limit = notifications[^1];
-
-            for (int i = 0; i < notifications.Length - 1; i++)
-            {
-                if (initialAmount > notifications[i])
-                {
-                    limit = notifications[i];
-                    break;
-                }
-            }
+            int limit = notifications.First(n => initialAmount > n || n == notifications[^1]);
 
             if (initialAmount <= limit || leftAmount > limit)
             {
