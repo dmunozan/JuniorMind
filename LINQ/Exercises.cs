@@ -24,5 +24,12 @@ namespace LINQ
 
             return text.Split(" .?!".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(w => w.Length).Sum() - NumberOfVowels(text);
         }
+
+        public (int consonants, int vowels) NumberOfLetters(string text)
+        {
+            text ??= "";
+
+            return (text.Length, text.Length);
+        }
     }
 }
