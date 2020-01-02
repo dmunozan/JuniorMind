@@ -27,9 +27,18 @@ namespace LINQ
 
         public (int consonants, int vowels) NumberOfLetters(string text)
         {
-            text ??= "";
+            if (string.IsNullOrEmpty(text))
+            {
+                return (0, 0);
+            }
 
-            return (text.Length, text.Length);
+            const string vowels = "aeiou";
+
+            int[] numOfLetters =
+                string.Concat(text.ToLowerInvariant().Split(".?! ;:,".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)).
+                GroupBy(c => vowels.Contains(c), (key, chars) => chars.Count()).ToArray();
+
+            return (numOfLetters[0], numOfLetters[1]);
         }
     }
 }
