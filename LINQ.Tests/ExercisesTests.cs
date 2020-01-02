@@ -67,5 +67,13 @@ namespace LINQ.Tests
 
             Assert.Equal((12, 5), testExercise.NumberOfLetters("This is a test string"));
         }
+
+        [Fact]
+        public void NumberOfLettersWhenNullStringShouldReturn0ConsonantsAnd0Vowels()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Equal((0, 0), testExercise.NumberOfLetters(""));
+        }
     }
 }
