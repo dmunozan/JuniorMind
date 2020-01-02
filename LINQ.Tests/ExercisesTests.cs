@@ -51,5 +51,13 @@ namespace LINQ.Tests
 
             Assert.Equal(0, testExercise.NumberOfConsonants(null));
         }
+
+        [Fact]
+        public void NumberOfLettersWhenEmptyStringShouldReturn0ConsonantsAnd0Vowels()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Equal((0, 0), testExercise.NumberOfLetters(""));
+        }
     }
 }
