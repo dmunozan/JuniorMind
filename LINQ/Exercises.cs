@@ -26,5 +26,15 @@ namespace LINQ
 
             return letterCount;
         }
+
+        public char FirstNotRepeatedChar(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                throw new InvalidOperationException("Argument can not be null or empty.");
+            }
+
+            return text[0];
+        }
     }
 }
