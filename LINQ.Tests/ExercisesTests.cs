@@ -42,7 +42,7 @@ namespace LINQ.Tests
         {
             Exercises testExercise = new Exercises();
 
-            Assert.Equal((0, 0), testExercise.NumberOfLetters(""));
+            Assert.Equal((0, 0), testExercise.NumberOfLetters(null));
         }
 
         [Fact]
@@ -67,6 +67,14 @@ namespace LINQ.Tests
             Exercises testExercise = new Exercises();
 
             Assert.Throws<ArgumentNullException>(() => testExercise.FirstNotRepeatedChar(null));
+        }
+
+        [Fact]
+        public void ConvertToIntWhenEmptyStringShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<FormatException>(() => testExercise.ConvertToInt(""));
         }
     }
 }
