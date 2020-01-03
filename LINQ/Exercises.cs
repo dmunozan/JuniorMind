@@ -31,5 +31,15 @@ namespace LINQ
         {
             return text.GroupBy(c => c, (key, chars) => new { Key = key, Count = chars.Count() }).First(g => g.Count == 1).Key;
         }
+
+        public int ConvertToInt(string text)
+        {
+            if (text == "")
+            {
+                throw new FormatException("Argument is not in the correct format");
+            }
+
+            return 0;
+        }
     }
 }
