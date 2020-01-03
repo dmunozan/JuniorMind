@@ -76,5 +76,13 @@ namespace LINQ.Tests
 
             Assert.Throws<FormatException>(() => testExercise.ConvertToInt(""));
         }
+
+        [Fact]
+        public void ConvertToIntWhenValidCharsShouldReturnEquivalentNumber()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Equal(1, testExercise.ConvertToInt("1"));
+        }
     }
 }
