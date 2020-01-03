@@ -60,5 +60,13 @@ namespace LINQ.Tests
 
             Assert.Equal('h', testExercise.FirstNotRepeatedChar("This Is A Test String!"));
         }
+
+        [Fact]
+        public void FirstNotRepeatedCharWhenNullStringShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.FirstNotRepeatedChar(null));
+        }
     }
 }
