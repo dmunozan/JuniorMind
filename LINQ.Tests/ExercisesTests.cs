@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace LINQ.Tests
 {
@@ -42,6 +43,14 @@ namespace LINQ.Tests
             Exercises testExercise = new Exercises();
 
             Assert.Equal((0, 0), testExercise.NumberOfLetters(""));
+        }
+
+        [Fact]
+        public void FirstNotRepeatedCharWhenEmptyStringShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<InvalidOperationException>(() => testExercise.FirstNotRepeatedChar(""));
         }
     }
 }
