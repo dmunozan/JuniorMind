@@ -39,7 +39,10 @@ namespace LINQ
                 throw new FormatException("Argument is not in the correct format");
             }
 
-            return 0;
+            const int Ten = 10;
+            const int CharA = 48;
+
+            return text.Aggregate(0, (total, next) => total * Ten + (next - CharA));
         }
     }
 }
