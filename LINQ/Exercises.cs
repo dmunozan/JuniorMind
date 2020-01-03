@@ -59,7 +59,11 @@ namespace LINQ
 
         public char MostRepeatedChar(string text)
         {
-            throw new InvalidOperationException(text);
+            var groupsOfLetters = text.GroupBy(c => c, (key, chars) => new { Key = key, Count = chars.Count() });
+
+            int max = groupsOfLetters.Max(g => g.Count);
+
+            return groupsOfLetters.First(g => g.Count == max).Key;
         }
     }
 }
