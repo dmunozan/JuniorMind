@@ -56,5 +56,10 @@ namespace LINQ
 
             return digits.Aggregate(0, (total, next) => total * Ten + (next - '0')) * sign;
         }
+
+        public char MostRepeatedChar(string text)
+        {
+            throw new InvalidOperationException(text);
+        }
     }
 }
