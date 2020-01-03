@@ -52,5 +52,13 @@ namespace LINQ.Tests
 
             Assert.Throws<InvalidOperationException>(() => testExercise.FirstNotRepeatedChar(""));
         }
+
+        [Fact]
+        public void FirstNotRepeatedCharWhenNotEmptyStringShouldReturnFirstNotRepeatedChar()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Equal('h', testExercise.FirstNotRepeatedChar("This Is A Test String!"));
+        }
     }
 }
