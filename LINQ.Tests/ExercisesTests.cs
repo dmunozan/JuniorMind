@@ -92,5 +92,13 @@ namespace LINQ.Tests
 
             Assert.Equal(-1, testExercise.ConvertToInt("-1"));
         }
+
+        [Fact]
+        public void ConvertToIntWhenInvalidCharsShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<FormatException>(() => testExercise.ConvertToInt("one"));
+        }
     }
 }

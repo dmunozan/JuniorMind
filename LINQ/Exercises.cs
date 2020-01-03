@@ -34,7 +34,7 @@ namespace LINQ
 
         public int ConvertToInt(string text)
         {
-            if (text == "")
+            if (text == "" || text.Any(c => !(char.IsDigit(c) || c == '-')))
             {
                 throw new FormatException("Argument is not in the correct format");
             }
