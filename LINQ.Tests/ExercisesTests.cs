@@ -116,5 +116,13 @@ namespace LINQ.Tests
 
             Assert.Throws<OverflowException>(() => testExercise.ConvertToInt("2147483648"));
         }
+
+        [Fact]
+        public void ConvertToIntWhenLowerThanIntShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<OverflowException>(() => testExercise.ConvertToInt("-2147483649"));
+        }
     }
 }
