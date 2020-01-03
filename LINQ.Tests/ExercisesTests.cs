@@ -84,5 +84,13 @@ namespace LINQ.Tests
 
             Assert.Equal(1, testExercise.ConvertToInt("1"));
         }
+
+        [Fact]
+        public void ConvertToIntWhenValidNegativeSymbolShouldReturnEquivalentNumber()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Equal(-1, testExercise.ConvertToInt("-1"));
+        }
     }
 }

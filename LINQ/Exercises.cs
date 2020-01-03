@@ -40,9 +40,10 @@ namespace LINQ
             }
 
             const int Ten = 10;
-            const int CharA = 48;
 
-            return text.Aggregate(0, (total, next) => total * Ten + (next - CharA));
+            int sign = (text.First() == '-') ? -1 : 1;
+
+            return text.Where(c => char.IsDigit(c)).Aggregate(0, (total, next) => total * Ten + (next - '0')) * sign;
         }
     }
 }
