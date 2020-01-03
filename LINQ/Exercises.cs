@@ -38,18 +38,13 @@ namespace LINQ
 
             const int Ten = 10;
             const char defaultChar = 'e';
-            int sign;
-            string digits;
+            int sign = 1;
+            string digits = text;
 
             if (text.FirstOrDefault() == '-')
             {
                 sign = -1;
                 digits = text.Substring(1);
-            }
-            else
-            {
-                sign = 1;
-                digits = text;
             }
 
             if (digits.DefaultIfEmpty(defaultChar).Any(c => !char.IsDigit(c)))
