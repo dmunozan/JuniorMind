@@ -34,16 +34,30 @@ namespace LINQ
 
         public int ConvertToInt(string text)
         {
-            if (text == "" || text.Any(c => !(char.IsDigit(c) || c == '-')))
+            text ??= "";
+
+            const int Ten = 10;
+            const char defaultChar = 'e';
+            int sign;
+            string digits;
+
+            if (text.FirstOrDefault() == '-')
+            {
+                sign = -1;
+                digits = text.Substring(1);
+            }
+            else
+            {
+                sign = 1;
+                digits = text;
+            }
+
+            if (digits.DefaultIfEmpty(defaultChar).Any(c => !char.IsDigit(c)))
             {
                 throw new FormatException("Argument is not in the correct format");
             }
 
-            const int Ten = 10;
-
-            int sign = (text.First() == '-') ? -1 : 1;
-
-            return text.Where(c => char.IsDigit(c)).Aggregate(0, (total, next) => total * Ten + (next - '0')) * sign;
+            return digits.Aggregate(0, (total, next) => total * Ten + (next - '0')) * sign;
         }
     }
 }
