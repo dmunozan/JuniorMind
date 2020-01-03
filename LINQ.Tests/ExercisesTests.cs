@@ -132,5 +132,13 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testExercise.ConvertToInt(null));
         }
+
+        [Fact]
+        public void MostRepeatedCharWhenEmptyStringShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<InvalidOperationException>(() => testExercise.MostRepeatedChar(""));
+        }
     }
 }
