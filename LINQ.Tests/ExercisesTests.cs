@@ -100,5 +100,13 @@ namespace LINQ.Tests
 
             Assert.Throws<FormatException>(() => testExercise.ConvertToInt("one"));
         }
+
+        [Fact]
+        public void ConvertToIntWhenInvalidNegativeSymbolShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<FormatException>(() => testExercise.ConvertToInt("1-"));
+        }
     }
 }
