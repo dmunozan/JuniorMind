@@ -29,12 +29,7 @@ namespace LINQ
 
         public char FirstNotRepeatedChar(string text)
         {
-            if (string.IsNullOrEmpty(text))
-            {
-                throw new InvalidOperationException("Argument can not be null or empty.");
-            }
-
-            return text[0];
+            return text.GroupBy(c => c, (key, chars) => new { Key = key, Count = chars.Count() }).First(g => g.Count == 1).Key;
         }
     }
 }
