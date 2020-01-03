@@ -21,17 +21,8 @@ namespace LINQ
                 text.ToLowerInvariant().Where(c => !punctuation.Contains(c)).
                 GroupBy(c => vowels.Contains(c), (key, chars) => new { Key = key, Count = chars.Count() });
 
-            foreach (var group in groupsOfLetters)
-            {
-                if (group.Key)
-                {
-                    letterCount.vowels = group.Count;
-                }
-                else
-                {
-                    letterCount.consonants = group.Count;
-                }
-            }
+            letterCount.vowels = groupsOfLetters.FirstOrDefault(g => g.Key)?.Count ?? 0;
+            letterCount.consonants = groupsOfLetters.FirstOrDefault(g => !g.Key)?.Count ?? 0;
 
             return letterCount;
         }
