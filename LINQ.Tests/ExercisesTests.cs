@@ -140,5 +140,13 @@ namespace LINQ.Tests
 
             Assert.Throws<InvalidOperationException>(() => testExercise.MostRepeatedChar(""));
         }
+
+        [Fact]
+        public void MostRepeatedCharWhenNotEmptyStringShouldReturnMostRepeatedChar()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Equal(' ', testExercise.MostRepeatedChar("This Is A Test String!"));
+        }
     }
 }
