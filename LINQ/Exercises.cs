@@ -34,7 +34,10 @@ namespace LINQ
 
         public int ConvertToInt(string text)
         {
-            text ??= "";
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text), "Argument can not be null");
+            }
 
             const int Ten = 10;
             int sign = 1;
