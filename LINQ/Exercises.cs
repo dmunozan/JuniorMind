@@ -15,9 +15,10 @@ namespace LINQ
             }
 
             const string vowels = "aeiou";
+            const string punctuation = ".?! ;:,";
 
             var groupsOfLetters =
-                string.Concat(text.ToLowerInvariant().Split(".?! ;:,".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)).
+                text.ToLowerInvariant().Where(c => !punctuation.Contains(c)).
                 GroupBy(c => vowels.Contains(c), (key, chars) => new { Key = key, Count = chars.Count() });
 
             foreach (var group in groupsOfLetters)
