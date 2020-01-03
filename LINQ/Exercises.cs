@@ -37,7 +37,6 @@ namespace LINQ
             text ??= "";
 
             const int Ten = 10;
-            const char defaultChar = 'e';
             int sign = 1;
             string digits = text;
 
@@ -47,7 +46,7 @@ namespace LINQ
                 digits = text.Substring(1);
             }
 
-            if (digits.DefaultIfEmpty(defaultChar).Any(c => !char.IsDigit(c)))
+            if (digits == "" || digits.Any(c => !char.IsDigit(c)))
             {
                 throw new FormatException("Argument is not in the correct format");
             }
