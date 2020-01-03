@@ -148,5 +148,13 @@ namespace LINQ.Tests
 
             Assert.Equal(' ', testExercise.MostRepeatedChar("This Is A Test String!"));
         }
+
+        [Fact]
+        public void MostRepeatedCharWhenNullStringShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.MostRepeatedChar(null));
+        }
     }
 }
