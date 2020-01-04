@@ -59,11 +59,8 @@ namespace LINQ
 
         public char MostRepeatedChar(string text)
         {
-            var groupsOfLetters = text.GroupBy(c => c, (key, chars) => new { Key = key, Count = chars.Count() });
-
-            int max = groupsOfLetters.Max(g => g.Count);
-
-            return groupsOfLetters.First(g => g.Count == max).Key;
+            return text.GroupBy(c => c, (key, chars) => new { Key = key, Count = chars.Count() }).
+                OrderByDescending(g => g.Count).First().Key;
         }
     }
 }
