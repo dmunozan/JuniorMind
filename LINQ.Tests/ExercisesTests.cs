@@ -182,5 +182,13 @@ namespace LINQ.Tests
                 item => Assert.Equal("aba", item),
                 item => Assert.Equal("aabaa", item));
         }
+
+        [Fact]
+        public void PalindromeGeneratorWhenNullStringShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.PalindromeGenerator(null));
+        }
     }
 }
