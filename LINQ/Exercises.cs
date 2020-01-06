@@ -68,7 +68,7 @@ namespace LINQ
         {
             if (text == null)
             {
-                return new string[] { };
+                throw new ArgumentNullException(nameof(text), "Argument can not be null");
             }
 
             return Enumerable.Range(0, text.Length).
