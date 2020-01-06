@@ -156,5 +156,13 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testExercise.MostRepeatedChar(null));
         }
+
+        [Fact]
+        public void PalindromeGeneratorWhenEmptyStringShouldReturnEmptySequence()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Empty(testExercise.PalindromeGenerator(""));
+        }
     }
 }
