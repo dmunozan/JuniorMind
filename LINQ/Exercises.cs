@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LINQ
@@ -61,6 +62,13 @@ namespace LINQ
         {
             return text.GroupBy(c => c, (key, chars) => new { Key = key, Count = chars.Count() }).
                 OrderByDescending(g => g.Count).First().Key;
+        }
+
+        public IEnumerable<string> PalindromeGenerator(string text)
+        {
+            Console.WriteLine(text);
+
+            return new string[] { };
         }
     }
 }
