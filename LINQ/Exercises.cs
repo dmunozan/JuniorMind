@@ -66,9 +66,19 @@ namespace LINQ
 
         public IEnumerable<string> PalindromeGenerator(string text)
         {
-            Console.WriteLine(text);
+            if (text == null)
+            {
+                return new string[] { };
+            }
 
-            return new string[] { };
+            return Enumerable.Range(0, text.Length).
+                SelectMany(
+                    i => Enumerable.Range(0, text.Length - i + 1),
+                    (i, j) => (i, j)).
+                Where(p => p.j >= 1).
+                Select(p => text.Substring(p.i, p.j)).
+                Where(s => s.SequenceEqual(s.Reverse())).
+                OrderBy(s => s.Length);
         }
     }
 }
