@@ -164,5 +164,23 @@ namespace LINQ.Tests
 
             Assert.Empty(testExercise.PalindromeGenerator(""));
         }
+
+        [Fact]
+        public void PalindromeGeneratorWhenNotEmptyStringShouldReturnSequenceOfPalindromes()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Collection(testExercise.PalindromeGenerator("aabaac"),
+                item => Assert.Equal("a", item),
+                item => Assert.Equal("a", item),
+                item => Assert.Equal("b", item),
+                item => Assert.Equal("a", item),
+                item => Assert.Equal("a", item),
+                item => Assert.Equal("c", item),
+                item => Assert.Equal("aa", item),
+                item => Assert.Equal("aa", item),
+                item => Assert.Equal("aba", item),
+                item => Assert.Equal("aabaa", item));
+        }
     }
 }
