@@ -190,5 +190,13 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testExercise.PalindromeGenerator(null));
         }
+
+        [Fact]
+        public void SubarraysOfKWhenArrayIsEmptyShouldReturnEmptySequence()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Empty(testExercise.SubarraysOfK(new int[] { }, 9));
+        }
     }
 }
