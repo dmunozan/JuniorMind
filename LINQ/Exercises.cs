@@ -80,5 +80,12 @@ namespace LINQ
                 Where(s => s.SequenceEqual(s.Reverse())).
                 OrderBy(s => s.Length);
         }
+
+        public IEnumerable<int[]> SubarraysOfK(int[] array, int k)
+        {
+            Console.WriteLine(array + " " + k);
+
+            return Enumerable.Empty<int[]>();
+        }
     }
 }
