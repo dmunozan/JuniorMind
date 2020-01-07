@@ -198,5 +198,18 @@ namespace LINQ.Tests
 
             Assert.Empty(testExercise.SubarraysOfK(new int[] { }, 9));
         }
+
+        [Fact]
+        public void SubarraysOfKWhenArrayIsNotEmptyShouldReturnSubarraysOfKThatAddKOrLess()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Collection(testExercise.SubarraysOfK(new int[] { 1, 2, 3 }, 5),
+                item => Assert.Equal(new int[] { 1 }, item),
+                item => Assert.Equal(new int[] { 2 }, item),
+                item => Assert.Equal(new int[] { 3 }, item),
+                item => Assert.Equal(new int[] { 1, 2 }, item),
+                item => Assert.Equal(new int[] { 2, 3 }, item));
+        }
     }
 }
