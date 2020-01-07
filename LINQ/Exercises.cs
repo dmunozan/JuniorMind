@@ -83,9 +83,19 @@ namespace LINQ
 
         public IEnumerable<int[]> SubarraysOfK(int[] array, int k)
         {
-            Console.WriteLine(array + " " + k);
+            if (array == null)
+            {
+                return Enumerable.Empty<int[]>();
+            }
 
-            return Enumerable.Empty<int[]>();
+            return Enumerable.Range(0, array.Length).
+                SelectMany(
+                    i => Enumerable.Range(0, array.Length - i + 1),
+                    (i, j) => (i, j)).
+                Where(p => p.j >= 1).
+                Select(p => array.Skip(p.i).Take(p.j).ToArray()).
+                Where(a => a.Sum() <= k).
+                OrderBy(a => a.Length);
         }
     }
 }
