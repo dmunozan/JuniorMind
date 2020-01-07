@@ -211,5 +211,13 @@ namespace LINQ.Tests
                 item => Assert.Equal(new int[] { 1, 2 }, item),
                 item => Assert.Equal(new int[] { 2, 3 }, item));
         }
+
+        [Fact]
+        public void SubarraysOfKWhenNullArrayShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.SubarraysOfK(null, 0));
+        }
     }
 }
