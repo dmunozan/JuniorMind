@@ -85,7 +85,7 @@ namespace LINQ
         {
             if (array == null)
             {
-                return Enumerable.Empty<int[]>();
+                throw new ArgumentNullException(nameof(array), "Argument can not be null");
             }
 
             return Enumerable.Range(0, array.Length).
