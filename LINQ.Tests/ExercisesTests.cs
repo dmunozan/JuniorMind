@@ -227,5 +227,15 @@ namespace LINQ.Tests
 
             Assert.Throws<InvalidOperationException>(() => testExercise.SummationOfN(0, 0));
         }
+
+        [Fact]
+        public void SummationOfNWhenNIsHigherThan0ShouldReturnCombinationsOfNWhereSumEqualsK()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Collection(testExercise.SummationOfN(3, 0),
+                item => Assert.Equal(new int[] { -1, -2, 3 }, item),
+                item => Assert.Equal(new int[] { 1, 2, -3 }, item));
+        }
     }
 }
