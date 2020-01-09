@@ -100,14 +100,22 @@ namespace LINQ
 
         public IEnumerable<int[]> SummationOfN(int n, int k)
         {
-            Console.WriteLine(k);
-
             if (n < 1)
             {
                 throw new InvalidOperationException("N must be higher than 0");
             }
 
-            return Enumerable.Empty<int[]>();
+            int[] baseValues = { -1, 1 };
+            int numOfRows = (int)Math.Pow(2, n);
+            const int Two = 2;
+
+            return Enumerable.Range(0, numOfRows).
+                 Select(
+                     i => Enumerable.Range(1, n).
+                            Select(
+                                j => baseValues[i / (numOfRows / (Two * j)) % Two] * j)).
+                 Where(s => s.Sum() == k).
+                 Select(s => s.ToArray());
         }
     }
 }
