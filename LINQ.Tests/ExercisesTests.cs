@@ -219,5 +219,13 @@ namespace LINQ.Tests
 
             Assert.Throws<ArgumentNullException>(() => testExercise.SubarraysOfK(null, 0));
         }
+
+        [Fact]
+        public void SummationOfNWhenNIs0ShouldReturnEmptySequence()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Empty(testExercise.SummationOfN(0, 0));
+        }
     }
 }
