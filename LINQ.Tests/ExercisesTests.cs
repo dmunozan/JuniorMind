@@ -239,11 +239,11 @@ namespace LINQ.Tests
         }
 
         [Fact]
-        public void SummationOfNWhenNIsIsHigherThan31ShouldThrowException()
+        public void SummationOfNWhenNIsIsHigherThan30ShouldThrowException()
         {
             Exercises testExercise = new Exercises();
 
-            Assert.Throws<OverflowException>(() => testExercise.SummationOfN(32, 0));
+            Assert.Throws<OverflowException>(() => testExercise.SummationOfN(31, 0));
         }
     }
 }
