@@ -237,5 +237,13 @@ namespace LINQ.Tests
                 item => Assert.Equal(new int[] { -1, -2, 3 }, item),
                 item => Assert.Equal(new int[] { 1, 2, -3 }, item));
         }
+
+        [Fact]
+        public void SummationOfNWhenNIsIsHigherThan31ShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<OverflowException>(() => testExercise.SummationOfN(32, 0));
+        }
     }
 }
