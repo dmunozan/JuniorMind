@@ -97,5 +97,12 @@ namespace LINQ
                 Where(a => a.Sum() <= k).
                 OrderBy(a => a.Length);
         }
+
+        public IEnumerable<int[]> SummationOfN(int n, int k)
+        {
+            Console.WriteLine(n + k);
+
+            return Enumerable.Empty<int[]>();
+        }
     }
 }
