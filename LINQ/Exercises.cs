@@ -100,7 +100,12 @@ namespace LINQ
 
         public IEnumerable<int[]> SummationOfN(int n, int k)
         {
-            Console.WriteLine(n + k);
+            Console.WriteLine(k);
+
+            if (n < 1)
+            {
+                throw new InvalidOperationException("N must be higher than 0");
+            }
 
             return Enumerable.Empty<int[]>();
         }
