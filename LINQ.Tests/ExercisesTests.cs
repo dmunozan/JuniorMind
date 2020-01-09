@@ -221,11 +221,11 @@ namespace LINQ.Tests
         }
 
         [Fact]
-        public void SummationOfNWhenNIs0ShouldReturnEmptySequence()
+        public void SummationOfNWhenNIsSmallerThan1ShouldThrowException()
         {
             Exercises testExercise = new Exercises();
 
-            Assert.Empty(testExercise.SummationOfN(0, 0));
+            Assert.Throws<InvalidOperationException>(() => testExercise.SummationOfN(0, 0));
         }
     }
 }
