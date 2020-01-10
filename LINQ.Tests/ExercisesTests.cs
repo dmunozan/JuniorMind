@@ -245,5 +245,13 @@ namespace LINQ.Tests
 
             Assert.Throws<OverflowException>(() => testExercise.SummationOfN(31, 0));
         }
+
+        [Fact]
+        public void PythagoreanCombinationsWhenArrayHasLessThan3ShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<InvalidOperationException>(() => testExercise.PythagoreanCombinations(new[] { 0 }));
+        }
     }
 }
