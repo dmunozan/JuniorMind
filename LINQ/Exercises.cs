@@ -117,5 +117,22 @@ namespace LINQ
                  Where(s => s.Sum() == k).
                  Select(s => s.ToArray());
         }
+
+        public IEnumerable<Tuple<int, int, int>> PythagoreanCombinations(int[] numArray)
+        {
+            const int minLenght = 3;
+
+            if (numArray == null)
+            {
+                return Enumerable.Empty<Tuple<int, int, int>>();
+            }
+
+            if (numArray.Length < minLenght)
+            {
+                throw new InvalidOperationException("There must be at least three numbers in the array");
+            }
+
+            return Enumerable.Empty<Tuple<int, int, int>>();
+        }
     }
 }
