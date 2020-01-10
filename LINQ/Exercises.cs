@@ -132,7 +132,18 @@ namespace LINQ
                 throw new InvalidOperationException("There must be at least three numbers in the array");
             }
 
-            return Enumerable.Empty<Tuple<int, int, int>>();
+            return Enumerable.Range(0, numArray.Length).
+                SelectMany(
+                    i => Enumerable.Range(0, numArray.Length),
+                    (i, j) => (i, j)).
+                SelectMany(
+                    p => Enumerable.Range(0, numArray.Length),
+                    (p, k) => (p.i, p.j, k)).
+                Where(t => t.i != t.j && t.i != t.k && t.j != t.k).
+                Select(t =>
+                    Tuple.Create(numArray[t.i], numArray[t.j], numArray[t.k])).
+                Where(t => t.Item1 * t.Item1 + t.Item2 * t.Item2 ==
+                    t.Item3 * t.Item3);
         }
     }
 }
