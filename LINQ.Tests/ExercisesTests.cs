@@ -253,5 +253,15 @@ namespace LINQ.Tests
 
             Assert.Throws<InvalidOperationException>(() => testExercise.PythagoreanCombinations(new[] { 0 }));
         }
+
+        [Fact]
+        public void PythagoreanCombinationsWhenArrayHasMoreThan2ShouldReturnPythagoreanCombinations()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Collection(testExercise.PythagoreanCombinations(new[] { 4, 5, 3, 1, 2 }),
+                item => Assert.Equal(Tuple.Create(4, 3, 5), item),
+                item => Assert.Equal(Tuple.Create(3, 4, 5), item));
+        }
     }
 }
