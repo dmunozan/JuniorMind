@@ -35,10 +35,7 @@ namespace LINQ
 
         public int ConvertToInt(string text)
         {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text), "Argument can not be null");
-            }
+            NullCheck(text);
 
             const int Ten = 10;
             int sign = 1;
@@ -66,10 +63,7 @@ namespace LINQ
 
         public IEnumerable<string> PalindromeGenerator(string text)
         {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text), "Argument can not be null");
-            }
+            NullCheck(text);
 
             return Enumerable.Range(0, text.Length).
                 SelectMany(
@@ -83,10 +77,7 @@ namespace LINQ
 
         public IEnumerable<int[]> SubarraysOfK(int[] array, int k)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException(nameof(array), "Argument can not be null");
-            }
+            NullCheck(array);
 
             return Enumerable.Range(0, array.Length).
                 SelectMany(
@@ -122,10 +113,7 @@ namespace LINQ
         {
             const int minLenght = 3;
 
-            if (numArray == null)
-            {
-                return Enumerable.Empty<Tuple<int, int, int>>();
-            }
+            NullCheck(numArray);
 
             if (numArray.Length < minLenght)
             {
@@ -144,6 +132,16 @@ namespace LINQ
                     Tuple.Create(numArray[t.i], numArray[t.j], numArray[t.k])).
                 Where(t => t.Item1 * t.Item1 + t.Item2 * t.Item2 ==
                     t.Item3 * t.Item3);
+        }
+
+        private void NullCheck(object obj)
+        {
+            if (obj != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(nameof(obj), "Argument can not be null");
         }
     }
 }
