@@ -263,5 +263,13 @@ namespace LINQ.Tests
                 item => Assert.Equal(Tuple.Create(4, 3, 5), item),
                 item => Assert.Equal(Tuple.Create(3, 4, 5), item));
         }
+
+        [Fact]
+        public void PythagoreanCombinationsWhenNullArrayShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.PythagoreanCombinations(null));
+        }
     }
 }
