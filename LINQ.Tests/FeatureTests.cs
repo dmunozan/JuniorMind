@@ -11,5 +11,15 @@ namespace LINQ.Tests
 
             Assert.Equal(1, testFeature.Id);
         }
+
+        [Fact]
+        public void IdWhenSetShouldSetFeatureId()
+        {
+            Feature testFeature = new Feature(1);
+
+            testFeature.Id = 2;
+
+            Assert.Equal(2, testFeature.Id);
+        }
     }
 }
