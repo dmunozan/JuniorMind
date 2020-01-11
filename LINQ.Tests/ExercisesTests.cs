@@ -260,8 +260,8 @@ namespace LINQ.Tests
             Exercises testExercise = new Exercises();
 
             Assert.Collection(testExercise.PythagoreanCombinations(new[] { 4, 5, 3, 1, 2 }),
-                item => Assert.Equal(Tuple.Create(4, 3, 5), item),
-                item => Assert.Equal(Tuple.Create(3, 4, 5), item));
+                item => Assert.Equal((4, 3, 5), item),
+                item => Assert.Equal((3, 4, 5), item));
         }
 
         [Fact]
