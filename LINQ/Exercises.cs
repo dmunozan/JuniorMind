@@ -133,6 +133,16 @@ namespace LINQ
                     t.Item3 * t.Item3);
         }
 
+        public IEnumerable<Product> FilterProductsByFeatures(
+            ICollection<Product> products,
+            ICollection<Feature> features,
+            int filterMode)
+        {
+            Console.WriteLine(products + " " + features + filterMode);
+
+            return new List<Product>();
+        }
+
         private void NullCheck(object obj)
         {
             if (obj != null)
