@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace LINQ.Tests
@@ -270,6 +271,20 @@ namespace LINQ.Tests
             Exercises testExercise = new Exercises();
 
             Assert.Throws<ArgumentNullException>(() => testExercise.PythagoreanCombinations(null));
+        }
+
+        [Fact]
+        public void FilterProductsByFeaturesWhenNoProductsShouldReturnEmptySequence()
+        {
+            const int OneOrMore = 0;
+
+            Exercises testExercise = new Exercises();
+
+            List<Product> productList = new List<Product>();
+
+            List<Feature> featureList = new List<Feature>();
+
+            Assert.Empty(testExercise.FilterProductByFeatures(productList, featureList, OneOrMore));
         }
     }
 }
