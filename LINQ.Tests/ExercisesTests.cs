@@ -284,7 +284,7 @@ namespace LINQ.Tests
 
             List<Feature> featureList = new List<Feature>();
 
-            Assert.Empty(testExercise.FilterProductByFeatures(productList, featureList, OneOrMore));
+            Assert.Empty(testExercise.FilterProductsByFeatures(productList, featureList, OneOrMore));
         }
     }
 }
