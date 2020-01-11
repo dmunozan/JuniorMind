@@ -109,7 +109,7 @@ namespace LINQ
                  Select(s => s.ToArray());
         }
 
-        public IEnumerable<Tuple<int, int, int>> PythagoreanCombinations(int[] numArray)
+        public IEnumerable<(int, int, int)> PythagoreanCombinations(int[] numArray)
         {
             const int minLenght = 3;
 
@@ -128,8 +128,7 @@ namespace LINQ
                     p => Enumerable.Range(0, numArray.Length),
                     (p, k) => (p.i, p.j, k)).
                 Where(t => t.i != t.j && t.i != t.k && t.j != t.k).
-                Select(t =>
-                    Tuple.Create(numArray[t.i], numArray[t.j], numArray[t.k])).
+                Select(t => (numArray[t.i], numArray[t.j], numArray[t.k])).
                 Where(t => t.Item1 * t.Item1 + t.Item2 * t.Item2 ==
                     t.Item3 * t.Item3);
         }
