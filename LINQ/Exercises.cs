@@ -140,7 +140,9 @@ namespace LINQ
         {
             Console.WriteLine(products + " " + features + filterMode);
 
-            return new List<Product>();
+            return products.
+                Where(p => features.Select(listf => listf.Id).
+                    Intersect(p.Features.Select(prodf => prodf.Id)).Any());
         }
 
         private void NullCheck(object obj)
