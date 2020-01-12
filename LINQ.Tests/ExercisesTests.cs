@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace LINQ.Tests
@@ -285,6 +286,81 @@ namespace LINQ.Tests
             List<Feature> featureList = new List<Feature>();
 
             Assert.Empty(testExercise.FilterProductsByFeatures(productList, featureList, OneOrMore));
+        }
+
+        [Fact]
+        public void FilterProductsByFeaturesWhenProductsAndOneOrMoreShouldReturnProductsWithOneOrMoreFeaturesFromFeatureList()
+        {
+            const int OneOrMore = 0;
+
+            Exercises testExercise = new Exercises();
+
+            Assert.Collection(testExercise.FilterProductsByFeatures(GetProductList(), GetFeatureList(), OneOrMore),
+                item => Assert.Equal("P2", item.Name),
+                item => Assert.Equal("P3", item.Name),
+                item => Assert.Equal("P4", item.Name),
+                item => Assert.Equal("P5", item.Name),
+                item => Assert.Equal("P6", item.Name),
+                item => Assert.Equal("P7", item.Name),
+                item => Assert.Equal("P8", item.Name),
+                item => Assert.Equal("P9", item.Name));
+        }
+
+        private List<Product> GetProductList()
+        {
+            /*
+             *              Features
+             * P1 - None | P4 - 7    | P7 - 8, 9
+             * P2 - 1    | P5 - 2, 3 | P8 - 4, 5, 6, 7
+             * P3 - 4    | P6 - 5, 6 | P9 - 1, 2, 3, 4, 5, 6, 7, 8, 9
+             */
+            List<Product> productList = new List<Product>();
+            List<Feature> featureList = new List<Feature>();
+
+            productList.Add(new Product("P1", 1, featureList));
+
+            featureList = new List<Feature> { new Feature(1) };
+            productList.Add(new Product("P2", 1, featureList));
+
+            featureList = new List<Feature> { new Feature(4) };
+            productList.Add(new Product("P3", 1, featureList));
+
+            featureList = new List<Feature> { new Feature(7) };
+            productList.Add(new Product("P4", 1, featureList));
+
+            featureList = new List<Feature>();
+            featureList.AddRange(Enumerable.Range(2, 2).
+                Select(i => new Feature(i)));
+            productList.Add(new Product("P5", 1, featureList));
+
+            featureList = new List<Feature>();
+            featureList.AddRange(Enumerable.Range(5, 2).
+                Select(i => new Feature(i)));
+            productList.Add(new Product("P6", 1, featureList));
+
+            featureList = new List<Feature>();
+            featureList.AddRange(Enumerable.Range(8, 2).
+                Select(i => new Feature(i)));
+            productList.Add(new Product("P7", 1, featureList));
+
+            featureList = new List<Feature>();
+            featureList.AddRange(Enumerable.Range(4, 4).
+                Select(i => new Feature(i)));
+            productList.Add(new Product("P8", 1, featureList));
+
+            productList.Add(new Product("P9", 1, GetFeatureList()));
+
+            return productList;
+        }
+
+        private List<Feature> GetFeatureList()
+        {
+            List<Feature> featureList = new List<Feature>();
+
+            featureList.AddRange(Enumerable.Range(1, 9).
+                Select(i => new Feature(i)));
+
+            return featureList;
         }
     }
 }
