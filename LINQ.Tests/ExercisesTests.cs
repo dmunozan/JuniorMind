@@ -390,6 +390,16 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentNullException>(() => testExercise.FilterProductsByFeatures(null, new List<Feature>(), All));
         }
 
+        [Fact]
+        public void FilterProductsByFeaturesWhenNullFeatureListShouldThrowException()
+        {
+            const uint All = 1;
+
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.FilterProductsByFeatures(GetProductList(), null, All));
+        }
+
         private List<Product> GetProductList()
         {
             /*
