@@ -380,6 +380,16 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => testExercise.FilterProductsByFeatures(new List<Product>(), new List<Feature>(), WrongFilter));
         }
 
+        [Fact]
+        public void FilterProductsByFeaturesWhenNullProductListShouldThrowException()
+        {
+            const uint All = 1;
+
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.FilterProductsByFeatures(null, new List<Feature>(), All));
+        }
+
         private List<Product> GetProductList()
         {
             /*
