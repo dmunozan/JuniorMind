@@ -316,6 +316,25 @@ namespace LINQ.Tests
             Assert.Empty(testExercise.FilterProductsByFeatures(GetProductList(), new List<Feature>(), OneOrMore));
         }
 
+        [Fact]
+        public void FilterProductsByFeaturesWhenProductsAndNoneShouldReturnProductsWithNoFeaturesFromFeatureList()
+        {
+            const int None = 2;
+
+            Exercises testExercise = new Exercises();
+
+            Assert.Collection(testExercise.FilterProductsByFeatures(GetProductList(), GetFeatureList(), None),
+                item => Assert.Equal("P1", item.Name));
+
+            Assert.Collection(testExercise.FilterProductsByFeatures(GetProductList(), new List<Feature> { new Feature(5) }, None),
+                item => Assert.Equal("P1", item.Name),
+                item => Assert.Equal("P2", item.Name),
+                item => Assert.Equal("P3", item.Name),
+                item => Assert.Equal("P4", item.Name),
+                item => Assert.Equal("P5", item.Name),
+                item => Assert.Equal("P7", item.Name));
+        }
+
         private List<Product> GetProductList()
         {
             /*
