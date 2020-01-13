@@ -335,6 +335,25 @@ namespace LINQ.Tests
                 item => Assert.Equal("P7", item.Name));
         }
 
+        [Fact]
+        public void FilterProductsByFeaturesWhenNoFeaturesAndNoneShouldReturnAllProducts()
+        {
+            const int None = 2;
+
+            Exercises testExercise = new Exercises();
+
+            Assert.Collection(testExercise.FilterProductsByFeatures(GetProductList(), new List<Feature>(), None),
+                item => Assert.Equal("P1", item.Name),
+                item => Assert.Equal("P2", item.Name),
+                item => Assert.Equal("P3", item.Name),
+                item => Assert.Equal("P4", item.Name),
+                item => Assert.Equal("P5", item.Name),
+                item => Assert.Equal("P6", item.Name),
+                item => Assert.Equal("P7", item.Name),
+                item => Assert.Equal("P8", item.Name),
+                item => Assert.Equal("P9", item.Name));
+        }
+
         private List<Product> GetProductList()
         {
             /*
