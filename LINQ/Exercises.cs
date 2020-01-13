@@ -138,10 +138,17 @@ namespace LINQ
             ICollection<Feature> features,
             int filterMode)
         {
-            Console.WriteLine(products + " " + features + filterMode);
+            const int OneOrMore = 0;
+
+            if (filterMode == OneOrMore)
+            {
+                return products.
+                Where(p => features.Select(listf => listf.Id).
+                    Intersect(p.Features.Select(prodf => prodf.Id)).Any());
+            }
 
             return products.
-                Where(p => features.Select(listf => listf.Id).
+                Where(p => !features.Select(listf => listf.Id).
                     Intersect(p.Features.Select(prodf => prodf.Id)).Any());
         }
 
