@@ -139,12 +139,19 @@ namespace LINQ
             int filterMode)
         {
             const int OneOrMore = 0;
+            const int All = 1;
 
             if (filterMode == OneOrMore)
             {
                 return products.
                 Where(p => features.Select(listf => listf.Id).
                     Intersect(p.Features.Select(prodf => prodf.Id)).Any());
+            }
+            else if (filterMode == All)
+            {
+                return products.
+                Where(p => !features.Select(listf => listf.Id).
+                    Except(p.Features.Select(prodf => prodf.Id)).Any());
             }
 
             return products.
