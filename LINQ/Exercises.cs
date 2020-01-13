@@ -6,6 +6,13 @@ namespace LINQ
 {
     public class Exercises
     {
+        enum FilterOptions : uint
+        {
+            OneOrMore,
+            All,
+            None
+        }
+
         public (int consonants, int vowels) NumberOfLetters(string text)
         {
             var letterCount = (consonants: 0, vowels: 0);
@@ -140,22 +147,18 @@ namespace LINQ
         {
             NullCheck(features);
 
-            const uint OneOrMore = 0;
-            const uint All = 1;
-            const uint None = 2;
-
-            if (filterMode > None)
+            if (filterMode > (uint)FilterOptions.None)
             {
                 throw new ArgumentOutOfRangeException(nameof(filterMode), "Argument out of allowed range.");
             }
 
-            if (filterMode == OneOrMore)
+            if (filterMode == (uint)FilterOptions.OneOrMore)
             {
                 return products.
                 Where(p => features.Select(listf => listf.Id).
                     Intersect(p.Features.Select(prodf => prodf.Id)).Any());
             }
-            else if (filterMode == All)
+            else if (filterMode == (uint)FilterOptions.All)
             {
                 return products.
                 Where(p => !features.Select(listf => listf.Id).
