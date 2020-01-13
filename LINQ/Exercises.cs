@@ -136,10 +136,16 @@ namespace LINQ
         public IEnumerable<Product> FilterProductsByFeatures(
             ICollection<Product> products,
             ICollection<Feature> features,
-            int filterMode)
+            uint filterMode)
         {
-            const int OneOrMore = 0;
-            const int All = 1;
+            const uint OneOrMore = 0;
+            const uint All = 1;
+            const uint None = 2;
+
+            if (filterMode > None)
+            {
+                throw new ArgumentOutOfRangeException(nameof(filterMode), "Argument out of allowed range.");
+            }
 
             if (filterMode == OneOrMore)
             {
