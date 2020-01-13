@@ -277,7 +277,7 @@ namespace LINQ.Tests
         [Fact]
         public void FilterProductsByFeaturesWhenNoProductsShouldReturnEmptySequence()
         {
-            const int OneOrMore = 0;
+            const uint OneOrMore = 0;
 
             Exercises testExercise = new Exercises();
 
@@ -291,7 +291,7 @@ namespace LINQ.Tests
         [Fact]
         public void FilterProductsByFeaturesWhenProductsAndOneOrMoreShouldReturnProductsWithOneOrMoreFeaturesFromFeatureList()
         {
-            const int OneOrMore = 0;
+            const uint OneOrMore = 0;
 
             Exercises testExercise = new Exercises();
 
@@ -309,7 +309,7 @@ namespace LINQ.Tests
         [Fact]
         public void FilterProductsByFeaturesWhenNoFeaturesAndOneOrMoreShouldReturnEmptySequence()
         {
-            const int OneOrMore = 0;
+            const uint OneOrMore = 0;
 
             Exercises testExercise = new Exercises();
 
@@ -319,7 +319,7 @@ namespace LINQ.Tests
         [Fact]
         public void FilterProductsByFeaturesWhenProductsAndNoneShouldReturnProductsWithNoFeaturesFromFeatureList()
         {
-            const int None = 2;
+            const uint None = 2;
 
             Exercises testExercise = new Exercises();
 
@@ -338,7 +338,7 @@ namespace LINQ.Tests
         [Fact]
         public void FilterProductsByFeaturesWhenNoFeaturesAndNoneShouldReturnAllProducts()
         {
-            const int None = 2;
+            const uint None = 2;
 
             Exercises testExercise = new Exercises();
 
@@ -357,7 +357,7 @@ namespace LINQ.Tests
         [Fact]
         public void FilterProductsByFeaturesWhenProductsAndAllShouldReturnProductsWithAllFeaturesFromFeatureList()
         {
-            const int All = 1;
+            const uint All = 1;
 
             Exercises testExercise = new Exercises();
 
@@ -368,6 +368,16 @@ namespace LINQ.Tests
                 item => Assert.Equal("P3", item.Name),
                 item => Assert.Equal("P8", item.Name),
                 item => Assert.Equal("P9", item.Name));
+        }
+
+        [Fact]
+        public void FilterProductsByFeaturesWhenFlagIsHiggerThan2ShouldThrowException()
+        {
+            const uint WrongFilter = 3;
+
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => testExercise.FilterProductsByFeatures(new List<Product>(), new List<Feature>(), WrongFilter));
         }
 
         private List<Product> GetProductList()
