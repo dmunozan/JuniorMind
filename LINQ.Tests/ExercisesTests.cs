@@ -354,6 +354,22 @@ namespace LINQ.Tests
                 item => Assert.Equal("P9", item.Name));
         }
 
+        [Fact]
+        public void FilterProductsByFeaturesWhenProductsAndAllShouldReturnProductsWithAllFeaturesFromFeatureList()
+        {
+            const int All = 1;
+
+            Exercises testExercise = new Exercises();
+
+            Assert.Collection(testExercise.FilterProductsByFeatures(GetProductList(), GetFeatureList(), All),
+                item => Assert.Equal("P9", item.Name));
+
+            Assert.Collection(testExercise.FilterProductsByFeatures(GetProductList(), new List<Feature> { new Feature(4) }, All),
+                item => Assert.Equal("P3", item.Name),
+                item => Assert.Equal("P8", item.Name),
+                item => Assert.Equal("P9", item.Name));
+        }
+
         private List<Product> GetProductList()
         {
             /*
