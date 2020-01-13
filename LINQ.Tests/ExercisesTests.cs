@@ -306,6 +306,16 @@ namespace LINQ.Tests
                 item => Assert.Equal("P9", item.Name));
         }
 
+        [Fact]
+        public void FilterProductsByFeaturesWhenNoFeaturesAndOneOrMoreShouldReturnEmptySequence()
+        {
+            const int OneOrMore = 0;
+
+            Exercises testExercise = new Exercises();
+
+            Assert.Empty(testExercise.FilterProductsByFeatures(GetProductList(), new List<Feature>(), OneOrMore));
+        }
+
         private List<Product> GetProductList()
         {
             /*
