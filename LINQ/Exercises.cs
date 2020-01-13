@@ -138,6 +138,8 @@ namespace LINQ
             ICollection<Feature> features,
             uint filterMode)
         {
+            NullCheck(features);
+
             const uint OneOrMore = 0;
             const uint All = 1;
             const uint None = 2;
