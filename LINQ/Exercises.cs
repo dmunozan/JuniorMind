@@ -170,6 +170,15 @@ namespace LINQ
                     Intersect(p.Features.Select(prodf => prodf.Id)).Any());
         }
 
+        public IEnumerable<Product> MergeProductLists(
+            IEnumerable<Product> firstList,
+            IEnumerable<Product> secondList)
+        {
+            Console.WriteLine(firstList);
+
+            return secondList;
+        }
+
         private void NullCheck(object obj)
         {
             if (obj != null)
