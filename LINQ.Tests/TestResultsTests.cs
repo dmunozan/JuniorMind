@@ -7,7 +7,7 @@ namespace LINQ.Tests
         [Fact]
         public void IdWhenGetShouldReturnId()
         {
-            TestResults result = new TestResults("A", "Adam");
+            TestResults result = new TestResults("A", "Adam", 1);
 
             Assert.Equal("A", result.Id);
         }
@@ -15,7 +15,7 @@ namespace LINQ.Tests
         [Fact]
         public void IdWhenSetShouldSetId()
         {
-            TestResults result = new TestResults("A", "Adam");
+            TestResults result = new TestResults("A", "Adam", 1);
 
             result.Id = "B";
 
@@ -25,7 +25,7 @@ namespace LINQ.Tests
         [Fact]
         public void FamilyIdWhenGetShouldReturnFamilyId()
         {
-            TestResults result = new TestResults("A", "Adam");
+            TestResults result = new TestResults("A", "Adam", 1);
 
             Assert.Equal("Adam", result.FamilyId);
         }
@@ -33,11 +33,19 @@ namespace LINQ.Tests
         [Fact]
         public void FamilyIdWhenSetShouldSetFamilyId()
         {
-            TestResults result = new TestResults("A", "Adam");
+            TestResults result = new TestResults("A", "Adam", 1);
 
             result.FamilyId = "Brown";
 
             Assert.Equal("Brown", result.FamilyId);
+        }
+
+        [Fact]
+        public void ScoreWhenGetShouldReturnScore()
+        {
+            TestResults result = new TestResults("A", "Adam", 1);
+
+            Assert.Equal(1, result.Score);
         }
     }
 }
