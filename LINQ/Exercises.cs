@@ -174,9 +174,13 @@ namespace LINQ
             IEnumerable<Product> firstList,
             IEnumerable<Product> secondList)
         {
-            Console.WriteLine(secondList);
-
-            return firstList;
+            return firstList.
+                Concat(secondList).
+                GroupBy(
+                    p => p.Name,
+                    p => p.Quantity,
+                    (name, quantities) =>
+                        new Product(name, quantities.Sum()));
         }
 
         private void NullCheck(object obj)
