@@ -10,6 +10,6 @@
 
         public string Id { get; set; }
 
-        public string FamilyId { get; }
+        public string FamilyId { get; set; }
     }
 }
