@@ -23,5 +23,12 @@ namespace LINQ
         public int Quantity { get; set; }
 
         public ICollection<Feature> Features { get; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Product prod
+                && Name == prod.Name
+                && Quantity == prod.Quantity;
+        }
     }
 }
