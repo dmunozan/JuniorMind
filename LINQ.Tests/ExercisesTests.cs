@@ -400,6 +400,14 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentNullException>(() => testExercise.FilterProductsByFeatures(GetProductList(), null, All));
         }
 
+        [Fact]
+        public void MergeProductListsWhenBothSequencesEmptyShouldReturnEmptySequence()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Empty(testExercise.MergeProductLists(new List<Product>(), new List<Product>()));
+        }
+
         private List<Product> GetProductList()
         {
             /*
