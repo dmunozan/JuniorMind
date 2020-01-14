@@ -47,5 +47,15 @@ namespace LINQ.Tests
 
             Assert.Equal(1, result.Score);
         }
+
+        [Fact]
+        public void ScoreWhenSetShouldSetScore()
+        {
+            TestResults result = new TestResults("A", "Adam", 1);
+
+            result.Score = 2;
+
+            Assert.Equal(2, result.Score);
+        }
     }
 }
