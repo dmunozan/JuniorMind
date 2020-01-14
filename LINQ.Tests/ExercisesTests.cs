@@ -455,6 +455,15 @@ namespace LINQ.Tests
                 item => Assert.Equal(new Product("P6", 4), item));
         }
 
+        [Fact]
+        public void MergeProductListsWhenNullSequenceShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.MergeProductLists(GetProductList(), null));
+            Assert.Throws<ArgumentNullException>(() => testExercise.MergeProductLists(null, GetProductList()));
+        }
+
         private List<Product> GetProductList()
         {
             /*
