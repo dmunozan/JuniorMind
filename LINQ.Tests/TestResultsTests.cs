@@ -11,5 +11,15 @@ namespace LINQ.Tests
 
             Assert.Equal("A", result.Id);
         }
+
+        [Fact]
+        public void IdWhenSetShouldSetId()
+        {
+            TestResults result = new TestResults("A");
+
+            result.Id = "B";
+
+            Assert.Equal("B", result.Id);
+        }
     }
 }
