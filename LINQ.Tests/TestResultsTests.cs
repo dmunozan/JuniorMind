@@ -29,5 +29,15 @@ namespace LINQ.Tests
 
             Assert.Equal("Adam", result.FamilyId);
         }
+
+        [Fact]
+        public void FamilyIdWhenSetShouldSetFamilyId()
+        {
+            TestResults result = new TestResults("A", "Adam");
+
+            result.FamilyId = "Brown";
+
+            Assert.Equal("Brown", result.FamilyId);
+        }
     }
 }
