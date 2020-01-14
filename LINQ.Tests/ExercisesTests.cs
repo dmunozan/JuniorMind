@@ -425,6 +425,36 @@ namespace LINQ.Tests
                 item => Assert.Equal("P9", item.Name));
         }
 
+        [Fact]
+        public void MergeProductListsWhenTwoNoEmptySequencesShouldReturnAllUniqueProductsWithTotalQuantity()
+        {
+            Exercises testExercise = new Exercises();
+
+            List<Product> firstProductList = new List<Product>();
+
+            firstProductList.Add(new Product("P2", 2));
+            firstProductList.Add(new Product("P3", 12));
+            firstProductList.Add(new Product("P4", 7));
+            firstProductList.Add(new Product("P5", 10));
+            firstProductList.Add(new Product("P8", 12));
+
+            List<Product> secondProductList = new List<Product>();
+
+            secondProductList.Add(new Product("P3", 1));
+            secondProductList.Add(new Product("P4", 5));
+            secondProductList.Add(new Product("P5", 6));
+            secondProductList.Add(new Product("P6", 4));
+            secondProductList.Add(new Product("P8", 10));
+
+            Assert.Collection(testExercise.MergeProductLists(firstProductList, secondProductList),
+                item => Assert.Equal(new Product("P2", 2), item),
+                item => Assert.Equal(new Product("P3", 13), item),
+                item => Assert.Equal(new Product("P4", 12), item),
+                item => Assert.Equal(new Product("P5", 16), item),
+                item => Assert.Equal(new Product("P8", 22), item),
+                item => Assert.Equal(new Product("P6", 4), item));
+        }
+
         private List<Product> GetProductList()
         {
             /*
