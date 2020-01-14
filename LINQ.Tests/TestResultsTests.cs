@@ -7,7 +7,7 @@ namespace LINQ.Tests
         [Fact]
         public void IdWhenGetShouldReturnId()
         {
-            TestResults result = new TestResults("A");
+            TestResults result = new TestResults("A", "Adam");
 
             Assert.Equal("A", result.Id);
         }
@@ -15,11 +15,19 @@ namespace LINQ.Tests
         [Fact]
         public void IdWhenSetShouldSetId()
         {
-            TestResults result = new TestResults("A");
+            TestResults result = new TestResults("A", "Adam");
 
             result.Id = "B";
 
             Assert.Equal("B", result.Id);
+        }
+
+        [Fact]
+        public void FamilyIdWhenGetShouldReturnFamilyId()
+        {
+            TestResults result = new TestResults("A", "Adam");
+
+            Assert.Equal("Adam", result.FamilyId);
         }
     }
 }
