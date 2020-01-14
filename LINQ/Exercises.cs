@@ -174,9 +174,9 @@ namespace LINQ
             IEnumerable<Product> firstList,
             IEnumerable<Product> secondList)
         {
-            Console.WriteLine(firstList);
+            Console.WriteLine(secondList);
 
-            return secondList;
+            return firstList;
         }
 
         private void NullCheck(object obj)
