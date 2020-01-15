@@ -505,6 +505,14 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentNullException>(() => testExercise.GetMaxScores(null));
         }
 
+        [Fact]
+        public void MostRepeatedWordWhenEmptyStringShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<InvalidOperationException>(() => testExercise.MostRepeatedWord(""));
+        }
+
         private List<Product> GetProductList()
         {
             /*
