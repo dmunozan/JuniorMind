@@ -497,6 +497,14 @@ namespace LINQ.Tests
                 item => Assert.Equal(new TestResults("F", "Foster", 39), item));
         }
 
+        [Fact]
+        public void GetMaxScoresWhenNullSequenceShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.GetMaxScores(null));
+        }
+
         private List<Product> GetProductList()
         {
             /*
