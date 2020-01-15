@@ -523,6 +523,22 @@ namespace LINQ.Tests
             Assert.Throws<InvalidOperationException>(() => testExercise.MostRepeatedWord(text));
         }
 
+        [Fact]
+        public void MostRepeatedWordWhenAnyWordShouldReturnMostRepeatedWord()
+        {
+            Exercises testExercise = new Exercises();
+
+            string text = "For the sake of brevity, we will not elaborate on the fundamental" +
+                " question of choosing a data analysis method. Although statistical consulting will" +
+                " have value at any stage of research, the earlier stages of planning a study profit" +
+                " most from consulting. We assume the iterative process of choosing and refining the" +
+                " research goals, the primary outcomes, and the sampling plan has succeeded. In turn, we" +
+                " also assume that an appropriate analysis plan has been selected, which sets the stage" +
+                " for sample size selection.";
+
+            Assert.Equal("the", testExercise.MostRepeatedWord(text));
+        }
+
         private List<Product> GetProductList()
         {
             /*
