@@ -183,6 +183,11 @@ namespace LINQ
                         new Product(name, quantities.Sum()));
         }
 
+        public IEnumerable<TestResults> GetMaxScores(IEnumerable<TestResults> testResults)
+        {
+            return testResults;
+        }
+
         private void NullCheck(object obj)
         {
             if (obj != null)
