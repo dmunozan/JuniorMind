@@ -513,6 +513,16 @@ namespace LINQ.Tests
             Assert.Throws<InvalidOperationException>(() => testExercise.MostRepeatedWord(""));
         }
 
+        [Fact]
+        public void MostRepeatedWordWhenNoEmptyStringButNoWordsShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            string text = ".,?,!, ,;,:,,";
+
+            Assert.Throws<InvalidOperationException>(() => testExercise.MostRepeatedWord(text));
+        }
+
         private List<Product> GetProductList()
         {
             /*
