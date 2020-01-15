@@ -539,6 +539,14 @@ namespace LINQ.Tests
             Assert.Equal("the", testExercise.MostRepeatedWord(text));
         }
 
+        [Fact]
+        public void MostRepeatedWordWhenNullShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.MostRepeatedWord(null));
+        }
+
         private List<Product> GetProductList()
         {
             /*
