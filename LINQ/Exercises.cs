@@ -196,6 +196,23 @@ namespace LINQ
                         results.Select(res => res.Score).Max()));
         }
 
+        public string MostRepeatedWord(string text)
+        {
+            if (text == null)
+            {
+                return "";
+            }
+
+            string[] words = text.Split(new[] { '.', '?', '!', ' ', ';', ':', ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (words.Length == 0)
+            {
+                throw new InvalidOperationException("There are no words in the provided string");
+            }
+
+            return "";
+        }
+
         private void NullCheck(object obj)
         {
             if (obj != null)
