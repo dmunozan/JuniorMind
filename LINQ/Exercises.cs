@@ -198,10 +198,7 @@ namespace LINQ
 
         public string MostRepeatedWord(string text)
         {
-            if (text == null)
-            {
-                return "";
-            }
+            NullCheck(text);
 
             string[] words = text.Split(new[] { '.', '?', '!', ' ', ';', ':', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
