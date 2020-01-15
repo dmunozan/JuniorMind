@@ -205,12 +205,13 @@ namespace LINQ
 
             string[] words = text.Split(new[] { '.', '?', '!', ' ', ';', ':', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            if (words.Length == 0)
-            {
-                throw new InvalidOperationException("There are no words in the provided string");
-            }
-
-            return "";
+            return words.
+                GroupBy(
+                    w => w.ToLowerInvariant(),
+                    (word, ocurrences) =>
+                        new { Word = word, Count = ocurrences.Count() }).
+                OrderByDescending(g => g.Count).
+                First().Word;
         }
 
         private void NullCheck(object obj)
