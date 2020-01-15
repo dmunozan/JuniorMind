@@ -14,5 +14,13 @@
         public string FamilyId { get; set; }
 
         public int Score { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is TestResults result
+                && Id == result.Id
+                && FamilyId == result.FamilyId
+                && Score == result.Score;
+        }
     }
 }
