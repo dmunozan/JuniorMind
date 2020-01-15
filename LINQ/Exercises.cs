@@ -185,7 +185,15 @@ namespace LINQ
 
         public IEnumerable<TestResults> GetMaxScores(IEnumerable<TestResults> testResults)
         {
-            return testResults;
+            return testResults.
+                GroupBy(
+                    r => r.FamilyId,
+                    r => r,
+                    (familyId, results) =>
+                    new TestResults(
+                        results.First().Id,
+                        familyId,
+                        results.Select(res => res.Score).Max()));
         }
 
         private void NullCheck(object obj)
