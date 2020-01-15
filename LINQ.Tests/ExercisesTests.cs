@@ -464,6 +464,14 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentNullException>(() => testExercise.MergeProductLists(null, GetProductList()));
         }
 
+        [Fact]
+        public void GetMaxScoresWhenEmptySequenceShouldReturnEmptySequence()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Empty(testExercise.GetMaxScores(new List<TestResults>()));
+        }
+
         private List<Product> GetProductList()
         {
             /*
