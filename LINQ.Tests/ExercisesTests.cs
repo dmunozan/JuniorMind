@@ -472,6 +472,31 @@ namespace LINQ.Tests
             Assert.Empty(testExercise.GetMaxScores(new List<TestResults>()));
         }
 
+        [Fact]
+        public void GetMaxScoresWhenNoEmptySequenceShouldReturnMaxEntriesForEachFamilyId()
+        {
+            Exercises testExercise = new Exercises();
+
+            List<TestResults> testResults = new List<TestResults>();
+
+            testResults.Add(new TestResults("A", "Anderson", 12));
+            testResults.Add(new TestResults("B", "Brown", 11));
+            testResults.Add(new TestResults("C", "Clark", 53));
+            testResults.Add(new TestResults("D", "Davis", 88));
+            testResults.Add(new TestResults("E", "Evans", 18));
+            testResults.Add(new TestResults("D", "Davis", 67));
+            testResults.Add(new TestResults("F", "Foster", 39));
+            testResults.Add(new TestResults("B", "Brown", 30));
+
+            Assert.Collection(testExercise.GetMaxScores(testResults),
+                item => Assert.Equal(new TestResults("A", "Anderson", 12), item),
+                item => Assert.Equal(new TestResults("B", "Brown", 30), item),
+                item => Assert.Equal(new TestResults("C", "Clark", 53), item),
+                item => Assert.Equal(new TestResults("D", "Davis", 88), item),
+                item => Assert.Equal(new TestResults("E", "Evans", 18), item),
+                item => Assert.Equal(new TestResults("F", "Foster", 39), item));
+        }
+
         private List<Product> GetProductList()
         {
             /*
