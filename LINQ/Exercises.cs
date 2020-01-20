@@ -211,6 +211,23 @@ namespace LINQ
                 First().Word;
         }
 
+        public bool SudokuChecker(int[,] board)
+        {
+            const int FullBoard = 81;
+
+            if (board == null)
+            {
+                return false;
+            }
+
+            if (board.Length == FullBoard)
+            {
+                return true;
+            }
+
+            throw new InvalidOperationException("The array must contain 81 elements.");
+        }
+
         private void NullCheck(object obj)
         {
             if (obj != null)
