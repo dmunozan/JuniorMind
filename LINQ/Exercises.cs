@@ -213,6 +213,8 @@ namespace LINQ
 
         public bool SudokuChecker(int[,] board)
         {
+            const int Three = 3;
+            const int Nine = 9;
             const int FullBoard = 81;
 
             if (board == null)
@@ -222,7 +224,19 @@ namespace LINQ
 
             if (board.Length == FullBoard)
             {
-                return true;
+                return Enumerable.Range(0, Nine).
+                    Select(i => Enumerable.Range(1, Nine).
+                        Except(Enumerable.Range(0, Nine).
+                            Select(j => board[i, j])).Count()).
+                    Concat(Enumerable.Range(0, Nine).
+                    Select(i => Enumerable.Range(1, Nine).
+                        Except(Enumerable.Range(0, Nine).
+                            Select(j => board[j, i])).Count())).
+                    Concat(Enumerable.Range(0, Nine).
+                    Select(i => Enumerable.Range(1, Nine).
+                        Except(Enumerable.Range(0, Nine).
+                            Select(j => board[(i / Three) * Three + (j / Three), (i % Three) * Three + (j % Three)])).Count())).
+                            All(num => num == 0);
             }
 
             throw new InvalidOperationException("The array must contain 81 elements.");
