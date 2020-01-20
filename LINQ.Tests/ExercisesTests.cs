@@ -547,6 +547,14 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentNullException>(() => testExercise.MostRepeatedWord(null));
         }
 
+        [Fact]
+        public void SudokuCheckerWhenArrayNoHas81ElementsShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<InvalidOperationException>(() => testExercise.SudokuChecker(new int[,] { }));
+        }
+
         private List<Product> GetProductList()
         {
             /*
