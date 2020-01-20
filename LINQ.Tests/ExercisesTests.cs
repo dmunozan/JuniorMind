@@ -597,6 +597,14 @@ namespace LINQ.Tests
             Assert.False(testExercise.SudokuChecker(sudoku));
         }
 
+        [Fact]
+        public void SudokuCheckerWhenNullArrayShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.SudokuChecker(null));
+        }
+
         private List<Product> GetProductList()
         {
             /*
