@@ -576,6 +576,27 @@ namespace LINQ.Tests
             Assert.True(testExercise.SudokuChecker(sudoku));
         }
 
+        [Fact]
+        public void SudokuCheckerWhenArrayHas81ElementsAndInvalidSolutionShouldReturnFalse()
+        {
+            Exercises testExercise = new Exercises();
+
+            int[,] sudoku =
+                {
+                    { 4, 4, 4, 4, 4, 4, 4, 4, 4 },
+                    { 4, 4, 4, 4, 4, 4, 4, 4, 4 },
+                    { 4, 4, 4, 4, 4, 4, 4, 4, 4 },
+                    { 4, 4, 4, 4, 4, 4, 4, 4, 4 },
+                    { 4, 4, 4, 4, 4, 4, 4, 4, 4 },
+                    { 4, 4, 4, 4, 4, 4, 4, 4, 4 },
+                    { 4, 4, 4, 4, 4, 4, 4, 4, 4 },
+                    { 4, 4, 4, 4, 4, 4, 4, 4, 4 },
+                    { 4, 4, 4, 4, 4, 4, 4, 4, 4 }
+                };
+
+            Assert.False(testExercise.SudokuChecker(sudoku));
+        }
+
         private List<Product> GetProductList()
         {
             /*
