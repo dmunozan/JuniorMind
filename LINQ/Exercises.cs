@@ -217,10 +217,7 @@ namespace LINQ
             const int Nine = 9;
             const int FullBoard = 81;
 
-            if (board == null)
-            {
-                return false;
-            }
+            NullCheck(board);
 
             if (board.Length == FullBoard)
             {
