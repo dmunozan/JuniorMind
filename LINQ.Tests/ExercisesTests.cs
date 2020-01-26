@@ -605,6 +605,16 @@ namespace LINQ.Tests
             Assert.Throws<ArgumentNullException>(() => testExercise.SudokuChecker(null));
         }
 
+        [Fact]
+        public void PolishPostfixCalculatorWhenStringOperationShouldReturnResult()
+        {
+            Exercises testExercise = new Exercises();
+
+            string operation = "15 7 1 1 + - / 3 * 2 1 1 + + -";
+
+            Assert.Equal("5", testExercise.PolishPostfixCalculator(operation));
+        }
+
         private List<Product> GetProductList()
         {
             /*
