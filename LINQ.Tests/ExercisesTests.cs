@@ -606,6 +606,16 @@ namespace LINQ.Tests
         }
 
         [Fact]
+        public void PolishPostfixCalculatorWhenTwoElementsOrLessShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            string operation = "15 -";
+
+            Assert.Throws<InvalidOperationException>(() => testExercise.PolishPostfixCalculator(operation));
+        }
+
+        [Fact]
         public void PolishPostfixCalculatorWhenStringOperationShouldReturnResult()
         {
             Exercises testExercise = new Exercises();
