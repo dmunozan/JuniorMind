@@ -648,7 +648,7 @@ namespace LINQ.Tests
 
             string operation = "15 7 1 1 + - / 3 * 2 1 1 + + -";
 
-            Assert.Equal("5", testExercise.PolishPostfixCalculator(operation));
+            Assert.Equal(5, testExercise.PolishPostfixCalculator(operation));
         }
 
         [Fact]
