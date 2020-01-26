@@ -254,10 +254,10 @@ namespace LINQ
 
             if (opeParts.Length < MinimumNumberOfElements)
             {
-                throw new InvalidOperationException("The string must contain at least three elements.");
+                throw new InvalidOperationException("The operations must contain at least three elements.");
             }
 
-            return opeParts.
+            var result = opeParts.
                 Aggregate(
                     Enumerable.Empty<string>(),
                     (current, next) =>
@@ -266,17 +266,24 @@ namespace LINQ
                                 CalculateOperation(
                                     current.Count() > 1 ?
                                         current.TakeLast(TwoElements).First() :
-                                        throw new FormatException("Use Polish postfix notation"),
+                                        throw new InvalidOperationException("Use Polish postfix notation"),
                                     next,
                                     current.Last())) :
-                            current.Append(next)).First();
+                            current.Append(next));
+
+            if (result.Count() != 1)
+            {
+                throw new InvalidOperationException("The operations must contain only numbers and the basic operators (+, -, * and /).");
+            }
+
+            return result.First();
         }
 
         private string CalculateOperation(string firstOperand, string operatorSymbol, string secondOperand)
         {
             if (!double.TryParse(firstOperand, out double firstNumber) || !double.TryParse(secondOperand, out double secondNumber))
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("The operations must contain only numbers and the basic operators (+, -, * and /).");
             }
 
             double result;
@@ -297,12 +304,12 @@ namespace LINQ
 
                     if (Math.Abs(result).Equals(double.PositiveInfinity))
                     {
-                        throw new InvalidOperationException();
+                        throw new InvalidOperationException("The operation contains a division by zero.");
                     }
 
                     break;
                 default:
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException("The operations must contain only numbers and the basic operators (+, -, * and /).");
             }
 
             return result.ToString();
