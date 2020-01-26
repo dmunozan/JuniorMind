@@ -651,6 +651,14 @@ namespace LINQ.Tests
             Assert.Equal("5", testExercise.PolishPostfixCalculator(operation));
         }
 
+        [Fact]
+        public void PolishPostfixCalculatorWhenNullShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            Assert.Throws<ArgumentNullException>(() => testExercise.PolishPostfixCalculator(null));
+        }
+
         private List<Product> GetProductList()
         {
             /*
