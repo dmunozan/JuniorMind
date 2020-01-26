@@ -271,12 +271,7 @@ namespace LINQ
                                     current.Last())) :
                             current.Append(next));
 
-            if (result.Count() != 1)
-            {
-                throw new InvalidOperationException("The operations must contain only numbers and the basic operators (+, -, * and /).");
-            }
-
-            return result.First();
+            return result.Single();
         }
 
         private string CalculateOperation(string firstOperand, string operatorSymbol, string secondOperand)
