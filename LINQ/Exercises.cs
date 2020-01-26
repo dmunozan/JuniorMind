@@ -246,10 +246,16 @@ namespace LINQ
             const string operators = "+-*/";
 
             const int TwoElements = 2;
+            const int MinimumNumberOfElements = 3;
 
             NullCheck(operation);
 
             string[] opeParts = operation.Split(' ');
+
+            if (opeParts.Length < MinimumNumberOfElements)
+            {
+                throw new InvalidOperationException("The string must contain at least three elements.");
+            }
 
             return opeParts.
                 Aggregate(
