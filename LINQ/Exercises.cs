@@ -225,20 +225,79 @@ namespace LINQ
             }
 
             var rows = Enumerable.Range(0, Nine).
-                    Select(i => Enumerable.Range(0, Nine).
-                            Select(j => board[i, j]));
+                Select(i => Enumerable.Range(0, Nine).
+                    Select(j => board[i, j]));
 
             var columns = Enumerable.Range(0, Nine).
-                    Select(i => Enumerable.Range(0, Nine).
-                            Select(j => board[j, i]));
+                Select(i => Enumerable.Range(0, Nine).
+                    Select(j => board[j, i]));
 
             var regions = Enumerable.Range(0, Nine).
-                    Select(i => Enumerable.Range(0, Nine).
-                            Select(j => board[(i / Three) * Three + (j / Three), (i % Three) * Three + (j % Three)]));
+                Select(i => Enumerable.Range(0, Nine).
+                    Select(j => board[(i / Three) * Three + (j / Three), (i % Three) * Three + (j % Three)]));
 
             return rows.Concat(columns).Concat(regions).
-                    All(comb => !Enumerable.Range(1, Nine).
-                            Except(comb).Any());
+                All(comb => !Enumerable.Range(1, Nine).
+                    Except(comb).Any());
+        }
+
+        public string PolishPostfixCalculator(string operation)
+        {
+            const string operators = "+-*/";
+
+            const int TwoElements = 2;
+
+            NullCheck(operation);
+
+            string[] opeParts = operation.Split(' ');
+
+            return opeParts.
+                Aggregate(
+                    Enumerable.Empty<string>(),
+                    (current, next) =>
+                        operators.Contains(next) ?
+                            current.SkipLast(TwoElements).Append(
+                                CalculateOperation(
+                                    current.TakeLast(TwoElements).First(),
+                                    next,
+                                    current.Last())) :
+                            current.Append(next)).First();
+        }
+
+        private string CalculateOperation(string firstOperand, string operatorSymbol, string secondOperand)
+        {
+            if (!double.TryParse(firstOperand, out double firstNumber) || !double.TryParse(secondOperand, out double secondNumber))
+            {
+                throw new InvalidOperationException();
+            }
+
+            double result;
+
+            switch (operatorSymbol)
+            {
+                case "+":
+                    result = firstNumber + secondNumber;
+                    break;
+                case "-":
+                    result = firstNumber - secondNumber;
+                    break;
+                case "*":
+                    result = firstNumber * secondNumber;
+                    break;
+                case "/":
+                    result = firstNumber / secondNumber;
+
+                    if (Math.Abs(result).Equals(double.PositiveInfinity))
+                    {
+                        throw new InvalidOperationException();
+                    }
+
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+
+            return result.ToString();
         }
 
         private void NullCheck(object obj)
