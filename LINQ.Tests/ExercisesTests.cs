@@ -622,7 +622,23 @@ namespace LINQ.Tests
 
             string operation = "15 - 5";
 
-            Assert.Throws<FormatException>(() => testExercise.PolishPostfixCalculator(operation));
+            Assert.Throws<InvalidOperationException>(() => testExercise.PolishPostfixCalculator(operation));
+        }
+
+        [Fact]
+        public void PolishPostfixCalculatorWhenWrongSymbolShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            string operation1 = "15 5 r";
+            string operation2 = "15 r +";
+            string operation3 = "15 3 5";
+            string operation4 = "+ - *";
+
+            Assert.Throws<InvalidOperationException>(() => testExercise.PolishPostfixCalculator(operation1));
+            Assert.Throws<InvalidOperationException>(() => testExercise.PolishPostfixCalculator(operation2));
+            Assert.Throws<InvalidOperationException>(() => testExercise.PolishPostfixCalculator(operation3));
+            Assert.Throws<InvalidOperationException>(() => testExercise.PolishPostfixCalculator(operation4));
         }
 
         [Fact]
