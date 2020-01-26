@@ -264,7 +264,9 @@ namespace LINQ
                         operators.Contains(next) ?
                             current.SkipLast(TwoElements).Append(
                                 CalculateOperation(
-                                    current.TakeLast(TwoElements).First(),
+                                    current.Count() > 1 ?
+                                        current.TakeLast(TwoElements).First() :
+                                        throw new FormatException("Use Polish postfix notation"),
                                     next,
                                     current.Last())) :
                             current.Append(next)).First();
