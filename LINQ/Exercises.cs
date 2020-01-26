@@ -241,7 +241,7 @@ namespace LINQ
                     Except(comb).Any());
         }
 
-        public string PolishPostfixCalculator(string operation)
+        public double PolishPostfixCalculator(string operation)
         {
             const string operators = "+-*/";
 
@@ -259,7 +259,7 @@ namespace LINQ
 
             var result = opeParts.
                 Aggregate(
-                    Enumerable.Empty<string>(),
+                    Enumerable.Empty<double>(),
                     (current, next) =>
                         operators.Contains(next) ?
                             current.SkipLast(TwoElements).Append(
@@ -269,18 +269,16 @@ namespace LINQ
                                         throw new InvalidOperationException("Use Polish postfix notation"),
                                     next,
                                     current.Last())) :
-                            current.Append(next));
+                            current.Append(
+                                double.TryParse(next, out double nextValue) ?
+                                    nextValue :
+                                    throw new InvalidOperationException("The operations must contain only numbers and the basic operators (+, -, * and /).")));
 
             return result.Single();
         }
 
-        private string CalculateOperation(string firstOperand, string operatorSymbol, string secondOperand)
+        private double CalculateOperation(double firstNumber, string operatorSymbol, double secondNumber)
         {
-            if (!double.TryParse(firstOperand, out double firstNumber) || !double.TryParse(secondOperand, out double secondNumber))
-            {
-                throw new InvalidOperationException("The operations must contain only numbers and the basic operators (+, -, * and /).");
-            }
-
             double result;
 
             switch (operatorSymbol)
@@ -307,7 +305,7 @@ namespace LINQ
                     throw new InvalidOperationException("The operations must contain only numbers and the basic operators (+, -, * and /).");
             }
 
-            return result.ToString();
+            return result;
         }
 
         private void NullCheck(object obj)
