@@ -616,6 +616,16 @@ namespace LINQ.Tests
         }
 
         [Fact]
+        public void PolishPostfixCalculatorWhenWrongFormatShouldThrowException()
+        {
+            Exercises testExercise = new Exercises();
+
+            string operation = "15 - 5";
+
+            Assert.Throws<FormatException>(() => testExercise.PolishPostfixCalculator(operation));
+        }
+
+        [Fact]
         public void PolishPostfixCalculatorWhenStringOperationShouldReturnResult()
         {
             Exercises testExercise = new Exercises();
