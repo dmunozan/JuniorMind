@@ -2,7 +2,7 @@
 
 namespace Common
 {
-    interface ITransfer
+    public interface ITransfer
     {
         public string ReceiveData(Socket socket);
 
