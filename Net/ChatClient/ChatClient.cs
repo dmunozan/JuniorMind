@@ -3,7 +3,7 @@ using Common;
 
 namespace ChatClient
 {
-    public class ChatClient : ITransfer
+    public class ChatClient : ISocket
     {
         public string ReceiveData(Socket socket)
         {
