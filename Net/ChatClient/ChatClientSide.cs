@@ -1,6 +1,6 @@
 ﻿namespace ChatClient
 {
-    public class ChatClient
+    public class ChatClientSide
     {
     }
 }
