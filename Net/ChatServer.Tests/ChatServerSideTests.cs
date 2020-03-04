@@ -1,6 +1,6 @@
 namespace ChatServer.Tests
 {
-    public class ChatServerTests
+    public class ChatServerSideTests
     {
     }
 }
