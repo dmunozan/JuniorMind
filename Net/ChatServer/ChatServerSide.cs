@@ -1,6 +1,6 @@
 ﻿namespace ChatServer
 {
-    public class ChatServer
+    public class ChatServerSide
     {
     }
 }
