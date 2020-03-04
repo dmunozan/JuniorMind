@@ -4,6 +4,6 @@
     {
         public string Receive();
 
-        public void Send(string text);
+        public void Send(string data);
     }
 }
