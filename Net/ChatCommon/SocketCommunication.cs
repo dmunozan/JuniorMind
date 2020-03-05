@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
@@ -35,35 +36,58 @@ namespace Common
             socket.Send(receivedBytes);
         }
 
-        private void SetSocket(string mode)
+        public void SetSocket(string mode)
         {
+            if (mode != "server" && mode != "client")
+            {
+                throw new ArgumentException("Modes allowed are server or client", nameof(mode));
+            }
+
             string host = Dns.GetHostName();
             IPHostEntry hostEntry = Dns.GetHostEntry(host);
 
             foreach (IPAddress address in hostEntry.AddressList)
             {
                 IPEndPoint endPoint = new IPEndPoint(address, 1111);
-                Socket tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-                if ((mode == "server" && ServerSocketValidation(tempSocket, endPoint)) || (mode == "client" && ClientSocketValidation(tempSocket, endPoint)))
+                Socket tempSocket = null;
+
+                try
                 {
-                    socket = tempSocket;
-                    break;
-                }
+                    tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-                tempSocket.Dispose();
+                    if ((mode == "server" && ServerSocketValidation(tempSocket, endPoint)) || (mode == "client" && ClientSocketValidation(tempSocket, endPoint)))
+                    {
+                        socket = tempSocket;
+                        break;
+                    }
+                }
+                finally
+                {
+                    tempSocket.Dispose();
+                }
             }
         }
 
-        private bool ServerSocketValidation(Socket tempSocket, IPEndPoint endPoint)
+        public bool ServerSocketValidation(Socket tempSocket, IPEndPoint endPoint)
         {
+            if (tempSocket == null)
+            {
+                throw new ArgumentNullException(nameof(tempSocket));
+            }
+
             tempSocket.Bind(endPoint);
 
             return tempSocket.IsBound;
         }
 
-        private bool ClientSocketValidation(Socket tempSocket, IPEndPoint endPoint)
+        public bool ClientSocketValidation(Socket tempSocket, IPEndPoint endPoint)
         {
+            if (tempSocket == null)
+            {
+                throw new ArgumentNullException(nameof(tempSocket));
+            }
+
             tempSocket.Connect(endPoint);
 
             return tempSocket.Connected;
