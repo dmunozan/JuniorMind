@@ -38,6 +38,8 @@ namespace Common
 
         public void SetSocket(string mode)
         {
+            CheckNullElement(mode);
+
             if (mode != "server" && mode != "client")
             {
                 throw new ArgumentException("Modes allowed are server or client", nameof(mode));
@@ -73,7 +75,7 @@ namespace Common
         {
             if (tempSocket == null)
             {
-                throw new ArgumentNullException(nameof(tempSocket));
+                return false;
             }
 
             tempSocket.Bind(endPoint);
@@ -85,12 +87,22 @@ namespace Common
         {
             if (tempSocket == null)
             {
-                throw new ArgumentNullException(nameof(tempSocket));
+                return false;
             }
 
             tempSocket.Connect(endPoint);
 
             return tempSocket.Connected;
+        }
+
+        private void CheckNullElement(object obj)
+        {
+            if (obj != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(nameof(obj));
         }
     }
 }
