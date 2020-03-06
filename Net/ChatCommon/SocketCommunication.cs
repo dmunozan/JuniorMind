@@ -73,10 +73,7 @@ namespace Common
 
         public bool ServerSocketValidation(Socket tempSocket, IPEndPoint endPoint)
         {
-            if (tempSocket == null)
-            {
-                return false;
-            }
+            CheckNullElement(tempSocket);
 
             tempSocket.Bind(endPoint);
 
