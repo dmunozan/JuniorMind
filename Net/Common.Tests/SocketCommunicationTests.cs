@@ -39,5 +39,19 @@ namespace Common.Tests
             tempSocket.Close();
             tempSocket.Dispose();
         }
+
+        [Fact]
+        public void ServerSocketValidationWhenNullSocketShouldThrowException()
+        {
+            SocketCommunication testSocket = new SocketCommunication("server");
+
+            IPHostEntry hostEntry = Dns.GetHostEntry(Dns.GetHostName());
+
+            IPEndPoint endPoint = new IPEndPoint(hostEntry.AddressList[0], 1111);
+
+            Socket tempSocket = null;
+
+            Assert.Throws<ArgumentNullException>(() => testSocket.ServerSocketValidation(tempSocket, endPoint));
+        }
     }
 }
