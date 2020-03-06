@@ -70,5 +70,22 @@ namespace Common.Tests
             tempSocket.Close();
             tempSocket.Dispose();
         }
+
+        [Fact]
+        public void ServerSocketValidationWhenDisposedSocketShouldThrowException()
+        {
+            SocketCommunication testSocket = new SocketCommunication("server");
+
+            IPHostEntry hostEntry = Dns.GetHostEntry(Dns.GetHostName());
+
+            IPEndPoint endPoint = new IPEndPoint(hostEntry.AddressList[0], 1111);
+
+            Socket tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+            tempSocket.Close();
+            tempSocket.Dispose();
+
+            Assert.Throws<ObjectDisposedException>(() => testSocket.ServerSocketValidation(tempSocket, endPoint));
+        }
     }
 }
