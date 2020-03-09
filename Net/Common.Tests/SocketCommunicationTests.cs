@@ -8,84 +8,19 @@ namespace Common.Tests
     public class SocketCommunicationTests
     {
         [Fact]
-        public void SetSocketWhenModeIsNotValidShouldThrowException()
+        public void ConstructorWhenModeIsNotValidShouldThrowException()
         {
-            SocketCommunication testSocket = new SocketCommunication("server");
+            SocketCommunication testSocket;
 
-            Assert.Throws<ArgumentException>(() => testSocket.SetSocket("invalid"));
+            Assert.Throws<ArgumentException>(() => testSocket = new SocketCommunication("invalid"));
         }
 
         [Fact]
-        public void SetSocketWhenModeIsNullShouldThrowException()
+        public void ConstructortWhenModeIsNullShouldThrowException()
         {
-            SocketCommunication testSocket = new SocketCommunication("server");
+            SocketCommunication testSocket;
 
-            Assert.Throws<ArgumentNullException>(() => testSocket.SetSocket(null));
-        }
-
-        [Fact]
-        public void ServerSocketValidationWhenValidSocketAndEndPointShouldReturnTrue()
-        {
-            SocketCommunication testSocket = new SocketCommunication("server");
-
-            IPHostEntry hostEntry = Dns.GetHostEntry(Dns.GetHostName());
-
-            IPEndPoint endPoint = new IPEndPoint(hostEntry.AddressList[0], 1111);
-
-            Socket tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-            Assert.True(testSocket.ServerSocketValidation(tempSocket, endPoint));
-
-            tempSocket.Close();
-            tempSocket.Dispose();
-        }
-
-        [Fact]
-        public void ServerSocketValidationWhenNullSocketShouldThrowException()
-        {
-            SocketCommunication testSocket = new SocketCommunication("server");
-
-            IPHostEntry hostEntry = Dns.GetHostEntry(Dns.GetHostName());
-
-            IPEndPoint endPoint = new IPEndPoint(hostEntry.AddressList[0], 1111);
-
-            Socket tempSocket = null;
-
-            Assert.Throws<ArgumentNullException>(() => testSocket.ServerSocketValidation(tempSocket, endPoint));
-        }
-
-        [Fact]
-        public void ServerSocketValidationWhenNullEndPointShouldThrowException()
-        {
-            SocketCommunication testSocket = new SocketCommunication("server");
-
-            IPHostEntry hostEntry = Dns.GetHostEntry(Dns.GetHostName());
-
-            IPEndPoint endPoint = new IPEndPoint(hostEntry.AddressList[0], 1111);
-
-            Socket tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-            Assert.Throws<ArgumentNullException>(() => testSocket.ServerSocketValidation(tempSocket, null));
-
-            tempSocket.Close();
-            tempSocket.Dispose();
-        }
-
-        [Fact]
-        public void ServerSocketValidationWhenDisposedSocketShouldThrowException()
-        {
-            SocketCommunication testSocket = new SocketCommunication("server");
-
-            IPHostEntry hostEntry = Dns.GetHostEntry(Dns.GetHostName());
-
-            IPEndPoint endPoint = new IPEndPoint(hostEntry.AddressList[0], 1111);
-
-            Socket tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-            tempSocket.Close();
-            tempSocket.Dispose();
-
-            Assert.Throws<ObjectDisposedException>(() => testSocket.ServerSocketValidation(tempSocket, endPoint));
+            Assert.Throws<ArgumentNullException>(() => testSocket = new SocketCommunication(null));
         }
     }
 }
