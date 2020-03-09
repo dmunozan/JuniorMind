@@ -11,7 +11,19 @@ namespace Common
 
         public SocketCommunication(string mode)
         {
-            SetSocket(mode);
+            CheckNullElement(mode);
+
+            if (mode != "server" && mode != "client")
+            {
+                throw new ArgumentException("Modes allowed are server or client", nameof(mode));
+            }
+
+            if (mode == "server")
+            {
+                SetServerSocket();
+            }
+
+            SetClientSocket();
         }
 
         public string Receive()
@@ -36,15 +48,8 @@ namespace Common
             socket.Send(receivedBytes);
         }
 
-        public void SetSocket(string mode)
+        public void SetServerSocket()
         {
-            CheckNullElement(mode);
-
-            if (mode != "server" && mode != "client")
-            {
-                throw new ArgumentException("Modes allowed are server or client", nameof(mode));
-            }
-
             string host = Dns.GetHostName();
             IPHostEntry hostEntry = Dns.GetHostEntry(host);
 
@@ -52,44 +57,41 @@ namespace Common
             {
                 IPEndPoint endPoint = new IPEndPoint(address, 1111);
 
-                Socket tempSocket = null;
+                Socket tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-                try
-                {
-                    tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                tempSocket.Bind(endPoint);
 
-                    if ((mode == "server" && ServerSocketValidation(tempSocket, endPoint)) || (mode == "client" && ClientSocketValidation(tempSocket, endPoint)))
-                    {
-                        socket = tempSocket;
-                        break;
-                    }
-                }
-                finally
+                if (tempSocket.IsBound)
                 {
-                    tempSocket.Dispose();
+                    socket = tempSocket;
+                    break;
                 }
+
+                tempSocket.Dispose();
             }
         }
 
-        public bool ServerSocketValidation(Socket tempSocket, IPEndPoint endPoint)
+        public void SetClientSocket()
         {
-            CheckNullElement(tempSocket);
+            string host = Dns.GetHostName();
+            IPHostEntry hostEntry = Dns.GetHostEntry(host);
 
-            tempSocket.Bind(endPoint);
-
-            return tempSocket.IsBound;
-        }
-
-        public bool ClientSocketValidation(Socket tempSocket, IPEndPoint endPoint)
-        {
-            if (tempSocket == null)
+            foreach (IPAddress address in hostEntry.AddressList)
             {
-                return false;
+                IPEndPoint endPoint = new IPEndPoint(address, 1111);
+
+                Socket tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+                tempSocket.Connect(endPoint);
+
+                if (tempSocket.Connected)
+                {
+                    socket = tempSocket;
+                    break;
+                }
+
+                tempSocket.Dispose();
             }
-
-            tempSocket.Connect(endPoint);
-
-            return tempSocket.Connected;
         }
 
         private void CheckNullElement(object obj)
