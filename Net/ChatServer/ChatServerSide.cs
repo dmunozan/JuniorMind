@@ -9,6 +9,11 @@ namespace ChatServer
 
         public bool AddUser(string user)
         {
+            if (user == "")
+            {
+                throw new ArgumentException("Empty string not allowed as user name", nameof(user));
+            }
+
             if (users.ContainsKey(user))
             {
                 return false;
