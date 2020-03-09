@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 
 namespace ChatServer.Tests
@@ -19,6 +20,14 @@ namespace ChatServer.Tests
 
             Assert.True(server.AddUser("newUser"));
             Assert.False(server.AddUser("newUser"));
+        }
+
+        [Fact]
+        public void AddUserWhenNullUserShouldThrowException()
+        {
+            ChatServerSide server = new ChatServerSide();
+
+            Assert.Throws<ArgumentNullException>(() => server.AddUser(null));
         }
     }
 }
