@@ -29,5 +29,13 @@ namespace ChatServer.Tests
 
             Assert.Throws<ArgumentNullException>(() => server.AddUser(null));
         }
+
+        [Fact]
+        public void AddUserWhenEmptyUserShouldThrowException()
+        {
+            ChatServerSide server = new ChatServerSide();
+
+            Assert.Throws<ArgumentException>(() => server.AddUser(""));
+        }
     }
 }
