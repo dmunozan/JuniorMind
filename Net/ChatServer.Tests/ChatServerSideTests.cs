@@ -11,5 +11,14 @@ namespace ChatServer.Tests
 
             Assert.True(server.AddUser("newUser"));
         }
+
+        [Fact]
+        public void AddUserWhenAlreadyExistingUserShouldReturnFalse()
+        {
+            ChatServerSide server = new ChatServerSide();
+
+            Assert.True(server.AddUser("newUser"));
+            Assert.False(server.AddUser("newUser"));
+        }
     }
 }
