@@ -1,3 +1,4 @@
+using Common;
 using System;
 using Xunit;
 
@@ -36,6 +37,18 @@ namespace ChatServer.Tests
             ChatServerSide server = new ChatServerSide();
 
             Assert.Throws<ArgumentException>(() => server.AddUser(""));
+        }
+
+        [Fact]
+        public void StartWhenNotNullSocketShouldWaitForIncomingConnection()
+        {
+            MockSocketCommunication mockSocket = new MockSocketCommunication();
+
+            ChatServerSide server = new ChatServerSide(mockSocket);
+
+            server.Start();
+
+            Assert.True(mockSocket.ServerIsWaiting);
         }
     }
 }
