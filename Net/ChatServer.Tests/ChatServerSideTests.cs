@@ -50,5 +50,13 @@ namespace ChatServer.Tests
 
             Assert.True(mockSocket.ServerIsWaiting);
         }
+
+        [Fact]
+        public void StartWhenNullSocketShouldThrowException()
+        {
+            ChatServerSide server = new ChatServerSide(null);
+
+            Assert.Throws<ArgumentNullException>(() => server.Start());
+        }
     }
 }
