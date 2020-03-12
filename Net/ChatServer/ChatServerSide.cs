@@ -38,6 +38,8 @@ namespace ChatServer
 
         public void Start()
         {
+            CheckNullElement(socket);
+
             string trimmedReceivedData = "";
             while (trimmedReceivedData != "close server")
             {
@@ -62,6 +64,16 @@ namespace ChatServer
             Console.WriteLine("Closing server.");
             socket.Close();
             socket.SocketDispose();
+        }
+
+        private void CheckNullElement(object obj)
+        {
+            if (obj != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(nameof(obj), "Not allowed null element.");
         }
     }
 }
