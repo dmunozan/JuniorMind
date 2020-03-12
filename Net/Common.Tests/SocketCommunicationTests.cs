@@ -20,7 +20,7 @@ namespace Common.Tests
         {
             SocketCommunication testSocket;
 
-            Assert.Throws<ArgumentNullException>(() => testSocket = new SocketCommunication(null));
+            Assert.Throws<ArgumentNullException>(() => testSocket = new SocketCommunication((string)null));
         }
     }
 }
