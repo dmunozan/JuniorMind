@@ -26,6 +26,26 @@ namespace Common
             SetClientSocket();
         }
 
+        public SocketCommunication(Socket newSocket)
+        {
+            socket = newSocket;
+        }
+
+        public ISocket Accept()
+        {
+            return new SocketCommunication(socket.Accept());
+        }
+
+        public void Close()
+        {
+            socket.Close();
+        }
+
+        public void Listen(int backlog)
+        {
+            socket.Listen(backlog);
+        }
+
         public string Receive()
         {
             const int ByteAllocation = 256;
@@ -48,7 +68,17 @@ namespace Common
             socket.Send(receivedBytes);
         }
 
-        public void SetServerSocket()
+        public void Shutdown(SocketShutdown how)
+        {
+            socket.Shutdown(how);
+        }
+
+        public void SocketDispose()
+        {
+            socket.Dispose();
+        }
+
+        private void SetServerSocket()
         {
             string host = Dns.GetHostName();
             IPHostEntry hostEntry = Dns.GetHostEntry(host);
@@ -71,7 +101,7 @@ namespace Common
             }
         }
 
-        public void SetClientSocket()
+        private void SetClientSocket()
         {
             string host = Dns.GetHostName();
             IPHostEntry hostEntry = Dns.GetHostEntry(host);
