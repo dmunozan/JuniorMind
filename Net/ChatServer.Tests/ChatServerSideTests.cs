@@ -58,5 +58,19 @@ namespace ChatServer.Tests
 
             Assert.Throws<ArgumentNullException>(() => server.Start());
         }
+
+        [Fact]
+        public void TrimmedReceivedDataWhenStartShouldContainReceivedMessage()
+        {
+            MockSocketCommunication mockSocket = new MockSocketCommunication();
+
+            ChatServerSide server = new ChatServerSide(mockSocket);
+
+            mockSocket.TextToReceive = "Test message";
+
+            server.Start();
+
+            Assert.Equal("Test message", mockSocket.TrimmedReceivedData);
+        }
     }
 }
