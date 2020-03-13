@@ -10,6 +10,10 @@ namespace Common
 
         public bool ServerIsWaiting { get; set; }
 
+        public string TextToReceive { get; set; }
+
+        public string TrimmedReceivedData { get; set; } = "";
+
         public ISocket Accept()
         {
             return this;
@@ -26,7 +30,12 @@ namespace Common
 
         public string Receive()
         {
-            return "close server";
+            if (TrimmedReceivedData == "")
+            {
+                TrimmedReceivedData = TextToReceive;
+            }
+
+            return TextToReceive;
         }
 
         public void Send(string data)
@@ -40,6 +49,7 @@ namespace Common
 
         public void SocketDispose()
         {
+            TextToReceive = "close server";
         }
     }
 }
