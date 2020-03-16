@@ -56,6 +56,19 @@ namespace ChatServer.Tests
         }
 
         [Fact]
+        public void CheckMessageWhenAnyShouldAddUserIfNew()
+        {
+            ChatServerSide server = new ChatServerSide();
+
+            string trimmedReceivedData = "userName<sep>sentMessage<sep>lastMessageReceived";
+
+            Assert.True(server.IsNewUser("userName"));
+            Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.Equal("sentMessage", server.CheckMessage(trimmedReceivedData));
+            Assert.False(server.IsNewUser("userName"));
+        }
+
+        [Fact]
         public void IsNewUserWhenUserNoExistShouldReturnTrue()
         {
             ChatServerSide server = new ChatServerSide();
