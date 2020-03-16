@@ -45,6 +45,11 @@ namespace ChatServer
             return data[1];
         }
 
+        public bool IsNewUser(string user)
+        {
+            return !users.ContainsKey(user);
+        }
+
         public void Start()
         {
             CheckNullElement(socket);
