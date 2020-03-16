@@ -20,20 +20,14 @@ namespace ChatServer
             socket = newSocket;
         }
 
-        public bool AddUser(string user)
+        public void AddUser(string user)
         {
             if (user == "")
             {
                 throw new ArgumentException("Empty string not allowed as user name", nameof(user));
             }
 
-            if (users.ContainsKey(user))
-            {
-                return false;
-            }
-
             users.Add(user, user);
-            return true;
         }
 
         public string CheckMessage(string trimmedReceivedData)
