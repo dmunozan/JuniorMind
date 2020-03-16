@@ -59,6 +59,15 @@ namespace ChatServer.Tests
         }
 
         [Fact]
+        public void IsNewUserWhenUserExistShouldReturnFalse()
+        {
+            ChatServerSide server = new ChatServerSide();
+
+            Assert.True(server.AddUser("newUser"));
+            Assert.False(server.IsNewUser("newUser"));
+        }
+
+        [Fact]
         public void StartWhenNotNullSocketShouldWaitForIncomingConnection()
         {
             MockSocketCommunication mockSocket = new MockSocketCommunication();
