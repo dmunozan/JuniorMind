@@ -36,6 +36,8 @@ namespace ChatServer
 
             string[] data = trimmedReceivedData.Split("<sep>");
 
+            AddUser(data[0]);
+
             return data[1];
         }
 
