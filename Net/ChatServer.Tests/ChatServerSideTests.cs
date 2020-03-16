@@ -7,20 +7,25 @@ namespace ChatServer.Tests
     public class ChatServerSideTests
     {
         [Fact]
-        public void AddUserWhenNewUserShouldAddUserToHashTableAndReturnTrue()
+        public void AddUserWhenNewUserShouldAddUserToHashTable()
         {
             ChatServerSide server = new ChatServerSide();
 
-            Assert.True(server.AddUser("newUser"));
+            Assert.True(server.IsNewUser("newUser"));
+
+            server.AddUser("newUser");
+
+            Assert.False(server.IsNewUser("newUser"));
         }
 
         [Fact]
-        public void AddUserWhenAlreadyExistingUserShouldReturnFalse()
+        public void AddUserWhenAlreadyExistingUserShouldThrowException()
         {
             ChatServerSide server = new ChatServerSide();
 
-            Assert.True(server.AddUser("newUser"));
-            Assert.False(server.AddUser("newUser"));
+            server.AddUser("newUser");
+
+            Assert.Throws<ArgumentException>(() => server.AddUser("newUser"));
         }
 
         [Fact]
@@ -63,7 +68,8 @@ namespace ChatServer.Tests
         {
             ChatServerSide server = new ChatServerSide();
 
-            Assert.True(server.AddUser("newUser"));
+            server.AddUser("newUser");
+            
             Assert.False(server.IsNewUser("newUser"));
         }
 
