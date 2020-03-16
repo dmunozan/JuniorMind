@@ -36,6 +36,15 @@ namespace ChatServer
             return true;
         }
 
+        public string CheckMessage(string trimmedReceivedData)
+        {
+            trimmedReceivedData ??= "";
+
+            string[] data = trimmedReceivedData.Split("<sep>");
+
+            return data[1];
+        }
+
         public void Start()
         {
             CheckNullElement(socket);
