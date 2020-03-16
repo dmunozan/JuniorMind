@@ -56,7 +56,7 @@ namespace ChatServer.Tests
         }
 
         [Fact]
-        public void CheckMessageWhenAnyShouldAddUserIfNew()
+        public void CheckMessageWhenNewUserShouldAddUser()
         {
             ChatServerSide server = new ChatServerSide();
 
