@@ -40,6 +40,17 @@ namespace ChatServer.Tests
         }
 
         [Fact]
+        public void CheckMessageWhenAnyShouldHaveValidFormat()
+        {
+            ChatServerSide server = new ChatServerSide();
+
+            string trimmedReceivedData = "userName<sep>sentMessage<sep>lastMessageReceived";
+
+            Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.Equal("sentMessage", server.CheckMessage(trimmedReceivedData));
+        }
+
+        [Fact]
         public void StartWhenNotNullSocketShouldWaitForIncomingConnection()
         {
             MockSocketCommunication mockSocket = new MockSocketCommunication();
