@@ -1,6 +1,7 @@
 ﻿using Common;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Net.Sockets;
 
 namespace ChatServer
@@ -9,6 +10,7 @@ namespace ChatServer
     {
         private readonly Hashtable users = new Hashtable();
         private readonly ISocket socket;
+        private readonly List<string> chatMessages = new List<string>();
 
         public ChatServerSide()
         {
@@ -34,9 +36,27 @@ namespace ChatServer
         {
             trimmedReceivedData ??= "";
 
+            const int userName = 0;
+            const int sentMessage = 1;
+            const int lastMessage = 2;
+
             string[] data = trimmedReceivedData.Split("<sep>");
 
-            AddUser(data[0]);
+            if (IsNewUser(data[userName]))
+            {
+                AddUser(data[userName]);
+            }
+            else
+            {
+                chatMessages.Add(data[userName] + ": " + data[sentMessage]);
+            }
+
+            int lastMessageReceived = chatMessages.LastIndexOf(data[lastMessage]);
+
+            for (int i = lastMessageReceived + 1; i < chatMessages.Count; i++)
+            {
+                socket.Send(chatMessages[i]);
+            }
 
             return data[1];
         }
