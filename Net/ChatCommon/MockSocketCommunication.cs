@@ -1,9 +1,12 @@
-﻿using System.Net.Sockets;
+﻿using System.Collections.Generic;
+using System.Net.Sockets;
 
 namespace Common
 {
     public class MockSocketCommunication : ISocket
     {
+        public List<string> SentMessages = new List<string>();
+
         public MockSocketCommunication()
         {
         }
@@ -40,7 +43,7 @@ namespace Common
 
         public void Send(string data)
         {
-            throw new System.NotImplementedException();
+            SentMessages.Add(data);
         }
 
         public void Shutdown(SocketShutdown how)
