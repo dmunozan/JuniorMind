@@ -49,13 +49,13 @@ namespace ChatServer
             else
             {
                 chatMessages.Add(data[userName] + ": " + data[sentMessage]);
-            }
 
-            int lastMessageReceived = chatMessages.LastIndexOf(data[lastMessage]);
+                int lastMessageReceived = chatMessages.LastIndexOf(data[lastMessage]);
 
-            for (int i = lastMessageReceived + 1; i < chatMessages.Count; i++)
-            {
-                socket.Send(chatMessages[i]);
+                for (int i = lastMessageReceived + 1; i < chatMessages.Count; i++)
+                {
+                    socket.Send(chatMessages[i]);
+                }
             }
 
             return data[1];
