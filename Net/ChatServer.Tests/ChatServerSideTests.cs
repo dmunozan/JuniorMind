@@ -69,6 +69,37 @@ namespace ChatServer.Tests
         }
 
         [Fact]
+        public void CheckMessageWhenNewUserShouldNotSendMessages()
+        {
+            MockSocketCommunication mockSocket = new MockSocketCommunication();
+
+            ChatServerSide server = new ChatServerSide(mockSocket);
+
+            string initialTestMessage = "someUser<sep>Initial message<sep>testLastMessageReceived";
+
+            server.AddUser("someUser");
+
+            Assert.False(server.IsNewUser("someUser"));
+            Assert.Equal(3, initialTestMessage.Split("<sep>").Length);
+            Assert.Empty(mockSocket.SentMessages);
+            Assert.Equal("Initial message", server.CheckMessage(initialTestMessage));
+            Assert.False(server.IsNewUser("someUser"));
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("someUser: Initial message", item));
+
+            string trimmedReceivedData = "newUser<sep>sentMessage<sep>lastMessageReceived";
+
+            Assert.True(server.IsNewUser("newUser"));
+            Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.Equal("sentMessage", server.CheckMessage(trimmedReceivedData));
+            Assert.False(server.IsNewUser("newUser"));
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("someUser: Initial message", item));
+        }
+
+        [Fact]
         public void CheckMessageWhenNoNewUserShouldAddMessageToChatAndSendNewMessages()
         {
             MockSocketCommunication mockSocket = new MockSocketCommunication();
