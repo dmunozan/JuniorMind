@@ -56,6 +56,17 @@ namespace ChatServer.Tests
         }
 
         [Fact]
+        public void CheckMessageWhenInvalidFormatShouldThrowException()
+        {
+            ChatServerSide server = new ChatServerSide();
+
+            string invalidFormatData = "userName_sentMessage_lastMessage";
+
+            Assert.Single(invalidFormatData.Split("<sep>"));
+            Assert.Throws<ArgumentException>(() => server.CheckMessage(invalidFormatData));
+        }
+
+        [Fact]
         public void CheckMessageWhenNewUserShouldAddUser()
         {
             ChatServerSide server = new ChatServerSide();
