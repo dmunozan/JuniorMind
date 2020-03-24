@@ -34,7 +34,7 @@ namespace ChatServer
 
         public string CheckMessage(string trimmedReceivedData)
         {
-            trimmedReceivedData ??= "";
+            CheckNullElement(trimmedReceivedData);
 
             const int userName = 0;
             const int sentMessage = 1;
