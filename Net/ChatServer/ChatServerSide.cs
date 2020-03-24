@@ -39,8 +39,14 @@ namespace ChatServer
             const int userName = 0;
             const int sentMessage = 1;
             const int lastMessage = 2;
+            const int piecesOfData = 3;
 
             string[] data = trimmedReceivedData.Split("<sep>");
+
+            if (data.Length != piecesOfData)
+            {
+                throw new ArgumentException("The received data should follow this format: 'userName<sep>sentMessage<sep>lastMessageReceived'", nameof(trimmedReceivedData));
+            }
 
             if (IsNewUser(data[userName]))
             {
