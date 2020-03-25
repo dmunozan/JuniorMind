@@ -47,7 +47,9 @@ namespace ChatServer.Tests
         [Fact]
         public void CheckMessageWhenAnyShouldHaveValidFormat()
         {
-            ChatServerSide server = new ChatServerSide();
+            MockSocketCommunication mockSocket = new MockSocketCommunication();
+
+            ChatServerSide server = new ChatServerSide(mockSocket);
 
             string trimmedReceivedData = "userName<sep>sentMessage<sep>lastMessageReceived";
 
@@ -80,7 +82,9 @@ namespace ChatServer.Tests
         [Fact]
         public void CheckMessageWhenNewUserShouldAddUser()
         {
-            ChatServerSide server = new ChatServerSide();
+            MockSocketCommunication mockSocket = new MockSocketCommunication();
+
+            ChatServerSide server = new ChatServerSide(mockSocket);
 
             string trimmedReceivedData = "userName<sep>sentMessage<sep>lastMessageReceived";
 
@@ -91,7 +95,7 @@ namespace ChatServer.Tests
         }
 
         [Fact]
-        public void CheckMessageWhenNewUserShouldNotSendMessages()
+        public void CheckMessageWhenNewUserShouldSendOnlyGreetingMessage()
         {
             MockSocketCommunication mockSocket = new MockSocketCommunication();
 
@@ -118,7 +122,8 @@ namespace ChatServer.Tests
             Assert.False(server.IsNewUser("newUser"));
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("someUser: Initial message", item));
+                item => Assert.Equal("someUser: Initial message", item),
+                item => Assert.Equal("server: You joined the chat.", item));
         }
 
         [Fact]
