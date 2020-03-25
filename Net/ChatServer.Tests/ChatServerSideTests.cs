@@ -168,6 +168,14 @@ namespace ChatServer.Tests
         }
 
         [Fact]
+        public void SentNewMessagesWhenNullShouldThrowException()
+        {
+            ChatServerSide server = new ChatServerSide();
+
+            Assert.Throws<ArgumentNullException>(() => server.SendNewMessages(null));
+        }
+
+        [Fact]
         public void SentNewMessagesWhenThereAreNewMessagesShouldSendThoseMessages()
         {
             MockSocketCommunication mockSocket = new MockSocketCommunication();
