@@ -56,6 +56,17 @@ namespace ChatServer.Tests
         }
 
         [Fact]
+        public void CheckMessageWhenEmptySecondArgumentShouldThrowException()
+        {
+            ChatServerSide server = new ChatServerSide();
+
+            string trimmedReceivedData = "userName<sep><sep>lastMessageReceived";
+
+            Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.Throws<ArgumentException>(() => server.CheckMessage(trimmedReceivedData));
+        }
+
+        [Fact]
         public void CheckMessageWhenInvalidFormatShouldThrowException()
         {
             ChatServerSide server = new ChatServerSide();
