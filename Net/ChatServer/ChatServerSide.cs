@@ -56,6 +56,8 @@ namespace ChatServer
             if (IsNewUser(data[userName]))
             {
                 AddUser(data[userName]);
+
+                socket.Send("server: You joined the chat.");
             }
             else
             {
