@@ -69,6 +69,11 @@ namespace ChatServer
 
         public void SendNewMessages(string lastMessage)
         {
+            if (lastMessage == "")
+            {
+                throw new ArgumentException("Empty string not allowed", nameof(lastMessage));
+            }
+
             int lastMessageReceived = chatMessages.LastIndexOf(lastMessage);
 
             for (int i = lastMessageReceived + 1; i < chatMessages.Count; i++)
