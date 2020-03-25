@@ -48,6 +48,11 @@ namespace ChatServer
                 throw new ArgumentException("The received data should follow this format: 'userName<sep>sentMessage<sep>lastMessageReceived'", nameof(trimmedReceivedData));
             }
 
+            if (data[sentMessage] == "")
+            {
+                throw new ArgumentException("The message part cannot be an empty string", nameof(trimmedReceivedData));
+            }
+
             if (IsNewUser(data[userName]))
             {
                 AddUser(data[userName]);
