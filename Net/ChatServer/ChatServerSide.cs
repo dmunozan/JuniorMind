@@ -69,6 +69,8 @@ namespace ChatServer
 
         public void SendNewMessages(string lastMessage)
         {
+            CheckNullElement(lastMessage);
+
             if (lastMessage == "")
             {
                 throw new ArgumentException("Empty string not allowed", nameof(lastMessage));
