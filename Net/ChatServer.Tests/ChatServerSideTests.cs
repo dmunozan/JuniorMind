@@ -160,6 +160,36 @@ namespace ChatServer.Tests
         }
 
         [Fact]
+        public void SentNewMessagesWhenThereAreNewMessagesShouldSendThoseMessages()
+        {
+            MockSocketCommunication mockSocket = new MockSocketCommunication();
+
+            ChatServerSide server = new ChatServerSide(mockSocket);
+
+            mockSocket.SentMessages.Add("Initial message");
+
+            string trimmedReceivedData = "userName<sep>sentMessage<sep>lastMessageReceived";
+
+            server.AddUser("userName");
+
+            Assert.False(server.IsNewUser("userName"));
+            Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.Equal("sentMessage", server.CheckMessage(trimmedReceivedData));
+            Assert.False(server.IsNewUser("userName"));
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("Initial message", item),
+                item => Assert.Equal("userName: sentMessage", item));
+
+            server.SendNewMessages("LastMessageReceived");
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("Initial message", item),
+                item => Assert.Equal("userName: sentMessage", item),
+                item => Assert.Equal("userName: sentMessage", item));
+        }
+
+        [Fact]
         public void StartWhenNotNullSocketShouldWaitForIncomingConnection()
         {
             MockSocketCommunication mockSocket = new MockSocketCommunication();
