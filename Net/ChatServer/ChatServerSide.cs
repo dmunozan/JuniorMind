@@ -74,9 +74,9 @@ namespace ChatServer
 
         public void SendNewMessages(string lastMessage)
         {
-            Console.WriteLine(lastMessage);
+            int lastMessageReceived = chatMessages.LastIndexOf(lastMessage);
 
-            for (int i = 0; i < chatMessages.Count; i++)
+            for (int i = lastMessageReceived + 1; i < chatMessages.Count; i++)
             {
                 socket.Send(chatMessages[i]);
             }
