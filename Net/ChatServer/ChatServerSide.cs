@@ -72,6 +72,16 @@ namespace ChatServer
             return !users.ContainsKey(user);
         }
 
+        public void SendNewMessages(string lastMessage)
+        {
+            Console.WriteLine(lastMessage);
+
+            for (int i = 0; i < chatMessages.Count; i++)
+            {
+                socket.Send(chatMessages[i]);
+            }
+        }
+
         public void Start()
         {
             CheckNullElement(socket);
