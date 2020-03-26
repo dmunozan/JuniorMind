@@ -24,10 +24,7 @@ namespace ChatServer
 
         public void AddUser(string user)
         {
-            if (user == "")
-            {
-                throw new ArgumentException("Empty string not allowed as user name", nameof(user));
-            }
+            CheckEmptyString(user);
 
             users.Add(user, user);
         }
@@ -48,10 +45,7 @@ namespace ChatServer
                 throw new ArgumentException("The received data should follow this format: 'userName<sep>sentMessage<sep>lastMessageReceived'", nameof(trimmedReceivedData));
             }
 
-            if (data[sentMessage] == "")
-            {
-                throw new ArgumentException("The message part cannot be an empty string", nameof(trimmedReceivedData));
-            }
+            CheckEmptyString(data[sentMessage]);
 
             if (IsNewUser(data[userName]))
             {
@@ -78,10 +72,7 @@ namespace ChatServer
         {
             CheckNullElement(lastMessage);
 
-            if (lastMessage == "")
-            {
-                throw new ArgumentException("Empty string not allowed", nameof(lastMessage));
-            }
+            CheckEmptyString(lastMessage);
 
             int lastMessageReceived = chatMessages.LastIndexOf(lastMessage);
 
@@ -119,6 +110,16 @@ namespace ChatServer
             Console.WriteLine("Closing server.");
             socket.Close();
             socket.SocketDispose();
+        }
+
+        private void CheckEmptyString(string test)
+        {
+            if (test != "")
+            {
+                return;
+            }
+
+            throw new ArgumentException("Empty string not allowed", nameof(test));
         }
 
         private void CheckNullElement(object obj)
