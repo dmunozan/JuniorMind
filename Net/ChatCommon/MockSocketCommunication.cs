@@ -52,7 +52,7 @@ namespace Common
 
         public void SocketDispose()
         {
-            TextToReceive = "close server";
+            TextToReceive = "testUser<sep>close server<sep>lastMessageReceived";
         }
     }
 }
