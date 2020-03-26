@@ -102,7 +102,7 @@ namespace ChatServer
                 socket.Listen(1);
                 ISocket connectedSocket = socket.Accept();
                 Console.WriteLine("Connection accepted.");
-                trimmedReceivedData = connectedSocket.Receive();
+                trimmedReceivedData = CheckMessage(connectedSocket.Receive());
                 Console.WriteLine("Closing connection.");
                 try
                 {
