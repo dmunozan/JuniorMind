@@ -257,6 +257,8 @@ namespace ChatServer.Tests
 
             ChatServerSide server = new ChatServerSide(mockSocket);
 
+            mockSocket.TextToReceive = "testUser<sep>testMessage<sep>lastMessageReceived";
+
             server.Start();
 
             Assert.True(mockSocket.ServerIsWaiting);
@@ -277,11 +279,11 @@ namespace ChatServer.Tests
 
             ChatServerSide server = new ChatServerSide(mockSocket);
 
-            mockSocket.TextToReceive = "Test message";
+            mockSocket.TextToReceive = "testUser<sep>testMessage<sep>lastMessageReceived";
 
             server.Start();
 
-            Assert.Equal("Test message", mockSocket.TrimmedReceivedData);
+            Assert.Equal("testUser<sep>testMessage<sep>lastMessageReceived", mockSocket.TrimmedReceivedData);
         }
     }
 }
