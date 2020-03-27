@@ -51,7 +51,11 @@ namespace ChatServer
             {
                 AddUser(data[userName]);
 
-                socket.Send("server: You joined the chat.");
+                string message = "server: " + data[userName] + " joined the chat.";
+
+                chatMessages.Add(message);
+
+                socket.Send(message);
             }
             else
             {
