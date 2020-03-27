@@ -80,6 +80,11 @@ namespace ChatServer
 
             int lastMessageReceived = chatMessages.LastIndexOf(lastMessage);
 
+            if (lastMessageReceived == -1)
+            {
+                throw new ArgumentException("The message doesn't exist", nameof(lastMessage));
+            }
+
             for (int i = lastMessageReceived + 1; i < chatMessages.Count; i++)
             {
                 socket.Send(chatMessages[i]);
