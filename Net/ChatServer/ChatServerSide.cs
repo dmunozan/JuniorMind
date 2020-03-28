@@ -38,16 +38,14 @@ namespace ChatServer
 
             string trimmedReceivedData = connectedSocket.Receive();
 
-            CheckNullElement(trimmedReceivedData);
-
             const int userName = 0;
             const int sentMessage = 1;
             const int lastMessage = 2;
             const int piecesOfData = 3;
 
-            string[] data = trimmedReceivedData.Split("<sep>");
+            string[] data = trimmedReceivedData?.Split("<sep>");
 
-            if (data.Length != piecesOfData)
+            if (data == null || data.Length != piecesOfData)
             {
                 throw new InvalidOperationException("The received data should follow this format: 'userName<sep>sentMessage<sep>lastMessageReceived'");
             }
