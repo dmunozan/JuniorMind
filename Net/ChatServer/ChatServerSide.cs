@@ -76,10 +76,7 @@ namespace ChatServer
 
         public void SendNewMessages(ISocket connectedSocket, string lastMessage)
         {
-            if (connectedSocket == null)
-            {
-                return;
-            }
+            CheckNullElement(connectedSocket);
 
             CheckNullElement(lastMessage);
 
