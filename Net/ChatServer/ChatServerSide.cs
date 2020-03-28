@@ -61,9 +61,16 @@ namespace ChatServer
             }
             else
             {
-                chatMessages.Add(data[userName] + ": " + data[sentMessage]);
+                if (chatMessages.IndexOf(data[lastMessage]) == -1)
+                {
+                    connectedSocket.Send("server: " + data[userName] + " already exist, choose a different user name.");
+                }
+                else
+                {
+                    chatMessages.Add(data[userName] + ": " + data[sentMessage]);
 
-                SendNewMessages(connectedSocket, data[lastMessage]);
+                    SendNewMessages(connectedSocket, data[lastMessage]);
+                }
             }
 
             return data[1];
