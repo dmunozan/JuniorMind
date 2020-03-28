@@ -177,7 +177,7 @@ namespace ChatServer.Tests
         }
 
         [Fact]
-        public void CheckMessageWhenNullArgumentShouldThrowException()
+        public void CheckMessageWhenNullMessageShouldThrowException()
         {
             MockSocketCommunication mockSocket = new MockSocketCommunication();
 
@@ -185,7 +185,7 @@ namespace ChatServer.Tests
 
             mockSocket.TextToReceive = null;
 
-            Assert.Throws<ArgumentNullException>(() => server.CheckMessage(mockSocket));
+            Assert.Throws<InvalidOperationException>(() => server.CheckMessage(mockSocket));
         }
 
         [Fact]
