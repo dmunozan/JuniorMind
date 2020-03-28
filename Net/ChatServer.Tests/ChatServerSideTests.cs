@@ -90,6 +90,32 @@ namespace ChatServer.Tests
         }
 
         [Fact]
+        public void CheckMessageWhenNewUserAndUserNameAlreadyExistShouldRequestForNewUserName()
+        {
+            MockSocketCommunication mockSocket = new MockSocketCommunication();
+
+            ChatServerSide server = new ChatServerSide(mockSocket);
+
+            string trimmedReceivedData = "userName<sep>sentMessage<sep>NotExistingText";
+
+            mockSocket.TextToReceive = trimmedReceivedData;
+
+            Assert.True(server.IsNewUser("userName"));
+            Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.Equal("sentMessage", server.CheckMessage(mockSocket));
+            Assert.False(server.IsNewUser("userName"));
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("server: userName joined the chat.", item));
+
+            Assert.Equal("sentMessage", server.CheckMessage(mockSocket));
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("server: userName joined the chat.", item),
+                item => Assert.Equal("server: userName already exist, choose a different user name.", item));
+        }
+
+        [Fact]
         public void CheckMessageWhenNewUserShouldAddUser()
         {
             MockSocketCommunication mockSocket = new MockSocketCommunication();
