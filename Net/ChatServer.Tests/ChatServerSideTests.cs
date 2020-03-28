@@ -189,6 +189,14 @@ namespace ChatServer.Tests
         }
 
         [Fact]
+        public void CheckMessageWhenNullSocketShouldThrowException()
+        {
+            ChatServerSide server = new ChatServerSide();
+
+            Assert.Throws<ArgumentNullException>(() => server.CheckMessage(null));
+        }
+
+        [Fact]
         public void IsNewUserWhenUserNoExistShouldReturnTrue()
         {
             ChatServerSide server = new ChatServerSide();
