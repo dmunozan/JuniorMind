@@ -31,10 +31,7 @@ namespace ChatServer
 
         public string CheckMessage(ISocket connectedSocket)
         {
-            if (connectedSocket == null)
-            {
-                return "error";
-            }
+            CheckNullElement(connectedSocket);
 
             string trimmedReceivedData = connectedSocket.Receive();
 
