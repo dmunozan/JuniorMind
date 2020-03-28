@@ -29,8 +29,15 @@ namespace ChatServer
             users.Add(user, user);
         }
 
-        public string CheckMessage(string trimmedReceivedData)
+        public string CheckMessage(ISocket connectedSocket)
         {
+            if (connectedSocket == null)
+            {
+                return "error";
+            }
+
+            string trimmedReceivedData = connectedSocket.Receive();
+
             CheckNullElement(trimmedReceivedData);
 
             const int userName = 0;
@@ -42,7 +49,7 @@ namespace ChatServer
 
             if (data.Length != piecesOfData)
             {
-                throw new ArgumentException("The received data should follow this format: 'userName<sep>sentMessage<sep>lastMessageReceived'", nameof(trimmedReceivedData));
+                throw new InvalidOperationException("The received data should follow this format: 'userName<sep>sentMessage<sep>lastMessageReceived'");
             }
 
             CheckEmptyString(data[sentMessage]);
@@ -55,13 +62,13 @@ namespace ChatServer
 
                 chatMessages.Add(message);
 
-                socket.Send(message);
+                connectedSocket.Send(message);
             }
             else
             {
                 chatMessages.Add(data[userName] + ": " + data[sentMessage]);
 
-                SendNewMessages(data[lastMessage]);
+                SendNewMessages(connectedSocket, data[lastMessage]);
             }
 
             return data[1];
@@ -72,8 +79,13 @@ namespace ChatServer
             return !users.ContainsKey(user);
         }
 
-        public void SendNewMessages(string lastMessage)
+        public void SendNewMessages(ISocket connectedSocket, string lastMessage)
         {
+            if (connectedSocket == null)
+            {
+                return;
+            }
+
             CheckNullElement(lastMessage);
 
             CheckEmptyString(lastMessage);
@@ -87,7 +99,7 @@ namespace ChatServer
 
             for (int i = lastMessageReceived + 1; i < chatMessages.Count; i++)
             {
-                socket.Send(chatMessages[i]);
+                connectedSocket.Send(chatMessages[i]);
             }
         }
 
@@ -102,7 +114,7 @@ namespace ChatServer
                 socket.Listen(1);
                 ISocket connectedSocket = socket.Accept();
                 Console.WriteLine("Connection accepted.");
-                trimmedReceivedData = CheckMessage(connectedSocket.Receive());
+                trimmedReceivedData = CheckMessage(connectedSocket);
                 Console.WriteLine("Closing connection.");
                 try
                 {
