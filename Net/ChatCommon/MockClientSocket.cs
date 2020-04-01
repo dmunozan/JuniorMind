@@ -7,7 +7,8 @@ namespace Common
     {
         public List<string> SentMessages = new List<string>();
 
-        public string TextToReceive { get; set; }
+        public List<string> ListToReceive = new List<string>();
+        private int index;
 
         public ISocket Accept()
         {
@@ -26,7 +27,7 @@ namespace Common
 
         public string Receive()
         {
-            return TextToReceive;
+            return ListToReceive[index++];
         }
 
         public void Send(string data)
