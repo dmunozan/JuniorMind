@@ -10,11 +10,11 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.TextToReceive = "server: userName joined the chat.";
+            mockSocket.ListToReceive.Add("server: userName joined the chat.");
 
             MockDataReader dataReader = new MockDataReader();
 
-            dataReader.TextToRead = "userName";
+            dataReader.ListToRead.Add("userName");
 
             ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
 
@@ -22,6 +22,28 @@ namespace ChatClient.Tests
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+        }
+
+        [Fact]
+        public void LogOnWhenAlreadyExistingUserNameShouldReceiveErrorMessageAndRequestForNewUserName()
+        {
+            MockClientSocket mockSocket = new MockClientSocket();
+
+            mockSocket.ListToReceive.Add("server: userName already exist, choose a different user name.");
+            mockSocket.ListToReceive.Add("server: newUserName joined the chat.");
+
+            MockDataReader dataReader = new MockDataReader();
+
+            dataReader.ListToRead.Add("userName");
+            dataReader.ListToRead.Add("newUserName");
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            Assert.Equal("newUserName", client.LogOn());
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("newUserName<sep>logon<sep>NoLastMessage", item));
         }
     }
 }
