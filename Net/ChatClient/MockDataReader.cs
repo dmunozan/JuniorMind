@@ -1,12 +1,15 @@
-﻿namespace ChatClient
+﻿using System.Collections.Generic;
+
+namespace ChatClient
 {
     public class MockDataReader : IReader
     {
-        public string TextToRead { get; set; }
+        public List<string> ListToRead = new List<string>();
+        private int index;
 
         public string Read(string textToShow)
         {
-            return TextToRead;
+            return ListToRead[index++];
         }
     }
 }
