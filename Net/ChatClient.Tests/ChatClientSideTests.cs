@@ -12,9 +12,13 @@ namespace ChatClient.Tests
 
             mockSocket.TextToReceive = "server: userName joined the chat.";
 
-            ChatClientSide client = new ChatClientSide(mockSocket);
+            MockDataReader dataReader = new MockDataReader();
 
-            Assert.Equal("userName", client.LogOn("userName"));
+            dataReader.TextToRead = "userName";
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            Assert.Equal("userName", client.LogOn());
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
