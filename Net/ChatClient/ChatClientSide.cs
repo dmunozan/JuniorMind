@@ -16,13 +16,19 @@ namespace ChatClient
 
         public string LogOn()
         {
-            string userName = dataReader.Read("Introduce your user name:");
+            string serverReply = "exist";
+            string userName = "";
 
-            socket.Send(userName + "<sep>logon<sep>NoLastMessage");
+            while (serverReply.IndexOf("exist") > -1)
+            {
+                userName = dataReader.Read("Introduce your user name:");
 
-            string serverReply = socket.Receive();
+                socket.Send(userName + "<sep>logon<sep>NoLastMessage");
 
-            Console.WriteLine(serverReply);
+                serverReply = socket.Receive();
+
+                Console.WriteLine(serverReply);
+            }
 
             return userName;
         }
