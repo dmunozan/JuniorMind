@@ -6,15 +6,17 @@ namespace ChatClient
     public class ChatClientSide
     {
         private readonly ISocket socket;
+        private readonly IReader dataReader;
 
-        public ChatClientSide(ISocket newSocket)
+        public ChatClientSide(ISocket newSocket, IReader newDataReader)
         {
             socket = newSocket;
+            dataReader = newDataReader;
         }
 
-        public string LogOn(string userName = null)
+        public string LogOn()
         {
-            userName ??= ReadData("Introduce your user name:");
+            string userName = dataReader.Read("Introduce your user name:");
 
             socket.Send(userName + "<sep>logon<sep>NoLastMessage");
 
@@ -23,12 +25,6 @@ namespace ChatClient
             Console.WriteLine(serverReply);
 
             return userName;
-        }
-
-        private string ReadData(string textToShow)
-        {
-            Console.WriteLine(textToShow);
-            return Console.ReadLine();
         }
     }
 }
