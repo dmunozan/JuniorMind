@@ -23,9 +23,9 @@ namespace ChatClient
             {
                 userName = dataReader.Read("Introduce your user name:");
 
-                if (string.IsNullOrEmpty(userName))
+                if (string.IsNullOrEmpty(userName) || userName.Contains("<sep>"))
                 {
-                    Console.WriteLine("User name not allowed.");
+                    Console.WriteLine(userName + " user name not allowed.");
                 }
                 else
                 {
