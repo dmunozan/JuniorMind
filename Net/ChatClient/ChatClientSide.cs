@@ -23,11 +23,18 @@ namespace ChatClient
             {
                 userName = dataReader.Read("Introduce your user name:");
 
-                socket.Send(userName + "<sep>logon<sep>NoLastMessage");
+                if (userName == "")
+                {
+                    Console.WriteLine("User name not allowed.");
+                }
+                else
+                {
+                    socket.Send(userName + "<sep>logon<sep>NoLastMessage");
 
-                serverReply = socket.Receive();
+                    serverReply = socket.Receive();
 
-                Console.WriteLine(serverReply);
+                    Console.WriteLine(serverReply);
+                }
             }
 
             return userName;
