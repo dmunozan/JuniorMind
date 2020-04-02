@@ -23,7 +23,7 @@ namespace ChatClient
             {
                 userName = dataReader.Read("Introduce your user name:");
 
-                if (userName == "")
+                if (string.IsNullOrEmpty(userName))
                 {
                     Console.WriteLine("User name not allowed.");
                 }
