@@ -68,6 +68,26 @@ namespace ChatClient.Tests
         }
 
         [Fact]
+        public void LogOnWhenUserNameContainsSeparatorShouldSendNothingShowErrorMessageAndRequestForNewUserName()
+        {
+            MockClientSocket mockSocket = new MockClientSocket();
+
+            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+
+            MockDataReader dataReader = new MockDataReader();
+
+            dataReader.ListToRead.Add("user<sep>Name");
+            dataReader.ListToRead.Add("userName");
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            Assert.Equal("userName", client.LogOn());
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+        }
+
+        [Fact]
         public void LogOnWhenValidUserNameShouldLogOnAndReceiveGreetingMessage()
         {
             MockClientSocket mockSocket = new MockClientSocket();
