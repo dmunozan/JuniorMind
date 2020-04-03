@@ -68,6 +68,25 @@ namespace ChatClient.Tests
         }
 
         [Fact]
+        public void LogOnWhenUserNameContainsExistShouldLogOnAndReceiveGreetingMessage()
+        {
+            MockClientSocket mockSocket = new MockClientSocket();
+
+            mockSocket.ListToReceive.Add("server: existUserName joined the chat.");
+
+            MockDataReader dataReader = new MockDataReader();
+
+            dataReader.ListToRead.Add("existUserName");
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            Assert.Equal("existUserName", client.LogOn());
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("existUserName<sep>logon<sep>NoLastMessage", item));
+        }
+
+        [Fact]
         public void LogOnWhenUserNameContainsSeparatorShouldSendNothingShowErrorMessageAndRequestForNewUserName()
         {
             MockClientSocket mockSocket = new MockClientSocket();
