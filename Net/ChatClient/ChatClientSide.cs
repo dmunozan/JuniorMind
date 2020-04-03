@@ -19,7 +19,7 @@ namespace ChatClient
             string serverReply = "exist";
             string userName = "";
 
-            while (serverReply.IndexOf("exist") > -1)
+            while (serverReply.Contains("exist"))
             {
                 userName = dataReader.Read("Introduce your user name:");
 
