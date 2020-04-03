@@ -16,10 +16,12 @@ namespace ChatClient
 
         public string LogOn()
         {
-            string serverReply = "exist";
+            const int toIgnore = 8;
+            int userNameLength = 0;
+            string serverReply = "server: exist";
             string userName = "";
 
-            while (serverReply.Contains("exist"))
+            while (serverReply.Substring(toIgnore + userNameLength).Contains("exist"))
             {
                 userName = dataReader.Read("Introduce your user name:");
 
@@ -29,6 +31,8 @@ namespace ChatClient
                 }
                 else
                 {
+                    userNameLength = userName.Length;
+
                     socket.Send(userName + "<sep>logon<sep>NoLastMessage");
 
                     serverReply = socket.Receive();
