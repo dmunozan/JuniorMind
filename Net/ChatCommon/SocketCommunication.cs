@@ -7,7 +7,9 @@ namespace Common
 {
     public class SocketCommunication : ISocket
     {
+        const int Port = 1111;
         private Socket socket;
+        private EndPoint endPoint;
 
         public SocketCommunication(string mode)
         {
@@ -31,6 +33,11 @@ namespace Common
             socket = newSocket;
         }
 
+        public bool Connected
+        {
+            get { return socket.Connected; }
+        }
+
         public ISocket Accept()
         {
             return new SocketCommunication(socket.Accept());
@@ -39,6 +46,16 @@ namespace Common
         public void Close()
         {
             socket.Close();
+        }
+
+        public void Connect()
+        {
+            socket.Connect(endPoint);
+        }
+
+        public void Disconnect(bool reuseSocket)
+        {
+            socket.Disconnect(reuseSocket);
         }
 
         public void Listen(int backlog)
@@ -85,7 +102,7 @@ namespace Common
 
             foreach (IPAddress address in hostEntry.AddressList)
             {
-                IPEndPoint endPoint = new IPEndPoint(address, 1111);
+                endPoint = new IPEndPoint(address, Port);
 
                 Socket tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
@@ -108,7 +125,7 @@ namespace Common
 
             foreach (IPAddress address in hostEntry.AddressList)
             {
-                IPEndPoint endPoint = new IPEndPoint(address, 1111);
+                endPoint = new IPEndPoint(address, Port);
 
                 Socket tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
