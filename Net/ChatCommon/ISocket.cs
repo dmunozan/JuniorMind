@@ -4,9 +4,15 @@ namespace Common
 {
     public interface ISocket
     {
+        public bool Connected { get; }
+
         public ISocket Accept();
 
         public void Close();
+
+        public void Connect();
+
+        public void Disconnect(bool reuseSocket);
 
         public void Listen(int backlog);
 
