@@ -10,6 +10,8 @@ namespace Common
         public List<string> ListToReceive = new List<string>();
         private int index;
 
+        public bool Connected { get; private set; } = true;
+
         public ISocket Accept()
         {
             throw new System.NotImplementedException();
@@ -18,6 +20,16 @@ namespace Common
         public void Close()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void Connect()
+        {
+            Connected = true;
+        }
+
+        public void Disconnect(bool reuseSocket)
+        {
+            Connected = false;
         }
 
         public void Listen(int backlog)
@@ -37,7 +49,6 @@ namespace Common
 
         public void Shutdown(SocketShutdown how)
         {
-            throw new System.NotImplementedException();
         }
 
         public void SocketDispose()
