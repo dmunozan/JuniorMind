@@ -1,5 +1,6 @@
 ﻿using Common;
 using System;
+using System.Net.Sockets;
 
 namespace ChatClient
 {
@@ -33,9 +34,17 @@ namespace ChatClient
                 {
                     userNameLength = userName.Length;
 
+                    if (!socket.Connected)
+                    {
+                        socket.Connect();
+                    }
+
                     socket.Send(userName + "<sep>logon<sep>NoLastMessage");
 
                     serverReply = socket.Receive();
+
+                    socket.Shutdown(SocketShutdown.Both);
+                    socket.Disconnect(true);
 
                     Console.WriteLine(serverReply);
                 }
