@@ -11,6 +11,8 @@ namespace Common
         {
         }
 
+        public bool Connected { get; }
+
         public bool ServerIsWaiting { get; set; }
 
         public string TextToReceive { get; set; }
@@ -23,6 +25,14 @@ namespace Common
         }
 
         public void Close()
+        {
+        }
+
+        public void Connect()
+        {
+        }
+
+        public void Disconnect(bool reuseSocket)
         {
         }
 
