@@ -55,7 +55,19 @@ namespace ChatClient
 
         public void Start()
         {
+            CheckNullElement(socket);
+
             Console.WriteLine(LogOn());
+        }
+
+        private void CheckNullElement(object obj)
+        {
+            if (obj != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(nameof(obj), "Not allowed null element.");
         }
     }
 }
