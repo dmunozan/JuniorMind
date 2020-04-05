@@ -148,5 +148,28 @@ namespace ChatClient.Tests
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
         }
+
+        [Fact]
+        public void StartWhenValidSocketShouldLogOn()
+        {
+            MockClientSocket mockSocket = new MockClientSocket();
+
+            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+
+            MockDataReader dataReader = new MockDataReader();
+
+            dataReader.ListToRead.Add("userName");
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            Assert.True(mockSocket.Connected);
+
+            client.Start();
+
+            Assert.False(mockSocket.Connected);
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+        }
     }
 }
