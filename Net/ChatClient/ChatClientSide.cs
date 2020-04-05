@@ -52,5 +52,10 @@ namespace ChatClient
 
             return userName;
         }
+
+        public void Start()
+        {
+            Console.WriteLine(LogOn());
+        }
     }
 }
