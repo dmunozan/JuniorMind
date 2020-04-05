@@ -57,6 +57,8 @@ namespace ChatClient
         {
             CheckNullElement(socket);
 
+            CheckNullElement(dataReader);
+
             Console.WriteLine(LogOn());
         }
 
