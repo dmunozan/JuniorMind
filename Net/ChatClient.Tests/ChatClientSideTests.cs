@@ -151,6 +151,34 @@ namespace ChatClient.Tests
         }
 
         [Fact]
+        public void StartWhenNullDataReaderShouldThrowException()
+        {
+            MockClientSocket mockSocket = new MockClientSocket();
+
+            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+
+            MockDataReader dataReader = null;
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            Assert.Throws<ArgumentNullException>(() => client.Start());
+        }
+
+        [Fact]
+        public void StartWhenNullSocketShouldThrowException()
+        {
+            MockClientSocket mockSocket = null;
+
+            MockDataReader dataReader = new MockDataReader();
+
+            dataReader.ListToRead.Add("userName");
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            Assert.Throws<ArgumentNullException>(() => client.Start());
+        }
+
+        [Fact]
         public void StartWhenValidSocketAndDataReaderShouldLogOn()
         {
             MockClientSocket mockSocket = new MockClientSocket();
@@ -171,20 +199,6 @@ namespace ChatClient.Tests
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
-        }
-
-        [Fact]
-        public void StartWhenNullSocketShouldThrowException()
-        {
-            MockClientSocket mockSocket = null;
-
-            MockDataReader dataReader = new MockDataReader();
-
-            dataReader.ListToRead.Add("userName");
-
-            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
-
-            Assert.Throws<ArgumentNullException>(() => client.Start());
         }
     }
 }
