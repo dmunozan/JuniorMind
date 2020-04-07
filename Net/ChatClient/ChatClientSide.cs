@@ -6,8 +6,11 @@ namespace ChatClient
 {
     public class ChatClientSide
     {
+        const string Sep = "<sep>";
         private readonly ISocket socket;
         private readonly IReader dataReader;
+        private string userName;
+        private string lastMessage;
 
         public ChatClientSide(ISocket newSocket, IReader newDataReader)
         {
@@ -18,28 +21,28 @@ namespace ChatClient
         public string LogOn()
         {
             const int toIgnore = 8;
-            int userNameLength = 0;
+            int newUserNameLength = 0;
             string serverReply = "server: exist";
-            string userName = "";
+            string newUserName = "";
 
-            while (serverReply.Substring(toIgnore + userNameLength).Contains("exist"))
+            while (serverReply.Substring(toIgnore + newUserNameLength).Contains("exist"))
             {
-                userName = dataReader.Read("Introduce your user name:");
+                newUserName = dataReader.Read("Introduce your user name: ");
 
-                if (string.IsNullOrEmpty(userName) || userName.Contains("<sep>"))
+                if (string.IsNullOrEmpty(newUserName) || newUserName.Contains("<sep>"))
                 {
-                    Console.WriteLine(userName + " user name not allowed.");
+                    Console.WriteLine(newUserName + " user name not allowed.");
                 }
                 else
                 {
-                    userNameLength = userName.Length;
+                    newUserNameLength = newUserName.Length;
 
                     if (!socket.Connected)
                     {
                         socket.Connect();
                     }
 
-                    socket.Send(userName + "<sep>logon<sep>NoLastMessage");
+                    socket.Send(newUserName + "<sep>logon<sep>NoLastMessage");
 
                     serverReply = socket.Receive();
 
@@ -50,7 +53,23 @@ namespace ChatClient
                 }
             }
 
-            return userName;
+            lastMessage = serverReply;
+
+            return newUserName;
+        }
+
+        public string SendMessage()
+        {
+            socket.Connect();
+
+            string message = dataReader.Read(userName + ": ");
+
+            socket.Send(userName + Sep + message + Sep + lastMessage);
+
+            socket.Shutdown(SocketShutdown.Both);
+            socket.Disconnect(true);
+
+            return message;
         }
 
         public void Start()
@@ -59,7 +78,7 @@ namespace ChatClient
 
             CheckNullElement(dataReader);
 
-            Console.WriteLine(LogOn());
+            userName = LogOn();
         }
 
         private void CheckNullElement(object obj)
