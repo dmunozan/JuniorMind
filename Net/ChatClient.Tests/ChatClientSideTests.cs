@@ -151,6 +151,34 @@ namespace ChatClient.Tests
         }
 
         [Fact]
+        public void SendMessageWhenValidMessageShouldConnectSendMessageToServerAndDisconnect()
+        {
+            MockClientSocket mockSocket = new MockClientSocket();
+
+            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+
+            MockDataReader dataReader = new MockDataReader();
+
+            dataReader.ListToRead.Add("userName");
+            dataReader.ListToRead.Add("Hello!");
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            client.Start();
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+
+            Assert.Equal("Hello!", client.SendMessage());
+
+            Assert.False(mockSocket.Connected);
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
+        }
+
+        [Fact]
         public void StartWhenNullDataReaderShouldThrowException()
         {
             MockClientSocket mockSocket = new MockClientSocket();
