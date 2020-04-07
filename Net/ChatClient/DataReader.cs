@@ -6,7 +6,7 @@ namespace ChatClient
     {
         public string Read(string textToShow)
         {
-            Console.WriteLine(textToShow);
+            Console.Write(textToShow);
             return Console.ReadLine();
         }
     }
