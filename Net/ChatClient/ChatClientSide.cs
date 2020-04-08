@@ -29,7 +29,7 @@ namespace ChatClient
             {
                 newUserName = dataReader.Read("Introduce your user name: ");
 
-                if (string.IsNullOrEmpty(newUserName) || newUserName.Contains("<sep>"))
+                if (string.IsNullOrEmpty(newUserName) || newUserName.Contains(Sep))
                 {
                     Console.WriteLine(newUserName + " user name not allowed.");
                 }
@@ -42,7 +42,7 @@ namespace ChatClient
                         socket.Connect();
                     }
 
-                    socket.Send(newUserName + "<sep>logon<sep>NoLastMessage");
+                    socket.Send(newUserName + Sep + "logon" + Sep + "NoLastMessage");
 
                     serverReply = socket.Receive();
 
@@ -60,9 +60,20 @@ namespace ChatClient
 
         public string SendMessage()
         {
-            socket.Connect();
+            string message;
 
-            string message = dataReader.Read(userName + ": ");
+            do
+            {
+                message = dataReader.Read(userName + ": ");
+
+                if (message.Contains(Sep))
+                {
+                    Console.WriteLine("Message not allowed.");
+                }
+            }
+            while (message.Contains(Sep));
+
+            socket.Connect();
 
             socket.Send(userName + Sep + message + Sep + lastMessage);
 
