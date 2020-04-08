@@ -151,6 +151,35 @@ namespace ChatClient.Tests
         }
 
         [Fact]
+        public void SendMessageWhenMessageContainsSeparatorShouldSendNothingShowErrorMessageAndRequestForNewMessage()
+        {
+            MockClientSocket mockSocket = new MockClientSocket();
+
+            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+
+            MockDataReader dataReader = new MockDataReader();
+
+            dataReader.ListToRead.Add("userName");
+            dataReader.ListToRead.Add("message<sep>with<sep>separator");
+            dataReader.ListToRead.Add("valid message");
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            client.Start();
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+
+            Assert.Equal("valid message", client.SendMessage());
+
+            Assert.False(mockSocket.Connected);
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.", item));
+        }
+
+        [Fact]
         public void SendMessageWhenValidMessageShouldConnectSendMessageToServerAndDisconnect()
         {
             MockClientSocket mockSocket = new MockClientSocket();
