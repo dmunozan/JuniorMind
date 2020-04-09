@@ -151,7 +151,7 @@ namespace ChatClient.Tests
         }
 
         [Fact]
-        public void SendMessageWhenEmptyStringShouldSendNothingShowErrorMessageAndRequestForNewUserName()
+        public void SendMessageWhenEmptyStringShouldSendNothingShowErrorMessageAndRequestForNewMessage()
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
@@ -161,6 +161,37 @@ namespace ChatClient.Tests
 
             dataReader.ListToRead.Add("userName");
             dataReader.ListToRead.Add("");
+            dataReader.ListToRead.Add("valid message");
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            client.Start();
+
+            Assert.False(mockSocket.Connected);
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+
+            Assert.Equal("valid message", client.SendMessage());
+
+            Assert.False(mockSocket.Connected);
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.", item));
+        }
+
+        [Fact]
+        public void SendMessageWhenNullStringShouldSendNothingShowErrorMessageAndRequestForNewMessage()
+        {
+            MockClientSocket mockSocket = new MockClientSocket();
+
+            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+
+            MockDataReader dataReader = new MockDataReader();
+
+            dataReader.ListToRead.Add("userName");
+            dataReader.ListToRead.Add(null);
             dataReader.ListToRead.Add("valid message");
 
             ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
