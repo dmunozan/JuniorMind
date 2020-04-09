@@ -67,7 +67,7 @@ namespace ChatClient
             {
                 message = dataReader.Read(userName + ": ");
 
-                notValid = message == "" || message.Contains(Sep);
+                notValid = string.IsNullOrEmpty(message) || message.Contains(Sep);
 
                 if (notValid)
                 {
