@@ -51,6 +51,29 @@ namespace ChatClient
             return newUserName;
         }
 
+        public void ReceiveNewMessages(string sentMessage)
+        {
+            string messageToCompare = userName + ": " + sentMessage;
+            string serverReply;
+
+            if (!socket.Connected)
+            {
+                socket.Connect();
+            }
+
+            do
+            {
+                serverReply = socket.Receive();
+                Console.WriteLine(serverReply);
+            }
+            while (serverReply != messageToCompare);
+
+            socket.Shutdown(SocketShutdown.Both);
+            socket.Disconnect(true);
+
+            lastMessage = serverReply;
+        }
+
         public string SendMessage()
         {
             string message = GetData(userName + ": ");
