@@ -61,17 +61,20 @@ namespace ChatClient
         public string SendMessage()
         {
             string message;
+            bool notValid;
 
             do
             {
                 message = dataReader.Read(userName + ": ");
 
-                if (message.Contains(Sep))
+                notValid = message == "" || message.Contains(Sep);
+
+                if (notValid)
                 {
                     Console.WriteLine("Message not allowed.");
                 }
             }
-            while (message.Contains(Sep));
+            while (notValid);
 
             socket.Connect();
 
