@@ -7,6 +7,8 @@ namespace Common
     {
         public List<string> SentMessages = new List<string>();
 
+        public List<string> ReceivedMessages = new List<string>();
+
         public List<string> ListToReceive = new List<string>();
         private int index;
 
@@ -39,7 +41,9 @@ namespace Common
 
         public string Receive()
         {
-            return ListToReceive[index++];
+            string message = ListToReceive[index++];
+            ReceivedMessages.Add(message);
+            return message;
         }
 
         public void Send(string data)
