@@ -27,30 +27,23 @@ namespace ChatClient
 
             while (serverReply.Substring(toIgnore + newUserNameLength).Contains("exist"))
             {
-                newUserName = dataReader.Read("Introduce your user name: ");
+                newUserName = GetData("Introduce your user name: ");
 
-                if (string.IsNullOrEmpty(newUserName) || newUserName.Contains(Sep))
+                newUserNameLength = newUserName.Length;
+
+                if (!socket.Connected)
                 {
-                    Console.WriteLine(newUserName + " user name not allowed.");
+                    socket.Connect();
                 }
-                else
-                {
-                    newUserNameLength = newUserName.Length;
 
-                    if (!socket.Connected)
-                    {
-                        socket.Connect();
-                    }
+                socket.Send(newUserName + Sep + "logon" + Sep + "NoLastMessage");
 
-                    socket.Send(newUserName + Sep + "logon" + Sep + "NoLastMessage");
+                serverReply = socket.Receive();
 
-                    serverReply = socket.Receive();
+                socket.Shutdown(SocketShutdown.Both);
+                socket.Disconnect(true);
 
-                    socket.Shutdown(SocketShutdown.Both);
-                    socket.Disconnect(true);
-
-                    Console.WriteLine(serverReply);
-                }
+                Console.WriteLine(serverReply);
             }
 
             lastMessage = serverReply;
@@ -60,21 +53,7 @@ namespace ChatClient
 
         public string SendMessage()
         {
-            string message;
-            bool notValid;
-
-            do
-            {
-                message = dataReader.Read(userName + ": ");
-
-                notValid = string.IsNullOrEmpty(message) || message.Contains(Sep);
-
-                if (notValid)
-                {
-                    Console.WriteLine("Message not allowed.");
-                }
-            }
-            while (notValid);
+            string message = GetData(userName + ": ");
 
             socket.Connect();
 
@@ -103,6 +82,27 @@ namespace ChatClient
             }
 
             throw new ArgumentNullException(nameof(obj), "Not allowed null element.");
+        }
+
+        private string GetData(string textToShow)
+        {
+            string message;
+            bool notValid;
+
+            do
+            {
+                message = dataReader.Read(textToShow);
+
+                notValid = string.IsNullOrEmpty(message) || message.Contains(Sep);
+
+                if (notValid)
+                {
+                    Console.WriteLine(message + " not allowed.");
+                }
+            }
+            while (notValid);
+
+            return message;
         }
     }
 }
