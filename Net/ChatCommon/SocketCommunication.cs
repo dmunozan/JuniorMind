@@ -24,8 +24,10 @@ namespace Common
             {
                 SetServerSocket();
             }
-
-            SetClientSocket();
+            else
+            {
+                SetClientSocket();
+            }
         }
 
         public SocketCommunication(Socket newSocket)
