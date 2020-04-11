@@ -53,19 +53,27 @@ namespace ChatClient
 
         public void ProcessChat()
         {
-            string message = SendMessage();
-            ReceiveNewMessages(message);
+            string message;
+            do
+            {
+                message = GetData(userName + ": ");
+
+                if (message != "exit")
+                {
+                    socket.Connect();
+                    SendMessage(message);
+                    ReceiveNewMessages(message);
+                    socket.Shutdown(SocketShutdown.Both);
+                    socket.Disconnect(true);
+                }
+            }
+            while (message != "exit");
         }
 
         public void ReceiveNewMessages(string sentMessage)
         {
             string messageToCompare = userName + ": " + sentMessage;
             string serverReply;
-
-            if (!socket.Connected)
-            {
-                socket.Connect();
-            }
 
             do
             {
@@ -74,24 +82,12 @@ namespace ChatClient
             }
             while (serverReply != messageToCompare);
 
-            socket.Shutdown(SocketShutdown.Both);
-            socket.Disconnect(true);
-
             lastMessage = serverReply;
         }
 
-        public string SendMessage()
+        public void SendMessage(string message)
         {
-            string message = GetData(userName + ": ");
-
-            socket.Connect();
-
             socket.Send(userName + Sep + message + Sep + lastMessage);
-
-            socket.Shutdown(SocketShutdown.Both);
-            socket.Disconnect(true);
-
-            return message;
         }
 
         public void Start()
@@ -101,6 +97,9 @@ namespace ChatClient
             CheckNullElement(dataReader);
 
             userName = LogOn();
+
+            socket.Close();
+            socket.SocketDispose();
         }
 
         private void CheckNullElement(object obj)
