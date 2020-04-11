@@ -68,8 +68,10 @@ namespace Common
         public string Receive()
         {
             const int ByteAllocation = 256;
-            byte[] receivedBytes;
-            string trimmedReceivedData = "";
+            byte[] receivedBytes = new byte[ByteAllocation];
+
+            socket.Receive(receivedBytes);
+            string trimmedReceivedData = Encoding.UTF8.GetString(receivedBytes).TrimEnd('\0');
 
             while (socket.Available != 0)
             {
