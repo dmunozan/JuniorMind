@@ -14,6 +14,8 @@ namespace Common
 
         public bool Connected { get; private set; } = true;
 
+        public bool Closed { get; set; }
+
         public ISocket Accept()
         {
             throw new System.NotImplementedException();
@@ -21,7 +23,7 @@ namespace Common
 
         public void Close()
         {
-            throw new System.NotImplementedException();
+            Closed = true;
         }
 
         public void Connect()
@@ -57,7 +59,6 @@ namespace Common
 
         public void SocketDispose()
         {
-            throw new System.NotImplementedException();
         }
     }
 }
