@@ -169,11 +169,6 @@ namespace ChatClient.Tests
 
             client.Start();
 
-            Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
-
-            client.ProcessChat();
-
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
@@ -205,11 +200,6 @@ namespace ChatClient.Tests
 
             client.Start();
 
-            Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
-
-            client.ProcessChat();
-
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
@@ -237,21 +227,15 @@ namespace ChatClient.Tests
 
             dataReader.ListToRead.Add("userName");
             dataReader.ListToRead.Add("Hello!");
+            dataReader.ListToRead.Add("exit");
 
             ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
 
             client.Start();
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
-
-            client.SendMessage("Hello!");
-
-            Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
                 item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
-
-            client.ReceiveNewMessages("Hello!");
 
             Assert.Collection(mockSocket.ReceivedMessages,
                 item => Assert.Equal("server: userName joined the chat.", item),
@@ -265,23 +249,18 @@ namespace ChatClient.Tests
             MockClientSocket mockSocket = new MockClientSocket();
 
             mockSocket.ListToReceive.Add("server: userName joined the chat.");
+            mockSocket.ListToReceive.Add("userName: valid message");
 
             MockDataReader dataReader = new MockDataReader();
 
             dataReader.ListToRead.Add("userName");
             dataReader.ListToRead.Add("");
             dataReader.ListToRead.Add("valid message");
+            dataReader.ListToRead.Add("exit");
 
             ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
 
             client.Start();
-
-            Assert.False(mockSocket.Connected);
-
-            Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
-
-            client.SendMessage("valid message");
 
             Assert.False(mockSocket.Connected);
 
@@ -296,23 +275,18 @@ namespace ChatClient.Tests
             MockClientSocket mockSocket = new MockClientSocket();
 
             mockSocket.ListToReceive.Add("server: userName joined the chat.");
+            mockSocket.ListToReceive.Add("userName: valid message");
 
             MockDataReader dataReader = new MockDataReader();
 
             dataReader.ListToRead.Add("userName");
             dataReader.ListToRead.Add(null);
             dataReader.ListToRead.Add("valid message");
+            dataReader.ListToRead.Add("exit");
 
             ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
 
             client.Start();
-
-            Assert.False(mockSocket.Connected);
-
-            Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
-
-            client.SendMessage("valid message");
 
             Assert.False(mockSocket.Connected);
 
@@ -327,21 +301,18 @@ namespace ChatClient.Tests
             MockClientSocket mockSocket = new MockClientSocket();
 
             mockSocket.ListToReceive.Add("server: userName joined the chat.");
+            mockSocket.ListToReceive.Add("userName: valid message");
 
             MockDataReader dataReader = new MockDataReader();
 
             dataReader.ListToRead.Add("userName");
             dataReader.ListToRead.Add("message<sep>with<sep>separator");
             dataReader.ListToRead.Add("valid message");
+            dataReader.ListToRead.Add("exit");
 
             ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
 
             client.Start();
-
-            Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
-
-            client.SendMessage("valid message");
 
             Assert.False(mockSocket.Connected);
 
@@ -356,20 +327,17 @@ namespace ChatClient.Tests
             MockClientSocket mockSocket = new MockClientSocket();
 
             mockSocket.ListToReceive.Add("server: userName joined the chat.");
+            mockSocket.ListToReceive.Add("userName: Hello!");
 
             MockDataReader dataReader = new MockDataReader();
 
             dataReader.ListToRead.Add("userName");
             dataReader.ListToRead.Add("Hello!");
+            dataReader.ListToRead.Add("exit");
 
             ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
 
             client.Start();
-
-            Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
-
-            client.SendMessage("Hello!");
 
             Assert.False(mockSocket.Connected);
 
@@ -407,15 +375,19 @@ namespace ChatClient.Tests
         }
 
         [Fact]
-        public void StartWhenValidSocketAndDataReaderShouldLogOn()
+        public void StartWhenValidSocketAndDataReaderShouldLogOnAndProcessChat()
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
             mockSocket.ListToReceive.Add("server: userName joined the chat.");
+            mockSocket.ListToReceive.Add("otherUser: Unrelated message.");
+            mockSocket.ListToReceive.Add("userName: Hello!");
 
             MockDataReader dataReader = new MockDataReader();
 
             dataReader.ListToRead.Add("userName");
+            dataReader.ListToRead.Add("Hello!");
+            dataReader.ListToRead.Add("exit");
 
             ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
 
@@ -424,9 +396,16 @@ namespace ChatClient.Tests
             client.Start();
 
             Assert.False(mockSocket.Connected);
+            Assert.True(mockSocket.Closed);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
+
+            Assert.Collection(mockSocket.ReceivedMessages,
+                item => Assert.Equal("server: userName joined the chat.", item),
+                item => Assert.Equal("otherUser: Unrelated message.", item),
+                item => Assert.Equal("userName: Hello!", item));
         }
     }
 }
