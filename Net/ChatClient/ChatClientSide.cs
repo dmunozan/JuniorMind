@@ -98,8 +98,12 @@ namespace ChatClient
 
             userName = LogOn();
 
+            ProcessChat();
+
             socket.Close();
             socket.SocketDispose();
+
+            Console.WriteLine("Closing client");
         }
 
         private void CheckNullElement(object obj)
