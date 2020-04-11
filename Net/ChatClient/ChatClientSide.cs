@@ -51,6 +51,12 @@ namespace ChatClient
             return newUserName;
         }
 
+        public void ProcessChat()
+        {
+            string message = SendMessage();
+            ReceiveNewMessages(message);
+        }
+
         public void ReceiveNewMessages(string sentMessage)
         {
             string messageToCompare = userName + ": " + sentMessage;
