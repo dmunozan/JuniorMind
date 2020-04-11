@@ -151,6 +151,41 @@ namespace ChatClient.Tests
         }
 
         [Fact]
+        public void ProcessChatWhenAnyShouldSendMessageAndReceiveNewMessages()
+        {
+            MockClientSocket mockSocket = new MockClientSocket();
+
+            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+            mockSocket.ListToReceive.Add("otherUser: Unrelated message.");
+            mockSocket.ListToReceive.Add("userName: Hello!");
+
+            MockDataReader dataReader = new MockDataReader();
+
+            dataReader.ListToRead.Add("userName");
+            dataReader.ListToRead.Add("Hello!");
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            client.Start();
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+
+            client.ProcessChat();
+
+            Assert.False(mockSocket.Connected);
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
+
+            Assert.Collection(mockSocket.ReceivedMessages,
+                item => Assert.Equal("server: userName joined the chat.", item),
+                item => Assert.Equal("otherUser: Unrelated message.", item),
+                item => Assert.Equal("userName: Hello!", item));
+        }
+
+        [Fact]
         public void ReceiveNewMessagesWhenValidSocketShouldReceiveNewMessagesShowThemToTheUserAndUpdateLastMessage()
         {
             MockClientSocket mockSocket = new MockClientSocket();
