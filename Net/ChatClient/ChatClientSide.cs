@@ -58,11 +58,14 @@ namespace ChatClient
 
                 if (message != "exit")
                 {
-                    socket.Connect();
+                    socket.SetSocket();
+
                     SendMessage(message);
                     ReceiveNewMessages(message);
+
                     socket.Shutdown(SocketShutdown.Both);
-                    socket.Disconnect(true);
+                    socket.Close();
+                    socket.SocketDispose();
                 }
             }
             while (message != "exit");
