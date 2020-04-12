@@ -87,6 +87,11 @@ namespace Common
             socket.Send(receivedBytes);
         }
 
+        public void SetSocket()
+        {
+            SetClientSocket();
+        }
+
         public void Shutdown(SocketShutdown how)
         {
             socket.Shutdown(how);
@@ -97,7 +102,7 @@ namespace Common
             socket.Dispose();
         }
 
-        public void SetClientSocket()
+        private void SetClientSocket()
         {
             string host = Dns.GetHostName();
             IPHostEntry hostEntry = Dns.GetHostEntry(host);
