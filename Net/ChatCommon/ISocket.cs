@@ -20,6 +20,8 @@ namespace Common
 
         public void Send(string data);
 
+        public void SetSocket();
+
         public void Shutdown(SocketShutdown how);
 
         public void SocketDispose();
