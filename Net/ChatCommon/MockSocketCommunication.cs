@@ -56,6 +56,11 @@ namespace Common
             SentMessages.Add(data);
         }
 
+        public void SetSocket()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Shutdown(SocketShutdown how)
         {
         }
