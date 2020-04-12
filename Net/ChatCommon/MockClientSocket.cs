@@ -53,6 +53,10 @@ namespace Common
             SentMessages.Add(data);
         }
 
+        public void SetSocket()
+        {
+        }
+
         public void Shutdown(SocketShutdown how)
         {
         }
