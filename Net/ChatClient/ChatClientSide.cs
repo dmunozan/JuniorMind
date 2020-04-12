@@ -101,9 +101,6 @@ namespace ChatClient
 
             ProcessChat();
 
-            socket.Close();
-            socket.SocketDispose();
-
             Console.WriteLine("Closing client");
         }
 
