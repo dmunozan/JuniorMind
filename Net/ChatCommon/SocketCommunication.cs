@@ -20,14 +20,12 @@ namespace Common
                 throw new ArgumentException("Modes allowed are server or client", nameof(mode));
             }
 
-            if (mode == "server")
+            if (mode != "server")
             {
-                SetServerSocket();
+                return;
             }
-            else
-            {
-                SetClientSocket();
-            }
+
+            SetServerSocket();
         }
 
         public SocketCommunication(Socket newSocket)
@@ -99,6 +97,29 @@ namespace Common
             socket.Dispose();
         }
 
+        public void SetClientSocket()
+        {
+            string host = Dns.GetHostName();
+            IPHostEntry hostEntry = Dns.GetHostEntry(host);
+
+            foreach (IPAddress address in hostEntry.AddressList)
+            {
+                endPoint = new IPEndPoint(address, Port);
+
+                Socket tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+                tempSocket.Connect(endPoint);
+
+                if (tempSocket.Connected)
+                {
+                    socket = tempSocket;
+                    break;
+                }
+
+                tempSocket.Dispose();
+            }
+        }
+
         private void SetServerSocket()
         {
             string host = Dns.GetHostName();
@@ -113,29 +134,6 @@ namespace Common
                 tempSocket.Bind(endPoint);
 
                 if (tempSocket.IsBound)
-                {
-                    socket = tempSocket;
-                    break;
-                }
-
-                tempSocket.Dispose();
-            }
-        }
-
-        private void SetClientSocket()
-        {
-            string host = Dns.GetHostName();
-            IPHostEntry hostEntry = Dns.GetHostEntry(host);
-
-            foreach (IPAddress address in hostEntry.AddressList)
-            {
-                endPoint = new IPEndPoint(address, Port);
-
-                Socket tempSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-                tempSocket.Connect(endPoint);
-
-                if (tempSocket.Connected)
                 {
                     socket = tempSocket;
                     break;
