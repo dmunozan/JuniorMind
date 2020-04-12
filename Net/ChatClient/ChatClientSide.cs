@@ -31,17 +31,15 @@ namespace ChatClient
 
                 newUserNameLength = newUserName.Length;
 
-                if (!socket.Connected)
-                {
-                    socket.Connect();
-                }
+                socket.SetSocket();
 
                 socket.Send(newUserName + Sep + "logon" + Sep + "NoLastMessage");
 
                 serverReply = socket.Receive();
 
                 socket.Shutdown(SocketShutdown.Both);
-                socket.Disconnect(true);
+                socket.Close();
+                socket.SocketDispose();
 
                 Console.WriteLine(serverReply);
             }
