@@ -23,6 +23,7 @@ namespace Common
 
         public void Close()
         {
+            Connected = false;
             Closed = true;
         }
 
