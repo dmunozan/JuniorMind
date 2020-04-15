@@ -241,33 +241,13 @@ namespace ChatServer.Tests
         }
 
         [Fact]
-        public void SendNewMessagesWhenEmptyMessageShouldThrowException()
-        {
-            MockSocketCommunication mockSocket = new MockSocketCommunication();
-
-            ChatServerSide server = new ChatServerSide(mockSocket);
-
-            Assert.Throws<ArgumentException>(() => server.SendNewMessages(mockSocket, ""));
-        }
-
-        [Fact]
         public void SendNewMessagesWhenMessageNoExistShouldThrowException()
         {
             MockSocketCommunication socket = new MockSocketCommunication();
 
             ChatServerSide server = new ChatServerSide(socket);
 
-            Assert.Throws<ArgumentException>(() => server.SendNewMessages(socket, "MessageNoExist"));
-        }
-
-        [Fact]
-        public void SendNewMessagesWhenNullMessageShouldThrowException()
-        {
-            MockSocketCommunication socket = new MockSocketCommunication();
-
-            ChatServerSide server = new ChatServerSide(socket);
-
-            Assert.Throws<ArgumentNullException>(() => server.SendNewMessages(socket, null));
+            Assert.Throws<ArgumentException>(() => server.SendNewMessages(socket, -1));
         }
 
         [Fact]
@@ -275,7 +255,7 @@ namespace ChatServer.Tests
         {
             ChatServerSide server = new ChatServerSide();
 
-            Assert.Throws<ArgumentNullException>(() => server.SendNewMessages(null, "message"));
+            Assert.Throws<ArgumentNullException>(() => server.SendNewMessages(null, 0));
         }
 
         [Fact]
@@ -303,7 +283,7 @@ namespace ChatServer.Tests
                 item => Assert.Equal("server: userName joined the chat.", item),
                 item => Assert.Equal("userName: sentMessage", item));
 
-            server.SendNewMessages(mockSocket, "server: userName joined the chat.");
+            server.SendNewMessages(mockSocket, 0);
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("Initial message", item),
@@ -337,7 +317,7 @@ namespace ChatServer.Tests
                 item => Assert.Equal("server: userName joined the chat.", item),
                 item => Assert.Equal("userName: sentMessage", item));
 
-            server.SendNewMessages(mockSocket, "userName: sentMessage");
+            server.SendNewMessages(mockSocket, 2);
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("Initial message", item),
