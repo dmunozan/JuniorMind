@@ -61,7 +61,9 @@ namespace ChatServer
             }
             else
             {
-                if (chatMessages.IndexOf(data[lastMessage]) == -1)
+                int indexOfLastMessage = chatMessages.LastIndexOf(data[lastMessage]);
+
+                if (indexOfLastMessage == -1)
                 {
                     connectedSocket.Send("server: " + data[userName] + " already exist, choose a different user name.");
                 }
@@ -69,7 +71,7 @@ namespace ChatServer
                 {
                     chatMessages.Add(data[userName] + ": " + data[sentMessage]);
 
-                    SendNewMessages(connectedSocket, data[lastMessage]);
+                    SendNewMessages(connectedSocket, indexOfLastMessage);
                 }
             }
 
@@ -81,22 +83,16 @@ namespace ChatServer
             return !users.ContainsKey(user);
         }
 
-        public void SendNewMessages(ISocket connectedSocket, string lastMessage)
+        public void SendNewMessages(ISocket connectedSocket, int indexOfLastMessage)
         {
             CheckNullElement(connectedSocket);
 
-            CheckNullElement(lastMessage);
-
-            CheckEmptyString(lastMessage);
-
-            int lastMessageReceived = chatMessages.LastIndexOf(lastMessage);
-
-            if (lastMessageReceived == -1)
+            if (indexOfLastMessage == -1)
             {
-                throw new ArgumentException("The message doesn't exist", nameof(lastMessage));
+                throw new ArgumentException("The message doesn't exist", nameof(indexOfLastMessage));
             }
 
-            for (int i = lastMessageReceived + 1; i < chatMessages.Count; i++)
+            for (int i = indexOfLastMessage + 1; i < chatMessages.Count; i++)
             {
                 connectedSocket.Send(chatMessages[i]);
             }
