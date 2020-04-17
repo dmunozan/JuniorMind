@@ -71,7 +71,7 @@ namespace Common
             socket.Receive(receivedBytes);
             string trimmedReceivedData = Encoding.UTF8.GetString(receivedBytes).TrimEnd('\0');
 
-            while (socket.Available != 0)
+            while (trimmedReceivedData.IndexOf("<eof>") == -1)
             {
                 receivedBytes = new byte[ByteAllocation];
                 socket.Receive(receivedBytes);
