@@ -191,7 +191,7 @@ namespace ChatServer.Tests
 
             mockSocket.SentMessages.Add("Initial message");
 
-            string trimmedReceivedData = "userName<sep>sentMessage<sep>server: userName joined the chat.";
+            string trimmedReceivedData = "userName<sep>sentMessage<sep>server: userName joined the chat.<eof>";
 
             mockSocket.TextToReceive = trimmedReceivedData;
 
@@ -199,6 +199,7 @@ namespace ChatServer.Tests
 
             Assert.False(server.IsNewUser("userName"));
             Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.True(trimmedReceivedData.IndexOf("<eof>") > -1);
             Assert.Equal("sentMessage", server.CheckMessage(mockSocket));
             Assert.False(server.IsNewUser("userName"));
 
@@ -273,7 +274,7 @@ namespace ChatServer.Tests
 
             mockSocket.SentMessages.Add("Initial message");
 
-            string trimmedReceivedData = "userName<sep>sentMessage<sep>server: userName joined the chat.";
+            string trimmedReceivedData = "userName<sep>sentMessage<sep>server: userName joined the chat.<eof>";
 
             mockSocket.TextToReceive = trimmedReceivedData;
 
@@ -281,6 +282,7 @@ namespace ChatServer.Tests
 
             Assert.False(server.IsNewUser("userName"));
             Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.True(trimmedReceivedData.IndexOf("<eof>") > -1);
             Assert.Equal("sentMessage", server.CheckMessage(mockSocket));
             Assert.False(server.IsNewUser("userName"));
 
@@ -307,7 +309,7 @@ namespace ChatServer.Tests
 
             mockSocket.SentMessages.Add("Initial message");
 
-            string trimmedReceivedData = "userName<sep>sentMessage<sep>server: userName joined the chat.";
+            string trimmedReceivedData = "userName<sep>sentMessage<sep>server: userName joined the chat.<eof>";
 
             mockSocket.TextToReceive = trimmedReceivedData;
 
@@ -315,6 +317,7 @@ namespace ChatServer.Tests
 
             Assert.False(server.IsNewUser("userName"));
             Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.True(trimmedReceivedData.IndexOf("<eof>") > -1);
             Assert.Equal("sentMessage", server.CheckMessage(mockSocket));
             Assert.False(server.IsNewUser("userName"));
 
@@ -338,7 +341,7 @@ namespace ChatServer.Tests
 
             ChatServerSide server = new ChatServerSide(mockSocket);
 
-            mockSocket.TextToReceive = "testUser<sep>testMessage<sep>lastMessageReceived";
+            mockSocket.TextToReceive = "testUser<sep>testMessage<sep>lastMessageReceived<eof>";
 
             server.Start();
 
@@ -360,11 +363,11 @@ namespace ChatServer.Tests
 
             ChatServerSide server = new ChatServerSide(mockSocket);
 
-            mockSocket.TextToReceive = "testUser<sep>testMessage<sep>lastMessageReceived";
+            mockSocket.TextToReceive = "testUser<sep>testMessage<sep>lastMessageReceived<eof>";
 
             server.Start();
 
-            Assert.Equal("testUser<sep>testMessage<sep>lastMessageReceived", mockSocket.TrimmedReceivedData);
+            Assert.Equal("testUser<sep>testMessage<sep>lastMessageReceived<eof>", mockSocket.TrimmedReceivedData);
         }
     }
 }
