@@ -67,7 +67,7 @@ namespace Common
 
         public void SocketDispose()
         {
-            TextToReceive = "testUser<sep>close server<sep>server: testUser joined the chat.";
+            TextToReceive = "testUser<sep>close server<sep>server: testUser joined the chat.<eof>";
         }
     }
 }
