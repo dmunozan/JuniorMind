@@ -61,7 +61,7 @@ namespace ChatServer
             }
             else
             {
-                int indexOfLastMessage = chatMessages.LastIndexOf(data[lastMessage]);
+                int indexOfLastMessage = chatMessages.LastIndexOf(data[lastMessage].Replace("<eof>", ""));
 
                 if (indexOfLastMessage == -1)
                 {
@@ -94,7 +94,7 @@ namespace ChatServer
 
             for (int i = indexOfLastMessage + 1; i < chatMessages.Count; i++)
             {
-                connectedSocket.Send(chatMessages[i]);
+                connectedSocket.Send(chatMessages[i] + "<eof>");
             }
         }
 
