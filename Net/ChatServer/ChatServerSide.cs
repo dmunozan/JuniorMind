@@ -8,6 +8,8 @@ namespace ChatServer
 {
     public class ChatServerSide
     {
+        const string EOF = "<eof>";
+
         private readonly Hashtable users = new Hashtable();
         private readonly ISocket socket;
         private readonly List<string> chatMessages = new List<string>();
@@ -40,11 +42,13 @@ namespace ChatServer
             const int lastMessage = 2;
             const int piecesOfData = 3;
 
-            string[] data = trimmedReceivedData?.Split("<sep>");
+            const string SEP = "<sep>";
+
+            string[] data = trimmedReceivedData?.Split(SEP);
 
             if (data == null || data.Length != piecesOfData)
             {
-                throw new InvalidOperationException("The received data should follow this format: 'userName<sep>sentMessage<sep>lastMessageReceived'");
+                throw new InvalidOperationException("The received data should follow this format: 'userName" + SEP + "sentMessage" + SEP + "lastMessageReceived" + EOF + "'");
             }
 
             CheckEmptyString(data[sentMessage]);
@@ -57,15 +61,15 @@ namespace ChatServer
 
                 chatMessages.Add(message);
 
-                connectedSocket.Send(message + "<eof>");
+                connectedSocket.Send(message + EOF);
             }
             else
             {
-                int indexOfLastMessage = chatMessages.LastIndexOf(data[lastMessage].Replace("<eof>", ""));
+                int indexOfLastMessage = chatMessages.LastIndexOf(data[lastMessage].Replace(EOF, ""));
 
                 if (indexOfLastMessage == -1)
                 {
-                    connectedSocket.Send("server: " + data[userName] + " already exist, choose a different user name.<eof>");
+                    connectedSocket.Send("server: " + data[userName] + " already exist, choose a different user name." + EOF);
                 }
                 else
                 {
@@ -94,7 +98,7 @@ namespace ChatServer
 
             for (int i = indexOfLastMessage + 1; i < chatMessages.Count; i++)
             {
-                connectedSocket.Send(chatMessages[i] + "<eof>");
+                connectedSocket.Send(chatMessages[i] + EOF);
             }
         }
 
