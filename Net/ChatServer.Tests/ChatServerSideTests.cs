@@ -125,12 +125,13 @@ namespace ChatServer.Tests
 
             ChatServerSide server = new ChatServerSide(mockSocket);
 
-            string trimmedReceivedData = "userName<sep>sentMessage<sep>lastMessageReceived";
+            string trimmedReceivedData = "userName<sep>sentMessage<sep>lastMessageReceived<eof>";
 
             mockSocket.TextToReceive = trimmedReceivedData;
 
             Assert.True(server.IsNewUser("userName"));
             Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.True(trimmedReceivedData.IndexOf("<eof>") > -1);
             Assert.Equal("sentMessage", server.CheckMessage(mockSocket));
             Assert.False(server.IsNewUser("userName"));
         }
@@ -142,7 +143,7 @@ namespace ChatServer.Tests
 
             ChatServerSide server = new ChatServerSide(mockSocket);
 
-            string initialTestMessage = "someUser<sep>Initial message<sep>testLastMessageReceived";
+            string initialTestMessage = "someUser<sep>Initial message<sep>testLastMessageReceived<eof>";
 
             mockSocket.TextToReceive = initialTestMessage;
 
@@ -151,31 +152,33 @@ namespace ChatServer.Tests
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("server: someUser joined the chat.<eof>", item));
 
-            string testMessage = "someUser<sep>Initial message<sep>server: someUser joined the chat.";
+            string testMessage = "someUser<sep>Initial message<sep>server: someUser joined the chat.<eof>";
 
             mockSocket.TextToReceive = testMessage;
 
             Assert.False(server.IsNewUser("someUser"));
             Assert.Equal(3, testMessage.Split("<sep>").Length);
+            Assert.True(testMessage.IndexOf("<eof>") > -1);
             Assert.Equal("Initial message", server.CheckMessage(mockSocket));
             Assert.False(server.IsNewUser("someUser"));
 
             Assert.Collection(mockSocket.SentMessages,
                             item => Assert.Equal("server: someUser joined the chat.<eof>", item),
-                            item => Assert.Equal("someUser: Initial message", item));
+                            item => Assert.Equal("someUser: Initial message<eof>", item));
 
-            string trimmedReceivedData = "newUser<sep>sentMessage<sep>lastMessageReceived";
+            string trimmedReceivedData = "newUser<sep>sentMessage<sep>lastMessageReceived<eof>";
 
             mockSocket.TextToReceive = trimmedReceivedData;
 
             Assert.True(server.IsNewUser("newUser"));
             Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.True(trimmedReceivedData.IndexOf("<eof>") > -1);
             Assert.Equal("sentMessage", server.CheckMessage(mockSocket));
             Assert.False(server.IsNewUser("newUser"));
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("server: someUser joined the chat.<eof>", item),
-                item => Assert.Equal("someUser: Initial message", item),
+                item => Assert.Equal("someUser: Initial message<eof>", item),
                 item => Assert.Equal("server: newUser joined the chat.<eof>", item));
         }
 
@@ -202,7 +205,7 @@ namespace ChatServer.Tests
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("Initial message", item),
                 item => Assert.Equal("server: userName joined the chat.<eof>", item),
-                item => Assert.Equal("userName: sentMessage", item));
+                item => Assert.Equal("userName: sentMessage<eof>", item));
         }
 
         [Fact]
@@ -284,15 +287,15 @@ namespace ChatServer.Tests
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("Initial message", item),
                 item => Assert.Equal("server: userName joined the chat.<eof>", item),
-                item => Assert.Equal("userName: sentMessage", item));
+                item => Assert.Equal("userName: sentMessage<eof>", item));
 
             server.SendNewMessages(mockSocket, 0);
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("Initial message", item),
                 item => Assert.Equal("server: userName joined the chat.<eof>", item),
-                item => Assert.Equal("userName: sentMessage", item),
-                item => Assert.Equal("userName: sentMessage", item));
+                item => Assert.Equal("userName: sentMessage<eof>", item),
+                item => Assert.Equal("userName: sentMessage<eof>", item));
         }
 
         [Fact]
@@ -318,14 +321,14 @@ namespace ChatServer.Tests
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("Initial message", item),
                 item => Assert.Equal("server: userName joined the chat.<eof>", item),
-                item => Assert.Equal("userName: sentMessage", item));
+                item => Assert.Equal("userName: sentMessage<eof>", item));
 
             server.SendNewMessages(mockSocket, 2);
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("Initial message", item),
                 item => Assert.Equal("server: userName joined the chat.<eof>", item),
-                item => Assert.Equal("userName: sentMessage", item));
+                item => Assert.Equal("userName: sentMessage<eof>", item));
         }
 
         [Fact]
