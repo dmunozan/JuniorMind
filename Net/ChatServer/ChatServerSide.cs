@@ -57,7 +57,7 @@ namespace ChatServer
 
                 chatMessages.Add(message);
 
-                connectedSocket.Send(message);
+                connectedSocket.Send(message + "<eof>");
             }
             else
             {
@@ -65,7 +65,7 @@ namespace ChatServer
 
                 if (indexOfLastMessage == -1)
                 {
-                    connectedSocket.Send("server: " + data[userName] + " already exist, choose a different user name.");
+                    connectedSocket.Send("server: " + data[userName] + " already exist, choose a different user name.<eof>");
                 }
                 else
                 {
