@@ -67,11 +67,12 @@ namespace ChatServer.Tests
 
             ChatServerSide server = new ChatServerSide(mockSocket);
 
-            string trimmedReceivedData = "userName<sep><sep>lastMessageReceived";
+            string trimmedReceivedData = "userName<sep><sep>lastMessageReceived<eof>";
 
             mockSocket.TextToReceive = trimmedReceivedData;
 
             Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.True(trimmedReceivedData.IndexOf("<eof>") > -1);
             Assert.Throws<ArgumentException>(() => server.CheckMessage(mockSocket));
         }
 
