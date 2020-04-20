@@ -46,7 +46,7 @@ namespace ChatServer
 
             string[] data = trimmedReceivedData?.Split(SEP);
 
-            if (data == null || data.Length != piecesOfData)
+            if (data == null || data.Length != piecesOfData || data[lastMessage].IndexOf(EOF) == -1)
             {
                 throw new InvalidOperationException("The received data should follow this format: 'userName" + SEP + "sentMessage" + SEP + "lastMessageReceived" + EOF + "'");
             }
