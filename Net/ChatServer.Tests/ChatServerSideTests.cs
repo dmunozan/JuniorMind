@@ -183,6 +183,22 @@ namespace ChatServer.Tests
         }
 
         [Fact]
+        public void CheckMessageWhenNoEOFTagShouldThrowException()
+        {
+            MockSocketCommunication mockSocket = new MockSocketCommunication();
+
+            ChatServerSide server = new ChatServerSide(mockSocket);
+
+            string trimmedReceivedData = "userName<sep>sentMessage<sep>lastMessageReceived";
+
+            mockSocket.TextToReceive = trimmedReceivedData;
+
+            Assert.Equal(3, trimmedReceivedData.Split("<sep>").Length);
+            Assert.False(trimmedReceivedData.IndexOf("<eof>") > -1);
+            Assert.Throws<InvalidOperationException>(() => server.CheckMessage(mockSocket));
+        }
+
+        [Fact]
         public void CheckMessageWhenNoNewUserShouldAddMessageToChatAndSendNewMessages()
         {
             MockSocketCommunication mockSocket = new MockSocketCommunication();
