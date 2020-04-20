@@ -11,8 +11,8 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName already exist, choose a different user name.");
-            mockSocket.ListToReceive.Add("server: newUserName joined the chat.");
+            mockSocket.ListToReceive.Add("server: userName already exist, choose a different user name.<eof>");
+            mockSocket.ListToReceive.Add("server: newUserName joined the chat.<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -28,8 +28,8 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
-                item => Assert.Equal("newUserName<sep>logon<sep>NoLastMessage", item));
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
+                item => Assert.Equal("newUserName<sep>logon<sep>NoLastMessage<eof>", item));
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item));
         }
 
         [Fact]
@@ -77,7 +77,7 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item));
         }
 
         [Fact]
@@ -100,7 +100,7 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("existUserName<sep>logon<sep>NoLastMessage", item));
+                item => Assert.Equal("existUserName<sep>logon<sep>NoLastMessage<eof>", item));
         }
 
         [Fact]
@@ -124,7 +124,7 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item));
         }
 
         [Fact]
@@ -147,7 +147,7 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item));
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item));
         }
 
         [Fact]
@@ -172,7 +172,7 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
                 item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
 
             Assert.Collection(mockSocket.ReceivedMessages,
@@ -203,7 +203,7 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
                 item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
 
             Assert.Collection(mockSocket.ReceivedMessages,
@@ -234,7 +234,7 @@ namespace ChatClient.Tests
             client.Start();
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
                 item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
 
             Assert.Collection(mockSocket.ReceivedMessages,
@@ -265,7 +265,7 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
                 item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.", item));
         }
 
@@ -291,7 +291,7 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
                 item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.", item));
         }
 
@@ -317,7 +317,7 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
                 item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.", item));
         }
 
@@ -342,7 +342,7 @@ namespace ChatClient.Tests
             Assert.False(mockSocket.Connected);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
                 item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
         }
 
@@ -399,7 +399,7 @@ namespace ChatClient.Tests
             Assert.True(mockSocket.Closed);
 
             Assert.Collection(mockSocket.SentMessages,
-                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage", item),
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
                 item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
 
             Assert.Collection(mockSocket.ReceivedMessages,
