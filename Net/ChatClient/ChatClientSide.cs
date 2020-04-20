@@ -6,7 +6,8 @@ namespace ChatClient
 {
     public class ChatClientSide
     {
-        const string Sep = "<sep>";
+        const string SEP = "<sep>";
+        const string EOF = "<eof>";
         private readonly ISocket socket;
         private readonly IReader dataReader;
         private string userName;
@@ -33,7 +34,7 @@ namespace ChatClient
 
                 socket.SetSocket();
 
-                socket.Send(newUserName + Sep + "logon" + Sep + "NoLastMessage");
+                socket.Send(newUserName + SEP + "logon" + SEP + "NoLastMessage" + EOF);
 
                 serverReply = socket.Receive();
 
@@ -88,7 +89,7 @@ namespace ChatClient
 
         public void SendMessage(string message)
         {
-            socket.Send(userName + Sep + message + Sep + lastMessage);
+            socket.Send(userName + SEP + message + SEP + lastMessage);
         }
 
         public void Start()
@@ -123,7 +124,7 @@ namespace ChatClient
             {
                 message = dataReader.Read(textToShow);
 
-                notValid = string.IsNullOrEmpty(message) || message.Contains(Sep);
+                notValid = string.IsNullOrEmpty(message) || message.Contains(SEP);
 
                 if (notValid)
                 {
