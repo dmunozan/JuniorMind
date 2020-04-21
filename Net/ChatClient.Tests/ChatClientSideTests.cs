@@ -81,6 +81,30 @@ namespace ChatClient.Tests
         }
 
         [Fact]
+        public void LogOnWhenUserNameContainsEOFTagShouldSendNothingShowErrorMessageAndRequestForNewUserName()
+        {
+            MockClientSocket mockSocket = new MockClientSocket();
+
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
+
+            MockDataReader dataReader = new MockDataReader();
+
+            dataReader.ListToRead.Add("user<eof>Name");
+            dataReader.ListToRead.Add("userName");
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            Assert.True(mockSocket.Connected);
+
+            Assert.Equal("userName", client.LogOn());
+
+            Assert.False(mockSocket.Connected);
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item));
+        }
+
+        [Fact]
         public void LogOnWhenUserNameContainsExistShouldLogOnAndReceiveGreetingMessage()
         {
             MockClientSocket mockSocket = new MockClientSocket();
