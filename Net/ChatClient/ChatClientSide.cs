@@ -42,7 +42,7 @@ namespace ChatClient
                 socket.Close();
                 socket.SocketDispose();
 
-                Console.WriteLine(serverReply);
+                Console.WriteLine(serverReply.Replace(EOF, ""));
             }
 
             lastMessage = serverReply;
@@ -80,7 +80,7 @@ namespace ChatClient
             do
             {
                 serverReply = socket.Receive();
-                Console.WriteLine(serverReply);
+                Console.WriteLine(serverReply.Replace(EOF, ""));
             }
             while (serverReply != messageToCompare);
 
@@ -89,7 +89,7 @@ namespace ChatClient
 
         public void SendMessage(string message)
         {
-            socket.Send(userName + SEP + message + SEP + lastMessage);
+            socket.Send(userName + SEP + message + SEP + lastMessage + EOF);
         }
 
         public void Start()
