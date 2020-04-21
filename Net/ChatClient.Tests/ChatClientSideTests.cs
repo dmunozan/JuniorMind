@@ -351,7 +351,7 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
 
             MockDataReader dataReader = null;
 
