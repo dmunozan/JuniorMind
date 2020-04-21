@@ -124,7 +124,7 @@ namespace ChatClient
             {
                 message = dataReader.Read(textToShow);
 
-                notValid = string.IsNullOrEmpty(message) || message.Contains(SEP);
+                notValid = string.IsNullOrEmpty(message) || message.Contains(SEP) || message.Contains(EOF);
 
                 if (notValid)
                 {
