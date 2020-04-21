@@ -294,7 +294,7 @@ namespace ChatClient.Tests
         }
 
         [Fact]
-        public void SendMessageWhenNullStringShouldSendNothingShowErrorMessageAndRequestForNewMessage()
+        public void SendMessageWhenMessageContainsEOFTagShouldSendNothingShowErrorMessageAndRequestForNewMessage()
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
@@ -304,7 +304,7 @@ namespace ChatClient.Tests
             MockDataReader dataReader = new MockDataReader();
 
             dataReader.ListToRead.Add("userName");
-            dataReader.ListToRead.Add(null);
+            dataReader.ListToRead.Add("message<eof>with<eof>EOF tag");
             dataReader.ListToRead.Add("valid message");
             dataReader.ListToRead.Add("exit");
 
@@ -331,6 +331,32 @@ namespace ChatClient.Tests
 
             dataReader.ListToRead.Add("userName");
             dataReader.ListToRead.Add("message<sep>with<sep>separator");
+            dataReader.ListToRead.Add("valid message");
+            dataReader.ListToRead.Add("exit");
+
+            ChatClientSide client = new ChatClientSide(mockSocket, dataReader);
+
+            client.Start();
+
+            Assert.False(mockSocket.Connected);
+
+            Assert.Collection(mockSocket.SentMessages,
+                item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
+                item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.<eof>", item));
+        }
+
+        [Fact]
+        public void SendMessageWhenNullStringShouldSendNothingShowErrorMessageAndRequestForNewMessage()
+        {
+            MockClientSocket mockSocket = new MockClientSocket();
+
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
+            mockSocket.ListToReceive.Add("userName: valid message<eof>");
+
+            MockDataReader dataReader = new MockDataReader();
+
+            dataReader.ListToRead.Add("userName");
+            dataReader.ListToRead.Add(null);
             dataReader.ListToRead.Add("valid message");
             dataReader.ListToRead.Add("exit");
 
