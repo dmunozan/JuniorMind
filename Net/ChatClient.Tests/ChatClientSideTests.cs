@@ -37,7 +37,7 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -61,7 +61,7 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -85,7 +85,7 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: existUserName joined the chat.");
+            mockSocket.ListToReceive.Add("server: existUserName joined the chat.<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -108,7 +108,7 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -132,7 +132,7 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -155,9 +155,9 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
-            mockSocket.ListToReceive.Add("otherUser: Unrelated message.");
-            mockSocket.ListToReceive.Add("userName: Hello!");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
+            mockSocket.ListToReceive.Add("otherUser: Unrelated message.<eof>");
+            mockSocket.ListToReceive.Add("userName: Hello!<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -173,12 +173,12 @@ namespace ChatClient.Tests
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
-                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
+                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.<eof>", item));
 
             Assert.Collection(mockSocket.ReceivedMessages,
-                item => Assert.Equal("server: userName joined the chat.", item),
-                item => Assert.Equal("otherUser: Unrelated message.", item),
-                item => Assert.Equal("userName: Hello!", item));
+                item => Assert.Equal("server: userName joined the chat.<eof>", item),
+                item => Assert.Equal("otherUser: Unrelated message.<eof>", item),
+                item => Assert.Equal("userName: Hello!<eof>", item));
         }
 
         [Fact]
@@ -186,9 +186,9 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
-            mockSocket.ListToReceive.Add("otherUser: Unrelated message.");
-            mockSocket.ListToReceive.Add("userName: Hello!");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
+            mockSocket.ListToReceive.Add("otherUser: Unrelated message.<eof>");
+            mockSocket.ListToReceive.Add("userName: Hello!<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -204,12 +204,12 @@ namespace ChatClient.Tests
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
-                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
+                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.<eof>", item));
 
             Assert.Collection(mockSocket.ReceivedMessages,
-                item => Assert.Equal("server: userName joined the chat.", item),
-                item => Assert.Equal("otherUser: Unrelated message.", item),
-                item => Assert.Equal("userName: Hello!", item));
+                item => Assert.Equal("server: userName joined the chat.<eof>", item),
+                item => Assert.Equal("otherUser: Unrelated message.<eof>", item),
+                item => Assert.Equal("userName: Hello!<eof>", item));
 
             Assert.True(mockSocket.Closed);
         }
@@ -219,9 +219,9 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
-            mockSocket.ListToReceive.Add("otherUser: Unrelated message.");
-            mockSocket.ListToReceive.Add("userName: Hello!");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
+            mockSocket.ListToReceive.Add("otherUser: Unrelated message.<eof>");
+            mockSocket.ListToReceive.Add("userName: Hello!<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -235,12 +235,12 @@ namespace ChatClient.Tests
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
-                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
+                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.<eof>", item));
 
             Assert.Collection(mockSocket.ReceivedMessages,
-                item => Assert.Equal("server: userName joined the chat.", item),
-                item => Assert.Equal("otherUser: Unrelated message.", item),
-                item => Assert.Equal("userName: Hello!", item));
+                item => Assert.Equal("server: userName joined the chat.<eof>", item),
+                item => Assert.Equal("otherUser: Unrelated message.<eof>", item),
+                item => Assert.Equal("userName: Hello!<eof>", item));
         }
 
         [Fact]
@@ -248,8 +248,8 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
-            mockSocket.ListToReceive.Add("userName: valid message");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
+            mockSocket.ListToReceive.Add("userName: valid message<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -266,7 +266,7 @@ namespace ChatClient.Tests
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
-                item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.", item));
+                item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.<eof>", item));
         }
 
         [Fact]
@@ -274,8 +274,8 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
-            mockSocket.ListToReceive.Add("userName: valid message");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
+            mockSocket.ListToReceive.Add("userName: valid message<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -292,7 +292,7 @@ namespace ChatClient.Tests
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
-                item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.", item));
+                item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.<eof>", item));
         }
 
         [Fact]
@@ -300,8 +300,8 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
-            mockSocket.ListToReceive.Add("userName: valid message");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
+            mockSocket.ListToReceive.Add("userName: valid message<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -318,7 +318,7 @@ namespace ChatClient.Tests
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
-                item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.", item));
+                item => Assert.Equal("userName<sep>valid message<sep>server: userName joined the chat.<eof>", item));
         }
 
         [Fact]
@@ -326,8 +326,8 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
-            mockSocket.ListToReceive.Add("userName: Hello!");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
+            mockSocket.ListToReceive.Add("userName: Hello!<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -343,7 +343,7 @@ namespace ChatClient.Tests
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
-                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
+                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.<eof>", item));
         }
 
         [Fact]
@@ -379,9 +379,9 @@ namespace ChatClient.Tests
         {
             MockClientSocket mockSocket = new MockClientSocket();
 
-            mockSocket.ListToReceive.Add("server: userName joined the chat.");
-            mockSocket.ListToReceive.Add("otherUser: Unrelated message.");
-            mockSocket.ListToReceive.Add("userName: Hello!");
+            mockSocket.ListToReceive.Add("server: userName joined the chat.<eof>");
+            mockSocket.ListToReceive.Add("otherUser: Unrelated message.<eof>");
+            mockSocket.ListToReceive.Add("userName: Hello!<eof>");
 
             MockDataReader dataReader = new MockDataReader();
 
@@ -400,12 +400,12 @@ namespace ChatClient.Tests
 
             Assert.Collection(mockSocket.SentMessages,
                 item => Assert.Equal("userName<sep>logon<sep>NoLastMessage<eof>", item),
-                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.", item));
+                item => Assert.Equal("userName<sep>Hello!<sep>server: userName joined the chat.<eof>", item));
 
             Assert.Collection(mockSocket.ReceivedMessages,
-                item => Assert.Equal("server: userName joined the chat.", item),
-                item => Assert.Equal("otherUser: Unrelated message.", item),
-                item => Assert.Equal("userName: Hello!", item));
+                item => Assert.Equal("server: userName joined the chat.<eof>", item),
+                item => Assert.Equal("otherUser: Unrelated message.<eof>", item),
+                item => Assert.Equal("userName: Hello!<eof>", item));
         }
     }
 }
