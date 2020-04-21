@@ -74,7 +74,7 @@ namespace ChatClient
 
         public void ReceiveNewMessages(string sentMessage)
         {
-            string messageToCompare = userName + ": " + sentMessage;
+            string messageToCompare = userName + ": " + sentMessage + EOF;
             string serverReply;
 
             do
