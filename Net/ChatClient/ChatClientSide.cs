@@ -36,13 +36,13 @@ namespace ChatClient
 
                 socket.Send(newUserName + SEP + "logon" + SEP + "NoLastMessage" + EOF);
 
-                serverReply = socket.Receive();
+                serverReply = socket.Receive().Replace(EOF, "");
 
                 socket.Shutdown(SocketShutdown.Both);
                 socket.Close();
                 socket.SocketDispose();
 
-                Console.WriteLine(serverReply.Replace(EOF, ""));
+                Console.WriteLine(serverReply);
             }
 
             lastMessage = serverReply;
@@ -74,13 +74,13 @@ namespace ChatClient
 
         public void ReceiveNewMessages(string sentMessage)
         {
-            string messageToCompare = userName + ": " + sentMessage + EOF;
+            string messageToCompare = userName + ": " + sentMessage;
             string serverReply;
 
             do
             {
-                serverReply = socket.Receive();
-                Console.WriteLine(serverReply.Replace(EOF, ""));
+                serverReply = socket.Receive().Replace(EOF, "");
+                Console.WriteLine(serverReply);
             }
             while (serverReply != messageToCompare);
 
