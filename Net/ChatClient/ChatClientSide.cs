@@ -1,5 +1,6 @@
 ﻿using Common;
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 
 namespace ChatClient
@@ -10,6 +11,7 @@ namespace ChatClient
         const string EOF = "<eof>";
         private readonly ISocket socket;
         private readonly IReader dataReader;
+        private readonly List<string> chatMessages = new List<string>();
         private string userName;
         private string lastMessage;
 
@@ -47,6 +49,8 @@ namespace ChatClient
 
             lastMessage = serverReply;
 
+            chatMessages.Add(serverReply);
+
             return newUserName;
         }
 
@@ -80,9 +84,12 @@ namespace ChatClient
             do
             {
                 serverReply = socket.Receive().Replace(EOF, "");
-                Console.WriteLine(serverReply);
+                chatMessages.Add(serverReply);
             }
             while (serverReply != messageToCompare);
+
+            Console.Clear();
+            PrintChatMessages();
 
             lastMessage = serverReply;
         }
@@ -134,6 +141,14 @@ namespace ChatClient
             while (notValid);
 
             return message;
+        }
+
+        private void PrintChatMessages()
+        {
+            foreach (string str in chatMessages)
+            {
+                Console.WriteLine(str);
+            }
         }
     }
 }
