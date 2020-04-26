@@ -7,6 +7,7 @@ namespace Common
 {
     public class SocketCommunication : ISocket
     {
+        const int DataSizeLength = 4;
         const int Port = 1111;
         private Socket socket;
         private EndPoint endPoint;
@@ -65,26 +66,35 @@ namespace Common
 
         public string Receive()
         {
-            const int ByteAllocation = 256;
-            byte[] receivedBytes = new byte[ByteAllocation];
+            byte[] bytesToReceive = new byte[DataSizeLength];
+            int bytes = 0;
+            string trimmedReceivedData = "";
 
-            socket.Receive(receivedBytes);
-            string trimmedReceivedData = Encoding.UTF8.GetString(receivedBytes).TrimEnd('\0');
+            socket.Receive(bytesToReceive, DataSizeLength, 0);
+            int dataSize = BitConverter.ToInt32(bytesToReceive);
 
-            while (trimmedReceivedData.IndexOf("<eof>") == -1)
+            bytesToReceive = new byte[dataSize];
+
+            do
             {
-                receivedBytes = new byte[ByteAllocation];
-                socket.Receive(receivedBytes);
-                trimmedReceivedData += Encoding.UTF8.GetString(receivedBytes).TrimEnd('\0');
+                bytes += socket.Receive(bytesToReceive, dataSize, 0);
+                trimmedReceivedData += Encoding.UTF8.GetString(bytesToReceive, 0, bytes);
             }
+            while (bytes < dataSize);
 
             return trimmedReceivedData;
         }
 
         public void Send(string data)
         {
-            byte[] receivedBytes = Encoding.UTF8.GetBytes(data);
-            socket.Send(receivedBytes);
+            byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+            byte[] dataSize = BitConverter.GetBytes(dataBytes.Length);
+            byte[] bytesToSend = new byte[dataBytes.Length + DataSizeLength];
+
+            dataSize.CopyTo(bytesToSend, 0);
+            dataBytes.CopyTo(bytesToSend, DataSizeLength);
+
+            socket.Send(bytesToSend);
         }
 
         public void SetSocket()
