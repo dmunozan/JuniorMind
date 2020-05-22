@@ -1,3 +1,4 @@
+using System.Net;
 using Xunit;
 
 namespace DNSClient.Tests
@@ -11,23 +12,7 @@ namespace DNSClient.Tests
 
             string hostIP = dnsClient.GetIP("www.google.com");
 
-            string[] ipOctets = hostIP.Split('.');
-
-            Assert.Equal(4, ipOctets.Length);
-
-            bool validIP = true;
-
-            foreach (var octet in ipOctets)
-            {
-                validIP = byte.TryParse(octet, out byte result);
-
-                if (!validIP)
-                {
-                    break;
-                }
-            }
-
-            Assert.True(validIP);
+            Assert.True(IPAddress.TryParse(hostIP, out IPAddress address));
         }
     }
 }
