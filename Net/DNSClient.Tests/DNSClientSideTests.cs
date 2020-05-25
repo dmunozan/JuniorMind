@@ -19,6 +19,17 @@ namespace DNSClient.Tests
         }
 
         [Fact]
+        public void GetIPWhenHostIsIPShouldReturnSameIP()
+        {
+            DNSClientSide dnsClient = new DNSClientSide();
+
+            string hostIP = dnsClient.GetIP("78.96.7.88");
+
+            Assert.True(IPAddress.TryParse(hostIP, out IPAddress address));
+            Assert.Equal("78.96.7.88", hostIP);
+        }
+
+        [Fact]
         public void GetIPWhenHostLengthIsGreaterThan255CharactersShouldThrowException()
         {
             DNSClientSide dnsClient = new DNSClientSide();
