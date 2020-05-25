@@ -18,6 +18,23 @@ namespace DNSClient.Tests
         }
 
         [Fact]
+        public void GetIPWhenHostLengthIsGreaterThan255CharactersShouldThrowException()
+        {
+            DNSClientSide dnsClient = new DNSClientSide();
+
+            string hostName = "www.t";
+
+            for (int i = 0; i < 255; i++)
+            {
+                hostName += "o"; 
+            }
+
+            hostName += ".long";
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => dnsClient.GetIP(hostName));
+        }
+
+        [Fact]
         public void GetIPWhenNullStringShouldThrowException()
         {
             DNSClientSide dnsClient = new DNSClientSide();
