@@ -19,6 +19,14 @@ namespace DNSClient.Tests
         }
 
         [Fact]
+        public void GetIPWhenHostIsInvalidIPShouldThrowException()
+        {
+            DNSClientSide dnsClient = new DNSClientSide();
+
+            Assert.Throws<ArgumentException>(() => dnsClient.GetIP("0.0.0.0"));
+        }
+
+        [Fact]
         public void GetIPWhenHostIsIPShouldReturnSameIP()
         {
             DNSClientSide dnsClient = new DNSClientSide();
