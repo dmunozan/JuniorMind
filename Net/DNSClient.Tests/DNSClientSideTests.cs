@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using Xunit;
 
@@ -14,6 +15,14 @@ namespace DNSClient.Tests
 
             Assert.True(IPAddress.TryParse(hostIP, out IPAddress address));
             Assert.Contains<IPAddress>(address, Dns.GetHostAddresses(Dns.GetHostName()));
+        }
+
+        [Fact]
+        public void GetIPWhenNullStringShouldThrowException()
+        {
+            DNSClientSide dnsClient = new DNSClientSide();
+
+            Assert.Throws<ArgumentNullException>(() => dnsClient.GetIP(null));
         }
 
         [Fact]
