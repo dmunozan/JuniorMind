@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Net.Sockets;
 using Xunit;
 
 namespace DNSClient.Tests
@@ -32,6 +33,14 @@ namespace DNSClient.Tests
             hostName += ".long";
 
             Assert.Throws<ArgumentOutOfRangeException>(() => dnsClient.GetIP(hostName));
+        }
+
+        [Fact]
+        public void GetIPWhenNotResolvingHostShouldThrowException()
+        {
+            DNSClientSide dnsClient = new DNSClientSide();
+
+            Assert.Throws<SocketException>(() => dnsClient.GetIP("invalidIPaddress"));
         }
 
         [Fact]
