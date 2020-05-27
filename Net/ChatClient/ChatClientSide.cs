@@ -1,6 +1,7 @@
 ﻿using Common;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Sockets;
 
 namespace ChatClient
@@ -88,7 +89,18 @@ namespace ChatClient
             }
             while (serverReply != messageToCompare);
 
-            Console.Clear();
+            try
+            {
+                Console.Clear();
+            }
+            catch (IOException)
+            {
+                if (!Console.IsOutputRedirected)
+                {
+                    throw;
+                }
+            }
+
             PrintChatMessages();
 
             lastMessage = serverReply;
