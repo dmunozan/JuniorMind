@@ -89,16 +89,9 @@ namespace ChatClient
             }
             while (serverReply != messageToCompare);
 
-            try
+            if (!Console.IsOutputRedirected)
             {
                 Console.Clear();
-            }
-            catch (IOException)
-            {
-                if (!Console.IsOutputRedirected)
-                {
-                    throw;
-                }
             }
 
             PrintChatMessages();
